@@ -11,8 +11,7 @@
           "EMAIL"
         ],
         "signupAttributes": [
-          "NAME",
-          "PREFERRED_USERNAME"
+          "NAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -34,7 +33,7 @@
     }
   },
   "api": {
-    "funkidsentertainmentAPI": {
+    "FunKidsEntertainment": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
@@ -68,13 +67,6 @@
           ]
         }
       }
-    }
-  },
-  "storage": {
-    "s3funkidsentertainmentstorage039090f5": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
     }
   }
 }

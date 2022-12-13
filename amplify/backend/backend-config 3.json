@@ -11,8 +11,7 @@
           "EMAIL"
         ],
         "signupAttributes": [
-          "NAME",
-          "PREFERRED_USERNAME"
+          "NAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -34,7 +33,7 @@
     }
   },
   "api": {
-    "funkidsentertainmentAPI": {
+    "funkidsentertainment": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
@@ -49,32 +48,23 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authFunKidsEntertainment"
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "AWS_IAM"
-            },
-            {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authFunKidsEntertainment"
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "description": "1",
+                "apiKeyExpirationDays": 7,
+                "apiKeyExpirationDate": "2022-12-19T20:26:17.783Z"
               }
             }
           ]
         }
       }
-    }
-  },
-  "storage": {
-    "s3funkidsentertainmentstorage039090f5": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
     }
   }
 }

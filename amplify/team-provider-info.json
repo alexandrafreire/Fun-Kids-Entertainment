@@ -10,6 +10,17 @@
       "StackName": "amplify-amplifydf1cab9fad9f4-staging-151408",
       "StackId": "arn:aws:cloudformation:eu-west-1:575559040672:stack/amplify-amplifydf1cab9fad9f4-staging-151408/760704f0-7966-11ed-ac73-02efdd9c2d05",
       "AmplifyAppId": "dg5t04iysr12r"
+    },
+    "categories": {
+      "auth": {
+        "FunKidsEntertainment": {}
+      },
+      "api": {
+        "funkidsentertainmentAPI": {}
+      },
+      "storage": {
+        "s3funkidsentertainmentstorage039090f5": {}
+      }
     }
   }
 }

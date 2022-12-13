@@ -1,0 +1,98 @@
+enum OverallSiteRatingValues {
+  GOOD
+  AVERAGE
+  BAD
+}
+
+enum FeedbackTypeValues {
+  GENERAL_FEEDBACK
+  REPORT_PROBLEM
+  FEATURE_REQUEST
+}
+
+type ContactUs @model @auth(rules: [{allow: public, operations: [create, read, update]}]) {
+  id: ID!
+  firstName: String!
+  lastName: String
+  email: AWSEmail!
+  feedbackType: FeedbackTypeValues
+  overallSiteRating: OverallSiteRatingValues
+  message: String
+}
+
+type Cities @model @auth(rules: [{allow: public, operations: [read]}]) {
+  id: ID!
+  cityName: String!
+  cityCounty: String!
+  cityCountry: String!
+  cityLat: Float!
+  cityLng: Float!
+}
+
+type UsersProfile @model @auth(rules: [{allow: private, operations: [create, read, update]}]) {
+  id: ID!
+  firstName: String!
+  lastName: String
+  email: AWSEmail!
+  username: String!
+  preferredLocation: String
+  preferredAgeRanges: [SiteAgeRangesValues]
+  preferredAmusementTypes: [AmusementTypeNameValues]
+  UsersFavSites: [String]
+  Cities: Cities @hasOne
+  Sites: [Sites] @hasMany(indexName: "byUsersProfile", fields: ["id"])
+  profilePic: String
+}
+
+type SiteComments @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  siteRating: String
+  message: String
+  email: String
+  username: String!
+  sitess: [Sites] @manyToMany(relationName: "SitesSiteComments")
+  createdDate: AWSDate!
+}
+
+enum AmusementTypeNameValues {
+  PLAYGROUND
+  AMUSEMENT_PARK
+  EXHIBITION
+  NATURE_ANIMALS
+  WATER_PARK
+  MUSEUM
+  BEACH
+  LANDSCAPE
+}
+
+enum SiteAgeRangesValues {
+  FAMILY_ACTIVITIES
+  TODDLER
+  PRESCHOOLER
+  SCHOOL_AGED_CHILD
+  ALL_AGES_KIDS
+  ADOLESCENTS_ADULTS
+}
+
+type Sites @model @auth(rules: [{allow: public, operations: [read]}]) {
+  id: ID!
+  siteName: String!
+  siteDescription: String!
+  siteTotalRating: Float!
+  siteAgeRange: [SiteAgeRangesValues!]
+  amusementTypeName: [AmusementTypeNameValues!]
+  siteType: String!
+  siteVillage: String!
+  siteCity: String!
+  siteCounty: String!
+  siteAddress: String!
+  siteLat: Float!
+  siteLng: Float!
+  SiteDistanceToGeoLoc: Float
+  SiteTimeToGeoLocation: Float
+  Website: AWSURL
+  siteImage: String
+  SiteComments: [SiteComments] @manyToMany(relationName: "SitesSiteComments")
+  usersprofileID: ID! @index(name: "byUsersProfile")
+}
+ 
