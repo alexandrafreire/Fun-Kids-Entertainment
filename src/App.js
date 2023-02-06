@@ -1,17 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { Amplify, API, graphqlOperation } from "aws-amplify";
+import React from "react";
 import "./App.css";
-
+import NavbarTop from "./components/Navbar/NavbarTop";
+import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/pages/Home";
+import Explore from "./components/pages/Explore";
+import IndoorActivities from "./components/pages/IndoorActivities";
+import OutdoorActivities from "./components/pages/OutdoorActivities";
+import ConcertsShows from "./components/pages/ConcertsShows";
+import OnTheWay from "./components/pages/OnTheWay";
+import Games from "./components/pages/Games";
+import MoviesTvShows from "./components/pages/MoviesTvShows";
+import Books from "./components/pages/Books";
+import Subscribe from "./components/pages/Subscribe";
+import ContactUs from "./components/pages/ContactUs";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import TermsOfService from "./components/pages/TermsOfService";
+import SignUp from "./components/pages/SignUp";
+import Error from "./components/pages/Error";
+import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
 Amplify.configure(awsExports);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello from V2</h1>
-      </header>
-    </div>
+    <Router>
+      <NavbarTop />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Explore/" element={<Explore />} />
+        <Route
+          path="/Explore/IndoorActivities"
+          element={<IndoorActivities />}
+        />
+        <Route
+          path="/Explore/OutdoorActivities"
+          element={<OutdoorActivities />}
+        />
+        <Route path="/Explore/ConcertsShows" element={<ConcertsShows />} />
+        <Route path="/OnTheWay" element={<OnTheWay />} />
+        <Route path="/OnTheWay/Games" element={<Games />} />
+        <Route path="/OnTheWay" element={<Home />} />
+        <Route path="/OnTheWay/MoviesTvShows" element={<MoviesTvShows />} />
+        <Route path="/OnTheWay/Books" element={<Books />} />
+        <Route path="/Subscribe" element={<Subscribe />} />
+        <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+        <Route path="/TermsOfService" element={<TermsOfService />} />
+        <Route path="/SignUp/" element={<SignUp />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </Router>
   );
 }
 

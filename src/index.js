@@ -1,11 +1,9 @@
-import reportWebVitals from "./reportWebVitals";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { AmplifyProvider } from "@aws-amplify/ui-react";
 import { Storage } from "@aws-amplify/storage";
 import "@aws-amplify/ui-react/styles.css";
 import config from "./aws-exports";
-import "./index.css";
 import App from "./App";
 import { Amplify } from "aws-amplify";
 import awsExports from "./aws-exports";
@@ -15,14 +13,7 @@ Amplify.configure(awsExports);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <AmplifyProvider>
-      <App />
-    </AmplifyProvider>
-  </React.StrictMode>
+  <AmplifyProvider>
+    <App />
+  </AmplifyProvider>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
