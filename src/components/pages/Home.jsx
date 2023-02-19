@@ -1,11 +1,14 @@
 import React from "react";
 import HomePageBanner from "../sections/Banner";
+import HomePageView from "../sections/HomePageView";
+
 
 function Home() {
   return (
     <div>
       <HomePageBanner />
-      <h1 className="home">HomePage</h1>
+      <HomePageView />
+      
     </div>
   );
 }
