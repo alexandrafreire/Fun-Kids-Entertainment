@@ -13,6 +13,7 @@ export const createContactUs = /* GraphQL */ `
       email
       feedbackType
       overallSiteRating
+      message
       createdAt
       updatedAt
       _version
@@ -33,6 +34,7 @@ export const updateContactUs = /* GraphQL */ `
       email
       feedbackType
       overallSiteRating
+      message
       createdAt
       updatedAt
       _version
@@ -53,6 +55,7 @@ export const deleteContactUs = /* GraphQL */ `
       email
       feedbackType
       overallSiteRating
+      message
       createdAt
       updatedAt
       _version
@@ -113,214 +116,6 @@ export const deleteCities = /* GraphQL */ `
       cityCountry
       cityLat
       cityLng
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteUsersProfile = /* GraphQL */ `
-  mutation DeleteUsersProfile(
-    $input: DeleteUsersProfileInput!
-    $condition: ModelUsersProfileConditionInput
-  ) {
-    deleteUsersProfile(input: $input, condition: $condition) {
-      id
-      firstName
-      lastName
-      email
-      username
-      preferredLocation
-      preferredAgeRanges
-      preferredAmusementTypes
-      UsersFavSites
-      Cities {
-        id
-        cityName
-        cityCounty
-        cityCountry
-        cityLat
-        cityLng
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      Sites {
-        items {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          Website
-          siteImage
-          usersprofileID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
-      profilePic
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      usersProfileCitiesId
-    }
-  }
-`;
-export const createSites = /* GraphQL */ `
-  mutation CreateSites(
-    $input: CreateSitesInput!
-    $condition: ModelSitesConditionInput
-  ) {
-    createSites(input: $input, condition: $condition) {
-      id
-      siteName
-      siteDescription
-      siteTotalRating
-      siteAgeRange
-      amusementTypeName
-      siteType
-      siteVillage
-      siteCity
-      siteCounty
-      siteAddress
-      siteLat
-      siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
-      Website
-      siteImage
-      SiteComments {
-        items {
-          id
-          siteCommentsId
-          sitesId
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      usersprofileID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateSites = /* GraphQL */ `
-  mutation UpdateSites(
-    $input: UpdateSitesInput!
-    $condition: ModelSitesConditionInput
-  ) {
-    updateSites(input: $input, condition: $condition) {
-      id
-      siteName
-      siteDescription
-      siteTotalRating
-      siteAgeRange
-      amusementTypeName
-      siteType
-      siteVillage
-      siteCity
-      siteCounty
-      siteAddress
-      siteLat
-      siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
-      Website
-      siteImage
-      SiteComments {
-        items {
-          id
-          siteCommentsId
-          sitesId
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      usersprofileID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteSites = /* GraphQL */ `
-  mutation DeleteSites(
-    $input: DeleteSitesInput!
-    $condition: ModelSitesConditionInput
-  ) {
-    deleteSites(input: $input, condition: $condition) {
-      id
-      siteName
-      siteDescription
-      siteTotalRating
-      siteAgeRange
-      amusementTypeName
-      siteType
-      siteVillage
-      siteCity
-      siteCounty
-      siteAddress
-      siteLat
-      siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
-      Website
-      siteImage
-      SiteComments {
-        items {
-          id
-          siteCommentsId
-          sitesId
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      usersprofileID
       createdAt
       updatedAt
       _version
@@ -402,6 +197,73 @@ export const updateUsersProfile = /* GraphQL */ `
     $condition: ModelUsersProfileConditionInput
   ) {
     updateUsersProfile(input: $input, condition: $condition) {
+      id
+      firstName
+      lastName
+      email
+      username
+      preferredLocation
+      preferredAgeRanges
+      preferredAmusementTypes
+      UsersFavSites
+      Cities {
+        id
+        cityName
+        cityCounty
+        cityCountry
+        cityLat
+        cityLng
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          Website
+          siteImage
+          usersprofileID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      profilePic
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      usersProfileCitiesId
+    }
+  }
+`;
+export const deleteUsersProfile = /* GraphQL */ `
+  mutation DeleteUsersProfile(
+    $input: DeleteUsersProfileInput!
+    $condition: ModelUsersProfileConditionInput
+  ) {
+    deleteUsersProfile(input: $input, condition: $condition) {
       id
       firstName
       lastName
@@ -568,6 +430,213 @@ export const deleteSiteComments = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+    }
+  }
+`;
+export const createSites = /* GraphQL */ `
+  mutation CreateSites(
+    $input: CreateSitesInput!
+    $condition: ModelSitesConditionInput
+  ) {
+    createSites(input: $input, condition: $condition) {
+      id
+      siteName
+      siteDescription
+      siteTotalRating
+      siteAgeRange
+      amusementTypeName
+      siteType
+      siteVillage
+      siteCity
+      siteCounty
+      siteAddress
+      siteLat
+      siteLng
+      SiteDistanceToGeoLoc
+      SiteTimeToGeoLocation
+      Website
+      siteImage
+      SiteComments {
+        items {
+          id
+          siteCommentsId
+          sitesId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      usersprofileID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateSites = /* GraphQL */ `
+  mutation UpdateSites(
+    $input: UpdateSitesInput!
+    $condition: ModelSitesConditionInput
+  ) {
+    updateSites(input: $input, condition: $condition) {
+      id
+      siteName
+      siteDescription
+      siteTotalRating
+      siteAgeRange
+      amusementTypeName
+      siteType
+      siteVillage
+      siteCity
+      siteCounty
+      siteAddress
+      siteLat
+      siteLng
+      SiteDistanceToGeoLoc
+      SiteTimeToGeoLocation
+      Website
+      siteImage
+      SiteComments {
+        items {
+          id
+          siteCommentsId
+          sitesId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      usersprofileID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteSites = /* GraphQL */ `
+  mutation DeleteSites(
+    $input: DeleteSitesInput!
+    $condition: ModelSitesConditionInput
+  ) {
+    deleteSites(input: $input, condition: $condition) {
+      id
+      siteName
+      siteDescription
+      siteTotalRating
+      siteAgeRange
+      amusementTypeName
+      siteType
+      siteVillage
+      siteCity
+      siteCounty
+      siteAddress
+      siteLat
+      siteLng
+      SiteDistanceToGeoLoc
+      SiteTimeToGeoLocation
+      Website
+      siteImage
+      SiteComments {
+        items {
+          id
+          siteCommentsId
+          sitesId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      usersprofileID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createPicture = /* GraphQL */ `
+  mutation CreatePicture(
+    $input: CreatePictureInput!
+    $condition: ModelPictureConditionInput
+  ) {
+    createPicture(input: $input, condition: $condition) {
+      id
+      name
+      owner
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updatePicture = /* GraphQL */ `
+  mutation UpdatePicture(
+    $input: UpdatePictureInput!
+    $condition: ModelPictureConditionInput
+  ) {
+    updatePicture(input: $input, condition: $condition) {
+      id
+      name
+      owner
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deletePicture = /* GraphQL */ `
+  mutation DeletePicture(
+    $input: DeletePictureInput!
+    $condition: ModelPictureConditionInput
+  ) {
+    deletePicture(input: $input, condition: $condition) {
+      id
+      name
+      owner
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

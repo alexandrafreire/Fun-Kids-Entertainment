@@ -5,8 +5,8 @@
  **************************************************************************/
 
 import * as React from "react";
-import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { GridProps, RadioGroupFieldProps, TextAreaFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -28,17 +28,17 @@ export declare type ContactUsFormValidationValues = {
     overallSiteRating?: ValidationFunction<string>;
     message?: ValidationFunction<string>;
 };
-export declare type FormProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
+export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ContactUsFormOverridesProps = {
-    ContactUsFormGrid?: FormProps<GridProps>;
-    RowGrid0?: FormProps<GridProps>;
-    firstName?: FormProps<TextFieldProps>;
-    lastName?: FormProps<TextFieldProps>;
-    email?: FormProps<TextFieldProps>;
-    RowGrid2?: FormProps<GridProps>;
-    feedbackType?: FormProps<RadioGroupFieldProps>;
-    overallSiteRating?: FormProps<RadioGroupFieldProps>;
-    message?: FormProps<TextAreaFieldProps>;
+    ContactUsFormGrid?: PrimitiveOverrideProps<GridProps>;
+    RowGrid0?: PrimitiveOverrideProps<GridProps>;
+    firstName?: PrimitiveOverrideProps<TextFieldProps>;
+    lastName?: PrimitiveOverrideProps<TextFieldProps>;
+    email?: PrimitiveOverrideProps<TextFieldProps>;
+    RowGrid2?: PrimitiveOverrideProps<GridProps>;
+    feedbackType?: PrimitiveOverrideProps<RadioGroupFieldProps>;
+    overallSiteRating?: PrimitiveOverrideProps<RadioGroupFieldProps>;
+    message?: PrimitiveOverrideProps<TextAreaFieldProps>;
 } & EscapeHatchProps;
 export declare type ContactUsFormProps = React.PropsWithChildren<{
     overrides?: ContactUsFormOverridesProps | undefined | null;

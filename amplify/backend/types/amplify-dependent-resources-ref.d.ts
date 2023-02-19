@@ -1,26 +1,26 @@
 export type AmplifyDependentResourcesAttributes = {
-    "auth": {
-        "FunKidsEntertainment": {
-            "IdentityPoolId": "string",
-            "IdentityPoolName": "string",
-            "UserPoolId": "string",
-            "UserPoolArn": "string",
-            "UserPoolName": "string",
-            "AppClientIDWeb": "string",
-            "AppClientID": "string"
-        }
-    },
-    "api": {
-        "funkidsentertainmentAPI": {
-            "GraphQLAPIKeyOutput": "string",
-            "GraphQLAPIIdOutput": "string",
-            "GraphQLAPIEndpointOutput": "string"
-        }
-    },
-    "storage": {
-        "s3funkidsentertainmentstorage039090f5": {
-            "BucketName": "string",
-            "Region": "string"
-        }
+  "api": {
+    "funkidsentertainmentAPI": {
+      "GraphQLAPIEndpointOutput": "string",
+      "GraphQLAPIIdOutput": "string",
+      "GraphQLAPIKeyOutput": "string"
     }
+  },
+  "auth": {
+    "FunKidsEntertainment": {
+      "AppClientID": "string",
+      "AppClientIDWeb": "string",
+      "IdentityPoolId": "string",
+      "IdentityPoolName": "string",
+      "UserPoolArn": "string",
+      "UserPoolId": "string",
+      "UserPoolName": "string"
+    }
+  },
+  "storage": {
+    "s3funkidsentertainmentstorage039090f5": {
+      "BucketName": "string",
+      "Region": "string"
+    }
+  }
 }

@@ -34,7 +34,21 @@ export enum AmusementTypeNameValues {
   LANDSCAPE = "LANDSCAPE"
 }
 
+type EagerS3Object = {
+  readonly bucket: string;
+  readonly region: string;
+  readonly key: string;
+}
 
+type LazyS3Object = {
+  readonly bucket: string;
+  readonly region: string;
+  readonly key: string;
+}
+
+export declare type S3Object = LazyLoading extends LazyLoadingDisabled ? EagerS3Object : LazyS3Object
+
+export declare const S3Object: (new (init: ModelInit<S3Object>) => S3Object)
 
 type EagerContactUs = {
   readonly [__modelMeta__]: {
@@ -258,6 +272,38 @@ export declare type SiteComments = LazyLoading extends LazyLoadingDisabled ? Eag
 
 export declare const SiteComments: (new (init: ModelInit<SiteComments>) => SiteComments) & {
   copyOf(source: SiteComments, mutator: (draft: MutableModel<SiteComments>) => MutableModel<SiteComments> | void): SiteComments;
+}
+
+type EagerPicture = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Picture, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly owner?: string | null;
+  readonly file?: S3Object | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyPicture = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Picture, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name?: string | null;
+  readonly owner?: string | null;
+  readonly file?: S3Object | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Picture = LazyLoading extends LazyLoadingDisabled ? EagerPicture : LazyPicture
+
+export declare const Picture: (new (init: ModelInit<Picture>) => Picture) & {
+  copyOf(source: Picture, mutator: (draft: MutableModel<Picture>) => MutableModel<Picture> | void): Picture;
 }
 
 type EagerSitesSiteComments = {

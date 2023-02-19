@@ -12,6 +12,7 @@ export const onCreateContactUs = /* GraphQL */ `
       email
       feedbackType
       overallSiteRating
+      message
       createdAt
       updatedAt
       _version
@@ -31,6 +32,7 @@ export const onUpdateContactUs = /* GraphQL */ `
       email
       feedbackType
       overallSiteRating
+      message
       createdAt
       updatedAt
       _version
@@ -50,6 +52,7 @@ export const onDeleteContactUs = /* GraphQL */ `
       email
       feedbackType
       overallSiteRating
+      message
       createdAt
       updatedAt
       _version
@@ -101,138 +104,6 @@ export const onDeleteCities = /* GraphQL */ `
       cityCountry
       cityLat
       cityLng
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onCreateSites = /* GraphQL */ `
-  subscription OnCreateSites($filter: ModelSubscriptionSitesFilterInput) {
-    onCreateSites(filter: $filter) {
-      id
-      siteName
-      siteDescription
-      siteTotalRating
-      siteAgeRange
-      amusementTypeName
-      siteType
-      siteVillage
-      siteCity
-      siteCounty
-      siteAddress
-      siteLat
-      siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
-      Website
-      siteImage
-      SiteComments {
-        items {
-          id
-          siteCommentsId
-          sitesId
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      usersprofileID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateSites = /* GraphQL */ `
-  subscription OnUpdateSites($filter: ModelSubscriptionSitesFilterInput) {
-    onUpdateSites(filter: $filter) {
-      id
-      siteName
-      siteDescription
-      siteTotalRating
-      siteAgeRange
-      amusementTypeName
-      siteType
-      siteVillage
-      siteCity
-      siteCounty
-      siteAddress
-      siteLat
-      siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
-      Website
-      siteImage
-      SiteComments {
-        items {
-          id
-          siteCommentsId
-          sitesId
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      usersprofileID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteSites = /* GraphQL */ `
-  subscription OnDeleteSites($filter: ModelSubscriptionSitesFilterInput) {
-    onDeleteSites(filter: $filter) {
-      id
-      siteName
-      siteDescription
-      siteTotalRating
-      siteAgeRange
-      amusementTypeName
-      siteType
-      siteVillage
-      siteCity
-      siteCounty
-      siteAddress
-      siteLat
-      siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
-      Website
-      siteImage
-      SiteComments {
-        items {
-          id
-          siteCommentsId
-          sitesId
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      usersprofileID
       createdAt
       updatedAt
       _version
@@ -544,6 +415,204 @@ export const onDeleteSiteComments = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+    }
+  }
+`;
+export const onCreateSites = /* GraphQL */ `
+  subscription OnCreateSites($filter: ModelSubscriptionSitesFilterInput) {
+    onCreateSites(filter: $filter) {
+      id
+      siteName
+      siteDescription
+      siteTotalRating
+      siteAgeRange
+      amusementTypeName
+      siteType
+      siteVillage
+      siteCity
+      siteCounty
+      siteAddress
+      siteLat
+      siteLng
+      SiteDistanceToGeoLoc
+      SiteTimeToGeoLocation
+      Website
+      siteImage
+      SiteComments {
+        items {
+          id
+          siteCommentsId
+          sitesId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      usersprofileID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateSites = /* GraphQL */ `
+  subscription OnUpdateSites($filter: ModelSubscriptionSitesFilterInput) {
+    onUpdateSites(filter: $filter) {
+      id
+      siteName
+      siteDescription
+      siteTotalRating
+      siteAgeRange
+      amusementTypeName
+      siteType
+      siteVillage
+      siteCity
+      siteCounty
+      siteAddress
+      siteLat
+      siteLng
+      SiteDistanceToGeoLoc
+      SiteTimeToGeoLocation
+      Website
+      siteImage
+      SiteComments {
+        items {
+          id
+          siteCommentsId
+          sitesId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      usersprofileID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteSites = /* GraphQL */ `
+  subscription OnDeleteSites($filter: ModelSubscriptionSitesFilterInput) {
+    onDeleteSites(filter: $filter) {
+      id
+      siteName
+      siteDescription
+      siteTotalRating
+      siteAgeRange
+      amusementTypeName
+      siteType
+      siteVillage
+      siteCity
+      siteCounty
+      siteAddress
+      siteLat
+      siteLng
+      SiteDistanceToGeoLoc
+      SiteTimeToGeoLocation
+      Website
+      siteImage
+      SiteComments {
+        items {
+          id
+          siteCommentsId
+          sitesId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      usersprofileID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreatePicture = /* GraphQL */ `
+  subscription OnCreatePicture(
+    $filter: ModelSubscriptionPictureFilterInput
+    $owner: String
+  ) {
+    onCreatePicture(filter: $filter, owner: $owner) {
+      id
+      name
+      owner
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdatePicture = /* GraphQL */ `
+  subscription OnUpdatePicture(
+    $filter: ModelSubscriptionPictureFilterInput
+    $owner: String
+  ) {
+    onUpdatePicture(filter: $filter, owner: $owner) {
+      id
+      name
+      owner
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeletePicture = /* GraphQL */ `
+  subscription OnDeletePicture(
+    $filter: ModelSubscriptionPictureFilterInput
+    $owner: String
+  ) {
+    onDeletePicture(filter: $filter, owner: $owner) {
+      id
+      name
+      owner
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

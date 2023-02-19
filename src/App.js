@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-import NavbarTop from "./components/Navbar/NavbarTop";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Explore from "./components/pages/Explore";
@@ -13,19 +12,19 @@ import Games from "./components/pages/Games";
 import MoviesTvShows from "./components/pages/MoviesTvShows";
 import Books from "./components/pages/Books";
 import Subscribe from "./components/pages/Subscribe";
-import ContactUs from "./components/pages/ContactUs";
+import ContactUs from "./components/pages/ContactUs.tsx";
+import Profile from "./components/pages/Profile";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import TermsOfService from "./components/pages/TermsOfService";
-import SignUp from "./components/pages/SignUp";
+import SignUp from "./components/pages/SignUp.tsx";
 import Error from "./components/pages/Error";
-import { Amplify } from "aws-amplify";
-import awsExports from "./aws-exports";
-Amplify.configure(awsExports);
+import { Amplify, Storage } from "aws-amplify";
+import awsconfig from "./aws-exports";
+Amplify.configure(awsconfig);
 
 function App() {
   return (
     <Router>
-      <NavbarTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -46,6 +45,7 @@ function App() {
         <Route path="/OnTheWay/Books" element={<Books />} />
         <Route path="/Subscribe" element={<Subscribe />} />
         <Route path="/ContactUs" element={<ContactUs />} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/TermsOfService" element={<TermsOfService />} />
         <Route path="/SignUp/" element={<SignUp />} />

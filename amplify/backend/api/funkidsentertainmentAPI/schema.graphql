@@ -10,7 +10,9 @@ enum FeedbackTypeValues {
   FEATURE_REQUEST
 }
 
-type ContactUs @model @auth(rules: [{allow: public, operations: [create, read, update]}]) {
+type ContactUs
+  @model
+  @auth(rules: [{ allow: public, operations: [create, read, update] }]) {
   id: ID!
   firstName: String!
   lastName: String
@@ -20,7 +22,7 @@ type ContactUs @model @auth(rules: [{allow: public, operations: [create, read, u
   message: String
 }
 
-type Cities @model @auth(rules: [{allow: public, operations: [read]}]) {
+type Cities @model @auth(rules: [{ allow: public, operations: [read] }]) {
   id: ID!
   cityName: String!
   cityCounty: String!
@@ -29,7 +31,9 @@ type Cities @model @auth(rules: [{allow: public, operations: [read]}]) {
   cityLng: Float!
 }
 
-type UsersProfile @model @auth(rules: [{allow: private, operations: [create, read, update]}]) {
+type UsersProfile
+  @model
+  @auth(rules: [{ allow: private, operations: [create, read, update] }]) {
   id: ID!
   firstName: String!
   lastName: String
@@ -44,7 +48,7 @@ type UsersProfile @model @auth(rules: [{allow: private, operations: [create, rea
   profilePic: String
 }
 
-type SiteComments @model @auth(rules: [{allow: owner}]) {
+type SiteComments @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   siteRating: String
   message: String
@@ -74,7 +78,7 @@ enum SiteAgeRangesValues {
   ADOLESCENTS_ADULTS
 }
 
-type Sites @model @auth(rules: [{allow: public, operations: [read]}]) {
+type Sites @model @auth(rules: [{ allow: public, operations: [read] }]) {
   id: ID!
   siteName: String!
   siteDescription: String!
@@ -91,8 +95,22 @@ type Sites @model @auth(rules: [{allow: public, operations: [read]}]) {
   SiteDistanceToGeoLoc: Float
   SiteTimeToGeoLocation: Float
   Website: AWSURL
-  siteImage: String
+  siteImage: AWSURL
   SiteComments: [SiteComments] @manyToMany(relationName: "SitesSiteComments")
   usersprofileID: ID! @index(name: "byUsersProfile")
 }
- 
+
+type S3Object {
+  bucket: String!
+  region: String!
+  key: String!
+}
+
+type Picture @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String
+  owner: String
+
+  #reference the S3Object
+  file: S3Object
+}

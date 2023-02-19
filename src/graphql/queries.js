@@ -10,6 +10,7 @@ export const getContactUs = /* GraphQL */ `
       email
       feedbackType
       overallSiteRating
+      message
       createdAt
       updatedAt
       _version
@@ -32,6 +33,7 @@ export const listContactuses = /* GraphQL */ `
         email
         feedbackType
         overallSiteRating
+        message
         createdAt
         updatedAt
         _version
@@ -63,6 +65,7 @@ export const syncContactuses = /* GraphQL */ `
         email
         feedbackType
         overallSiteRating
+        message
         createdAt
         updatedAt
         _version
@@ -136,187 +139,6 @@ export const syncCities = /* GraphQL */ `
         cityCountry
         cityLat
         cityLng
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getSites = /* GraphQL */ `
-  query GetSites($id: ID!) {
-    getSites(id: $id) {
-      id
-      siteName
-      siteDescription
-      siteTotalRating
-      siteAgeRange
-      amusementTypeName
-      siteType
-      siteVillage
-      siteCity
-      siteCounty
-      siteAddress
-      siteLat
-      siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
-      Website
-      siteImage
-      SiteComments {
-        items {
-          id
-          siteCommentsId
-          sitesId
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
-      usersprofileID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listSites = /* GraphQL */ `
-  query ListSites(
-    $filter: ModelSitesFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSites(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        siteCity
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
-        Website
-        siteImage
-        SiteComments {
-          nextToken
-          startedAt
-        }
-        usersprofileID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSites = /* GraphQL */ `
-  query SyncSites(
-    $filter: ModelSitesFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSites(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        siteCity
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
-        Website
-        siteImage
-        SiteComments {
-          nextToken
-          startedAt
-        }
-        usersprofileID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const sitesByUsersprofileID = /* GraphQL */ `
-  query SitesByUsersprofileID(
-    $usersprofileID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelSitesFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    sitesByUsersprofileID(
-      usersprofileID: $usersprofileID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        siteCity
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
-        Website
-        siteImage
-        SiteComments {
-          nextToken
-          startedAt
-        }
-        usersprofileID
         createdAt
         updatedAt
         _version
@@ -585,6 +407,266 @@ export const syncSiteComments = /* GraphQL */ `
         _deleted
         _lastChangedAt
         owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getSites = /* GraphQL */ `
+  query GetSites($id: ID!) {
+    getSites(id: $id) {
+      id
+      siteName
+      siteDescription
+      siteTotalRating
+      siteAgeRange
+      amusementTypeName
+      siteType
+      siteVillage
+      siteCity
+      siteCounty
+      siteAddress
+      siteLat
+      siteLng
+      SiteDistanceToGeoLoc
+      SiteTimeToGeoLocation
+      Website
+      siteImage
+      SiteComments {
+        items {
+          id
+          siteCommentsId
+          sitesId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      usersprofileID
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listSites = /* GraphQL */ `
+  query ListSites(
+    $filter: ModelSitesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSites(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        siteName
+        siteDescription
+        siteTotalRating
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        Website
+        siteImage
+        SiteComments {
+          nextToken
+          startedAt
+        }
+        usersprofileID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncSites = /* GraphQL */ `
+  query SyncSites(
+    $filter: ModelSitesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSites(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        siteName
+        siteDescription
+        siteTotalRating
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        Website
+        siteImage
+        SiteComments {
+          nextToken
+          startedAt
+        }
+        usersprofileID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const sitesByUsersprofileID = /* GraphQL */ `
+  query SitesByUsersprofileID(
+    $usersprofileID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelSitesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    sitesByUsersprofileID(
+      usersprofileID: $usersprofileID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        siteName
+        siteDescription
+        siteTotalRating
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        Website
+        siteImage
+        SiteComments {
+          nextToken
+          startedAt
+        }
+        usersprofileID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getPicture = /* GraphQL */ `
+  query GetPicture($id: ID!) {
+    getPicture(id: $id) {
+      id
+      name
+      owner
+      file {
+        bucket
+        region
+        key
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listPictures = /* GraphQL */ `
+  query ListPictures(
+    $filter: ModelPictureFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPictures(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        owner
+        file {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncPictures = /* GraphQL */ `
+  query SyncPictures(
+    $filter: ModelPictureFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncPictures(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        name
+        owner
+        file {
+          bucket
+          region
+          key
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt

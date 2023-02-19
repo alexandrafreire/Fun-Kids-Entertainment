@@ -4,7 +4,7 @@ import "./Navbar.css";
 import logo from "./../../images/logo.png";
 import DropdownExplore from "./DropdownExplore";
 import DropdownOnTheWay from "./DropdownOnTheWay";
-import { ButtonSignIn } from "./Button";
+import { ButtonSignIn, ButtonContactUs } from "./Button";
 
 function Navbar() {
   //Update the state
@@ -54,6 +54,22 @@ function Navbar() {
 
   return (
     <>
+      <nav className="navbar-top">
+        <ul className={click ? "nav-menu active" : "nav-menu"}>
+          <li>
+            <Link to="/SignUp" className="nav-links-mobile">
+              Sign In
+            </Link>
+          </li>
+          <li>
+            <Link to="/ContactUs" className="nav-links-mobile">
+              Sign In
+            </Link>
+          </li>
+        </ul>
+        <ButtonContactUs />
+        <ButtonSignIn />
+      </nav>
       <nav className="navbar">
         <Link to="/" className="navbar-logo">
           <img src={logo} width="338" height="57" className="logo" alt="" />

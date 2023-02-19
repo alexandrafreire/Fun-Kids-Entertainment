@@ -34,7 +34,7 @@ const AmusementTypeNameValues = {
   "LANDSCAPE": "LANDSCAPE"
 };
 
-const { ContactUs, Cities, UsersProfile, Sites, SiteComments, SitesSiteComments } = initSchema(schema);
+const { ContactUs, Cities, UsersProfile, Sites, SiteComments, Picture, SitesSiteComments, S3Object } = initSchema(schema);
 
 export {
   ContactUs,
@@ -42,9 +42,11 @@ export {
   UsersProfile,
   Sites,
   SiteComments,
+  Picture,
   SitesSiteComments,
   OverallSiteRatingValues,
   FeedbackTypeValues,
   SiteAgeRangesValues,
-  AmusementTypeNameValues
+  AmusementTypeNameValues,
+  S3Object
 };

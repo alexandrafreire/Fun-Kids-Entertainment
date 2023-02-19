@@ -6,9 +6,6 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { fetchByPath, validateField } from "./utils";
-import { ContactUs } from "../models";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Button,
   Flex,
@@ -19,6 +16,9 @@ import {
   TextField,
   useTheme,
 } from "@aws-amplify/ui-react";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
+import { ContactUs } from "../models";
+import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 export default function ContactUsForm(props) {
   const {
@@ -34,12 +34,12 @@ export default function ContactUsForm(props) {
   } = props;
   const { tokens } = useTheme();
   const initialValues = {
-    firstName: undefined,
-    lastName: undefined,
-    email: undefined,
+    firstName: "",
+    lastName: "",
+    email: "",
     feedbackType: undefined,
     overallSiteRating: undefined,
-    message: undefined,
+    message: "",
   };
   const [firstName, setFirstName] = React.useState(initialValues.firstName);
   const [lastName, setLastName] = React.useState(initialValues.lastName);
@@ -69,7 +69,14 @@ export default function ContactUsForm(props) {
     overallSiteRating: [],
     message: [],
   };
-  const runValidationTasks = async (fieldName, value) => {
+  const runValidationTasks = async (
+    fieldName,
+    currentValue,
+    getDisplayValue
+  ) => {
+    const value = getDisplayValue
+      ? getDisplayValue(currentValue)
+      : currentValue;
     let validationResponse = validateField(value, validations[fieldName]);
     const customValidator = fetchByPath(onValidate, fieldName);
     if (customValidator) {
@@ -117,6 +124,11 @@ export default function ContactUsForm(props) {
           modelFields = onSubmit(modelFields);
         }
         try {
+          Object.entries(modelFields).forEach(([key, value]) => {
+            if (typeof value === "string" && value.trim() === "") {
+              modelFields[key] = undefined;
+            }
+          });
           await DataStore.save(new ContactUs(modelFields));
           if (onSuccess) {
             onSuccess(modelFields);
@@ -130,8 +142,8 @@ export default function ContactUsForm(props) {
           }
         }
       }}
-      {...rest}
       {...getOverrideProps(overrides, "ContactUsForm")}
+      {...rest}
     >
       <Grid
         columnGap="inherit"
@@ -143,6 +155,7 @@ export default function ContactUsForm(props) {
           label="First name"
           isRequired={true}
           isReadOnly={false}
+          value={firstName}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -171,6 +184,7 @@ export default function ContactUsForm(props) {
           label="Last name"
           isRequired={false}
           isReadOnly={false}
+          value={lastName}
           onChange={(e) => {
             let { value } = e.target;
             if (onChange) {
@@ -200,6 +214,7 @@ export default function ContactUsForm(props) {
         label="Email"
         isRequired={true}
         isReadOnly={false}
+        value={email}
         onChange={(e) => {
           let { value } = e.target;
           if (onChange) {
@@ -358,7 +373,10 @@ export default function ContactUsForm(props) {
         <Button
           children="Clear"
           type="reset"
-          onClick={resetStateValues}
+          onClick={(event) => {
+            event.preventDefault();
+            resetStateValues();
+          }}
           {...getOverrideProps(overrides, "ClearButton")}
         ></Button>
         <Flex
