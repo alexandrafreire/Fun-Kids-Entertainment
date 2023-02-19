@@ -2,7 +2,7 @@ import React from "react";
 import "@aws-amplify/ui-react/styles.css";
 import ContactUsForm from "../../ui-components/ContactUsForm";
 import {API} from 'aws-amplify';
-import {createContactUs} from "./../../graphql/mutations"
+import {createContactUs} from "../../graphql/mutations"
 
 import  Alert from "react";
 
