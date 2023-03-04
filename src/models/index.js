@@ -14,15 +14,6 @@ const FeedbackTypeValues = {
   "FEATURE_REQUEST": "FEATURE_REQUEST"
 };
 
-const SiteAgeRangesValues = {
-  "FAMILY_ACTIVITIES": "FAMILY_ACTIVITIES",
-  "TODDLER": "TODDLER",
-  "PRESCHOOLER": "PRESCHOOLER",
-  "SCHOOL_AGED_CHILD": "SCHOOL_AGED_CHILD",
-  "ALL_AGES_KIDS": "ALL_AGES_KIDS",
-  "ADOLESCENTS_ADULTS": "ADOLESCENTS_ADULTS"
-};
-
 const AmusementTypeNameValues = {
   "PLAYGROUND": "PLAYGROUND",
   "AMUSEMENT_PARK": "AMUSEMENT_PARK",
@@ -34,7 +25,16 @@ const AmusementTypeNameValues = {
   "LANDSCAPE": "LANDSCAPE"
 };
 
-const { ContactUs, Cities, UsersProfile, Sites, SiteComments, Picture, SitesSiteComments, S3Object } = initSchema(schema);
+const SiteAgeRangesValues = {
+  "FAMILY_ACTIVITIES": "FAMILY_ACTIVITIES",
+  "TODDLER": "TODDLER",
+  "PRESCHOOLER": "PRESCHOOLER",
+  "SCHOOL_AGED_CHILD": "SCHOOL_AGED_CHILD",
+  "ALL_AGES_KIDS": "ALL_AGES_KIDS",
+  "ADOLESCENTS_ADULTS": "ADOLESCENTS_ADULTS"
+};
+
+const { ContactUs, Cities, UsersProfile, Sites, SiteComments, SitesSiteComments } = initSchema(schema);
 
 export {
   ContactUs,
@@ -42,11 +42,9 @@ export {
   UsersProfile,
   Sites,
   SiteComments,
-  Picture,
   SitesSiteComments,
   OverallSiteRatingValues,
   FeedbackTypeValues,
-  SiteAgeRangesValues,
   AmusementTypeNameValues,
-  S3Object
+  SiteAgeRangesValues
 };

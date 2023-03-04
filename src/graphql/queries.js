@@ -181,6 +181,7 @@ export const getUsersProfile = /* GraphQL */ `
           siteName
           siteDescription
           siteTotalRating
+          siteNumberOfRatings
           siteAgeRange
           amusementTypeName
           siteType
@@ -192,8 +193,9 @@ export const getUsersProfile = /* GraphQL */ `
           siteLng
           SiteDistanceToGeoLoc
           SiteTimeToGeoLocation
-          Website
+          SiteWebsite
           siteImage
+          SiteMapURL
           usersprofileID
           createdAt
           updatedAt
@@ -420,6 +422,7 @@ export const getSites = /* GraphQL */ `
       siteName
       siteDescription
       siteTotalRating
+      siteNumberOfRatings
       siteAgeRange
       amusementTypeName
       siteType
@@ -431,8 +434,9 @@ export const getSites = /* GraphQL */ `
       siteLng
       SiteDistanceToGeoLoc
       SiteTimeToGeoLocation
-      Website
+      SiteWebsite
       siteImage
+      SiteMapURL
       SiteComments {
         items {
           id
@@ -469,6 +473,7 @@ export const listSites = /* GraphQL */ `
         siteName
         siteDescription
         siteTotalRating
+        siteNumberOfRatings
         siteAgeRange
         amusementTypeName
         siteType
@@ -480,8 +485,9 @@ export const listSites = /* GraphQL */ `
         siteLng
         SiteDistanceToGeoLoc
         SiteTimeToGeoLocation
-        Website
+        SiteWebsite
         siteImage
+        SiteMapURL
         SiteComments {
           nextToken
           startedAt
@@ -516,6 +522,7 @@ export const syncSites = /* GraphQL */ `
         siteName
         siteDescription
         siteTotalRating
+        siteNumberOfRatings
         siteAgeRange
         amusementTypeName
         siteType
@@ -527,8 +534,9 @@ export const syncSites = /* GraphQL */ `
         siteLng
         SiteDistanceToGeoLoc
         SiteTimeToGeoLocation
-        Website
+        SiteWebsite
         siteImage
+        SiteMapURL
         SiteComments {
           nextToken
           startedAt
@@ -565,6 +573,7 @@ export const sitesByUsersprofileID = /* GraphQL */ `
         siteName
         siteDescription
         siteTotalRating
+        siteNumberOfRatings
         siteAgeRange
         amusementTypeName
         siteType
@@ -576,92 +585,14 @@ export const sitesByUsersprofileID = /* GraphQL */ `
         siteLng
         SiteDistanceToGeoLoc
         SiteTimeToGeoLocation
-        Website
+        SiteWebsite
         siteImage
+        SiteMapURL
         SiteComments {
           nextToken
           startedAt
         }
         usersprofileID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getPicture = /* GraphQL */ `
-  query GetPicture($id: ID!) {
-    getPicture(id: $id) {
-      id
-      name
-      owner
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listPictures = /* GraphQL */ `
-  query ListPictures(
-    $filter: ModelPictureFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPictures(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        name
-        owner
-        file {
-          bucket
-          region
-          key
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncPictures = /* GraphQL */ `
-  query SyncPictures(
-    $filter: ModelPictureFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncPictures(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        owner
-        file {
-          bucket
-          region
-          key
-        }
         createdAt
         updatedAt
         _version
@@ -702,6 +633,7 @@ export const getSitesSiteComments = /* GraphQL */ `
         siteName
         siteDescription
         siteTotalRating
+        siteNumberOfRatings
         siteAgeRange
         amusementTypeName
         siteType
@@ -713,8 +645,9 @@ export const getSitesSiteComments = /* GraphQL */ `
         siteLng
         SiteDistanceToGeoLoc
         SiteTimeToGeoLocation
-        Website
+        SiteWebsite
         siteImage
+        SiteMapURL
         SiteComments {
           nextToken
           startedAt
@@ -769,6 +702,7 @@ export const listSitesSiteComments = /* GraphQL */ `
           siteName
           siteDescription
           siteTotalRating
+          siteNumberOfRatings
           siteAgeRange
           amusementTypeName
           siteType
@@ -780,8 +714,9 @@ export const listSitesSiteComments = /* GraphQL */ `
           siteLng
           SiteDistanceToGeoLoc
           SiteTimeToGeoLocation
-          Website
+          SiteWebsite
           siteImage
+          SiteMapURL
           usersprofileID
           createdAt
           updatedAt
@@ -837,6 +772,7 @@ export const syncSitesSiteComments = /* GraphQL */ `
           siteName
           siteDescription
           siteTotalRating
+          siteNumberOfRatings
           siteAgeRange
           amusementTypeName
           siteType
@@ -848,8 +784,9 @@ export const syncSitesSiteComments = /* GraphQL */ `
           siteLng
           SiteDistanceToGeoLoc
           SiteTimeToGeoLocation
-          Website
+          SiteWebsite
           siteImage
+          SiteMapURL
           usersprofileID
           createdAt
           updatedAt
@@ -907,6 +844,7 @@ export const sitesSiteCommentsBySiteCommentsId = /* GraphQL */ `
           siteName
           siteDescription
           siteTotalRating
+          siteNumberOfRatings
           siteAgeRange
           amusementTypeName
           siteType
@@ -918,8 +856,9 @@ export const sitesSiteCommentsBySiteCommentsId = /* GraphQL */ `
           siteLng
           SiteDistanceToGeoLoc
           SiteTimeToGeoLocation
-          Website
+          SiteWebsite
           siteImage
+          SiteMapURL
           usersprofileID
           createdAt
           updatedAt
@@ -977,6 +916,7 @@ export const sitesSiteCommentsBySitesId = /* GraphQL */ `
           siteName
           siteDescription
           siteTotalRating
+          siteNumberOfRatings
           siteAgeRange
           amusementTypeName
           siteType
@@ -988,8 +928,9 @@ export const sitesSiteCommentsBySitesId = /* GraphQL */ `
           siteLng
           SiteDistanceToGeoLoc
           SiteTimeToGeoLocation
-          Website
+          SiteWebsite
           siteImage
+          SiteMapURL
           usersprofileID
           createdAt
           updatedAt

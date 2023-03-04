@@ -7,9 +7,9 @@
 /* eslint-disable */
 import * as React from "react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Button, Flex, Image, Rating, Text } from "@aws-amplify/ui-react";
+import { Button, Flex, Image, Text } from "@aws-amplify/ui-react";
 export default function ActionCard(props) {
-  const { overrides, ...rest } = props;
+  const { SitesCard1, overrides, ...rest } = props;
   return (
     <Flex
       gap="0"
@@ -110,12 +110,6 @@ export default function ActionCard(props) {
             {...getOverrideProps(overrides, "Information about this product")}
           ></Text>
         </Flex>
-        <Rating
-          width="174px"
-          shrink="0"
-          size="default"
-          {...getOverrideProps(overrides, "Rating")}
-        ></Rating>
         <Text
           fontFamily="Inter"
           fontSize="20px"
@@ -139,6 +133,8 @@ export default function ActionCard(props) {
           {...getOverrideProps(overrides, "$99 USD")}
         ></Text>
         <Button
+          width="unset"
+          height="unset"
           shrink="0"
           alignSelf="stretch"
           size="large"

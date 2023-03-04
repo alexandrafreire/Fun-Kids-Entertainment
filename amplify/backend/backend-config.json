@@ -71,11 +71,5 @@
     }
   },
   "function": {},
-  "storage": {
-    "s3funkidsentertainmentstorage039090f5": {
-      "dependsOn": [],
-      "providerPlugin": "awscloudformation",
-      "service": "S3"
-    }
-  }
+  "storage": {}
 }

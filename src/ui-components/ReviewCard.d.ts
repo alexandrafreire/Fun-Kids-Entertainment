@@ -5,6 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
+import { Sites } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { BadgeProps, DividerProps, FlexProps, IconProps, ImageProps, RatingProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -18,6 +19,7 @@ export declare type ReviewCardOverridesProps = {
     Icon?: PrimitiveOverrideProps<ViewProps>;
     Vector?: PrimitiveOverrideProps<IconProps>;
     "Classic Long Sleeve T-Shirt"?: PrimitiveOverrideProps<TextProps>;
+    "Site Age Range"?: PrimitiveOverrideProps<TextProps>;
     Divider?: PrimitiveOverrideProps<DividerProps>;
     Features?: PrimitiveOverrideProps<FlexProps>;
     "Information about this product.29766836"?: PrimitiveOverrideProps<TextProps>;
@@ -27,9 +29,10 @@ export declare type ReviewCardOverridesProps = {
     Rating29766840?: PrimitiveOverrideProps<FlexProps>;
     Rating29766841?: PrimitiveOverrideProps<RatingProps>;
     Reviews?: PrimitiveOverrideProps<TextProps>;
-    "$99/Night"?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type ReviewCardProps = React.PropsWithChildren<Partial<FlexProps> & {
+    sites?: Sites;
+} & {
     overrides?: ReviewCardOverridesProps | undefined | null;
 }>;
 export default function ReviewCard(props: ReviewCardProps): React.ReactElement;

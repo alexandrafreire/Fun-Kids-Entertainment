@@ -5,8 +5,9 @@
  **************************************************************************/
 
 import * as React from "react";
+import { Sites } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { ButtonProps, FlexProps, ImageProps, RatingProps, TextProps } from "@aws-amplify/ui-react";
+import { ButtonProps, FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ActionCardOverridesProps = {
     ActionCard?: PrimitiveOverrideProps<FlexProps>;
@@ -15,11 +16,12 @@ export declare type ActionCardOverridesProps = {
     "Main Text"?: PrimitiveOverrideProps<FlexProps>;
     "Classic Long Sleeve T-Shirt"?: PrimitiveOverrideProps<TextProps>;
     "Information about this product"?: PrimitiveOverrideProps<TextProps>;
-    Rating?: PrimitiveOverrideProps<RatingProps>;
     "$99 USD"?: PrimitiveOverrideProps<TextProps>;
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type ActionCardProps = React.PropsWithChildren<Partial<FlexProps> & {
+    SitesCard1?: Sites;
+} & {
     overrides?: ActionCardOverridesProps | undefined | null;
 }>;
 export default function ActionCard(props: ActionCardProps): React.ReactElement;

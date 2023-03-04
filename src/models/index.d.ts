@@ -14,15 +14,6 @@ export enum FeedbackTypeValues {
   FEATURE_REQUEST = "FEATURE_REQUEST"
 }
 
-export enum SiteAgeRangesValues {
-  FAMILY_ACTIVITIES = "FAMILY_ACTIVITIES",
-  TODDLER = "TODDLER",
-  PRESCHOOLER = "PRESCHOOLER",
-  SCHOOL_AGED_CHILD = "SCHOOL_AGED_CHILD",
-  ALL_AGES_KIDS = "ALL_AGES_KIDS",
-  ADOLESCENTS_ADULTS = "ADOLESCENTS_ADULTS"
-}
-
 export enum AmusementTypeNameValues {
   PLAYGROUND = "PLAYGROUND",
   AMUSEMENT_PARK = "AMUSEMENT_PARK",
@@ -34,21 +25,16 @@ export enum AmusementTypeNameValues {
   LANDSCAPE = "LANDSCAPE"
 }
 
-type EagerS3Object = {
-  readonly bucket: string;
-  readonly region: string;
-  readonly key: string;
+export enum SiteAgeRangesValues {
+  FAMILY_ACTIVITIES = "FAMILY_ACTIVITIES",
+  TODDLER = "TODDLER",
+  PRESCHOOLER = "PRESCHOOLER",
+  SCHOOL_AGED_CHILD = "SCHOOL_AGED_CHILD",
+  ALL_AGES_KIDS = "ALL_AGES_KIDS",
+  ADOLESCENTS_ADULTS = "ADOLESCENTS_ADULTS"
 }
 
-type LazyS3Object = {
-  readonly bucket: string;
-  readonly region: string;
-  readonly key: string;
-}
 
-export declare type S3Object = LazyLoading extends LazyLoadingDisabled ? EagerS3Object : LazyS3Object
-
-export declare const S3Object: (new (init: ModelInit<S3Object>) => S3Object)
 
 type EagerContactUs = {
   readonly [__modelMeta__]: {
@@ -183,8 +169,9 @@ type EagerSites = {
   readonly siteName: string;
   readonly siteDescription: string;
   readonly siteTotalRating: number;
-  readonly siteAgeRange?: SiteAgeRangesValues[] | keyof typeof SiteAgeRangesValues | null;
-  readonly amusementTypeName?: AmusementTypeNameValues[] | keyof typeof AmusementTypeNameValues | null;
+  readonly siteNumberOfRatings?: number | null;
+  readonly siteAgeRange: string;
+  readonly amusementTypeName: string;
   readonly siteType: string;
   readonly siteVillage: string;
   readonly siteCity: string;
@@ -194,10 +181,11 @@ type EagerSites = {
   readonly siteLng: number;
   readonly SiteDistanceToGeoLoc?: number | null;
   readonly SiteTimeToGeoLocation?: number | null;
-  readonly Website?: string | null;
+  readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
+  readonly SiteMapURL?: string | null;
   readonly SiteComments?: (SitesSiteComments | null)[] | null;
-  readonly usersprofileID: string;
+  readonly usersprofileID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -211,8 +199,9 @@ type LazySites = {
   readonly siteName: string;
   readonly siteDescription: string;
   readonly siteTotalRating: number;
-  readonly siteAgeRange?: SiteAgeRangesValues[] | keyof typeof SiteAgeRangesValues | null;
-  readonly amusementTypeName?: AmusementTypeNameValues[] | keyof typeof AmusementTypeNameValues | null;
+  readonly siteNumberOfRatings?: number | null;
+  readonly siteAgeRange: string;
+  readonly amusementTypeName: string;
   readonly siteType: string;
   readonly siteVillage: string;
   readonly siteCity: string;
@@ -222,10 +211,11 @@ type LazySites = {
   readonly siteLng: number;
   readonly SiteDistanceToGeoLoc?: number | null;
   readonly SiteTimeToGeoLocation?: number | null;
-  readonly Website?: string | null;
+  readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
+  readonly SiteMapURL?: string | null;
   readonly SiteComments: AsyncCollection<SitesSiteComments>;
-  readonly usersprofileID: string;
+  readonly usersprofileID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -272,38 +262,6 @@ export declare type SiteComments = LazyLoading extends LazyLoadingDisabled ? Eag
 
 export declare const SiteComments: (new (init: ModelInit<SiteComments>) => SiteComments) & {
   copyOf(source: SiteComments, mutator: (draft: MutableModel<SiteComments>) => MutableModel<SiteComments> | void): SiteComments;
-}
-
-type EagerPicture = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Picture, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name?: string | null;
-  readonly owner?: string | null;
-  readonly file?: S3Object | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyPicture = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Picture, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name?: string | null;
-  readonly owner?: string | null;
-  readonly file?: S3Object | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type Picture = LazyLoading extends LazyLoadingDisabled ? EagerPicture : LazyPicture
-
-export declare const Picture: (new (init: ModelInit<Picture>) => Picture) & {
-  copyOf(source: Picture, mutator: (draft: MutableModel<Picture>) => MutableModel<Picture> | void): Picture;
 }
 
 type EagerSitesSiteComments = {

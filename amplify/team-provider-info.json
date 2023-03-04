@@ -17,9 +17,6 @@
       },
       "api": {
         "funkidsentertainmentAPI": {}
-      },
-      "storage": {
-        "s3funkidsentertainmentstorage039090f5": {}
       }
     }
   }

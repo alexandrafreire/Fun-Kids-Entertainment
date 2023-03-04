@@ -31,6 +31,26 @@ type Cities @model @auth(rules: [{ allow: public, operations: [read] }]) {
   cityLng: Float!
 }
 
+enum AmusementTypeNameValues {
+  PLAYGROUND
+  AMUSEMENT_PARK
+  EXHIBITION
+  NATURE_ANIMALS
+  WATER_PARK
+  MUSEUM
+  BEACH
+  LANDSCAPE
+}
+
+enum SiteAgeRangesValues {
+  FAMILY_ACTIVITIES
+  TODDLER
+  PRESCHOOLER
+  SCHOOL_AGED_CHILD
+  ALL_AGES_KIDS
+  ADOLESCENTS_ADULTS
+}
+
 type UsersProfile
   @model
   @auth(rules: [{ allow: private, operations: [create, read, update] }]) {
@@ -58,33 +78,14 @@ type SiteComments @model @auth(rules: [{ allow: owner }]) {
   createdDate: AWSDate!
 }
 
-enum AmusementTypeNameValues {
-  PLAYGROUND
-  AMUSEMENT_PARK
-  EXHIBITION
-  NATURE_ANIMALS
-  WATER_PARK
-  MUSEUM
-  BEACH
-  LANDSCAPE
-}
-
-enum SiteAgeRangesValues {
-  FAMILY_ACTIVITIES
-  TODDLER
-  PRESCHOOLER
-  SCHOOL_AGED_CHILD
-  ALL_AGES_KIDS
-  ADOLESCENTS_ADULTS
-}
-
 type Sites @model @auth(rules: [{ allow: public, operations: [read] }]) {
   id: ID!
   siteName: String!
   siteDescription: String!
   siteTotalRating: Float!
-  siteAgeRange: [SiteAgeRangesValues!]
-  amusementTypeName: [AmusementTypeNameValues!]
+  siteNumberOfRatings: Float
+  siteAgeRange: String!
+  amusementTypeName: String!
   siteType: String!
   siteVillage: String!
   siteCity: String!
@@ -94,23 +95,9 @@ type Sites @model @auth(rules: [{ allow: public, operations: [read] }]) {
   siteLng: Float!
   SiteDistanceToGeoLoc: Float
   SiteTimeToGeoLocation: Float
-  Website: AWSURL
+  SiteWebsite: AWSURL
   siteImage: AWSURL
+  SiteMapURL: AWSURL
   SiteComments: [SiteComments] @manyToMany(relationName: "SitesSiteComments")
-  usersprofileID: ID! @index(name: "byUsersProfile")
-}
-
-type S3Object {
-  bucket: String!
-  region: String!
-  key: String!
-}
-
-type Picture @model @auth(rules: [{ allow: owner }]) {
-  id: ID!
-  name: String
-  owner: String
-
-  #reference the S3Object
-  file: S3Object
+  usersprofileID: ID @index(name: "byUsersProfile")
 }

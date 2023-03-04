@@ -158,6 +158,7 @@ export const createUsersProfile = /* GraphQL */ `
           siteName
           siteDescription
           siteTotalRating
+          siteNumberOfRatings
           siteAgeRange
           amusementTypeName
           siteType
@@ -169,8 +170,9 @@ export const createUsersProfile = /* GraphQL */ `
           siteLng
           SiteDistanceToGeoLoc
           SiteTimeToGeoLocation
-          Website
+          SiteWebsite
           siteImage
+          SiteMapURL
           usersprofileID
           createdAt
           updatedAt
@@ -225,6 +227,7 @@ export const updateUsersProfile = /* GraphQL */ `
           siteName
           siteDescription
           siteTotalRating
+          siteNumberOfRatings
           siteAgeRange
           amusementTypeName
           siteType
@@ -236,8 +239,9 @@ export const updateUsersProfile = /* GraphQL */ `
           siteLng
           SiteDistanceToGeoLoc
           SiteTimeToGeoLocation
-          Website
+          SiteWebsite
           siteImage
+          SiteMapURL
           usersprofileID
           createdAt
           updatedAt
@@ -292,6 +296,7 @@ export const deleteUsersProfile = /* GraphQL */ `
           siteName
           siteDescription
           siteTotalRating
+          siteNumberOfRatings
           siteAgeRange
           amusementTypeName
           siteType
@@ -303,8 +308,9 @@ export const deleteUsersProfile = /* GraphQL */ `
           siteLng
           SiteDistanceToGeoLoc
           SiteTimeToGeoLocation
-          Website
+          SiteWebsite
           siteImage
+          SiteMapURL
           usersprofileID
           createdAt
           updatedAt
@@ -443,6 +449,7 @@ export const createSites = /* GraphQL */ `
       siteName
       siteDescription
       siteTotalRating
+      siteNumberOfRatings
       siteAgeRange
       amusementTypeName
       siteType
@@ -454,8 +461,9 @@ export const createSites = /* GraphQL */ `
       siteLng
       SiteDistanceToGeoLoc
       SiteTimeToGeoLocation
-      Website
+      SiteWebsite
       siteImage
+      SiteMapURL
       SiteComments {
         items {
           id
@@ -490,6 +498,7 @@ export const updateSites = /* GraphQL */ `
       siteName
       siteDescription
       siteTotalRating
+      siteNumberOfRatings
       siteAgeRange
       amusementTypeName
       siteType
@@ -501,8 +510,9 @@ export const updateSites = /* GraphQL */ `
       siteLng
       SiteDistanceToGeoLoc
       SiteTimeToGeoLocation
-      Website
+      SiteWebsite
       siteImage
+      SiteMapURL
       SiteComments {
         items {
           id
@@ -537,6 +547,7 @@ export const deleteSites = /* GraphQL */ `
       siteName
       siteDescription
       siteTotalRating
+      siteNumberOfRatings
       siteAgeRange
       amusementTypeName
       siteType
@@ -548,8 +559,9 @@ export const deleteSites = /* GraphQL */ `
       siteLng
       SiteDistanceToGeoLoc
       SiteTimeToGeoLocation
-      Website
+      SiteWebsite
       siteImage
+      SiteMapURL
       SiteComments {
         items {
           id
@@ -566,72 +578,6 @@ export const deleteSites = /* GraphQL */ `
         startedAt
       }
       usersprofileID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const createPicture = /* GraphQL */ `
-  mutation CreatePicture(
-    $input: CreatePictureInput!
-    $condition: ModelPictureConditionInput
-  ) {
-    createPicture(input: $input, condition: $condition) {
-      id
-      name
-      owner
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updatePicture = /* GraphQL */ `
-  mutation UpdatePicture(
-    $input: UpdatePictureInput!
-    $condition: ModelPictureConditionInput
-  ) {
-    updatePicture(input: $input, condition: $condition) {
-      id
-      name
-      owner
-      file {
-        bucket
-        region
-        key
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deletePicture = /* GraphQL */ `
-  mutation DeletePicture(
-    $input: DeletePictureInput!
-    $condition: ModelPictureConditionInput
-  ) {
-    deletePicture(input: $input, condition: $condition) {
-      id
-      name
-      owner
-      file {
-        bucket
-        region
-        key
-      }
       createdAt
       updatedAt
       _version
@@ -672,6 +618,7 @@ export const createSitesSiteComments = /* GraphQL */ `
         siteName
         siteDescription
         siteTotalRating
+        siteNumberOfRatings
         siteAgeRange
         amusementTypeName
         siteType
@@ -683,8 +630,9 @@ export const createSitesSiteComments = /* GraphQL */ `
         siteLng
         SiteDistanceToGeoLoc
         SiteTimeToGeoLocation
-        Website
+        SiteWebsite
         siteImage
+        SiteMapURL
         SiteComments {
           nextToken
           startedAt
@@ -737,6 +685,7 @@ export const updateSitesSiteComments = /* GraphQL */ `
         siteName
         siteDescription
         siteTotalRating
+        siteNumberOfRatings
         siteAgeRange
         amusementTypeName
         siteType
@@ -748,8 +697,9 @@ export const updateSitesSiteComments = /* GraphQL */ `
         siteLng
         SiteDistanceToGeoLoc
         SiteTimeToGeoLocation
-        Website
+        SiteWebsite
         siteImage
+        SiteMapURL
         SiteComments {
           nextToken
           startedAt
@@ -802,6 +752,7 @@ export const deleteSitesSiteComments = /* GraphQL */ `
         siteName
         siteDescription
         siteTotalRating
+        siteNumberOfRatings
         siteAgeRange
         amusementTypeName
         siteType
@@ -813,8 +764,9 @@ export const deleteSitesSiteComments = /* GraphQL */ `
         siteLng
         SiteDistanceToGeoLoc
         SiteTimeToGeoLocation
-        Website
+        SiteWebsite
         siteImage
+        SiteMapURL
         SiteComments {
           nextToken
           startedAt

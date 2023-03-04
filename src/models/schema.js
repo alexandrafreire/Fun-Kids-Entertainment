@@ -374,25 +374,26 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "siteNumberOfRatings": {
+                    "name": "siteNumberOfRatings",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "siteAgeRange": {
                     "name": "siteAgeRange",
-                    "isArray": true,
-                    "type": {
-                        "enum": "SiteAgeRangesValues"
-                    },
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "amusementTypeName": {
                     "name": "amusementTypeName",
-                    "isArray": true,
-                    "type": {
-                        "enum": "AmusementTypeNameValues"
-                    },
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": true,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "siteType": {
                     "name": "siteType",
@@ -457,8 +458,8 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Website": {
-                    "name": "Website",
+                "SiteWebsite": {
+                    "name": "SiteWebsite",
                     "isArray": false,
                     "type": "AWSURL",
                     "isRequired": false,
@@ -466,6 +467,13 @@ export const schema = {
                 },
                 "siteImage": {
                     "name": "siteImage",
+                    "isArray": false,
+                    "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "SiteMapURL": {
+                    "name": "SiteMapURL",
                     "isArray": false,
                     "type": "AWSURL",
                     "isRequired": false,
@@ -491,7 +499,7 @@ export const schema = {
                     "name": "usersprofileID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -648,84 +656,6 @@ export const schema = {
                 }
             ]
         },
-        "Picture": {
-            "name": "Picture",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "owner": {
-                    "name": "owner",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "file": {
-                    "name": "file",
-                    "isArray": false,
-                    "type": {
-                        "nonModel": "S3Object"
-                    },
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "Pictures",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
         "SitesSiteComments": {
             "name": "SitesSiteComments",
             "fields": {
@@ -842,17 +772,6 @@ export const schema = {
                 "FEATURE_REQUEST"
             ]
         },
-        "SiteAgeRangesValues": {
-            "name": "SiteAgeRangesValues",
-            "values": [
-                "FAMILY_ACTIVITIES",
-                "TODDLER",
-                "PRESCHOOLER",
-                "SCHOOL_AGED_CHILD",
-                "ALL_AGES_KIDS",
-                "ADOLESCENTS_ADULTS"
-            ]
-        },
         "AmusementTypeNameValues": {
             "name": "AmusementTypeNameValues",
             "values": [
@@ -865,36 +784,20 @@ export const schema = {
                 "BEACH",
                 "LANDSCAPE"
             ]
+        },
+        "SiteAgeRangesValues": {
+            "name": "SiteAgeRangesValues",
+            "values": [
+                "FAMILY_ACTIVITIES",
+                "TODDLER",
+                "PRESCHOOLER",
+                "SCHOOL_AGED_CHILD",
+                "ALL_AGES_KIDS",
+                "ADOLESCENTS_ADULTS"
+            ]
         }
     },
-    "nonModels": {
-        "S3Object": {
-            "name": "S3Object",
-            "fields": {
-                "bucket": {
-                    "name": "bucket",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "region": {
-                    "name": "region",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "key": {
-                    "name": "key",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                }
-            }
-        }
-    },
+    "nonModels": {},
     "codegenVersion": "3.3.5",
-    "version": "5e94df4bfda697ad839bce5f47f725ef"
+    "version": "ee141cb651cd994329567158c2f7974e"
 };
