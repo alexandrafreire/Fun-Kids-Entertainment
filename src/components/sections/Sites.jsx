@@ -1,13 +1,18 @@
-import React from "react";
 import "../.././App.css";
-import {SitesCardCollection} from './ui-components';
+import "./../pages/Home.css";
+import SitesCardCollection from "./../../ui-components/SitesCardCollection";
 
-const HomePageSites = () => {
 
-    return 
-    (
+function HomePageSites () {
 
-        <SitesCardCollection />
+
+
+    return (
+        <>
+        <div className="sites-container">
+        <SitesCardCollection width="100%" className='sites-component'/>
+        </div>
+        </>
     )
   };
   

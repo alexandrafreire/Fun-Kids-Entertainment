@@ -17,6 +17,9 @@
       },
       "api": {
         "funkidsentertainmentAPI": {}
+      },
+      "storage": {
+        "s3funkidsentertainmentstorage": {}
       }
     }
   }

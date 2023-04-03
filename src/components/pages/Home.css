@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
+video{
+
+ /* override other styles to make responsive */
+	width: 100%    !important;
+	height: auto   !important;
+	position: relative;
+  
+}
+
+video{
+
+    /* override other styles to make responsive */
+       width: 100%    !important;
+       height: auto   !important;
+       position: relative;
+     
+   }
+
+
+/* Divider */
+.container-divider{
+  margin-top: 10px;
+  align-items: center;
+}
+
+
+
+.amplify-divider {
+  --amplify-components-divider-border-color: #79C91D;
+  --amplify-components-divider-label-margin-inline: 2px;
+}
+
+.sites-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sites-component {
+  flex: 1;
+  min-width: 300px;
+  margin: 10px;
+} {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sites-component {
+  flex: 1;
+  min-width: 300px;
+  margin: 10px;
+}
+
+/* For smaller screens (mobile) */
+@media (max-width: 768px) {
+  .sites-container{
+    flex-direction: column;
+  }
+
+  .sites-component {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* For medium screens (tablets) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sites-container{
+    flex-direction: row;
+  }
+
+  .sites-component {
+    width: 48%;
+  }
+}
+
+/* For larger screens (desktop) */
+@media (min-width: 1025px) {
+  .sites-container{
+    flex-direction: row;
+  }
+
+  .sites-component {
+    width: 32%;
+  }
+}

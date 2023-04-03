@@ -160,6 +160,44 @@ export declare const UsersProfile: (new (init: ModelInit<UsersProfile>) => Users
   copyOf(source: UsersProfile, mutator: (draft: MutableModel<UsersProfile>) => MutableModel<UsersProfile> | void): UsersProfile;
 }
 
+type EagerSiteComments = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<SiteComments, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly siteRating?: string | null;
+  readonly message?: string | null;
+  readonly email?: string | null;
+  readonly username: string;
+  readonly sitess?: (SitesSiteComments | null)[] | null;
+  readonly createdDate: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazySiteComments = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<SiteComments, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly siteRating?: string | null;
+  readonly message?: string | null;
+  readonly email?: string | null;
+  readonly username: string;
+  readonly sitess: AsyncCollection<SitesSiteComments>;
+  readonly createdDate: string;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type SiteComments = LazyLoading extends LazyLoadingDisabled ? EagerSiteComments : LazySiteComments
+
+export declare const SiteComments: (new (init: ModelInit<SiteComments>) => SiteComments) & {
+  copyOf(source: SiteComments, mutator: (draft: MutableModel<SiteComments>) => MutableModel<SiteComments> | void): SiteComments;
+}
+
 type EagerSites = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Sites, 'id'>;
@@ -226,54 +264,16 @@ export declare const Sites: (new (init: ModelInit<Sites>) => Sites) & {
   copyOf(source: Sites, mutator: (draft: MutableModel<Sites>) => MutableModel<Sites> | void): Sites;
 }
 
-type EagerSiteComments = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<SiteComments, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly siteRating?: string | null;
-  readonly message?: string | null;
-  readonly email?: string | null;
-  readonly username: string;
-  readonly sitess?: (SitesSiteComments | null)[] | null;
-  readonly createdDate: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazySiteComments = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<SiteComments, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly siteRating?: string | null;
-  readonly message?: string | null;
-  readonly email?: string | null;
-  readonly username: string;
-  readonly sitess: AsyncCollection<SitesSiteComments>;
-  readonly createdDate: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type SiteComments = LazyLoading extends LazyLoadingDisabled ? EagerSiteComments : LazySiteComments
-
-export declare const SiteComments: (new (init: ModelInit<SiteComments>) => SiteComments) & {
-  copyOf(source: SiteComments, mutator: (draft: MutableModel<SiteComments>) => MutableModel<SiteComments> | void): SiteComments;
-}
-
 type EagerSitesSiteComments = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<SitesSiteComments, 'id'>;
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly sitesId?: string | null;
   readonly siteCommentsId?: string | null;
-  readonly sites: Sites;
+  readonly sitesId?: string | null;
   readonly siteComments: SiteComments;
+  readonly sites: Sites;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -284,10 +284,10 @@ type LazySitesSiteComments = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly sitesId?: string | null;
   readonly siteCommentsId?: string | null;
-  readonly sites: AsyncItem<Sites>;
+  readonly sitesId?: string | null;
   readonly siteComments: AsyncItem<SiteComments>;
+  readonly sites: AsyncItem<Sites>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

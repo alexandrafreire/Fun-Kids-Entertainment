@@ -6,30 +6,46 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { getOverrideProps } from "@aws-amplify/ui-react/internal";
-import { Badge, Divider, Flex, Icon, Image, Text } from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
+import {
+  getOverrideProps,
+  useNavigateAction,
+} from "@aws-amplify/ui-react/internal";
+import {
+  Badge,
+  Button,
+  Divider,
+  Flex,
+  Icon,
+  Image,
+  Text,
+} from "@aws-amplify/ui-react";
 export default function SitesCard(props) {
-  const { sites, sitesCard, overrides, ...rest } = props;
+  const { sites, sitesCard, header, usersProfile, overrides, ...rest } = props;
+  const buttonOnClick = useNavigateAction({
+    target: "_blank",
+    type: "url",
+    url: sites?.SiteMapURL,
+  });
   return (
     <Flex
       gap="8px"
       direction="column"
-      width="423px"
-      height="456px"
+      width="392px"
+      height="506px"
       justifyContent="center"
       alignItems="flex-start"
       overflow="hidden"
       position="relative"
-      borderRadius="20px"
+      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
+      borderRadius="10px"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
       {...getOverrideProps(overrides, "SitesCard")}
       {...rest}
     >
       <Image
-        width="423px"
-        height="262px"
+        width="392px"
+        height="284px"
         display="block"
         gap="unset"
         alignItems="unset"
@@ -44,8 +60,8 @@ export default function SitesCard(props) {
       <Flex
         gap="16px"
         direction="row"
-        width="412px"
-        height="32px"
+        width="366px"
+        height="21px"
         justifyContent="center"
         alignItems="center"
         shrink="0"
@@ -56,8 +72,8 @@ export default function SitesCard(props) {
         <Flex
           gap="16px"
           direction="row"
-          width="306px"
-          height="22px"
+          width="276px"
+          height="18px"
           justifyContent="flex-start"
           alignItems="center"
           shrink="0"
@@ -75,8 +91,8 @@ export default function SitesCard(props) {
             display="block"
             direction="column"
             justifyContent="unset"
-            width="unset"
-            height="unset"
+            width="356px"
+            height="25px"
             gap="unset"
             alignItems="unset"
             shrink="0"
@@ -87,25 +103,11 @@ export default function SitesCard(props) {
             {...getOverrideProps(overrides, "Site Name")}
           ></Text>
         </Flex>
-        <MyIcon
-          width="24px"
-          height="24px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          overflow="hidden"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          type="favorite_border"
-          {...getOverrideProps(overrides, "MyIcon")}
-        ></MyIcon>
       </Flex>
       <Flex
         gap="16px"
         direction="row"
-        width="412px"
+        width="382px"
         height="38px"
         justifyContent="flex-start"
         alignItems="flex-start"
@@ -178,7 +180,7 @@ export default function SitesCard(props) {
           fontFamily="Inter"
           fontSize="14px"
           fontWeight="400"
-          color="rgba(77,0,77,1)"
+          color="rgba(0,0,0,1)"
           lineHeight="24px"
           textAlign="left"
           display="block"
@@ -199,8 +201,8 @@ export default function SitesCard(props) {
       <Flex
         gap="16px"
         direction="row"
-        width="412px"
-        height="35px"
+        width="366px"
+        height="54px"
         justifyContent="flex-start"
         alignItems="center"
         shrink="0"
@@ -209,30 +211,35 @@ export default function SitesCard(props) {
         {...getOverrideProps(overrides, "Badges")}
       >
         <Badge
-          width="unset"
+          width="151px"
           height="unset"
-          justifyContent="flex-start"
+          justifyContent="center"
+          backgroundColor="rgba(54,94,61,1)"
           shrink="0"
           size="default"
           variation="default"
+          color="white"
           children={sites?.amusementTypeName}
           {...getOverrideProps(overrides, "Badge35692749")}
         ></Badge>
         <Badge
-          width="unset"
-          height="unset"
+          width="173px"
+          height="30px"
+          backgroundColor="rgba(54,94,61,1)"
           shrink="0"
           size="default"
           variation="default"
+          color="white"
+          justifyContent="center"
           children={sites?.siteAgeRange}
           {...getOverrideProps(overrides, "Badge35692753")}
         ></Badge>
       </Flex>
       <Divider
-        width="unset"
+        width="350px"
         height="1px"
         shrink="0"
-        alignSelf="stretch"
+        opacity="0.5"
         size="small"
         orientation="horizontal"
         {...getOverrideProps(overrides, "Divider")}
@@ -240,8 +247,8 @@ export default function SitesCard(props) {
       <Flex
         gap="8px"
         direction="column"
-        width="412px"
-        height="54px"
+        width="382px"
+        height="71px"
         justifyContent="flex-start"
         alignItems="flex-start"
         shrink="0"
@@ -252,8 +259,8 @@ export default function SitesCard(props) {
         <Flex
           gap="8px"
           direction="row"
-          width="417px"
-          height="33px"
+          width="366px"
+          height="56px"
           justifyContent="flex-start"
           alignItems="center"
           shrink="0"
@@ -271,8 +278,8 @@ export default function SitesCard(props) {
             display="block"
             direction="column"
             justifyContent="unset"
-            width="176px"
-            height="24px"
+            width="141px"
+            height="22px"
             gap="unset"
             alignItems="unset"
             shrink="0"
@@ -292,8 +299,8 @@ export default function SitesCard(props) {
             display="block"
             direction="column"
             justifyContent="unset"
-            width="133px"
-            height="unset"
+            width="112px"
+            height="24px"
             gap="unset"
             alignItems="unset"
             shrink="0"
@@ -303,27 +310,20 @@ export default function SitesCard(props) {
             children={`${sites?.SiteDistanceToGeoLoc}${" Km away"}`}
             {...getOverrideProps(overrides, "10,45")}
           ></Text>
-          <Text
-            fontFamily="Inter"
-            fontSize="14px"
-            fontWeight="400"
-            color="rgba(13,26,38,1)"
-            lineHeight="24px"
-            textAlign="left"
-            display="block"
-            direction={sites?.SiteMapURL}
-            justifyContent="unset"
-            width="36px"
-            height="21px"
-            gap="unset"
-            alignItems="unset"
+          <Button
+            width="unset"
+            height="unset"
+            border="1px SOLID rgba(0,0,0,1)"
             shrink="0"
-            position="relative"
-            padding="0px 0px 0px 0px"
-            whiteSpace="pre-wrap"
+            size="default"
+            isDisabled={false}
+            variation="default"
             children="Map"
-            {...getOverrideProps(overrides, "Map URL")}
-          ></Text>
+            onClick={() => {
+              buttonOnClick();
+            }}
+            {...getOverrideProps(overrides, "Button")}
+          ></Button>
         </Flex>
       </Flex>
     </Flex>

@@ -37,7 +37,7 @@ export default function SitesCardCollection(props) {
       type="grid"
       searchPlaceholder="Search..."
       itemsPerPage={6}
-      templateColumns="1fr 1fr 1fr 1fr"
+      templateColumns="1fr 1fr 1fr 1fr 1fr 1fr"
       autoFlow="row"
       alignItems="stretch"
       justifyContent="stretch"
@@ -48,9 +48,9 @@ export default function SitesCardCollection(props) {
       {(item, index) => (
         <SitesCard
           sites={item}
-          margin="10px 10px 10px 10px"
-          height="auto"
-          width="auto"
+          margin="20px 10px 20px 10px"
+          height="506px"
+          width="392px"
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}
         ></SitesCard>

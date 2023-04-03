@@ -5,10 +5,9 @@
  **************************************************************************/
 
 import * as React from "react";
-import { Sites } from "../models";
+import { Sites, UsersProfile } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { BadgeProps, DividerProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
-import { MyIconProps } from "./MyIcon";
+import { BadgeProps, ButtonProps, DividerProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SitesCardOverridesProps = {
     SitesCard?: PrimitiveOverrideProps<FlexProps>;
@@ -16,7 +15,6 @@ export declare type SitesCardOverridesProps = {
     Header?: PrimitiveOverrideProps<FlexProps>;
     Profile?: PrimitiveOverrideProps<FlexProps>;
     "Site Name"?: PrimitiveOverrideProps<TextProps>;
-    MyIcon?: MyIconProps;
     Options?: PrimitiveOverrideProps<FlexProps>;
     "4.7"?: PrimitiveOverrideProps<TextProps>;
     Vector?: PrimitiveOverrideProps<IconProps>;
@@ -29,11 +27,13 @@ export declare type SitesCardOverridesProps = {
     Location?: PrimitiveOverrideProps<FlexProps>;
     "Site Village, Site City"?: PrimitiveOverrideProps<TextProps>;
     "10,45"?: PrimitiveOverrideProps<TextProps>;
-    "Map URL"?: PrimitiveOverrideProps<TextProps>;
+    Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type SitesCardProps = React.PropsWithChildren<Partial<FlexProps> & {
     sites?: Sites;
     sitesCard?: Sites;
+    header?: React.ReactNode;
+    usersProfile?: UsersProfile;
 } & {
     overrides?: SitesCardOverridesProps | undefined | null;
 }>;

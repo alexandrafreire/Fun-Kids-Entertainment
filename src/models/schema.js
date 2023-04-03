@@ -343,6 +343,112 @@ export const schema = {
                 }
             ]
         },
+        "SiteComments": {
+            "name": "SiteComments",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "siteRating": {
+                    "name": "siteRating",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "message": {
+                    "name": "message",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "sitess": {
+                    "name": "sitess",
+                    "isArray": true,
+                    "type": {
+                        "model": "SitesSiteComments"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "siteComments"
+                        ]
+                    }
+                },
+                "createdDate": {
+                    "name": "createdDate",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "SiteComments",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Sites": {
             "name": "Sites",
             "fields": {
@@ -550,112 +656,6 @@ export const schema = {
                 }
             ]
         },
-        "SiteComments": {
-            "name": "SiteComments",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "siteRating": {
-                    "name": "siteRating",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "message": {
-                    "name": "message",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "email": {
-                    "name": "email",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "username": {
-                    "name": "username",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "sitess": {
-                    "name": "sitess",
-                    "isArray": true,
-                    "type": {
-                        "model": "SitesSiteComments"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "siteComments"
-                        ]
-                    }
-                },
-                "createdDate": {
-                    "name": "createdDate",
-                    "isArray": false,
-                    "type": "AWSDate",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "SiteComments",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
         "SitesSiteComments": {
             "name": "SitesSiteComments",
             "fields": {
@@ -666,13 +666,6 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "sitesId": {
-                    "name": "sitesId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "siteCommentsId": {
                     "name": "siteCommentsId",
                     "isArray": false,
@@ -680,20 +673,12 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "sites": {
-                    "name": "sites",
+                "sitesId": {
+                    "name": "sitesId",
                     "isArray": false,
-                    "type": {
-                        "model": "Sites"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "sitesId"
-                        ]
-                    }
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
                 },
                 "siteComments": {
                     "name": "siteComments",
@@ -707,6 +692,21 @@ export const schema = {
                         "connectionType": "BELONGS_TO",
                         "targetNames": [
                             "siteCommentsId"
+                        ]
+                    }
+                },
+                "sites": {
+                    "name": "sites",
+                    "isArray": false,
+                    "type": {
+                        "model": "Sites"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "sitesId"
                         ]
                     }
                 },
@@ -737,18 +737,18 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "bySites",
+                        "name": "bySiteComments",
                         "fields": [
-                            "sitesId"
+                            "siteCommentsId"
                         ]
                     }
                 },
                 {
                     "type": "key",
                     "properties": {
-                        "name": "bySiteComments",
+                        "name": "bySites",
                         "fields": [
-                            "siteCommentsId"
+                            "sitesId"
                         ]
                     }
                 }
@@ -798,6 +798,6 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "codegenVersion": "3.3.5",
+    "codegenVersion": "3.4.0",
     "version": "ee141cb651cd994329567158c2f7974e"
 };
