@@ -15,8 +15,6 @@ export declare type HomePageBannerOverridesProps = {
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type HomePageBannerProps = React.PropsWithChildren<Partial<ViewProps> & {
-    Banner?: React.ReactNode;
-} & {
     overrides?: HomePageBannerOverridesProps | undefined | null;
 }>;
 export default function HomePageBanner(props: HomePageBannerProps): React.ReactElement;

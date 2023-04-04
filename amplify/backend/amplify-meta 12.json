@@ -50,12 +50,12 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2023-04-03T22:51:55.796Z",
+      "lastPushTimeStamp": "2023-04-04T00:03:23.505Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apifunkidsentertainmentAPI"
       },
-      "lastPushDirHash": "ACeqHy+S0QIH6dykX+DUzGuz71g="
+      "lastPushDirHash": "QiFgbZGXPqO5I71QZJG7MVFyRLs="
     }
   },
   "auth": {
@@ -99,11 +99,12 @@
         "IdentityPoolName": "testAuthIdentityPool__staging",
         "UserPoolName": "FunKidsEntertainment"
       },
-      "lastPushTimeStamp": "2023-04-03T22:51:55.798Z",
+      "lastPushTimeStamp": "2023-04-04T00:03:23.507Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/auth/FunKidsEntertainment-cloudformation-template.json",
         "logicalId": "authFunKidsEntertainment"
-      }
+      },
+      "lastPushDirHash": "29rAkX3CdjP3Pl9cQ/qBXRTQgD4="
     }
   },
   "function": {},
@@ -116,11 +117,12 @@
         "BucketName": "fun-kids-entertainment-storage151408-staging",
         "Region": "eu-west-1"
       },
-      "lastPushTimeStamp": "2023-04-03T22:51:57.316Z",
+      "lastPushTimeStamp": "2023-04-04T00:03:25.327Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "logicalId": "storages3funkidsentertainmentstorage"
-      }
+      },
+      "lastPushDirHash": "HU5DNwu5nOnp+66onA3Sec1LdPY="
     }
   }
 }

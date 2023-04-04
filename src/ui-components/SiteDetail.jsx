@@ -416,7 +416,7 @@ export default function SiteDetail(props) {
                 <Button
                   width="unset"
                   height="unset"
-                  border="1px SOLID rgba(54,94,61,1)"
+                  border="1px SOLID rgba(34,66,38,1)"
                   shrink="0"
                   size="default"
                   isDisabled={false}
@@ -488,7 +488,7 @@ export default function SiteDetail(props) {
                 <Button
                   width="218px"
                   height="44px"
-                  border="1px SOLID rgba(54,94,61,1)"
+                  border="1px SOLID rgba(34,66,38,1)"
                   shrink="0"
                   size="default"
                   isDisabled={false}

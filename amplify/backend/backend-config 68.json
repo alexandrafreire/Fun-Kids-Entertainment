@@ -33,7 +33,7 @@
     }
   },
   "api": {
-    "funkidsentertainment": {
+    "FunKidsEntertainment": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
@@ -48,18 +48,20 @@
       "output": {
         "authConfig": {
           "defaultAuthentication": {
-            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-            "userPoolConfig": {
-              "userPoolId": "authFunKidsEntertainment"
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
             }
           },
           "additionalAuthenticationProviders": [
             {
-              "authenticationType": "API_KEY",
-              "apiKeyConfig": {
-                "description": "1",
-                "apiKeyExpirationDays": 7,
-                "apiKeyExpirationDate": "2022-12-19T20:26:17.783Z"
+              "authenticationType": "AWS_IAM"
+            },
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authFunKidsEntertainment"
               }
             }
           ]

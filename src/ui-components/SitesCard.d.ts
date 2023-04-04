@@ -7,19 +7,22 @@
 import * as React from "react";
 import { Sites, UsersProfile } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { BadgeProps, ButtonProps, DividerProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
+import { BadgeProps, ButtonProps, DividerProps, FlexProps, IconProps, ImageProps, TextProps, ViewProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SitesCardOverridesProps = {
     SitesCard?: PrimitiveOverrideProps<FlexProps>;
     image?: PrimitiveOverrideProps<ImageProps>;
-    Header?: PrimitiveOverrideProps<FlexProps>;
-    Profile?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 419"?: PrimitiveOverrideProps<FlexProps>;
     "Site Name"?: PrimitiveOverrideProps<TextProps>;
-    Options?: PrimitiveOverrideProps<FlexProps>;
+    Options?: PrimitiveOverrideProps<ViewProps>;
+    "Frame 421"?: PrimitiveOverrideProps<FlexProps>;
     "4.7"?: PrimitiveOverrideProps<TextProps>;
+    "Frame 422"?: PrimitiveOverrideProps<FlexProps>;
     Vector?: PrimitiveOverrideProps<IconProps>;
+    "Frame 423"?: PrimitiveOverrideProps<FlexProps>;
     "# of reviews"?: PrimitiveOverrideProps<TextProps>;
     Badges?: PrimitiveOverrideProps<FlexProps>;
+    "Frame 420"?: PrimitiveOverrideProps<FlexProps>;
     Badge35692749?: PrimitiveOverrideProps<BadgeProps>;
     Badge35692753?: PrimitiveOverrideProps<BadgeProps>;
     Divider?: PrimitiveOverrideProps<DividerProps>;
