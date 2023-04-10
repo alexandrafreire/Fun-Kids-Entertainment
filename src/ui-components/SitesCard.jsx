@@ -21,8 +21,19 @@ import {
 } from "@aws-amplify/ui-react";
 import MyIcon from "./MyIcon";
 export default function SitesCard(props) {
-  const { sites, sitesCard, header, usersProfile, overrides, ...rest } = props;
-  const imageOnClick = useNavigateAction({ type: "url", url: header });
+  const {
+    sites,
+    sitesCard,
+    header,
+    usersProfile,
+    EventOnClick,
+    overrides,
+    ...rest
+  } = props;
+  const imageOnClick = useNavigateAction({
+    type: "url",
+    url: "itemsDescription.id",
+  });
   const buttonOnClick = useNavigateAction({
     target: "_blank",
     type: "url",

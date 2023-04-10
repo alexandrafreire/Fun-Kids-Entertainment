@@ -9,6 +9,7 @@ import { Sites, UsersProfile } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { BadgeProps, ButtonProps, DividerProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 import { MyIconProps } from "./MyIcon";
+import { SyntheticEvent } from "react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SitesCardOverridesProps = {
     SitesCard?: PrimitiveOverrideProps<FlexProps>;
@@ -38,6 +39,7 @@ export declare type SitesCardProps = React.PropsWithChildren<Partial<FlexProps> 
     sitesCard?: Sites;
     header?: React.ReactNode;
     usersProfile?: UsersProfile;
+    EventOnClick?: (event: SyntheticEvent) => void;
 } & {
     overrides?: SitesCardOverridesProps | undefined | null;
 }>;

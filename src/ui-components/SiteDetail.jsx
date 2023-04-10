@@ -20,6 +20,8 @@ import {
 } from "@aws-amplify/ui-react";
 export default function SiteDetail(props) {
   const { sites, siteComments, usersProfile, overrides, ...rest } = props;
+  const nmberofreviewsThreeSixFiveSevenTwoEightNineTwoOnClick =
+    useNavigateAction({ anchor: "", type: "anchor" });
   const buttonOnClick = useNavigateAction({
     target: "_blank",
     type: "url",
@@ -203,6 +205,9 @@ export default function SiteDetail(props) {
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
                 children={`${sites?.siteNumberOfRatings}${" "}${"Reviews"}`}
+                onClick={() => {
+                  nmberofreviewsThreeSixFiveSevenTwoEightNineTwoOnClick();
+                }}
                 {...getOverrideProps(overrides, "# of reviews36572892")}
               ></Text>
             </Flex>

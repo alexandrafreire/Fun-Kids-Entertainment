@@ -55,8 +55,8 @@ export default function SitesCollectionHomeFavorites(props) {
     >
       {(item, index) => (
         <SitesCard
-          height="371px"
-          width="387px"
+          height="369px"
+          width="426px"
           margin="25px 10px 20px 10px"
           sites={item}
           sitesCard={item}
