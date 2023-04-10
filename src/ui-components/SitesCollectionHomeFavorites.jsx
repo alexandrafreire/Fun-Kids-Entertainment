@@ -7,15 +7,23 @@
 /* eslint-disable */
 import * as React from "react";
 import { Sites } from "../models";
-import { SortDirection } from "@aws-amplify/datastore";
 import {
+  createDataStorePredicate,
   getOverrideProps,
   useDataStoreBinding,
 } from "@aws-amplify/ui-react/internal";
+import { SortDirection } from "@aws-amplify/datastore";
 import SitesCard from "./SitesCard";
 import { Collection } from "@aws-amplify/ui-react";
-export default function SitesCardCollection(props) {
+export default function SitesCollectionHomeFavorites(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
+  const itemsFilterObj = {
+    and: [
+      { field: "siteTotalRating", operand: "4.7", operator: "ge" },
+      { field: "siteCounty", operand: "Dublin", operator: "contains" },
+    ],
+  };
+  const itemsFilter = createDataStorePredicate(itemsFilterObj);
   const itemsPagination = {
     sort: (s) => s.siteTotalRating(SortDirection.DESCENDING),
   };
@@ -23,6 +31,7 @@ export default function SitesCardCollection(props) {
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Sites,
+    criteria: itemsFilter,
     pagination: itemsPagination,
   }).items;
   React.useEffect(() => {
@@ -36,21 +45,20 @@ export default function SitesCardCollection(props) {
     <Collection
       type="grid"
       searchPlaceholder="Search..."
-      itemsPerPage={6}
       templateColumns="1fr 1fr 1fr 1fr 1fr"
       autoFlow="row"
       alignItems="stretch"
       justifyContent="stretch"
       items={items || []}
-      {...getOverrideProps(overrides, "SitesCardCollection")}
+      {...getOverrideProps(overrides, "SitesCollectionHomeFavorites")}
       {...rest}
     >
       {(item, index) => (
         <SitesCard
+          height="371px"
+          width="387px"
+          margin="25px 10px 20px 10px"
           sites={item}
-          margin="20px 10px 20px 10px"
-          height="408px"
-          width="405px"
           sitesCard={item}
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}

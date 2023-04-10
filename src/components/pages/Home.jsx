@@ -1,18 +1,18 @@
-import React from "react";
 import "../.././App.css";
-import SitesCardCollection from "./../sections/Sites";
 import HomePageBanner from "../sections/Banner";
 import CustomDivider from "./../sections/Divider";
-
+import SitesCollectionCards from "../sections/SitesCollectionCards";
 
 
 function Home() {
+
+
+
   return (
     <>
       <HomePageBanner />
       <CustomDivider />
-      <SitesCardCollection />
-
+      <SitesCollectionCards />
     </>
   );
 }

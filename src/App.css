@@ -5,10 +5,6 @@
   font-family: 'PT Sans', sans-serif;
 }
 
-
-
-
-
 video{
 
   width: 100%;
@@ -27,49 +23,8 @@ video{
 }
 
 
-.explore {
- 
-  
-}
+/* Add to the end of /src/index.css */
 
-
-
-.indoor-activities{
- 
-
-}
-
-.outdoor-activities{
- 
-}
-
-.Concerts-Shows{
- 
-}
-
-.on-the-way{
-  
-
-}
-
-.games{
-  
-
-}
-
-.movies-tvshows{
-  
-
-}
-
-.books{
-
-
-}
-
-.subscribe{
- 
-}
 
 
 .contact-us {
