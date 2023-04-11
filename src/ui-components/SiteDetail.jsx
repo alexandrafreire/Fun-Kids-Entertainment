@@ -36,6 +36,7 @@ export default function SiteDetail(props) {
       justifyContent="flex-start"
       alignItems="flex-start"
       position="relative"
+      boxShadow="0px 4px 4px rgba(0, 0, 0, 0.25)"
       padding="0px 0px 0px 0px"
       {...getOverrideProps(overrides, "SiteDetail")}
       {...rest}
@@ -64,6 +65,7 @@ export default function SiteDetail(props) {
           shrink="0"
           position="relative"
           padding="0px 0px 0px 0px"
+          backgroundColor="rgba(255,255,255,1)"
           {...getOverrideProps(overrides, "Frame 418")}
         >
           <Image

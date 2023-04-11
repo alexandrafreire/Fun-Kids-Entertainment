@@ -16,9 +16,10 @@ import ContactUs from "./components/pages/ContactUs.tsx";
 import Profile from "./components/pages/Profile";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import TermsOfService from "./components/pages/TermsOfService";
-import SignUp from "./components/pages/SignUp.tsx";
+import Footer from "./components/sections/Footer";
+import SignUp from "./components/pages/SignUp";
 import Error from "./components/pages/Error";
-import { Amplify, Storage } from "aws-amplify";
+import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
 Amplify.configure(awsconfig);
 
@@ -26,6 +27,7 @@ function App() {
   return (
     <Router>
       <Navbar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Explore/" element={<Explore />} />
@@ -51,6 +53,7 @@ function App() {
         <Route path="/SignUp/" element={<SignUp />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

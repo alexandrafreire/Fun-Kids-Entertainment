@@ -27,6 +27,7 @@ export default function SitesCard(props) {
     header,
     usersProfile,
     EventOnClick,
+    Margin,
     overrides,
     ...rest
   } = props;
@@ -53,6 +54,8 @@ export default function SitesCard(props) {
       borderRadius="10px"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
+      marginRight="0px"
+      marginLeft="0px"
       {...getOverrideProps(overrides, "SitesCard")}
       {...rest}
     >
@@ -123,7 +126,7 @@ export default function SitesCard(props) {
         ></MyIcon>
       </Flex>
       <Flex
-        gap="10px"
+        gap="16px"
         direction="row"
         width="420px"
         height="28px"
@@ -131,7 +134,7 @@ export default function SitesCard(props) {
         alignItems="center"
         shrink="0"
         position="relative"
-        padding="0px 6px 0px 6px"
+        padding="16px 16px 16px 16px"
         {...getOverrideProps(overrides, "Options")}
       >
         <Flex
@@ -271,7 +274,6 @@ export default function SitesCard(props) {
           width="180px"
           height="28px"
           justifyContent="center"
-          padding="8px 6px 8px 6px"
           backgroundColor="rgba(34,66,38,1)"
           shrink="0"
           size="default"
@@ -323,7 +325,7 @@ export default function SitesCard(props) {
           alignItems="center"
           shrink="0"
           position="relative"
-          padding="16px 0px 16px 6px"
+          padding="16px 16px 16px 16px"
           {...getOverrideProps(overrides, "Location")}
         >
           <Text

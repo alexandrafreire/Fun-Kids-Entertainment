@@ -20,8 +20,8 @@ video{
 
 /* Divider */
 .container-divider{
-  margin-top: 10px;
-  align-items: center;
+  margin-bottom: 20px;
+  
 }
 
 
@@ -32,19 +32,3 @@ video{
 }
 
 
-.modal {
-  position: absolute;
-  background-color: white;
-  margin-left: auto;
-  margin-right: auto;
-  width: fit-content;
-  left: 0;
-  right: 0;
-  top: 100px;
-  border: .5px solid grey;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 900px;
-}

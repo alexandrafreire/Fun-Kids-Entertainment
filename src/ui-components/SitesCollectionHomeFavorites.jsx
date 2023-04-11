@@ -45,7 +45,8 @@ export default function SitesCollectionHomeFavorites(props) {
     <Collection
       type="grid"
       searchPlaceholder="Search..."
-      templateColumns="1fr 1fr 1fr 1fr 1fr"
+      itemsPerPage={8}
+      templateColumns="1fr 1fr 1fr 1fr"
       autoFlow="row"
       alignItems="stretch"
       justifyContent="stretch"
@@ -55,11 +56,12 @@ export default function SitesCollectionHomeFavorites(props) {
     >
       {(item, index) => (
         <SitesCard
-          height="369px"
           width="426px"
-          margin="25px 10px 20px 10px"
+          margin="20px 10px 20px 10px"
           sites={item}
           sitesCard={item}
+          height="367px"
+          EventOnClick={item.id}
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}
         ></SitesCard>

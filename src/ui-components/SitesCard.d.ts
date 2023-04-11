@@ -40,6 +40,7 @@ export declare type SitesCardProps = React.PropsWithChildren<Partial<FlexProps> 
     header?: React.ReactNode;
     usersProfile?: UsersProfile;
     EventOnClick?: (event: SyntheticEvent) => void;
+    Margin?: String;
 } & {
     overrides?: SitesCardOverridesProps | undefined | null;
 }>;

@@ -1,80 +1,70 @@
 {
-  "api": {
-    "funkidsentertainmentAPI": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "FunKidsEntertainment"
-        }
-      ],
-      "output": {
-        "authConfig": {
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            },
-            {
-              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
-              "userPoolConfig": {
-                "userPoolId": "authFunKidsEntertainment"
-              }
-            }
-          ],
-          "defaultAuthentication": {
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            },
-            "authenticationType": "API_KEY"
-          }
-        }
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "AppSync"
-    }
-  },
   "auth": {
     "FunKidsEntertainment": {
-      "customAuth": false,
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
       "dependsOn": [],
+      "customAuth": false,
       "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "NAME"
         ],
         "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": [
             "REQUIRES_LOWERCASE",
             "REQUIRES_NUMBERS",
             "REQUIRES_SYMBOLS",
             "REQUIRES_UPPERCASE"
-          ],
-          "passwordPolicyMinLength": 8
+          ]
         },
-        "signupAttributes": [
-          "NAME",
-          "PREFERRED_USERNAME"
-        ],
-        "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
         ],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "Cognito"
+      }
     }
   },
-  "storage": {
-    "s3funkidsentertainmentstorage039090f5": {
-      "dependsOn": [],
+  "api": {
+    "funkidsentertainment": {
+      "service": "AppSync",
       "providerPlugin": "awscloudformation",
-      "service": "S3"
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authFunKidsEntertainment"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "API_KEY",
+              "apiKeyConfig": {
+                "description": "1",
+                "apiKeyExpirationDays": 7,
+                "apiKeyExpirationDate": "2022-12-19T20:26:17.783Z"
+              }
+            }
+          ]
+        }
+      }
     }
   }
 }

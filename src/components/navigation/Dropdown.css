@@ -13,7 +13,7 @@
   }
   
   .dropdown-menu li:hover {
-    background: orange;
+    background-color: #79C91D;
   }
   
   .dropdown-menu.clicked {
