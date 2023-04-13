@@ -19,7 +19,7 @@ export default function SitesCollectionHomeFavorites(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const itemsFilterObj = {
     and: [
-      { field: "siteTotalRating", operand: "4.7", operator: "ge" },
+      { field: "siteTotalRating", operand: "4.6", operator: "ge" },
       { field: "siteCounty", operand: "Dublin", operator: "contains" },
     ],
   };
@@ -46,7 +46,7 @@ export default function SitesCollectionHomeFavorites(props) {
       type="grid"
       searchPlaceholder="Search..."
       itemsPerPage={8}
-      templateColumns="1fr 1fr 1fr 1fr"
+      templateColumns="1fr 1fr 1fr"
       autoFlow="row"
       alignItems="stretch"
       justifyContent="stretch"

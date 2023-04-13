@@ -54,8 +54,6 @@ export default function SitesCard(props) {
       borderRadius="10px"
       padding="0px 0px 0px 0px"
       backgroundColor="rgba(255,255,255,1)"
-      marginRight="0px"
-      marginLeft="0px"
       {...getOverrideProps(overrides, "SitesCard")}
       {...rest}
     >
