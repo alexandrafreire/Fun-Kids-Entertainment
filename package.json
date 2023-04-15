@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/datastore": "^4.1.7",
     "@aws-amplify/ui-react": "^4.3.8",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
@@ -15,7 +16,8 @@
     "@types/node": "^18.14.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
-    "aws-amplify": "^5.0.15",
+    "aws-amplify": "^5.0.25",
+    "aws-sdk": "^2.1359.0",
     "bootstrap": "^5.2.3",
     "eslint-plugin-jest": "^27.2.1",
     "nth-check": "^2.1.1",

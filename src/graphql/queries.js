@@ -5,7 +5,7 @@ export const getContactUs = /* GraphQL */ `
   query GetContactUs($id: ID!) {
     getContactUs(id: $id) {
       id
-      Name
+      firstname
       email
       feedbackType
       overallSiteRating
@@ -27,7 +27,7 @@ export const listContactuses = /* GraphQL */ `
     listContactuses(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        Name
+        firstname
         email
         feedbackType
         overallSiteRating
@@ -58,7 +58,7 @@ export const syncContactuses = /* GraphQL */ `
     ) {
       items {
         id
-        Name
+        firstname
         email
         feedbackType
         overallSiteRating

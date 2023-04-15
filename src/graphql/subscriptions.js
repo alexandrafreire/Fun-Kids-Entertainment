@@ -7,7 +7,7 @@ export const onCreateContactUs = /* GraphQL */ `
   ) {
     onCreateContactUs(filter: $filter) {
       id
-      Name
+      firstname
       email
       feedbackType
       overallSiteRating
@@ -26,7 +26,7 @@ export const onUpdateContactUs = /* GraphQL */ `
   ) {
     onUpdateContactUs(filter: $filter) {
       id
-      Name
+      firstname
       email
       feedbackType
       overallSiteRating
@@ -45,7 +45,7 @@ export const onDeleteContactUs = /* GraphQL */ `
   ) {
     onDeleteContactUs(filter: $filter) {
       id
-      Name
+      firstname
       email
       feedbackType
       overallSiteRating

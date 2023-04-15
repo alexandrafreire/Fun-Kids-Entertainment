@@ -13,7 +13,7 @@ import Games from "./components/pages/Games";
 import MoviesTvShows from "./components/pages/MoviesTvShows";
 import Books from "./components/pages/Books";
 import Subscribe from "./components/pages/Subscribe";
-import ContactUs from "./components/pages/ContactUs.tsx";
+import ContactUs from "./components/pages/ContactUs";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import TermsOfService from "./components/pages/TermsOfService";
 import Footer from "./components/sections/Footer";

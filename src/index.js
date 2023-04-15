@@ -21,8 +21,6 @@ Amplify.configure(awsExports);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider theme={studioTheme}>
-    <AmplifyProvider>
-      <App />
-    </AmplifyProvider>
+    <App />
   </ThemeProvider>
 );

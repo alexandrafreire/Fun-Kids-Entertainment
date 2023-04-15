@@ -8,7 +8,7 @@ export const createContactUs = /* GraphQL */ `
   ) {
     createContactUs(input: $input, condition: $condition) {
       id
-      Name
+      firstname
       email
       feedbackType
       overallSiteRating
@@ -28,7 +28,7 @@ export const updateContactUs = /* GraphQL */ `
   ) {
     updateContactUs(input: $input, condition: $condition) {
       id
-      Name
+      firstname
       email
       feedbackType
       overallSiteRating
@@ -48,7 +48,7 @@ export const deleteContactUs = /* GraphQL */ `
   ) {
     deleteContactUs(input: $input, condition: $condition) {
       id
-      Name
+      firstname
       email
       feedbackType
       overallSiteRating

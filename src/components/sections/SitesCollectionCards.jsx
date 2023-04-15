@@ -1,16 +1,13 @@
-import React, {useState} from "react";
-import SitesCollectionHomeFavorites from "../../ui-components/SitesCollectionHomeFavorites"
-import "./../../App.css"
+import React from "react";
 
+import SitesCollectionHomeFavorites from "../../ui-components/SitesCollectionHomeFavorites";
+import "../../App.css";
 
 function SitesCollectionCards() {
-
-
-
-return (
-  <>
-    <SitesCollectionHomeFavorites />
-  </>
+  return (
+    <>
+      <SitesCollectionHomeFavorites />
+    </>
   );
 }
 

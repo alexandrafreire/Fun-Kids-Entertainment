@@ -70,7 +70,49 @@
       "service": "Cognito"
     }
   },
-  "function": {},
+  "function": {
+    "linkSignInToUserProfileTable": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "funkidsentertainmentAPI"
+        },
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_linkSignInToUserProfileTable_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "linkSignInToUserProfileTable"
+        }
+      ]
+    },
+    "AMPLIFY_function_linkSignInToUserProfileTable_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "linkSignInToUserProfileTable"
+        }
+      ]
+    }
+  },
   "storage": {
     "s3funkidsentertainmentstorage": {
       "dependsOn": [],

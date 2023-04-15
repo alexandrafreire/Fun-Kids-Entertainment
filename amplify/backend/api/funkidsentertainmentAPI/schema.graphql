@@ -14,7 +14,7 @@ type ContactUs
   @model
   @auth(rules: [{ allow: public, operations: [create, read, update] }]) {
   id: ID!
-  Name: String!
+  firstname: String!
   email: AWSEmail!
   feedbackType: FeedbackTypeValues
   overallSiteRating: OverallSiteRatingValues

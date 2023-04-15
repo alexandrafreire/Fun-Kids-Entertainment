@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { DataStore } from "@aws-amplify/datastore";
-import { UsersProfile } from "./../../models";
+import { UsersProfile } from "../../models";
 import "./ProfileSettings.css";
-import config from "./../../aws-exports";
-import awsExports from "./../../aws-exports";
+import config from "../../aws-exports";
+import awsExports from "../../aws-exports";
 import { Amplify } from "aws-amplify";
 Amplify.configure(config);
 Amplify.configure(awsExports);

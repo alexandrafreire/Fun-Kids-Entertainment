@@ -13,17 +13,15 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type ContactUsFormInputValues = {
-    firstName?: string;
+    firstname?: string;
     email?: string;
-    Name?: string;
     feedbackType?: string;
     overallSiteRating?: string;
     message?: string;
 };
 export declare type ContactUsFormValidationValues = {
-    firstName?: ValidationFunction<string>;
+    firstname?: ValidationFunction<string>;
     email?: ValidationFunction<string>;
-    Name?: ValidationFunction<string>;
     feedbackType?: ValidationFunction<string>;
     overallSiteRating?: ValidationFunction<string>;
     message?: ValidationFunction<string>;
@@ -31,10 +29,9 @@ export declare type ContactUsFormValidationValues = {
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ContactUsFormOverridesProps = {
     ContactUsFormGrid?: PrimitiveOverrideProps<GridProps>;
-    firstName?: PrimitiveOverrideProps<TextFieldProps>;
+    firstname?: PrimitiveOverrideProps<TextFieldProps>;
     email?: PrimitiveOverrideProps<TextFieldProps>;
-    Name?: PrimitiveOverrideProps<TextFieldProps>;
-    RowGrid3?: PrimitiveOverrideProps<GridProps>;
+    RowGrid2?: PrimitiveOverrideProps<GridProps>;
     feedbackType?: PrimitiveOverrideProps<RadioGroupFieldProps>;
     overallSiteRating?: PrimitiveOverrideProps<RadioGroupFieldProps>;
     message?: PrimitiveOverrideProps<TextAreaFieldProps>;

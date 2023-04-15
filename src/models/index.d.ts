@@ -42,7 +42,7 @@ type EagerContactUs = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Name: string;
+  readonly firstname: string;
   readonly email: string;
   readonly feedbackType?: FeedbackTypeValues | keyof typeof FeedbackTypeValues | null;
   readonly overallSiteRating?: OverallSiteRatingValues | keyof typeof OverallSiteRatingValues | null;
@@ -57,7 +57,7 @@ type LazyContactUs = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Name: string;
+  readonly firstname: string;
   readonly email: string;
   readonly feedbackType?: FeedbackTypeValues | keyof typeof FeedbackTypeValues | null;
   readonly overallSiteRating?: OverallSiteRatingValues | keyof typeof OverallSiteRatingValues | null;
