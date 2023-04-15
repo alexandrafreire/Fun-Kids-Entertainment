@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Auth, Hub } from "aws-amplify";
 import "./Navbar.css";
 import logo from "./../../images/logo.png";
 import DropdownExplore from "./DropdownExplore";
@@ -7,18 +8,12 @@ import DropdownOnTheWay from "./DropdownOnTheWay";
 import { ButtonSignIn, ButtonContactUs } from "./Button";
 
 function Navbar() {
-  //Update the state
   const [click, setClick] = useState(false);
-
   const [Dropdown, setDropdown] = useState(false);
   const [Dropdown1, setDropdown1] = useState(false);
-
-  //Set state to be the opositive of what it is when the user clicks the icon
   const handleClick = () => setClick(!click);
-  //For Mobile pages, on click menu not visible when the user selects an option
   const closeMobileMenu = () => setClick(false);
 
-  //Remove dropdown if inner width < 960 - DropdownExplore
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
       setDropdown(false);
@@ -35,7 +30,6 @@ function Navbar() {
     }
   };
 
-  //Remove dropdown if inner width < 960 - DropdownOnTheWay
   const onMouseEnter1 = () => {
     if (window.innerWidth < 960) {
       setDropdown1(false);
@@ -52,24 +46,85 @@ function Navbar() {
     }
   };
 
+  const [signedIn, setSignedIn] = useState(false);
+  const [profilePicUrl, setProfilePicUrl] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        setSignedIn(!!user);
+        setProfilePicUrl(user.attributes.profilePic);
+      } catch (error) {
+        setSignedIn(false);
+      }
+    };
+
+    checkUser();
+
+    const listener = Hub.listen("auth", (data) => {
+      switch (data.payload.event) {
+        case "signIn":
+          checkUser();
+          navigate("/ProfileSettings");
+          break;
+        case "signOut":
+          checkUser();
+          navigate("/");
+          break;
+        default:
+          break;
+      }
+    });
+
+    return () => {
+      Hub.listen("auth", listener);
+    };
+  }, [navigate]);
+
   return (
     <>
       <nav className="navbar-top">
-        <ul className={click ? "nav-menu active" : "nav-menu"}>
+        <ul className="nav-top-items">
           <li>
-            <Link to="/SignUp" className="nav-links-mobile">
-              Sign In
-            </Link>
+            <ButtonContactUs />
           </li>
-          <li>
-            <Link to="/ContactUs" className="nav-links-mobile">
-              Sign In
-            </Link>
-          </li>
+          {signedIn ? (
+            <li className="nav-item-profile">
+              <img src={profilePicUrl} alt="Profile" className="profile-pic" />
+              <ul className="dropdown-menu-profile">
+                <li>
+                  <Link to="/ProfileSettings" className="nav-links">
+                    Profile Settings
+                  </Link>
+                </li>
+                <li>
+                  <div
+                    className="nav-links signout-btn"
+                    role="button"
+                    tabIndex="0"
+                    onClick={() => Auth.signOut()}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        Auth.signOut();
+                      }
+                    }}
+                  >
+                    Sign Out
+                  </div>
+                </li>
+              </ul>
+            </li>
+          ) : (
+            <li>
+              <ButtonSignIn />
+            </li>
+          )}
         </ul>
-        <ButtonContactUs />
-        <ButtonSignIn />
       </nav>
+
       <nav className="navbar">
         <Link to="/" className="navbar-logo">
           <img src={logo} width="338" height="57" className="logo" alt="" />

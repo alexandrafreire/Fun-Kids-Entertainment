@@ -8,8 +8,7 @@ export const createContactUs = /* GraphQL */ `
   ) {
     createContactUs(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
+      Name
       email
       feedbackType
       overallSiteRating
@@ -29,8 +28,7 @@ export const updateContactUs = /* GraphQL */ `
   ) {
     updateContactUs(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
+      Name
       email
       feedbackType
       overallSiteRating
@@ -50,8 +48,7 @@ export const deleteContactUs = /* GraphQL */ `
   ) {
     deleteContactUs(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
+      Name
       email
       feedbackType
       overallSiteRating
@@ -131,8 +128,7 @@ export const createUsersProfile = /* GraphQL */ `
   ) {
     createUsersProfile(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
+      name
       email
       username
       preferredLocation
@@ -200,8 +196,7 @@ export const updateUsersProfile = /* GraphQL */ `
   ) {
     updateUsersProfile(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
+      name
       email
       username
       preferredLocation
@@ -269,8 +264,7 @@ export const deleteUsersProfile = /* GraphQL */ `
   ) {
     deleteUsersProfile(input: $input, condition: $condition) {
       id
-      firstName
-      lastName
+      name
       email
       username
       preferredLocation

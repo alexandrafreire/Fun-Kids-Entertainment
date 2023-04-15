@@ -13,10 +13,23 @@
     height: 55px;
     position: relative;
     display: flex;
-    justify-content: right;
+    justify-content: flex-end;
     align-items: center;
     
+    
   }
+
+  .nav-top-items{
+
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  list-style: none;
+  margin-right: 20px;
+
+  }
+
+ 
   
   .navbar-logo {
     
@@ -27,8 +40,6 @@
     text-decoration: none;
     
   }
-
- 
   
   .fa-firstdraft {
     margin-left: 0.5rem;

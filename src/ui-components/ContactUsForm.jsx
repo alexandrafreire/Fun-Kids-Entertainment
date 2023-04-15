@@ -35,15 +35,15 @@ export default function ContactUsForm(props) {
   const { tokens } = useTheme();
   const initialValues = {
     firstName: "",
-    lastName: "",
     email: "",
+    Name: "",
     feedbackType: undefined,
     overallSiteRating: undefined,
     message: "",
   };
   const [firstName, setFirstName] = React.useState(initialValues.firstName);
-  const [lastName, setLastName] = React.useState(initialValues.lastName);
   const [email, setEmail] = React.useState(initialValues.email);
+  const [Name, setName] = React.useState(initialValues.Name);
   const [feedbackType, setFeedbackType] = React.useState(
     initialValues.feedbackType
   );
@@ -54,8 +54,8 @@ export default function ContactUsForm(props) {
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     setFirstName(initialValues.firstName);
-    setLastName(initialValues.lastName);
     setEmail(initialValues.email);
+    setName(initialValues.Name);
     setFeedbackType(initialValues.feedbackType);
     setOverallSiteRating(initialValues.overallSiteRating);
     setMessage(initialValues.message);
@@ -63,8 +63,8 @@ export default function ContactUsForm(props) {
   };
   const validations = {
     firstName: [{ type: "Required" }],
-    lastName: [],
     email: [{ type: "Required" }, { type: "Email" }],
+    Name: [{ type: "Required" }],
     feedbackType: [],
     overallSiteRating: [],
     message: [],
@@ -96,8 +96,8 @@ export default function ContactUsForm(props) {
         event.preventDefault();
         let modelFields = {
           firstName,
-          lastName,
           email,
+          Name,
           feedbackType,
           overallSiteRating,
           message,
@@ -130,7 +130,14 @@ export default function ContactUsForm(props) {
               modelFields[key] = undefined;
             }
           });
-          await DataStore.save(new ContactUs(modelFields));
+          const modelFieldsToSave = {
+            email: modelFields.email,
+            Name: modelFields.Name,
+            feedbackType: modelFields.feedbackType,
+            overallSiteRating: modelFields.overallSiteRating,
+            message: modelFields.message,
+          };
+          await DataStore.save(new ContactUs(modelFieldsToSave));
           if (onSuccess) {
             onSuccess(modelFields);
           }
@@ -146,71 +153,34 @@ export default function ContactUsForm(props) {
       {...getOverrideProps(overrides, "ContactUsForm")}
       {...rest}
     >
-      <Grid
-        columnGap="inherit"
-        rowGap="inherit"
-        templateColumns="repeat(2, auto)"
-        {...getOverrideProps(overrides, "RowGrid0")}
-      >
-        <TextField
-          label="First name"
-          isRequired={true}
-          isReadOnly={false}
-          value={firstName}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (onChange) {
-              const modelFields = {
-                firstName: value,
-                lastName,
-                email,
-                feedbackType,
-                overallSiteRating,
-                message,
-              };
-              const result = onChange(modelFields);
-              value = result?.firstName ?? value;
-            }
-            if (errors.firstName?.hasError) {
-              runValidationTasks("firstName", value);
-            }
-            setFirstName(value);
-          }}
-          onBlur={() => runValidationTasks("firstName", firstName)}
-          errorMessage={errors.firstName?.errorMessage}
-          hasError={errors.firstName?.hasError}
-          {...getOverrideProps(overrides, "firstName")}
-        ></TextField>
-        <TextField
-          label="Last name"
-          isRequired={false}
-          isReadOnly={false}
-          value={lastName}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (onChange) {
-              const modelFields = {
-                firstName,
-                lastName: value,
-                email,
-                feedbackType,
-                overallSiteRating,
-                message,
-              };
-              const result = onChange(modelFields);
-              value = result?.lastName ?? value;
-            }
-            if (errors.lastName?.hasError) {
-              runValidationTasks("lastName", value);
-            }
-            setLastName(value);
-          }}
-          onBlur={() => runValidationTasks("lastName", lastName)}
-          errorMessage={errors.lastName?.errorMessage}
-          hasError={errors.lastName?.hasError}
-          {...getOverrideProps(overrides, "lastName")}
-        ></TextField>
-      </Grid>
+      <TextField
+        label="Name"
+        isRequired={true}
+        value={firstName}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              firstName: value,
+              email,
+              Name,
+              feedbackType,
+              overallSiteRating,
+              message,
+            };
+            const result = onChange(modelFields);
+            value = result?.firstName ?? value;
+          }
+          if (errors.firstName?.hasError) {
+            runValidationTasks("firstName", value);
+          }
+          setFirstName(value);
+        }}
+        onBlur={() => runValidationTasks("firstName", firstName)}
+        errorMessage={errors.firstName?.errorMessage}
+        hasError={errors.firstName?.hasError}
+        {...getOverrideProps(overrides, "firstName")}
+      ></TextField>
       <TextField
         label="Email"
         isRequired={true}
@@ -221,8 +191,8 @@ export default function ContactUsForm(props) {
           if (onChange) {
             const modelFields = {
               firstName,
-              lastName,
               email: value,
+              Name,
               feedbackType,
               overallSiteRating,
               message,
@@ -240,11 +210,40 @@ export default function ContactUsForm(props) {
         hasError={errors.email?.hasError}
         {...getOverrideProps(overrides, "email")}
       ></TextField>
+      <TextField
+        label="Name"
+        isRequired={true}
+        isReadOnly={false}
+        value={Name}
+        onChange={(e) => {
+          let { value } = e.target;
+          if (onChange) {
+            const modelFields = {
+              firstName,
+              email,
+              Name: value,
+              feedbackType,
+              overallSiteRating,
+              message,
+            };
+            const result = onChange(modelFields);
+            value = result?.Name ?? value;
+          }
+          if (errors.Name?.hasError) {
+            runValidationTasks("Name", value);
+          }
+          setName(value);
+        }}
+        onBlur={() => runValidationTasks("Name", Name)}
+        errorMessage={errors.Name?.errorMessage}
+        hasError={errors.Name?.hasError}
+        {...getOverrideProps(overrides, "Name")}
+      ></TextField>
       <Grid
         columnGap="inherit"
         rowGap="inherit"
         templateColumns="repeat(2, auto)"
-        {...getOverrideProps(overrides, "RowGrid2")}
+        {...getOverrideProps(overrides, "RowGrid3")}
       >
         <RadioGroupField
           label="Feedback type"
@@ -256,8 +255,8 @@ export default function ContactUsForm(props) {
             if (onChange) {
               const modelFields = {
                 firstName,
-                lastName,
                 email,
+                Name,
                 feedbackType: value,
                 overallSiteRating,
                 message,
@@ -301,8 +300,8 @@ export default function ContactUsForm(props) {
             if (onChange) {
               const modelFields = {
                 firstName,
-                lastName,
                 email,
+                Name,
                 feedbackType,
                 overallSiteRating: value,
                 message,
@@ -348,8 +347,8 @@ export default function ContactUsForm(props) {
           if (onChange) {
             const modelFields = {
               firstName,
-              lastName,
               email,
+              Name,
               feedbackType,
               overallSiteRating,
               message: value,

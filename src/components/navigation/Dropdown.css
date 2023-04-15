@@ -34,3 +34,47 @@
       display: none;
     }
   }
+
+
+  
+  .nav-item-profile {
+    position: relative;
+  }
+  
+  .dropdown-menu-profile {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-menu-profile li {
+    background-color:  #009400;
+    cursor: pointer;
+  }
+  
+  .nav-item-profile:hover .dropdown-menu-profile {
+    display: block;
+  }
+  
+  .nav-links {
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+    display: block;
+  }
+  
+  .signout-btn {
+    cursor: pointer;
+  }
+  
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }

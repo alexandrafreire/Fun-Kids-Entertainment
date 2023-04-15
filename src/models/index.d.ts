@@ -42,8 +42,7 @@ type EagerContactUs = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly firstName: string;
-  readonly lastName?: string | null;
+  readonly Name: string;
   readonly email: string;
   readonly feedbackType?: FeedbackTypeValues | keyof typeof FeedbackTypeValues | null;
   readonly overallSiteRating?: OverallSiteRatingValues | keyof typeof OverallSiteRatingValues | null;
@@ -58,8 +57,7 @@ type LazyContactUs = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly firstName: string;
-  readonly lastName?: string | null;
+  readonly Name: string;
   readonly email: string;
   readonly feedbackType?: FeedbackTypeValues | keyof typeof FeedbackTypeValues | null;
   readonly overallSiteRating?: OverallSiteRatingValues | keyof typeof OverallSiteRatingValues | null;
@@ -116,8 +114,7 @@ type EagerUsersProfile = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly firstName: string;
-  readonly lastName?: string | null;
+  readonly name: string;
   readonly email: string;
   readonly username: string;
   readonly preferredLocation?: string | null;
@@ -138,8 +135,7 @@ type LazyUsersProfile = {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly firstName: string;
-  readonly lastName?: string | null;
+  readonly name: string;
   readonly email: string;
   readonly username: string;
   readonly preferredLocation?: string | null;

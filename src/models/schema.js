@@ -10,18 +10,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "firstName": {
-                    "name": "firstName",
+                "Name": {
+                    "name": "Name",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
-                    "attributes": []
-                },
-                "lastName": {
-                    "name": "lastName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
                     "attributes": []
                 },
                 "email": {
@@ -191,18 +184,11 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "firstName": {
-                    "name": "firstName",
+                "name": {
+                    "name": "name",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
-                    "attributes": []
-                },
-                "lastName": {
-                    "name": "lastName",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
                     "attributes": []
                 },
                 "email": {
@@ -799,5 +785,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.0",
-    "version": "ee141cb651cd994329567158c2f7974e"
+    "version": "9c37c04c413a2cfa2b1b3835346a6875"
 };
