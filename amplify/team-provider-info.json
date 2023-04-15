@@ -20,12 +20,6 @@
       },
       "storage": {
         "s3funkidsentertainmentstorage": {}
-      },
-      "function": {
-        "linkSignInToUserProfileTable": {
-          "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
-          "s3Key": "amplify-builds/linkSignInToUserProfileTable-6b444247464947795475-build.zip"
-        }
       }
     }
   }
