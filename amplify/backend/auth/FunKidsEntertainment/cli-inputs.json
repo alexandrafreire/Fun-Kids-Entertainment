@@ -44,7 +44,9 @@
     ],
     "useDefault": "manual",
     "userPoolGroups": false,
-    "userPoolGroupList": [],
+    "userPoolGroupList": [
+      "admin"
+    ],
     "adminQueries": false,
     "thirdPartyAuth": false,
     "authProviders": [],
