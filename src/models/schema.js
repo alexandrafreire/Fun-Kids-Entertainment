@@ -14,7 +14,7 @@ export const schema = {
                     "name": "firstname",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "email": {
@@ -317,9 +317,19 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "private",
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
                                 "operations": [
                                     "create",
+                                    "read",
+                                    "update"
+                                ],
+                                "identityClaim": "cognito:username"
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
                                     "read",
                                     "update"
                                 ]
@@ -422,11 +432,17 @@ export const schema = {
                                 "provider": "userPools",
                                 "ownerField": "owner",
                                 "allow": "owner",
-                                "identityClaim": "cognito:username",
                                 "operations": [
                                     "create",
-                                    "update",
-                                    "delete",
+                                    "read",
+                                    "update"
+                                ],
+                                "identityClaim": "cognito:username"
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "create",
                                     "read"
                                 ]
                             }
@@ -785,5 +801,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.0",
-    "version": "b3185bfe5e11086fce807e571022234d"
+    "version": "a56227ee867bb044a96a5ea0bc742142"
 };

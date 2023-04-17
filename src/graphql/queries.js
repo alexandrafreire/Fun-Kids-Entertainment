@@ -209,6 +209,7 @@ export const getUsersProfile = /* GraphQL */ `
       _deleted
       _lastChangedAt
       usersProfileCitiesId
+      owner
     }
   }
 `;
@@ -252,6 +253,7 @@ export const listUsersProfiles = /* GraphQL */ `
         _deleted
         _lastChangedAt
         usersProfileCitiesId
+        owner
       }
       nextToken
       startedAt
@@ -304,6 +306,7 @@ export const syncUsersProfiles = /* GraphQL */ `
         _deleted
         _lastChangedAt
         usersProfileCitiesId
+        owner
       }
       nextToken
       startedAt

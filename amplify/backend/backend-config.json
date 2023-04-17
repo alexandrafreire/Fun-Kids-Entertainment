@@ -70,7 +70,93 @@
       "service": "Cognito"
     }
   },
-  "function": {},
+  "function": {
+    "AuthToDynamoDbUserProfile": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "s3funkidsentertainmentstorage"
+        },
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput"
+          ],
+          "category": "api",
+          "resourceName": "funkidsentertainmentAPI"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "saveUserAuthToProfile": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "funkidsentertainmentAPI"
+        },
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        },
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "s3funkidsentertainmentstorage"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_AuthToDynamoDbUserProfile_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AuthToDynamoDbUserProfile"
+        }
+      ]
+    },
+    "AMPLIFY_function_AuthToDynamoDbUserProfile_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AuthToDynamoDbUserProfile"
+        }
+      ]
+    },
+    "AMPLIFY_function_saveUserAuthToProfile_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "saveUserAuthToProfile"
+        }
+      ]
+    },
+    "AMPLIFY_function_saveUserAuthToProfile_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "saveUserAuthToProfile"
+        }
+      ]
+    }
+  },
   "storage": {
     "s3funkidsentertainmentstorage": {
       "dependsOn": [],

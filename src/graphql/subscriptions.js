@@ -112,8 +112,9 @@ export const onDeleteCities = /* GraphQL */ `
 export const onCreateUsersProfile = /* GraphQL */ `
   subscription OnCreateUsersProfile(
     $filter: ModelSubscriptionUsersProfileFilterInput
+    $owner: String
   ) {
-    onCreateUsersProfile(filter: $filter) {
+    onCreateUsersProfile(filter: $filter, owner: $owner) {
       id
       name
       email
@@ -173,14 +174,16 @@ export const onCreateUsersProfile = /* GraphQL */ `
       _deleted
       _lastChangedAt
       usersProfileCitiesId
+      owner
     }
   }
 `;
 export const onUpdateUsersProfile = /* GraphQL */ `
   subscription OnUpdateUsersProfile(
     $filter: ModelSubscriptionUsersProfileFilterInput
+    $owner: String
   ) {
-    onUpdateUsersProfile(filter: $filter) {
+    onUpdateUsersProfile(filter: $filter, owner: $owner) {
       id
       name
       email
@@ -240,14 +243,16 @@ export const onUpdateUsersProfile = /* GraphQL */ `
       _deleted
       _lastChangedAt
       usersProfileCitiesId
+      owner
     }
   }
 `;
 export const onDeleteUsersProfile = /* GraphQL */ `
   subscription OnDeleteUsersProfile(
     $filter: ModelSubscriptionUsersProfileFilterInput
+    $owner: String
   ) {
-    onDeleteUsersProfile(filter: $filter) {
+    onDeleteUsersProfile(filter: $filter, owner: $owner) {
       id
       name
       email
@@ -307,6 +312,7 @@ export const onDeleteUsersProfile = /* GraphQL */ `
       _deleted
       _lastChangedAt
       usersProfileCitiesId
+      owner
     }
   }
 `;

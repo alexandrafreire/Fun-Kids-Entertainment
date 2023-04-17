@@ -18,7 +18,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "linkSignInToUserProfileTable": {
+    "AuthToDynamoDbUserProfile": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
