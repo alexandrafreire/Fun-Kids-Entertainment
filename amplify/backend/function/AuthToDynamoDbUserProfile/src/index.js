@@ -24,10 +24,7 @@ exports.handler = async (event, context) => {
         createdAt: { S: date.toISOString() },
         updatedAt: { S: date.toISOString() },
       },
-      TableName:
-        process.env.API_funkidsentertainmentAPI_UsersProfile -
-        dzrrg4e5obe6pcmhcqmzhxvr3u -
-        staging,
+      TableName: process.env.API_funkidsentertainmentAPI_UsersProfile,
     };
 
     // Call DynamoDB
