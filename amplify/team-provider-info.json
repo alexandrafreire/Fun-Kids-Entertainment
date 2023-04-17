@@ -27,10 +27,6 @@
         "saveUserAuthToProfile": {
           "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
           "s3Key": "amplify-builds/saveUserAuthToProfile-46414171697179514e58-build.zip"
-        },
-        "AuthToDynamoDbUserProfile": {
-          "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
-          "s3Key": "amplify-builds/AuthToDynamoDbUserProfile-635378506a39356b577a-build.zip"
         }
       }
     }

@@ -20,15 +20,6 @@ export type AmplifyDependentResourcesAttributes = {
       "adminGroupRole": "string"
     }
   },
-  "function": {
-    "AuthToDynamoDbUserProfile": {
-      "Arn": "string",
-      "LambdaExecutionRole": "string",
-      "LambdaExecutionRoleArn": "string",
-      "Name": "string",
-      "Region": "string"
-    }
-  },
   "storage": {
     "s3funkidsentertainmentstorage": {
       "BucketName": "string",

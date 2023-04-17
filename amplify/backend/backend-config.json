@@ -87,27 +87,6 @@
     }
   },
   "function": {
-    "AuthToDynamoDbUserProfile": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "BucketName"
-          ],
-          "category": "storage",
-          "resourceName": "s3funkidsentertainmentstorage"
-        },
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput"
-          ],
-          "category": "api",
-          "resourceName": "funkidsentertainmentAPI"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    },
     "saveUserAuthToProfile": {
       "build": true,
       "dependsOn": [
@@ -140,22 +119,6 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_AuthToDynamoDbUserProfile_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AuthToDynamoDbUserProfile"
-        }
-      ]
-    },
-    "AMPLIFY_function_AuthToDynamoDbUserProfile_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "AuthToDynamoDbUserProfile"
-        }
-      ]
-    },
     "AMPLIFY_function_saveUserAuthToProfile_deploymentBucketName": {
       "usedBy": [
         {
