@@ -68,8 +68,75 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    },
+    "userPoolGroups": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito-UserPool-Groups"
     }
   },
+  "function": {
+    "saveUserAuthToProfile": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "funkidsentertainmentAPI"
+        },
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        },
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "s3funkidsentertainmentstorage"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_saveUserAuthToProfile_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "saveUserAuthToProfile"
+        }
+      ]
+    },
+    "AMPLIFY_function_saveUserAuthToProfile_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "saveUserAuthToProfile"
+        }
+      ]
+    }
+  },
+<<<<<<< HEAD
   "function": {},
   "parameters": {
     "AMPLIFY_function_saveUserAuthToProfile_deploymentBucketName": {
@@ -89,6 +156,8 @@
       ]
     }
   },
+=======
+>>>>>>> 200b4760eda16efd7047e258ea7e4904c24111eb
   "storage": {
     "s3funkidsentertainmentstorage": {
       "dependsOn": [],

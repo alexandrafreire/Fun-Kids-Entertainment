@@ -14,7 +14,7 @@ type ContactUs
   @model
   @auth(rules: [{ allow: public, operations: [create, read, update] }]) {
   id: ID!
-  firstname: String!
+  firstname: String
   email: AWSEmail!
   feedbackType: FeedbackTypeValues
   overallSiteRating: OverallSiteRatingValues
@@ -52,7 +52,12 @@ enum SiteAgeRangesValues {
 
 type UsersProfile
   @model
-  @auth(rules: [{ allow: private, operations: [create, read, update] }]) {
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: private, operations: [read, update] }
+    ]
+  ) {
   id: ID!
   name: String!
   email: AWSEmail!
@@ -66,7 +71,14 @@ type UsersProfile
   profilePic: String
 }
 
-type SiteComments @model @auth(rules: [{ allow: owner }]) {
+type SiteComments
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update] }
+      { allow: private, operations: [create, read] }
+    ]
+  ) {
   id: ID!
   siteRating: String
   message: String

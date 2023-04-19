@@ -7,6 +7,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "auth": {
+<<<<<<< HEAD
     "FunKidsEntertainment": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
@@ -15,6 +16,10 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
+=======
+    "userPoolGroups": {
+      "adminGroupRole": "string"
+>>>>>>> 200b4760eda16efd7047e258ea7e4904c24111eb
     }
   },
   "storage": {
