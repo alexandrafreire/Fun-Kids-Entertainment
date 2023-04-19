@@ -71,6 +71,24 @@
     }
   },
   "function": {},
+  "parameters": {
+    "AMPLIFY_function_saveUserAuthToProfile_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "saveUserAuthToProfile"
+        }
+      ]
+    },
+    "AMPLIFY_function_saveUserAuthToProfile_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "saveUserAuthToProfile"
+        }
+      ]
+    }
+  },
   "storage": {
     "s3funkidsentertainmentstorage": {
       "dependsOn": [],

@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/datastore": "^4.1.7",
-    "@aws-amplify/ui-react": "^4.3.8",
+    "@aws-amplify/ui-react": "^4.6.0",
+    "@aws-sdk/client-dynamodb": "^3.312.0",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
@@ -29,6 +30,7 @@
     "react-scripts": "^5.0.1",
     "semantic-ui-css": "^2.5.0",
     "semantic-ui-react": "^2.1.4",
+    "stack": "^0.1.0",
     "typescript": "^4.9.5",
     "web-vitals": "^3.1.1"
   },

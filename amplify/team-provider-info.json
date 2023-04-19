@@ -13,13 +13,21 @@
     },
     "categories": {
       "auth": {
-        "FunKidsEntertainment": {}
+        "FunKidsEntertainment": {},
+        "userPoolGroups": {}
       },
       "api": {
         "funkidsentertainmentAPI": {}
       },
       "storage": {
         "s3funkidsentertainmentstorage": {}
+      },
+      "function": {
+        "UsersToProfileTable": {},
+        "saveUserAuthToProfile": {
+          "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+          "s3Key": "amplify-builds/saveUserAuthToProfile-46414171697179514e58-build.zip"
+        }
       }
     }
   }

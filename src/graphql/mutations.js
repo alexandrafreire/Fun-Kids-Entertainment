@@ -186,6 +186,7 @@ export const createUsersProfile = /* GraphQL */ `
       _deleted
       _lastChangedAt
       usersProfileCitiesId
+      owner
     }
   }
 `;
@@ -254,6 +255,7 @@ export const updateUsersProfile = /* GraphQL */ `
       _deleted
       _lastChangedAt
       usersProfileCitiesId
+      owner
     }
   }
 `;
@@ -322,6 +324,7 @@ export const deleteUsersProfile = /* GraphQL */ `
       _deleted
       _lastChangedAt
       usersProfileCitiesId
+      owner
     }
   }
 `;
