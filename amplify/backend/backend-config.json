@@ -136,28 +136,6 @@
       ]
     }
   },
-<<<<<<< HEAD
-  "function": {},
-  "parameters": {
-    "AMPLIFY_function_saveUserAuthToProfile_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "saveUserAuthToProfile"
-        }
-      ]
-    },
-    "AMPLIFY_function_saveUserAuthToProfile_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "saveUserAuthToProfile"
-        }
-      ]
-    }
-  },
-=======
->>>>>>> 200b4760eda16efd7047e258ea7e4904c24111eb
   "storage": {
     "s3funkidsentertainmentstorage": {
       "dependsOn": [],
