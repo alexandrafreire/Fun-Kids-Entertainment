@@ -17,7 +17,16 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolName": "string"
     },
     "userPoolGroups": {
-      "adminGroupRole": "string"
+      "AppAdminGroupRole": "string"
+    }
+  },
+  "function": {
+    "createAthUserInDatastore": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
     }
   },
   "storage": {

@@ -72,42 +72,6 @@ export declare const ContactUs: (new (init: ModelInit<ContactUs>) => ContactUs) 
   copyOf(source: ContactUs, mutator: (draft: MutableModel<ContactUs>) => MutableModel<ContactUs> | void): ContactUs;
 }
 
-type EagerCities = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Cities, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly cityName: string;
-  readonly cityCounty: string;
-  readonly cityCountry: string;
-  readonly cityLat: number;
-  readonly cityLng: number;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyCities = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Cities, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly cityName: string;
-  readonly cityCounty: string;
-  readonly cityCountry: string;
-  readonly cityLat: number;
-  readonly cityLng: number;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type Cities = LazyLoading extends LazyLoadingDisabled ? EagerCities : LazyCities
-
-export declare const Cities: (new (init: ModelInit<Cities>) => Cities) & {
-  copyOf(source: Cities, mutator: (draft: MutableModel<Cities>) => MutableModel<Cities> | void): Cities;
-}
-
 type EagerUsersProfile = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<UsersProfile, 'id'>;
@@ -121,7 +85,7 @@ type EagerUsersProfile = {
   readonly preferredAgeRanges?: (SiteAgeRangesValues | null)[] | keyof typeof SiteAgeRangesValues | null;
   readonly preferredAmusementTypes?: (AmusementTypeNameValues | null)[] | keyof typeof AmusementTypeNameValues | null;
   readonly UsersFavSites?: (string | null)[] | null;
-  readonly Cities?: Cities | null;
+  readonly Cities?: Sites | null;
   readonly Sites?: (Sites | null)[] | null;
   readonly profilePic?: string | null;
   readonly createdAt?: string | null;
@@ -142,7 +106,7 @@ type LazyUsersProfile = {
   readonly preferredAgeRanges?: (SiteAgeRangesValues | null)[] | keyof typeof SiteAgeRangesValues | null;
   readonly preferredAmusementTypes?: (AmusementTypeNameValues | null)[] | keyof typeof AmusementTypeNameValues | null;
   readonly UsersFavSites?: (string | null)[] | null;
-  readonly Cities: AsyncItem<Cities | undefined>;
+  readonly Cities: AsyncItem<Sites | undefined>;
   readonly Sites: AsyncCollection<Sites>;
   readonly profilePic?: string | null;
   readonly createdAt?: string | null;

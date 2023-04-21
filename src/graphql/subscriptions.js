@@ -4,8 +4,9 @@
 export const onCreateContactUs = /* GraphQL */ `
   subscription OnCreateContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
+    $owner: String
   ) {
-    onCreateContactUs(filter: $filter) {
+    onCreateContactUs(filter: $filter, owner: $owner) {
       id
       firstname
       email
@@ -17,14 +18,16 @@ export const onCreateContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onUpdateContactUs = /* GraphQL */ `
   subscription OnUpdateContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
+    $owner: String
   ) {
-    onUpdateContactUs(filter: $filter) {
+    onUpdateContactUs(filter: $filter, owner: $owner) {
       id
       firstname
       email
@@ -36,14 +39,16 @@ export const onUpdateContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onDeleteContactUs = /* GraphQL */ `
   subscription OnDeleteContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
+    $owner: String
   ) {
-    onDeleteContactUs(filter: $filter) {
+    onDeleteContactUs(filter: $filter, owner: $owner) {
       id
       firstname
       email
@@ -55,57 +60,7 @@ export const onDeleteContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-    }
-  }
-`;
-export const onCreateCities = /* GraphQL */ `
-  subscription OnCreateCities($filter: ModelSubscriptionCitiesFilterInput) {
-    onCreateCities(filter: $filter) {
-      id
-      cityName
-      cityCounty
-      cityCountry
-      cityLat
-      cityLng
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onUpdateCities = /* GraphQL */ `
-  subscription OnUpdateCities($filter: ModelSubscriptionCitiesFilterInput) {
-    onUpdateCities(filter: $filter) {
-      id
-      cityName
-      cityCounty
-      cityCountry
-      cityLat
-      cityLng
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const onDeleteCities = /* GraphQL */ `
-  subscription OnDeleteCities($filter: ModelSubscriptionCitiesFilterInput) {
-    onDeleteCities(filter: $filter) {
-      id
-      cityName
-      cityCounty
-      cityCountry
-      cityLat
-      cityLng
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
+      owner
     }
   }
 `;
@@ -125,16 +80,35 @@ export const onCreateUsersProfile = /* GraphQL */ `
       UsersFavSites
       Cities {
         id
-        cityName
-        cityCounty
-        cityCountry
-        cityLat
-        cityLng
+        siteName
+        siteDescription
+        siteTotalRating
+        siteNumberOfRatings
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        SiteWebsite
+        siteImage
+        SiteMapURL
+        SiteComments {
+          nextToken
+          startedAt
+        }
+        usersprofileID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       Sites {
         items {
@@ -163,6 +137,7 @@ export const onCreateUsersProfile = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -194,16 +169,35 @@ export const onUpdateUsersProfile = /* GraphQL */ `
       UsersFavSites
       Cities {
         id
-        cityName
-        cityCounty
-        cityCountry
-        cityLat
-        cityLng
+        siteName
+        siteDescription
+        siteTotalRating
+        siteNumberOfRatings
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        SiteWebsite
+        siteImage
+        SiteMapURL
+        SiteComments {
+          nextToken
+          startedAt
+        }
+        usersprofileID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       Sites {
         items {
@@ -232,6 +226,7 @@ export const onUpdateUsersProfile = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -263,16 +258,35 @@ export const onDeleteUsersProfile = /* GraphQL */ `
       UsersFavSites
       Cities {
         id
-        cityName
-        cityCounty
-        cityCountry
-        cityLat
-        cityLng
+        siteName
+        siteDescription
+        siteTotalRating
+        siteNumberOfRatings
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        SiteWebsite
+        siteImage
+        SiteMapURL
+        SiteComments {
+          nextToken
+          startedAt
+        }
+        usersprofileID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       Sites {
         items {
@@ -301,6 +315,7 @@ export const onDeleteUsersProfile = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -425,8 +440,11 @@ export const onDeleteSiteComments = /* GraphQL */ `
   }
 `;
 export const onCreateSites = /* GraphQL */ `
-  subscription OnCreateSites($filter: ModelSubscriptionSitesFilterInput) {
-    onCreateSites(filter: $filter) {
+  subscription OnCreateSites(
+    $filter: ModelSubscriptionSitesFilterInput
+    $owner: String
+  ) {
+    onCreateSites(filter: $filter, owner: $owner) {
       id
       siteName
       siteDescription
@@ -467,12 +485,16 @@ export const onCreateSites = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onUpdateSites = /* GraphQL */ `
-  subscription OnUpdateSites($filter: ModelSubscriptionSitesFilterInput) {
-    onUpdateSites(filter: $filter) {
+  subscription OnUpdateSites(
+    $filter: ModelSubscriptionSitesFilterInput
+    $owner: String
+  ) {
+    onUpdateSites(filter: $filter, owner: $owner) {
       id
       siteName
       siteDescription
@@ -513,12 +535,16 @@ export const onUpdateSites = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onDeleteSites = /* GraphQL */ `
-  subscription OnDeleteSites($filter: ModelSubscriptionSitesFilterInput) {
-    onDeleteSites(filter: $filter) {
+  subscription OnDeleteSites(
+    $filter: ModelSubscriptionSitesFilterInput
+    $owner: String
+  ) {
+    onDeleteSites(filter: $filter, owner: $owner) {
       id
       siteName
       siteDescription
@@ -559,6 +585,7 @@ export const onDeleteSites = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -619,6 +646,7 @@ export const onCreateSitesSiteComments = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       createdAt
       updatedAt
@@ -686,6 +714,7 @@ export const onUpdateSitesSiteComments = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       createdAt
       updatedAt
@@ -753,6 +782,7 @@ export const onDeleteSitesSiteComments = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       createdAt
       updatedAt

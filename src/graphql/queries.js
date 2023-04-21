@@ -15,6 +15,7 @@ export const getContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -37,6 +38,7 @@ export const listContactuses = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       nextToken
       startedAt
@@ -68,79 +70,7 @@ export const syncContactuses = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getCities = /* GraphQL */ `
-  query GetCities($id: ID!) {
-    getCities(id: $id) {
-      id
-      cityName
-      cityCounty
-      cityCountry
-      cityLat
-      cityLng
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listCities = /* GraphQL */ `
-  query ListCities(
-    $filter: ModelCitiesFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listCities(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        cityName
-        cityCounty
-        cityCountry
-        cityLat
-        cityLng
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncCities = /* GraphQL */ `
-  query SyncCities(
-    $filter: ModelCitiesFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncCities(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        cityName
-        cityCounty
-        cityCountry
-        cityLat
-        cityLng
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
+        owner
       }
       nextToken
       startedAt
@@ -160,16 +90,35 @@ export const getUsersProfile = /* GraphQL */ `
       UsersFavSites
       Cities {
         id
-        cityName
-        cityCounty
-        cityCountry
-        cityLat
-        cityLng
+        siteName
+        siteDescription
+        siteTotalRating
+        siteNumberOfRatings
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        SiteWebsite
+        siteImage
+        SiteMapURL
+        SiteComments {
+          nextToken
+          startedAt
+        }
+        usersprofileID
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       Sites {
         items {
@@ -198,6 +147,7 @@ export const getUsersProfile = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         nextToken
         startedAt
@@ -231,16 +181,31 @@ export const listUsersProfiles = /* GraphQL */ `
         UsersFavSites
         Cities {
           id
-          cityName
-          cityCounty
-          cityCountry
-          cityLat
-          cityLng
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          usersprofileID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         Sites {
           nextToken
@@ -284,16 +249,31 @@ export const syncUsersProfiles = /* GraphQL */ `
         UsersFavSites
         Cities {
           id
-          cityName
-          cityCounty
-          cityCountry
-          cityLat
-          cityLng
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          usersprofileID
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         Sites {
           nextToken
@@ -455,6 +435,7 @@ export const getSites = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
@@ -495,6 +476,7 @@ export const listSites = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       nextToken
       startedAt
@@ -544,6 +526,7 @@ export const syncSites = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       nextToken
       startedAt
@@ -595,6 +578,7 @@ export const sitesByUsersprofileID = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       nextToken
       startedAt
@@ -655,6 +639,7 @@ export const getSitesSiteComments = /* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        owner
       }
       createdAt
       updatedAt
@@ -720,6 +705,7 @@ export const listSitesSiteComments = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         createdAt
         updatedAt
@@ -790,6 +776,7 @@ export const syncSitesSiteComments = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         createdAt
         updatedAt
@@ -862,6 +849,7 @@ export const sitesSiteCommentsBySiteCommentsId = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         createdAt
         updatedAt
@@ -934,6 +922,7 @@ export const sitesSiteCommentsBySitesId = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          owner
         }
         createdAt
         updatedAt

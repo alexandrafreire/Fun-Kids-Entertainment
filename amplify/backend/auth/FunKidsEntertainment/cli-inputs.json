@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "funkid6f835a4e",
     "userPoolName": "FunKidsEntertainment",
     "autoVerifiedAttributes": [
@@ -45,7 +45,7 @@
     "useDefault": "manual",
     "userPoolGroups": false,
     "userPoolGroupList": [
-      "admin"
+      "AppAdmin"
     ],
     "adminQueries": false,
     "thirdPartyAuth": false,
@@ -66,6 +66,11 @@
     },
     "breakCircularDependency": true,
     "dependsOn": [],
-    "hostedUI": false
+    "hostedUI": false,
+    "triggers": {},
+    "parentStack": {
+      "Ref": "AWS::StackId"
+    },
+    "permissions": []
   }
 }

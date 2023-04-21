@@ -4,9 +4,8 @@
     "apiName": "funkidsentertainmentAPI",
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "API_KEY",
-      "keyDescription": "api key description",
-      "expirationTime": 30
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authFunKidsEntertainment"
     },
     "conflictResolution": {
       "defaultResolutionStrategy": {
@@ -15,11 +14,13 @@
     },
     "additionalAuthTypes": [
       {
-        "mode": "AWS_IAM"
+        "mode": "API_KEY",
+        "expirationTime": 365,
+        "apiKeyExpirationDate": "2024-04-20T23:07:39.823Z",
+        "keyDescription": "ApiAuth"
       },
       {
-        "mode": "AMAZON_COGNITO_USER_POOLS",
-        "cognitoUserPoolId": "authFunKidsEntertainment"
+        "mode": "AWS_IAM"
       }
     ]
   }
