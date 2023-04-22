@@ -101,7 +101,7 @@ function Navbar() {
                     className="profile-pic"
                   />
                 ) : (
-                  <i className="fas fa-user-circle default-avatar"></i>
+                  <i className="far fa-user-circle fa-lg"></i>
                 )}
               </div>
               <ul className="dropdown-menu-profile">

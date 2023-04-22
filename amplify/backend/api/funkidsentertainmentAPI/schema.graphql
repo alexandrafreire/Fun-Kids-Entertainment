@@ -1,3 +1,11 @@
+type Users @model @auth(rules: [{allow: groups, groups: ["AppAdmin"], operations: [read, create, update, delete]}]) {
+  id: ID!
+  name: String!
+  email: AWSEmail!
+  username: String!
+  UsersProfile: UsersProfile @hasOne
+}
+
 enum OverallSiteRatingValues {
   GOOD
   AVERAGE
@@ -10,16 +18,7 @@ enum FeedbackTypeValues {
   FEATURE_REQUEST
 }
 
-type ContactUs
-  @model
-  @auth(
-    rules: [
-      { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      { allow: owner, operations: [create, read, update], provider: userPools }
-      { allow: private, operations: [create, read], provider: userPools }
-      { allow: public, operations: [create, read, update], provider: apiKey }
-    ]
-  ) {
+type ContactUs @model @auth(rules: [{allow: groups, groups: ["AppAdmin"], operations: [create, read, update, delete]}, {allow: owner, operations: [create, read, update]}, {allow: private, operations: [create, read, update]}, {allow: public, operations: [create, read, update]}]) {
   id: ID!
   firstname: String
   email: AWSEmail!
@@ -48,15 +47,7 @@ enum SiteAgeRangesValues {
   ADOLESCENTS_ADULTS
 }
 
-type UsersProfile
-  @model
-  @auth(
-    rules: [
-      { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      { allow: owner, operations: [read, update, create], provider: userPools }
-      { allow: private, operations: [read], provider: userPools }
-    ]
-  ) {
+type UsersProfile @model @auth(rules: [{allow: groups, groups: ["AppAdmin"], operations: [create, read, update, delete]}, {allow: owner, operations: [read, update, create]}, {allow: private, operations: [read, update]}]) {
   id: ID!
   name: String!
   email: AWSEmail!
@@ -65,40 +56,23 @@ type UsersProfile
   preferredAgeRanges: [SiteAgeRangesValues]
   preferredAmusementTypes: [AmusementTypeNameValues]
   UsersFavSites: [String]
-  Cities: Sites @hasOne
-  Sites: [Sites] @hasMany(indexName: "byUsersProfile", fields: ["id"])
   profilePic: String
+  Users: Users @belongsTo
+  SiteComments: [SiteComments] @hasMany(indexName: "byUsersProfile", fields: ["id"])
 }
 
-type SiteComments
-  @model
-  @auth(
-    rules: [
-      { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      { allow: owner, provider: userPools }
-      { allow: private, operations: [create], provider: userPools }
-      { allow: public, operations: [read], provider: apiKey }
-    ]
-  ) {
+type SiteComments @model @auth(rules: [{allow: groups, groups: ["AppAdmin"], operations: [create, read, update, delete]}, {allow: owner}, {allow: private, operations: [create, read]}, {allow: public, operations: [read]}]) {
   id: ID!
   siteRating: String
   message: String
   email: String
   username: String!
-  sitess: [Sites] @manyToMany(relationName: "SitesSiteComments")
   createdDate: AWSDate!
+  sitesID: ID! @index(name: "bySites")
+  usersprofileID: ID! @index(name: "byUsersProfile")
 }
 
-type Sites
-  @model
-  @auth(
-    rules: [
-      { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      { allow: owner, operations: [read, update], provider: userPools }
-      { allow: private, operations: [read, update], provider: userPools }
-      { allow: public, operations: [read], provider: apiKey }
-    ]
-  ) {
+type Sites @model @auth(rules: [{allow: groups, groups: ["AppAdmin"], provider: userPools}, {allow: owner, operations: [read, update], provider: userPools}, {allow: private, operations: [read, update], provider: userPools}, {allow: public, operations: [read], provider: apiKey}]) {
   id: ID!
   siteName: String!
   siteDescription: String!
@@ -118,6 +92,6 @@ type Sites
   SiteWebsite: AWSURL
   siteImage: AWSURL
   SiteMapURL: AWSURL
-  SiteComments: [SiteComments] @manyToMany(relationName: "SitesSiteComments")
-  usersprofileID: ID @index(name: "byUsersProfile")
+  SiteComments: [SiteComments] @hasMany(indexName: "bySites", fields: ["id"])
 }
+ 

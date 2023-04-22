@@ -36,6 +36,42 @@ export enum SiteAgeRangesValues {
 
 
 
+type EagerUsers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Users, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly email: string;
+  readonly username: string;
+  readonly UsersProfile?: UsersProfile | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly usersUsersProfileId?: string | null;
+}
+
+type LazyUsers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Users, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly email: string;
+  readonly username: string;
+  readonly UsersProfile: AsyncItem<UsersProfile | undefined>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly usersUsersProfileId?: string | null;
+}
+
+export declare type Users = LazyLoading extends LazyLoadingDisabled ? EagerUsers : LazyUsers
+
+export declare const Users: (new (init: ModelInit<Users>) => Users) & {
+  copyOf(source: Users, mutator: (draft: MutableModel<Users>) => MutableModel<Users> | void): Users;
+}
+
 type EagerContactUs = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<ContactUs, 'id'>;
@@ -85,12 +121,12 @@ type EagerUsersProfile = {
   readonly preferredAgeRanges?: (SiteAgeRangesValues | null)[] | keyof typeof SiteAgeRangesValues | null;
   readonly preferredAmusementTypes?: (AmusementTypeNameValues | null)[] | keyof typeof AmusementTypeNameValues | null;
   readonly UsersFavSites?: (string | null)[] | null;
-  readonly Cities?: Sites | null;
-  readonly Sites?: (Sites | null)[] | null;
   readonly profilePic?: string | null;
+  readonly Users?: Users | null;
+  readonly SiteComments?: (SiteComments | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly usersProfileCitiesId?: string | null;
+  readonly usersProfileUsersId?: string | null;
 }
 
 type LazyUsersProfile = {
@@ -106,12 +142,12 @@ type LazyUsersProfile = {
   readonly preferredAgeRanges?: (SiteAgeRangesValues | null)[] | keyof typeof SiteAgeRangesValues | null;
   readonly preferredAmusementTypes?: (AmusementTypeNameValues | null)[] | keyof typeof AmusementTypeNameValues | null;
   readonly UsersFavSites?: (string | null)[] | null;
-  readonly Cities: AsyncItem<Sites | undefined>;
-  readonly Sites: AsyncCollection<Sites>;
   readonly profilePic?: string | null;
+  readonly Users: AsyncItem<Users | undefined>;
+  readonly SiteComments: AsyncCollection<SiteComments>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly usersProfileCitiesId?: string | null;
+  readonly usersProfileUsersId?: string | null;
 }
 
 export declare type UsersProfile = LazyLoading extends LazyLoadingDisabled ? EagerUsersProfile : LazyUsersProfile
@@ -130,8 +166,9 @@ type EagerSiteComments = {
   readonly message?: string | null;
   readonly email?: string | null;
   readonly username: string;
-  readonly sitess?: (SitesSiteComments | null)[] | null;
   readonly createdDate: string;
+  readonly sitesID: string;
+  readonly usersprofileID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -146,8 +183,9 @@ type LazySiteComments = {
   readonly message?: string | null;
   readonly email?: string | null;
   readonly username: string;
-  readonly sitess: AsyncCollection<SitesSiteComments>;
   readonly createdDate: string;
+  readonly sitesID: string;
+  readonly usersprofileID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -182,8 +220,7 @@ type EagerSites = {
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
-  readonly SiteComments?: (SitesSiteComments | null)[] | null;
-  readonly usersprofileID?: string | null;
+  readonly SiteComments?: (SiteComments | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -212,8 +249,7 @@ type LazySites = {
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
-  readonly SiteComments: AsyncCollection<SitesSiteComments>;
-  readonly usersprofileID?: string | null;
+  readonly SiteComments: AsyncCollection<SiteComments>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -222,38 +258,4 @@ export declare type Sites = LazyLoading extends LazyLoadingDisabled ? EagerSites
 
 export declare const Sites: (new (init: ModelInit<Sites>) => Sites) & {
   copyOf(source: Sites, mutator: (draft: MutableModel<Sites>) => MutableModel<Sites> | void): Sites;
-}
-
-type EagerSitesSiteComments = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<SitesSiteComments, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly siteCommentsId?: string | null;
-  readonly sitesId?: string | null;
-  readonly siteComments: SiteComments;
-  readonly sites: Sites;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazySitesSiteComments = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<SitesSiteComments, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly siteCommentsId?: string | null;
-  readonly sitesId?: string | null;
-  readonly siteComments: AsyncItem<SiteComments>;
-  readonly sites: AsyncItem<Sites>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type SitesSiteComments = LazyLoading extends LazyLoadingDisabled ? EagerSitesSiteComments : LazySitesSiteComments
-
-export declare const SitesSiteComments: (new (init: ModelInit<SitesSiteComments>) => SitesSiteComments) & {
-  copyOf(source: SitesSiteComments, mutator: (draft: MutableModel<SitesSiteComments>) => MutableModel<SitesSiteComments> | void): SitesSiteComments;
 }

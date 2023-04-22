@@ -39,7 +39,16 @@ export default function SitesCollectionHomeFavorites(props) {
       setItems(itemsProp);
       return;
     }
-    setItems(itemsDataStore);
+    async function setItemsFromDataStore() {
+      var loaded = await Promise.all(
+        itemsDataStore.map(async (item) => ({
+          ...item,
+          SiteComments: await item.SiteComments.toArray(),
+        }))
+      );
+      setItems(loaded);
+    }
+    setItemsFromDataStore();
   }, [itemsProp, itemsDataStore]);
   return (
     <Collection

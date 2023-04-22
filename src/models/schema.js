@@ -1,5 +1,108 @@
 export const schema = {
     "models": {
+        "Users": {
+            "name": "Users",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "UsersProfile": {
+                    "name": "UsersProfile",
+                    "isArray": false,
+                    "type": {
+                        "model": "UsersProfile"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "usersUsersProfileId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "usersUsersProfileId": {
+                    "name": "usersUsersProfileId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Users",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "AppAdmin"
+                                ],
+                                "operations": [
+                                    "read",
+                                    "create",
+                                    "update",
+                                    "delete"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "ContactUs": {
             "name": "ContactUs",
             "fields": {
@@ -86,9 +189,9 @@ export const schema = {
                                 ],
                                 "operations": [
                                     "create",
+                                    "read",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
                             },
                             {
@@ -106,9 +209,9 @@ export const schema = {
                                 "allow": "private",
                                 "operations": [
                                     "create",
-                                    "read"
-                                ],
-                                "provider": "userPools"
+                                    "read",
+                                    "update"
+                                ]
                             },
                             {
                                 "allow": "public",
@@ -116,8 +219,7 @@ export const schema = {
                                     "create",
                                     "read",
                                     "update"
-                                ],
-                                "provider": "apiKey"
+                                ]
                             }
                         ]
                     }
@@ -190,29 +292,33 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": true
                 },
-                "Cities": {
-                    "name": "Cities",
+                "profilePic": {
+                    "name": "profilePic",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Users": {
+                    "name": "Users",
                     "isArray": false,
                     "type": {
-                        "model": "Sites"
+                        "model": "Users"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": [
-                            "id"
-                        ],
+                        "connectionType": "BELONGS_TO",
                         "targetNames": [
-                            "usersProfileCitiesId"
+                            "usersProfileUsersId"
                         ]
                     }
                 },
-                "Sites": {
-                    "name": "Sites",
+                "SiteComments": {
+                    "name": "SiteComments",
                     "isArray": true,
                     "type": {
-                        "model": "Sites"
+                        "model": "SiteComments"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -223,13 +329,6 @@ export const schema = {
                             "usersprofileID"
                         ]
                     }
-                },
-                "profilePic": {
-                    "name": "profilePic",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -247,8 +346,8 @@ export const schema = {
                     "attributes": [],
                     "isReadOnly": true
                 },
-                "usersProfileCitiesId": {
-                    "name": "usersProfileCitiesId",
+                "usersProfileUsersId": {
+                    "name": "usersProfileUsersId",
                     "isArray": false,
                     "type": "ID",
                     "isRequired": false,
@@ -275,9 +374,9 @@ export const schema = {
                                 ],
                                 "operations": [
                                     "create",
+                                    "read",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
                             },
                             {
@@ -294,9 +393,9 @@ export const schema = {
                             {
                                 "allow": "private",
                                 "operations": [
-                                    "read"
-                                ],
-                                "provider": "userPools"
+                                    "read",
+                                    "update"
+                                ]
                             }
                         ]
                     }
@@ -341,26 +440,24 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "sitess": {
-                    "name": "sitess",
-                    "isArray": true,
-                    "type": {
-                        "model": "SitesSiteComments"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": [
-                            "siteComments"
-                        ]
-                    }
-                },
                 "createdDate": {
                     "name": "createdDate",
                     "isArray": false,
                     "type": "AWSDate",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "sitesID": {
+                    "name": "sitesID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "usersprofileID": {
+                    "name": "usersprofileID",
+                    "isArray": false,
+                    "type": "ID",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -389,6 +486,24 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "key",
+                    "properties": {
+                        "name": "bySites",
+                        "fields": [
+                            "sitesID"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsersProfile",
+                        "fields": [
+                            "usersprofileID"
+                        ]
+                    }
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -401,9 +516,9 @@ export const schema = {
                                 ],
                                 "operations": [
                                     "create",
+                                    "read",
                                     "update",
-                                    "delete",
-                                    "read"
+                                    "delete"
                                 ]
                             },
                             {
@@ -421,16 +536,15 @@ export const schema = {
                             {
                                 "allow": "private",
                                 "operations": [
-                                    "create"
-                                ],
-                                "provider": "userPools"
+                                    "create",
+                                    "read"
+                                ]
                             },
                             {
                                 "allow": "public",
                                 "operations": [
                                     "read"
-                                ],
-                                "provider": "apiKey"
+                                ]
                             }
                         ]
                     }
@@ -577,7 +691,7 @@ export const schema = {
                     "name": "SiteComments",
                     "isArray": true,
                     "type": {
-                        "model": "SitesSiteComments"
+                        "model": "SiteComments"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -585,16 +699,9 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
-                            "sites"
+                            "sitesID"
                         ]
                     }
-                },
-                "usersprofileID": {
-                    "name": "usersprofileID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -619,15 +726,6 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUsersProfile",
-                        "fields": [
-                            "usersprofileID"
-                        ]
-                    }
                 },
                 {
                     "type": "auth",
@@ -672,104 +770,6 @@ export const schema = {
                                 ],
                                 "provider": "apiKey"
                             }
-                        ]
-                    }
-                }
-            ]
-        },
-        "SitesSiteComments": {
-            "name": "SitesSiteComments",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "siteCommentsId": {
-                    "name": "siteCommentsId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "sitesId": {
-                    "name": "sitesId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "siteComments": {
-                    "name": "siteComments",
-                    "isArray": false,
-                    "type": {
-                        "model": "SiteComments"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "siteCommentsId"
-                        ]
-                    }
-                },
-                "sites": {
-                    "name": "sites",
-                    "isArray": false,
-                    "type": {
-                        "model": "Sites"
-                    },
-                    "isRequired": true,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "sitesId"
-                        ]
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "SitesSiteComments",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "bySiteComments",
-                        "fields": [
-                            "siteCommentsId"
-                        ]
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "bySites",
-                        "fields": [
-                            "sitesId"
                         ]
                     }
                 }
@@ -820,5 +820,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.0",
-    "version": "392235518b4941bc415f993e0feeae71"
+    "version": "4b6734137692d5503a1f55704739981a"
 };
