@@ -13,7 +13,6 @@ import { studioTheme } from "./ui-components";
 import config from "./aws-exports";
 import awsExports from "./aws-exports";
 import "@aws-amplify/ui-react/styles.css";
-import { AmplifyProvider } from "@aws-amplify/ui-react";
 Amplify.configure(config);
 Amplify.configure(awsExports);
 Amplify.configure(awsconfig);

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { DataStore } from "@aws-amplify/datastore";
 import { UsersProfile } from "../../models";
+import { useNavigate } from "react-router-dom";
+import { Auth } from "@aws-amplify/auth";
 import "./ProfileSettings.css";
 import config from "../../aws-exports";
 import awsExports from "../../aws-exports";
@@ -10,6 +12,21 @@ Amplify.configure(awsExports);
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if the user is authenticated
+    const checkAuth = async () => {
+      try {
+        await Auth.currentAuthenticatedUser();
+      } catch (error) {
+        console.error("User is not authenticated:", error);
+        navigate("/SignIn");
+      }
+    };
+
+    checkAuth();
+  }, [navigate]);
 
   useEffect(() => {
     fetchUserProfile();
@@ -18,15 +35,20 @@ const UserProfile = () => {
   const fetchUserProfile = async () => {
     try {
       const userData = await DataStore.query(UsersProfile);
-      const userProfile = userData[0]; // Assuming the first user's profile
-      setUserProfile(userProfile);
+      if (userData.length > 0) {
+        const userProfile = userData[0]; // Assuming the first user's profile
+        setUserProfile(userProfile);
+      } else {
+        // No user profile found
+        setUserProfile(null);
+      }
     } catch (error) {
       console.error("Error fetching user profile:", error);
     }
   };
 
   if (!userProfile) {
-    return <div>Loading...</div>;
+    return <div>No user profile found.</div>;
   }
 
   return (

@@ -87,49 +87,7 @@
       "service": "Cognito-UserPool-Groups"
     }
   },
-  "function": {
-    "createAthUserInDatastore": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
-          "category": "api",
-          "resourceName": "funkidsentertainmentAPI"
-        },
-        {
-          "attributes": [
-            "BucketName"
-          ],
-          "category": "storage",
-          "resourceName": "s3funkidsentertainmentstorage"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_createAthUserInDatastore_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "createAthUserInDatastore"
-        }
-      ]
-    },
-    "AMPLIFY_function_createAthUserInDatastore_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "createAthUserInDatastore"
-        }
-      ]
-    }
-  },
+  "function": {},
   "storage": {
     "s3funkidsentertainmentstorage": {
       "dependsOn": [],

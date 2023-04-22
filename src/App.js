@@ -17,7 +17,7 @@ import ContactUs from "./components/pages/ContactUs";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import TermsOfService from "./components/pages/TermsOfService";
 import Footer from "./components/sections/Footer";
-import SignIn from "./components/pages/SignIn";
+import SignUp from "./components/pages/SignUp";
 import Error from "./components/pages/Error";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
@@ -48,7 +48,7 @@ function App() {
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/TermsOfService" element={<TermsOfService />} />
-        <Route path="/SignIn/" element={<SignIn />} />
+        <Route path="/SignUp/" element={<SignUp />} />
         <Route path="/ProfileSettings" element={<UserProfile />} />
         <Route path="*" element={<Error />} />
       </Routes>

@@ -16,11 +16,7 @@ type ContactUs
     rules: [
       { allow: groups, groups: ["AppAdmin"], provider: userPools }
       { allow: owner, operations: [create, read, update], provider: userPools }
-      {
-        allow: private
-        operations: [create, read, update]
-        provider: userPools
-      }
+      { allow: private, operations: [create, read], provider: userPools }
       { allow: public, operations: [create, read, update], provider: apiKey }
     ]
   ) {
@@ -57,7 +53,7 @@ type UsersProfile
   @auth(
     rules: [
       { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      { allow: owner, operations: [read, update], provider: userPools }
+      { allow: owner, operations: [read, update, create], provider: userPools }
       { allow: private, operations: [read], provider: userPools }
     ]
   ) {

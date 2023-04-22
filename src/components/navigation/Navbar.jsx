@@ -93,7 +93,17 @@ function Navbar() {
           </li>
           {signedIn ? (
             <li className="nav-item-profile">
-              <img src={profilePicUrl} alt="Profile" className="profile-pic" />
+              <div className="profile-container">
+                {profilePicUrl ? (
+                  <img
+                    src={profilePicUrl}
+                    alt="Profile"
+                    className="profile-pic"
+                  />
+                ) : (
+                  <i className="fas fa-user-circle default-avatar"></i>
+                )}
+              </div>
               <ul className="dropdown-menu-profile">
                 <li>
                   <Link to="/ProfileSettings" className="nav-links">
