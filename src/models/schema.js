@@ -1,108 +1,5 @@
 export const schema = {
     "models": {
-        "Users": {
-            "name": "Users",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "email": {
-                    "name": "email",
-                    "isArray": false,
-                    "type": "AWSEmail",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "username": {
-                    "name": "username",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "UsersProfile": {
-                    "name": "UsersProfile",
-                    "isArray": false,
-                    "type": {
-                        "model": "UsersProfile"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": [
-                            "id"
-                        ],
-                        "targetNames": [
-                            "usersUsersProfileId"
-                        ]
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "usersUsersProfileId": {
-                    "name": "usersUsersProfileId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "Users",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groups": [
-                                    "AppAdmin"
-                                ],
-                                "operations": [
-                                    "read",
-                                    "create",
-                                    "update",
-                                    "delete"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
         "ContactUs": {
             "name": "ContactUs",
             "fields": {
@@ -211,7 +108,8 @@ export const schema = {
                                     "create",
                                     "read",
                                     "update"
-                                ]
+                                ],
+                                "provider": "userPools"
                             },
                             {
                                 "allow": "public",
@@ -219,7 +117,8 @@ export const schema = {
                                     "create",
                                     "read",
                                     "update"
-                                ]
+                                ],
+                                "provider": "iam"
                             }
                         ]
                     }
@@ -299,21 +198,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Users": {
-                    "name": "Users",
-                    "isArray": false,
-                    "type": {
-                        "model": "Users"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetNames": [
-                            "usersProfileUsersId"
-                        ]
-                    }
-                },
                 "SiteComments": {
                     "name": "SiteComments",
                     "isArray": true,
@@ -345,13 +229,6 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "isReadOnly": true
-                },
-                "usersProfileUsersId": {
-                    "name": "usersProfileUsersId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 }
             },
             "syncable": true,
@@ -392,9 +269,12 @@ export const schema = {
                             },
                             {
                                 "allow": "private",
+                                "provider": "userPools",
                                 "operations": [
-                                    "read",
-                                    "update"
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
                                 ]
                             }
                         ]
@@ -538,13 +418,15 @@ export const schema = {
                                 "operations": [
                                     "create",
                                     "read"
-                                ]
+                                ],
+                                "provider": "userPools"
                             },
                             {
                                 "allow": "public",
                                 "operations": [
                                     "read"
-                                ]
+                                ],
+                                "provider": "iam"
                             }
                         ]
                     }
@@ -768,7 +650,7 @@ export const schema = {
                                 "operations": [
                                     "read"
                                 ],
-                                "provider": "apiKey"
+                                "provider": "iam"
                             }
                         ]
                     }
@@ -820,5 +702,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.0",
-    "version": "4b6734137692d5503a1f55704739981a"
+    "version": "627bd86b4e8bf737bb4afeda7fb1da1b"
 };

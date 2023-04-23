@@ -34,10 +34,9 @@ const SiteAgeRangesValues = {
   "ADOLESCENTS_ADULTS": "ADOLESCENTS_ADULTS"
 };
 
-const { Users, ContactUs, UsersProfile, SiteComments, Sites } = initSchema(schema);
+const { ContactUs, UsersProfile, SiteComments, Sites } = initSchema(schema);
 
 export {
-  Users,
   ContactUs,
   UsersProfile,
   SiteComments,

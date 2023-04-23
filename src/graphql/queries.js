@@ -88,59 +88,16 @@ export const getUsersProfile = /* GraphQL */ `
       preferredAgeRanges
       preferredAmusementTypes
       UsersFavSites
-      Cities {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteNumberOfRatings
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        siteCity
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
-        SiteWebsite
-        siteImage
-        SiteMapURL
-        SiteComments {
-          nextToken
-          startedAt
-        }
-        usersprofileID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      Sites {
+      profilePic
+      SiteComments {
         items {
           id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
+          siteRating
+          message
+          email
+          username
+          createdDate
+          sitesID
           usersprofileID
           createdAt
           updatedAt
@@ -152,13 +109,11 @@ export const getUsersProfile = /* GraphQL */ `
         nextToken
         startedAt
       }
-      profilePic
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      usersProfileCitiesId
       owner
     }
   }
@@ -179,45 +134,16 @@ export const listUsersProfiles = /* GraphQL */ `
         preferredAgeRanges
         preferredAmusementTypes
         UsersFavSites
-        Cities {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          usersprofileID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        Sites {
+        profilePic
+        SiteComments {
           nextToken
           startedAt
         }
-        profilePic
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        usersProfileCitiesId
         owner
       }
       nextToken
@@ -247,45 +173,16 @@ export const syncUsersProfiles = /* GraphQL */ `
         preferredAgeRanges
         preferredAmusementTypes
         UsersFavSites
-        Cities {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          usersprofileID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        Sites {
+        profilePic
+        SiteComments {
           nextToken
           startedAt
         }
-        profilePic
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        usersProfileCitiesId
         owner
       }
       nextToken
@@ -301,22 +198,9 @@ export const getSiteComments = /* GraphQL */ `
       message
       email
       username
-      sitess {
-        items {
-          id
-          siteCommentsId
-          sitesId
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        nextToken
-        startedAt
-      }
       createdDate
+      sitesID
+      usersprofileID
       createdAt
       updatedAt
       _version
@@ -339,11 +223,9 @@ export const listSiteComments = /* GraphQL */ `
         message
         email
         username
-        sitess {
-          nextToken
-          startedAt
-        }
         createdDate
+        sitesID
+        usersprofileID
         createdAt
         updatedAt
         _version
@@ -375,11 +257,81 @@ export const syncSiteComments = /* GraphQL */ `
         message
         email
         username
-        sitess {
-          nextToken
-          startedAt
-        }
         createdDate
+        sitesID
+        usersprofileID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const siteCommentsBySitesID = /* GraphQL */ `
+  query SiteCommentsBySitesID(
+    $sitesID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelSiteCommentsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    siteCommentsBySitesID(
+      sitesID: $sitesID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        siteRating
+        message
+        email
+        username
+        createdDate
+        sitesID
+        usersprofileID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const siteCommentsByUsersprofileID = /* GraphQL */ `
+  query SiteCommentsByUsersprofileID(
+    $usersprofileID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelSiteCommentsFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    siteCommentsByUsersprofileID(
+      usersprofileID: $usersprofileID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        siteRating
+        message
+        email
+        username
+        createdDate
+        sitesID
+        usersprofileID
         createdAt
         updatedAt
         _version
@@ -417,8 +369,13 @@ export const getSites = /* GraphQL */ `
       SiteComments {
         items {
           id
-          siteCommentsId
-          sitesId
+          siteRating
+          message
+          email
+          username
+          createdDate
+          sitesID
+          usersprofileID
           createdAt
           updatedAt
           _version
@@ -429,7 +386,6 @@ export const getSites = /* GraphQL */ `
         nextToken
         startedAt
       }
-      usersprofileID
       createdAt
       updatedAt
       _version
@@ -470,7 +426,6 @@ export const listSites = /* GraphQL */ `
           nextToken
           startedAt
         }
-        usersprofileID
         createdAt
         updatedAt
         _version
@@ -519,410 +474,6 @@ export const syncSites = /* GraphQL */ `
         SiteComments {
           nextToken
           startedAt
-        }
-        usersprofileID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const sitesByUsersprofileID = /* GraphQL */ `
-  query SitesByUsersprofileID(
-    $usersprofileID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelSitesFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    sitesByUsersprofileID(
-      usersprofileID: $usersprofileID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteNumberOfRatings
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        siteCity
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
-        SiteWebsite
-        siteImage
-        SiteMapURL
-        SiteComments {
-          nextToken
-          startedAt
-        }
-        usersprofileID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const getSitesSiteComments = /* GraphQL */ `
-  query GetSitesSiteComments($id: ID!) {
-    getSitesSiteComments(id: $id) {
-      id
-      siteCommentsId
-      sitesId
-      siteComments {
-        id
-        siteRating
-        message
-        email
-        username
-        sitess {
-          nextToken
-          startedAt
-        }
-        createdDate
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      sites {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteNumberOfRatings
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        siteCity
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
-        SiteWebsite
-        siteImage
-        SiteMapURL
-        SiteComments {
-          nextToken
-          startedAt
-        }
-        usersprofileID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      owner
-    }
-  }
-`;
-export const listSitesSiteComments = /* GraphQL */ `
-  query ListSitesSiteComments(
-    $filter: ModelSitesSiteCommentsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listSitesSiteComments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        siteCommentsId
-        sitesId
-        siteComments {
-          id
-          siteRating
-          message
-          email
-          username
-          createdDate
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        sites {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          usersprofileID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncSitesSiteComments = /* GraphQL */ `
-  query SyncSitesSiteComments(
-    $filter: ModelSitesSiteCommentsFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncSitesSiteComments(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        siteCommentsId
-        sitesId
-        siteComments {
-          id
-          siteRating
-          message
-          email
-          username
-          createdDate
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        sites {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          usersprofileID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const sitesSiteCommentsBySiteCommentsId = /* GraphQL */ `
-  query SitesSiteCommentsBySiteCommentsId(
-    $siteCommentsId: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelSitesSiteCommentsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    sitesSiteCommentsBySiteCommentsId(
-      siteCommentsId: $siteCommentsId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        siteCommentsId
-        sitesId
-        siteComments {
-          id
-          siteRating
-          message
-          email
-          username
-          createdDate
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        sites {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          usersprofileID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const sitesSiteCommentsBySitesId = /* GraphQL */ `
-  query SitesSiteCommentsBySitesId(
-    $sitesId: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelSitesSiteCommentsFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    sitesSiteCommentsBySitesId(
-      sitesId: $sitesId
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        siteCommentsId
-        sitesId
-        siteComments {
-          id
-          siteRating
-          message
-          email
-          username
-          createdDate
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-        }
-        sites {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          usersprofileID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
         }
         createdAt
         updatedAt

@@ -1,6 +1,6 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
 
 export enum OverallSiteRatingValues {
   GOOD = "GOOD",
@@ -35,42 +35,6 @@ export enum SiteAgeRangesValues {
 }
 
 
-
-type EagerUsers = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Users, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly email: string;
-  readonly username: string;
-  readonly UsersProfile?: UsersProfile | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly usersUsersProfileId?: string | null;
-}
-
-type LazyUsers = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Users, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly email: string;
-  readonly username: string;
-  readonly UsersProfile: AsyncItem<UsersProfile | undefined>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-  readonly usersUsersProfileId?: string | null;
-}
-
-export declare type Users = LazyLoading extends LazyLoadingDisabled ? EagerUsers : LazyUsers
-
-export declare const Users: (new (init: ModelInit<Users>) => Users) & {
-  copyOf(source: Users, mutator: (draft: MutableModel<Users>) => MutableModel<Users> | void): Users;
-}
 
 type EagerContactUs = {
   readonly [__modelMeta__]: {
@@ -122,11 +86,9 @@ type EagerUsersProfile = {
   readonly preferredAmusementTypes?: (AmusementTypeNameValues | null)[] | keyof typeof AmusementTypeNameValues | null;
   readonly UsersFavSites?: (string | null)[] | null;
   readonly profilePic?: string | null;
-  readonly Users?: Users | null;
   readonly SiteComments?: (SiteComments | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly usersProfileUsersId?: string | null;
 }
 
 type LazyUsersProfile = {
@@ -143,11 +105,9 @@ type LazyUsersProfile = {
   readonly preferredAmusementTypes?: (AmusementTypeNameValues | null)[] | keyof typeof AmusementTypeNameValues | null;
   readonly UsersFavSites?: (string | null)[] | null;
   readonly profilePic?: string | null;
-  readonly Users: AsyncItem<Users | undefined>;
   readonly SiteComments: AsyncCollection<SiteComments>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-  readonly usersProfileUsersId?: string | null;
 }
 
 export declare type UsersProfile = LazyLoading extends LazyLoadingDisabled ? EagerUsersProfile : LazyUsersProfile

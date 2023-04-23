@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "api": {
+      "funkidsentertainmentAPI": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "storage": {
+      "s3funkidsentertainmentstorage": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "UsersProfile:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

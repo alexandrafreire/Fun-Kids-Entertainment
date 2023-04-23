@@ -22,6 +22,12 @@
       },
       "storage": {
         "s3funkidsentertainmentstorage": {}
+      },
+      "function": {
+        "CreateUserInAppSync": {
+          "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+          "s3Key": "amplify-builds/CreateUserInAppSync-447149326b31392f724e-build.zip"
+        }
       }
     }
   }
