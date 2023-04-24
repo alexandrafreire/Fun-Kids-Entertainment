@@ -14,15 +14,14 @@
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
-              "apiKeyConfig": {
-                "apiKeyExpirationDate": "2023-05-23T01:14:45.614Z",
-                "apiKeyExpirationDays": 30,
-                "description": "ApiKeyUserSync"
-              },
-              "authenticationType": "API_KEY"
+              "authenticationType": "AWS_IAM"
             },
             {
-              "authenticationType": "AWS_IAM"
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 30,
+                "description": "api key description"
+              },
+              "authenticationType": "API_KEY"
             }
           ],
           "defaultAuthentication": {
@@ -87,49 +86,7 @@
       "service": "Cognito-UserPool-Groups"
     }
   },
-  "function": {
-    "CreateUserInAppSync": {
-      "build": true,
-      "dependsOn": [
-        {
-          "attributes": [
-            "GraphQLAPIIdOutput",
-            "GraphQLAPIEndpointOutput",
-            "GraphQLAPIKeyOutput"
-          ],
-          "category": "api",
-          "resourceName": "funkidsentertainmentAPI"
-        },
-        {
-          "attributes": [
-            "BucketName"
-          ],
-          "category": "storage",
-          "resourceName": "s3funkidsentertainmentstorage"
-        }
-      ],
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_CreateUserInAppSync_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateUserInAppSync"
-        }
-      ]
-    },
-    "AMPLIFY_function_CreateUserInAppSync_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "CreateUserInAppSync"
-        }
-      ]
-    }
-  },
+  "function": {},
   "storage": {
     "s3funkidsentertainmentstorage": {
       "dependsOn": [],

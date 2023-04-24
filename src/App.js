@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/navigation/Navbar";
-import UserProfile from "./components/pages/ProfileSettings";
+import UsersProfile from "./components/pages/UsersProfile.jsx";
 import Home from "./components/pages/Home";
 import Explore from "./components/pages/Explore";
 import IndoorActivities from "./components/pages/IndoorActivities";
@@ -49,7 +49,7 @@ function App() {
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/TermsOfService" element={<TermsOfService />} />
         <Route path="/SignUp/" element={<SignUp />} />
-        <Route path="/ProfileSettings" element={<UserProfile />} />
+        <Route path="/UsersProfile" element={<UsersProfile />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />

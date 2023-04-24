@@ -1,6 +1,6 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
 
 export enum OverallSiteRatingValues {
   GOOD = "GOOD",
@@ -72,90 +72,6 @@ export declare const ContactUs: (new (init: ModelInit<ContactUs>) => ContactUs) 
   copyOf(source: ContactUs, mutator: (draft: MutableModel<ContactUs>) => MutableModel<ContactUs> | void): ContactUs;
 }
 
-type EagerUsersProfile = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<UsersProfile, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly email: string;
-  readonly username: string;
-  readonly preferredLocation?: string | null;
-  readonly preferredAgeRanges?: (SiteAgeRangesValues | null)[] | keyof typeof SiteAgeRangesValues | null;
-  readonly preferredAmusementTypes?: (AmusementTypeNameValues | null)[] | keyof typeof AmusementTypeNameValues | null;
-  readonly UsersFavSites?: (string | null)[] | null;
-  readonly profilePic?: string | null;
-  readonly SiteComments?: (SiteComments | null)[] | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyUsersProfile = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<UsersProfile, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly name: string;
-  readonly email: string;
-  readonly username: string;
-  readonly preferredLocation?: string | null;
-  readonly preferredAgeRanges?: (SiteAgeRangesValues | null)[] | keyof typeof SiteAgeRangesValues | null;
-  readonly preferredAmusementTypes?: (AmusementTypeNameValues | null)[] | keyof typeof AmusementTypeNameValues | null;
-  readonly UsersFavSites?: (string | null)[] | null;
-  readonly profilePic?: string | null;
-  readonly SiteComments: AsyncCollection<SiteComments>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type UsersProfile = LazyLoading extends LazyLoadingDisabled ? EagerUsersProfile : LazyUsersProfile
-
-export declare const UsersProfile: (new (init: ModelInit<UsersProfile>) => UsersProfile) & {
-  copyOf(source: UsersProfile, mutator: (draft: MutableModel<UsersProfile>) => MutableModel<UsersProfile> | void): UsersProfile;
-}
-
-type EagerSiteComments = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<SiteComments, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly siteRating?: string | null;
-  readonly message?: string | null;
-  readonly email?: string | null;
-  readonly username: string;
-  readonly createdDate: string;
-  readonly sitesID: string;
-  readonly usersprofileID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazySiteComments = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<SiteComments, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly siteRating?: string | null;
-  readonly message?: string | null;
-  readonly email?: string | null;
-  readonly username: string;
-  readonly createdDate: string;
-  readonly sitesID: string;
-  readonly usersprofileID: string;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type SiteComments = LazyLoading extends LazyLoadingDisabled ? EagerSiteComments : LazySiteComments
-
-export declare const SiteComments: (new (init: ModelInit<SiteComments>) => SiteComments) & {
-  copyOf(source: SiteComments, mutator: (draft: MutableModel<SiteComments>) => MutableModel<SiteComments> | void): SiteComments;
-}
-
 type EagerSites = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Sites, 'id'>;
@@ -180,7 +96,6 @@ type EagerSites = {
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
-  readonly SiteComments?: (SiteComments | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -209,7 +124,6 @@ type LazySites = {
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
-  readonly SiteComments: AsyncCollection<SiteComments>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

@@ -43,7 +43,7 @@
       "email"
     ],
     "useDefault": "manual",
-    "userPoolGroups": false,
+    "userPoolGroups": true,
     "userPoolGroupList": [
       "AppAdmin"
     ],
