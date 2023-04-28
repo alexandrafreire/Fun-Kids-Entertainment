@@ -22,6 +22,9 @@
       },
       "storage": {
         "s3funkidsentertainmentstorage": {}
+      },
+      "geo": {
+        "MyGeoCodeResource": {}
       }
     }
   }

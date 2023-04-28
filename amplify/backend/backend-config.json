@@ -87,6 +87,25 @@
     }
   },
   "function": {},
+  "geo": {
+    "MyGeoCodeResource": {
+      "accessType": "AuthorizedAndGuestUsers",
+      "dataProvider": "Here",
+      "dataSourceIntendedUse": "Storage",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        }
+      ],
+      "isDefault": true,
+      "providerPlugin": "awscloudformation",
+      "service": "PlaceIndex"
+    }
+  },
   "storage": {
     "s3funkidsentertainmentstorage": {
       "dependsOn": [],

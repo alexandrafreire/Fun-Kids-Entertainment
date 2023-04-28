@@ -10,6 +10,31 @@ enum FeedbackTypeValues {
   FEATURE_REQUEST
 }
 
+type Users
+  @model
+  @auth(
+    rules: [
+      { allow: groups, groups: ["AppAdmin"], provider: userPools }
+      {
+        allow: owner
+        operations: [read, update]
+        provider: userPools
+        #identityClaim: "email"
+      }
+      { allow: private, operations: [read], provider: userPools }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  email: AWSEmail!
+  username: String!
+  profilePic: String
+  preferredLocation: String
+  preferredAgeRanges: SiteAgeRangesValues
+  preferredAmusementTypes: AmusementTypeNameValues
+  Sites: [Sites] @hasMany(indexName: "byUsers", fields: ["id"])
+}
+
 type ContactUs
   @model
   @auth(
@@ -20,7 +45,6 @@ type ContactUs
         operations: [create, read, update, delete]
         provider: userPools
       }
-      { allow: owner, operations: [create, read, update], provider: userPools }
       {
         allow: private
         operations: [create, read, update]
@@ -86,4 +110,7 @@ type Sites
   SiteWebsite: AWSURL
   siteImage: AWSURL
   SiteMapURL: AWSURL
+  cityLat: Float
+  cityLng: Float
+  usersID: ID @index(name: "byUsers")
 }

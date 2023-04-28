@@ -1,6 +1,6 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncCollection } from "@aws-amplify/datastore";
 
 export enum OverallSiteRatingValues {
   GOOD = "GOOD",
@@ -35,6 +35,48 @@ export enum SiteAgeRangesValues {
 }
 
 
+
+type EagerUsers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Users, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly email: string;
+  readonly username: string;
+  readonly profilePic?: string | null;
+  readonly preferredLocation?: string | null;
+  readonly preferredAgeRanges?: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues | null;
+  readonly preferredAmusementTypes?: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues | null;
+  readonly Sites?: (Sites | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyUsers = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Users, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly name: string;
+  readonly email: string;
+  readonly username: string;
+  readonly profilePic?: string | null;
+  readonly preferredLocation?: string | null;
+  readonly preferredAgeRanges?: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues | null;
+  readonly preferredAmusementTypes?: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues | null;
+  readonly Sites: AsyncCollection<Sites>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Users = LazyLoading extends LazyLoadingDisabled ? EagerUsers : LazyUsers
+
+export declare const Users: (new (init: ModelInit<Users>) => Users) & {
+  copyOf(source: Users, mutator: (draft: MutableModel<Users>) => MutableModel<Users> | void): Users;
+}
 
 type EagerContactUs = {
   readonly [__modelMeta__]: {
@@ -96,6 +138,9 @@ type EagerSites = {
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
+  readonly cityLat?: number | null;
+  readonly cityLng?: number | null;
+  readonly usersID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -124,6 +169,9 @@ type LazySites = {
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
+  readonly cityLat?: number | null;
+  readonly cityLng?: number | null;
+  readonly usersID?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

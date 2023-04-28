@@ -1,12 +1,182 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreateUsers = /* GraphQL */ `
+  subscription OnCreateUsers(
+    $filter: ModelSubscriptionUsersFilterInput
+    $owner: String
+  ) {
+    onCreateUsers(filter: $filter, owner: $owner) {
+      id
+      name
+      email
+      username
+      profilePic
+      preferredLocation
+      preferredAgeRanges
+      preferredAmusementTypes
+      Sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          cityLat
+          cityLng
+          usersID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const onUpdateUsers = /* GraphQL */ `
+  subscription OnUpdateUsers(
+    $filter: ModelSubscriptionUsersFilterInput
+    $owner: String
+  ) {
+    onUpdateUsers(filter: $filter, owner: $owner) {
+      id
+      name
+      email
+      username
+      profilePic
+      preferredLocation
+      preferredAgeRanges
+      preferredAmusementTypes
+      Sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          cityLat
+          cityLng
+          usersID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const onDeleteUsers = /* GraphQL */ `
+  subscription OnDeleteUsers(
+    $filter: ModelSubscriptionUsersFilterInput
+    $owner: String
+  ) {
+    onDeleteUsers(filter: $filter, owner: $owner) {
+      id
+      name
+      email
+      username
+      profilePic
+      preferredLocation
+      preferredAgeRanges
+      preferredAmusementTypes
+      Sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          cityLat
+          cityLng
+          usersID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
 export const onCreateContactUs = /* GraphQL */ `
   subscription OnCreateContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
-    $owner: String
   ) {
-    onCreateContactUs(filter: $filter, owner: $owner) {
+    onCreateContactUs(filter: $filter) {
       id
       firstname
       email
@@ -18,16 +188,14 @@ export const onCreateContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onUpdateContactUs = /* GraphQL */ `
   subscription OnUpdateContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
-    $owner: String
   ) {
-    onUpdateContactUs(filter: $filter, owner: $owner) {
+    onUpdateContactUs(filter: $filter) {
       id
       firstname
       email
@@ -39,16 +207,14 @@ export const onUpdateContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onDeleteContactUs = /* GraphQL */ `
   subscription OnDeleteContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
-    $owner: String
   ) {
-    onDeleteContactUs(filter: $filter, owner: $owner) {
+    onDeleteContactUs(filter: $filter) {
       id
       firstname
       email
@@ -60,7 +226,6 @@ export const onDeleteContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -89,6 +254,9 @@ export const onCreateSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
+      cityLat
+      cityLng
+      usersID
       createdAt
       updatedAt
       _version
@@ -123,6 +291,9 @@ export const onUpdateSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
+      cityLat
+      cityLng
+      usersID
       createdAt
       updatedAt
       _version
@@ -157,6 +328,9 @@ export const onDeleteSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
+      cityLat
+      cityLng
+      usersID
       createdAt
       updatedAt
       _version

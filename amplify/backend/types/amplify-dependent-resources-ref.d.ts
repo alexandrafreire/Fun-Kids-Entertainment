@@ -20,6 +20,13 @@ export type AmplifyDependentResourcesAttributes = {
       "AppAdminGroupRole": "string"
     }
   },
+  "geo": {
+    "MyGeoCodeResource": {
+      "Arn": "string",
+      "Name": "string",
+      "Region": "string"
+    }
+  },
   "storage": {
     "s3funkidsentertainmentstorage": {
       "BucketName": "string",

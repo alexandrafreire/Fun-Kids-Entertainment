@@ -1,5 +1,148 @@
 export const schema = {
     "models": {
+        "Users": {
+            "name": "Users",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "AWSEmail",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "profilePic": {
+                    "name": "profilePic",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "preferredLocation": {
+                    "name": "preferredLocation",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "preferredAgeRanges": {
+                    "name": "preferredAgeRanges",
+                    "isArray": false,
+                    "type": {
+                        "enum": "SiteAgeRangesValues"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "preferredAmusementTypes": {
+                    "name": "preferredAmusementTypes",
+                    "isArray": false,
+                    "type": {
+                        "enum": "AmusementTypeNameValues"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Sites": {
+                    "name": "Sites",
+                    "isArray": true,
+                    "type": {
+                        "model": "Sites"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "usersID"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Users",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "AppAdmin"
+                                ],
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "operations": [
+                                    "read",
+                                    "update"
+                                ],
+                                "identityClaim": "cognito:username"
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ],
+                                "provider": "userPools"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "ContactUs": {
             "name": "ContactUs",
             "fields": {
@@ -90,17 +233,6 @@ export const schema = {
                                     "update",
                                     "delete"
                                 ]
-                            },
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "operations": [
-                                    "create",
-                                    "read",
-                                    "update"
-                                ],
-                                "identityClaim": "cognito:username"
                             },
                             {
                                 "allow": "private",
@@ -261,6 +393,27 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "cityLat": {
+                    "name": "cityLat",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "cityLng": {
+                    "name": "cityLng",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "usersID": {
+                    "name": "usersID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -284,6 +437,15 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUsers",
+                        "fields": [
+                            "usersID"
+                        ]
+                    }
                 },
                 {
                     "type": "auth",
@@ -378,5 +540,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.0",
-    "version": "502e4d29534e12760b0c50960954cb59"
+    "version": "5a752773b2f46f33307dc07021f6b63f"
 };

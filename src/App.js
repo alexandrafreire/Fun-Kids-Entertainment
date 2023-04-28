@@ -1,8 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
+
+// Amplify
+import { Amplify } from "aws-amplify";
+
+//Pages
 import Navbar from "./components/navigation/Navbar";
-import UsersProfile from "./components/pages/UsersProfile.jsx";
+import UsersProfile from "./components/pages/UsersProfile";
 import Home from "./components/pages/Home";
 import Explore from "./components/pages/Explore";
 import IndoorActivities from "./components/pages/IndoorActivities";
@@ -18,8 +22,11 @@ import PrivacyPolicy from "./components/pages/PrivacyPolicy";
 import TermsOfService from "./components/pages/TermsOfService";
 import Footer from "./components/sections/Footer";
 import SignUp from "./components/pages/SignUp";
+import Admin from "./components/pages/Admin";
 import Error from "./components/pages/Error";
-import { Amplify } from "aws-amplify";
+import "./App.css";
+
+// Amplify Configurations
 import awsconfig from "./aws-exports";
 Amplify.configure(awsconfig);
 
@@ -49,6 +56,7 @@ function App() {
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
         <Route path="/TermsOfService" element={<TermsOfService />} />
         <Route path="/SignUp/" element={<SignUp />} />
+        <Route path="/Admin/" element={<Admin />} />
         <Route path="/UsersProfile" element={<UsersProfile />} />
         <Route path="*" element={<Error />} />
       </Routes>

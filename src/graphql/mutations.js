@@ -1,6 +1,177 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createUsers = /* GraphQL */ `
+  mutation CreateUsers(
+    $input: CreateUsersInput!
+    $condition: ModelUsersConditionInput
+  ) {
+    createUsers(input: $input, condition: $condition) {
+      id
+      name
+      email
+      username
+      profilePic
+      preferredLocation
+      preferredAgeRanges
+      preferredAmusementTypes
+      Sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          cityLat
+          cityLng
+          usersID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const updateUsers = /* GraphQL */ `
+  mutation UpdateUsers(
+    $input: UpdateUsersInput!
+    $condition: ModelUsersConditionInput
+  ) {
+    updateUsers(input: $input, condition: $condition) {
+      id
+      name
+      email
+      username
+      profilePic
+      preferredLocation
+      preferredAgeRanges
+      preferredAmusementTypes
+      Sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          cityLat
+          cityLng
+          usersID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const deleteUsers = /* GraphQL */ `
+  mutation DeleteUsers(
+    $input: DeleteUsersInput!
+    $condition: ModelUsersConditionInput
+  ) {
+    deleteUsers(input: $input, condition: $condition) {
+      id
+      name
+      email
+      username
+      profilePic
+      preferredLocation
+      preferredAgeRanges
+      preferredAmusementTypes
+      Sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          siteCity
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToGeoLoc
+          SiteTimeToGeoLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          cityLat
+          cityLng
+          usersID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
 export const createContactUs = /* GraphQL */ `
   mutation CreateContactUs(
     $input: CreateContactUsInput!
@@ -18,7 +189,6 @@ export const createContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -39,7 +209,6 @@ export const updateContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -60,7 +229,6 @@ export const deleteContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
@@ -89,6 +257,9 @@ export const createSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
+      cityLat
+      cityLng
+      usersID
       createdAt
       updatedAt
       _version
@@ -123,6 +294,9 @@ export const updateSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
+      cityLat
+      cityLng
+      usersID
       createdAt
       updatedAt
       _version
@@ -157,6 +331,9 @@ export const deleteSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
+      cityLat
+      cityLng
+      usersID
       createdAt
       updatedAt
       _version
