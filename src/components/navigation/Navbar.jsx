@@ -11,6 +11,7 @@ function Navbar() {
   const [click, setClick] = useState(false);
   const [Dropdown, setDropdown] = useState(false);
   const [Dropdown1, setDropdown1] = useState(false);
+  const [showDropdownProfile, setShowDropdownProfile] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
@@ -46,6 +47,12 @@ function Navbar() {
     }
   };
 
+  const toggleDropdownProfile = () => {
+    setShowDropdownProfile(
+      (prevShowDropdownProfile) => !prevShowDropdownProfile
+    );
+  };
+
   const [signedIn, setSignedIn] = useState(false);
   const [profilePicUrl, setProfilePicUrl] = useState("");
 
@@ -68,7 +75,7 @@ function Navbar() {
       switch (data.payload.event) {
         case "signIn":
           checkUser();
-          navigate("/ProfileSettings");
+          navigate("/");
           break;
         case "signOut":
           checkUser();
@@ -87,12 +94,12 @@ function Navbar() {
   return (
     <>
       <nav className="navbar-top">
-        <ul className="nav-top-items">
+        <ul className={`nav-top-items ${signedIn ? "signed-in" : ""}`}>
           <li>
             <ButtonContactUs />
           </li>
           {signedIn ? (
-            <li className="nav-item-profile">
+            <li className="nav-item-profile" onClick={toggleDropdownProfile}>
               <div className="profile-container">
                 {profilePicUrl ? (
                   <img
@@ -104,28 +111,30 @@ function Navbar() {
                   <i className="far fa-user-circle fa-lg"></i>
                 )}
               </div>
-              <ul className="dropdown-menu-profile">
-                <li>
-                  <Link to="/ProfileSettings" className="nav-links">
-                    Profile Settings
-                  </Link>
-                </li>
-                <li>
-                  <div
-                    className="nav-links signout-btn"
-                    role="button"
-                    tabIndex="0"
-                    onClick={() => Auth.signOut()}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        Auth.signOut();
-                      }
-                    }}
-                  >
-                    Sign Out
-                  </div>
-                </li>
-              </ul>
+              {showDropdownProfile && (
+                <ul className="dropdown-menu-profile">
+                  <li>
+                    <Link to="/UsersProfile" className="nav-links">
+                      Profile Settings
+                    </Link>
+                  </li>
+                  <li>
+                    <div
+                      className="nav-links signout-btn"
+                      role="button"
+                      tabIndex="0"
+                      onClick={() => Auth.signOut()}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          Auth.signOut();
+                        }
+                      }}
+                    >
+                      Sign Out
+                    </div>
+                  </li>
+                </ul>
+              )}
             </li>
           ) : (
             <li>

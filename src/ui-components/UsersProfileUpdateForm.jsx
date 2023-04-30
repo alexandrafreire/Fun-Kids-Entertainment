@@ -284,10 +284,10 @@ export default function UsersProfileUpdateForm(props) {
         hasError={errors.profilePic?.hasError}
         {...getOverrideProps(overrides, "profilePic")}
       ></TextField>
-      <TextField
+      <SelectField
         label="Preferred location"
-        isRequired={false}
-        isReadOnly={false}
+        placeholder="Please select an option"
+        isDisabled={false}
         value={preferredLocation}
         onChange={(e) => {
           let { value } = e.target;
@@ -315,7 +315,7 @@ export default function UsersProfileUpdateForm(props) {
         errorMessage={errors.preferredLocation?.errorMessage}
         hasError={errors.preferredLocation?.hasError}
         {...getOverrideProps(overrides, "preferredLocation")}
-      ></TextField>
+      ></SelectField>
       <SelectField
         label="Preferred age ranges"
         placeholder="Please select an option"

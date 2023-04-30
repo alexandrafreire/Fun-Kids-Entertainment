@@ -38,7 +38,7 @@ export declare type UsersProfileUpdateFormOverridesProps = {
     email?: PrimitiveOverrideProps<TextFieldProps>;
     username?: PrimitiveOverrideProps<TextFieldProps>;
     profilePic?: PrimitiveOverrideProps<TextFieldProps>;
-    preferredLocation?: PrimitiveOverrideProps<TextFieldProps>;
+    preferredLocation?: PrimitiveOverrideProps<SelectFieldProps>;
     preferredAgeRanges?: PrimitiveOverrideProps<SelectFieldProps>;
     preferredAmusementTypes?: PrimitiveOverrideProps<SelectFieldProps>;
 } & EscapeHatchProps;

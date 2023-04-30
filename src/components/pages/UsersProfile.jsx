@@ -8,49 +8,65 @@ import {
   TextField,
   Flex,
   SelectField,
-  Icon,
   Button,
 } from "@aws-amplify/ui-react";
 import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { DataStore } from "@aws-amplify/datastore";
-import "../../App.css";
-import { Users } from "../../models";
-import { Sites } from "../../models";
-import { useSearchParams } from "react-router-dom";
+import { Users, Sites } from "../../models";
+import { Predicates } from "@aws-amplify/datastore";
+import { useNavigate } from "react-router-dom";
 
 function UsersProfile() {
-  const [users, setUsers] = useState([]);
+  const [userData, setUserData] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [preferredLocations, setPreferredLocations] = useState([]);
 
-  const { id } = useSearchParams();
+  const handleEditProfile = () => {
+    navigate(`/edit-profile/${userData.id}`);
+  };
 
   useEffect(() => {
-    const getUsersData = async () => {
+    const getData = async () => {
       try {
-        // fetch the current signed in user
         const user = await Auth.currentAuthenticatedUser();
-        // query the Users table
-        const usersData = await DataStore.query(Users);
-        setUsers(usersData);
         setIsAuthenticated(true);
+
+        const userQuery = await DataStore.query(Users, Predicates.ALL, {
+          filter: (u) => u.id("eq", user.attributes.sub),
+        });
+
+        if (userQuery.length > 0) {
+          setUserData(userQuery[0]);
+
+          const sites = await DataStore.query(Sites);
+          const uniqueSiteCities = Array.from(
+            new Set(sites.map((site) => site.siteCity))
+          );
+          setPreferredLocations(uniqueSiteCities);
+        } else {
+          console.log("User not found in the Users table.");
+        }
       } catch (err) {
         console.error(err);
       }
     };
-    getUsersData();
-  }, [id]);
+
+    getData();
+  }, []);
+
+  const navigate = useNavigate();
 
   return (
     <>
-      {isAuthenticated ? (
+      {isAuthenticated && userData ? (
         <View className="profile-view">
           <Tabs justifyContent="flex-start">
-            <TabItem title="Tab 1">
+            <TabItem title="User Profile">
               Profile Page
               <Image
                 alt="ProfilePic"
-                src="/amplify-logo.svg"
+                src={userData.profilePic || "/amplify-logo.svg"}
                 objectFit="initial"
                 objectPosition="50% 50%"
                 backgroundColor="initial"
@@ -59,40 +75,68 @@ function UsersProfile() {
                 opacity="100%"
               />
               <Flex direction="column">
-                <TextField label="Username" size="default" width="75%" />
-                <TextField label="email" size="default" width="75%" />
+                <TextField
+                  label="Name"
+                  size="default"
+                  width="75%"
+                  value={userData.name}
+                  readOnly
+                  isDisabled={true}
+                />
+                <TextField
+                  label="Username"
+                  size="default"
+                  width="75%"
+                  value={userData.username}
+                  readOnly
+                  isDisabled={true}
+                />
+                <TextField
+                  label="Email"
+                  size="default"
+                  width="75%"
+                  value={userData.email}
+                  readOnly
+                  isDisabled={true}
+                />
                 <SelectField
                   label="Preferred Location"
                   size="default"
                   width="75%"
+                  defaultValue={userData.preferredLocation}
+                  readOnly
+                  isDisabled={true}
                 >
-                  <option value="apple">Apple</option>
-                  <option value="banana">Banana</option>
-                  <option value="orange">Orange</option>
+                  {preferredLocations.map((location) => (
+                    <option key={location} value={location}>
+                      {location}
+                    </option>
+                  ))}
                 </SelectField>
                 <SelectField
                   label="Preferred Activities"
                   size="default"
                   width="75%"
-                >
-                  <option value="apple">Apple</option>
-                  <option value="banana">Banana</option>
-                  <option value="orange">Orange</option>
-                </SelectField>
+                  isDisabled={true}
+                  defaultValue={userData.preferredAmusementTypes}
+                  readOnly
+                  isDisabled={true}
+                ></SelectField>
                 <SelectField
                   label="Preferred Age Range"
                   size="default"
                   width="75%"
+                  defaultValue={userData.preferredAgeRanges}
+                  readOnly
+                  isDisabled={true}
                 >
-                  <option value="apple">Apple</option>
-                  <option value="banana">Banana</option>
-                  <option value="orange">Orange</option>
+                  {/* Add preferred age ranges options */}
                 </SelectField>
               </Flex>
               <Button
                 variation="primary"
                 loadingText=""
-                onClick={() => alert("hello")}
+                onClick={handleEditProfile}
                 ariaLabel=""
               >
                 Edit profile
@@ -102,7 +146,9 @@ function UsersProfile() {
           </Tabs>
         </View>
       ) : (
-        <div>{<h2>User is not found</h2>}</div>
+        <div>
+          <h2>User is not found</h2>
+        </div>
       )}
     </>
   );

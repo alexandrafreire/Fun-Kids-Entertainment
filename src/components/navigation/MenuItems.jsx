@@ -1,3 +1,5 @@
+import { Auth } from "aws-amplify";
+
 export const MenuItemsExplore = [
   {
     title: "Indoor Activities",
@@ -31,5 +33,25 @@ export const MenuItemsOnTheWay = [
     title: "Books",
     path: "/OnTheWay/Books",
     cName: "dropdown-link",
+  },
+];
+
+export const MenuItemsUsersProfile = [
+  {
+    title: "Profile Settings",
+    path: "/UsersProfile",
+    cName: "dropdown-link",
+  },
+  {
+    title: "Sign Out",
+    path: "/",
+    cName: "dropdown-link",
+    onClick: async () => {
+      try {
+        await Auth.signOut();
+      } catch (error) {
+        console.error("Error signing out:", error);
+      }
+    },
   },
 ];

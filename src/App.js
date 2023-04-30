@@ -7,6 +7,7 @@ import { Amplify } from "aws-amplify";
 //Pages
 import Navbar from "./components/navigation/Navbar";
 import UsersProfile from "./components/pages/UsersProfile";
+import EditProfile from "./components/pages/EditProfile";
 import Home from "./components/pages/Home";
 import Explore from "./components/pages/Explore";
 import IndoorActivities from "./components/pages/IndoorActivities";
@@ -58,6 +59,7 @@ function App() {
         <Route path="/SignUp/" element={<SignUp />} />
         <Route path="/Admin/" element={<Admin />} />
         <Route path="/UsersProfile" element={<UsersProfile />} />
+        <Route path="/edit-profile/:id" element={<EditProfile />} />
         <Route path="*" element={<Error />} />
       </Routes>
       <Footer />
