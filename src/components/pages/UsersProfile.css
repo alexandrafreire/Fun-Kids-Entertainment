@@ -1,6 +1,52 @@
 .profile-view {
-   
-    display: block;
-    font-size: 5em;
-    text-align: left;
-  }
+  margin: 2rem;
+}
+
+.profile-view .amplify-tabs-container {
+  margin-bottom: 2rem;
+}
+
+.profile-view .amplify-flex {
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.profile-view .amplify-button {
+  display: Left;
+  width: 25%;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #009400;
+  color: white;
+}
+
+.edit-profile-view {
+  margin: 2rem;
+}
+
+.edit-profile-view h1 {
+  text-align: left;
+  color: #79C91D;
+  margin-bottom: 15px;
+}
+
+.edit-profile-view .amplify-flex {
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.edit-profile-view .amplify-button {
+  display: left;
+  width: 25%;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #009400;
+  color: white;
+}
+
+.edit-profile-view p {
+  text-align: center;
+  margin-top: 1rem;
+}

@@ -23,12 +23,22 @@
   justify-content: flex-end;
   list-style: none;
   
+  
 }
 
 .nav-top-items.signed-in {
   justify-content: flex-start;
-  margin-right: 100px;
+  margin-right: 20px;
 }
+
+.username {
+  margin-right: 8px;
+  margin-left: 15px;
+  color: white;
+  font-size: 1rem;
+  display: inline-block;
+}
+
 
 .navbar-logo {
   justify-self: start;
@@ -169,7 +179,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
+    width: auto;
     height: 40px;
     cursor: pointer;
     z-index: 2;
@@ -177,7 +187,7 @@
 
     .profile-container .fa-user-circle {
       cursor: pointer;
-      color: black;
+      color:#79C91D
     }
 
     .profile-container:hover .fa-user-circle {

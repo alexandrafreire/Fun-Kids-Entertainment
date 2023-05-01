@@ -4,7 +4,6 @@ import {
   View,
   Tabs,
   TabItem,
-  Image,
   TextField,
   Flex,
   SelectField,
@@ -24,6 +23,26 @@ function UsersProfile() {
 
   const handleEditProfile = () => {
     navigate(`/edit-profile/${userData.id}`);
+  };
+
+  const siteAgeRangesDisplayNames = {
+    FAMILY_ACTIVITIES: "Family Activities",
+    TODDLER: "Toddler",
+    PRESCHOOLER: "Preschooler",
+    SCHOOL_AGED_CHILD: "School Aged Child",
+    ALL_AGES_KIDS: "All Ages Kids",
+    ADOLESCENTS_ADULTS: "Adolescents & Adults",
+  };
+
+  const amusementTypeNameDisplayNames = {
+    PLAYGROUND: "Playground",
+    AMUSEMENT_PARK: "Amusement Park",
+    EXHIBITION: "Exhibition",
+    NATURE_ANIMALS: "Nature & Animals",
+    WATER_PARK: "Water Park",
+    MUSEUM: "Museum",
+    BEACH: "Beach",
+    LANDSCAPE: "Landscape",
   };
 
   useEffect(() => {
@@ -53,7 +72,17 @@ function UsersProfile() {
     };
 
     getData();
-  }, []);
+
+    // Observe changes in Users table and update userData when the user is updated
+    const subscription = DataStore.observe(Users).subscribe((msg) => {
+      if (msg.opType === "UPDATE" && msg.element.id === userData?.id) {
+        setUserData(msg.element);
+      }
+    });
+
+    // Unsubscribe from the DataStore.observe when the component is unmounted
+    return () => subscription.unsubscribe();
+  }, [userData]);
 
   const navigate = useNavigate();
 
@@ -63,22 +92,11 @@ function UsersProfile() {
         <View className="profile-view">
           <Tabs justifyContent="flex-start">
             <TabItem title="User Profile">
-              Profile Page
-              <Image
-                alt="ProfilePic"
-                src={userData.profilePic || "/amplify-logo.svg"}
-                objectFit="initial"
-                objectPosition="50% 50%"
-                backgroundColor="initial"
-                height="40%"
-                width="40%"
-                opacity="100%"
-              />
               <Flex direction="column">
                 <TextField
                   label="Name"
                   size="default"
-                  width="75%"
+                  width="25%"
                   value={userData.name}
                   readOnly
                   isDisabled={true}
@@ -86,7 +104,7 @@ function UsersProfile() {
                 <TextField
                   label="Username"
                   size="default"
-                  width="75%"
+                  width="25%"
                   value={userData.username}
                   readOnly
                   isDisabled={true}
@@ -94,7 +112,7 @@ function UsersProfile() {
                 <TextField
                   label="Email"
                   size="default"
-                  width="75%"
+                  width="25%"
                   value={userData.email}
                   readOnly
                   isDisabled={true}
@@ -102,7 +120,7 @@ function UsersProfile() {
                 <SelectField
                   label="Preferred Location"
                   size="default"
-                  width="75%"
+                  width="25%"
                   defaultValue={userData.preferredLocation}
                   readOnly
                   isDisabled={true}
@@ -116,21 +134,33 @@ function UsersProfile() {
                 <SelectField
                   label="Preferred Activities"
                   size="default"
-                  width="75%"
+                  width="25%"
                   isDisabled={true}
                   defaultValue={userData.preferredAmusementTypes}
                   readOnly
-                  isDisabled={true}
-                ></SelectField>
+                >
+                  {Object.values(amusementTypeNameDisplayNames).map(
+                    (activity) => (
+                      <option key={activity} value={activity}>
+                        {activity}
+                      </option>
+                    )
+                  )}
+                </SelectField>
+
                 <SelectField
                   label="Preferred Age Range"
                   size="default"
-                  width="75%"
+                  width="25%"
                   defaultValue={userData.preferredAgeRanges}
                   readOnly
                   isDisabled={true}
                 >
-                  {/* Add preferred age ranges options */}
+                  {Object.values(siteAgeRangesDisplayNames).map((ageRange) => (
+                    <option key={ageRange} value={ageRange}>
+                      {ageRange}
+                    </option>
+                  ))}
                 </SelectField>
               </Flex>
               <Button
@@ -142,7 +172,7 @@ function UsersProfile() {
                 Edit profile
               </Button>
             </TabItem>
-            <TabItem title="Tab 2">Favorite Sites</TabItem>
+            <TabItem title="Favorite Sites"></TabItem>
           </Tabs>
         </View>
       ) : (

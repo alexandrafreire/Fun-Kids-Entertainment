@@ -14,6 +14,7 @@ function Navbar() {
   const [showDropdownProfile, setShowDropdownProfile] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const [username, setUsername] = useState("");
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -64,6 +65,7 @@ function Navbar() {
         const user = await Auth.currentAuthenticatedUser();
         setSignedIn(!!user);
         setProfilePicUrl(user.attributes.profilePic);
+        setUsername(user.attributes.username || user.attributes.name);
       } catch (error) {
         setSignedIn(false);
       }
@@ -110,6 +112,7 @@ function Navbar() {
                 ) : (
                   <i className="far fa-user-circle fa-lg"></i>
                 )}
+                <span className="username">{username}</span>
               </div>
               {showDropdownProfile && (
                 <ul className="dropdown-menu-profile">

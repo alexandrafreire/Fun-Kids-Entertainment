@@ -1,3 +1,4 @@
+import "./UsersProfile.css";
 import { useState, useEffect, useCallback } from "react";
 import { DataStore } from "aws-amplify";
 import { TextField, SelectField, Button, Flex } from "@aws-amplify/ui-react";
@@ -8,7 +9,6 @@ function EditProfile() {
   const [userData, setUserData] = useState(null);
   const [preferredLocations, setPreferredLocations] = useState([]);
   const { id } = useParams();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -110,34 +110,34 @@ function EditProfile() {
   return (
     <>
       {userData ? (
-        <div>
+        <div className="edit-profile-view">
           <h1>Edit Profile</h1>
           <Flex direction="column">
             <TextField
               label="Name"
               size="default"
-              width="75%"
+              width="25%"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <TextField
               label="Username"
               size="default"
-              width="75%"
+              width="25%"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
               label="Email"
               size="default"
-              width="75%"
+              width="25%"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <SelectField
               label="Preferred Location"
               size="default"
-              width="75%"
+              width="25%"
               value={preferredLocation}
               onChange={(e) => setPreferredLocation(e.target.value)}
             >
@@ -150,7 +150,7 @@ function EditProfile() {
             <SelectField
               label="Preferred Age Ranges"
               size="default"
-              width="75%"
+              width="25%"
               value={preferredAgeRanges}
               onChange={(e) => setPreferredAgeRanges(e.target.value)}
             >
@@ -165,7 +165,7 @@ function EditProfile() {
             <SelectField
               label="Preferred Amusement Types"
               size="default"
-              width="75%"
+              width="25%"
               value={preferredAmusementTypes}
               onChange={(e) => setPreferredAmusementTypes(e.target.value)}
             >
