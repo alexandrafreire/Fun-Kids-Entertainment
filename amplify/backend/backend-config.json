@@ -86,7 +86,24 @@
       "service": "Cognito-UserPool-Groups"
     }
   },
-  "function": {},
+  "function": {
+    "InsertUserCognitoToDataStore": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "funkidsentertainmentAPI"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "geo": {
     "MyGeoCodeResource": {
       "accessType": "AuthorizedAndGuestUsers",
@@ -104,6 +121,24 @@
       "isDefault": true,
       "providerPlugin": "awscloudformation",
       "service": "PlaceIndex"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_InsertUserCognitoToDataStore_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InsertUserCognitoToDataStore"
+        }
+      ]
+    },
+    "AMPLIFY_function_InsertUserCognitoToDataStore_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "InsertUserCognitoToDataStore"
+        }
+      ]
     }
   },
   "storage": {

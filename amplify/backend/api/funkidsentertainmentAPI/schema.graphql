@@ -15,13 +15,9 @@ type Users
   @auth(
     rules: [
       { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      {
-        allow: owner
-        operations: [read, update]
-        provider: userPools
-        #identityClaim: "email"
-      }
+      { allow: owner, operations: [read, update], provider: userPools }
       { allow: private, operations: [read], provider: userPools }
+      { allow: public, operations: [read], provider: apiKey }
     ]
   ) {
   id: ID!
@@ -86,7 +82,7 @@ type Sites
   @auth(
     rules: [
       { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      { allow: owner, operations: [read, update], provider: userPools }
+      { allow: owner, provider: userPools }
       { allow: private, operations: [read, update], provider: userPools }
       { allow: public, operations: [read], provider: apiKey }
     ]

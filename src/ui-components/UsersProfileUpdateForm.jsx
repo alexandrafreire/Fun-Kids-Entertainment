@@ -471,7 +471,7 @@ export default function UsersProfileUpdateForm(props) {
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
-            children="Submit"
+            children="Save"
             type="submit"
             variation="primary"
             isDisabled={

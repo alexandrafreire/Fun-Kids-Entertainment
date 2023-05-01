@@ -137,6 +137,13 @@ export const schema = {
                                     "read"
                                 ],
                                 "provider": "userPools"
+                            },
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ],
+                                "provider": "apiKey"
                             }
                         ]
                     }
@@ -469,11 +476,13 @@ export const schema = {
                                 "provider": "userPools",
                                 "ownerField": "owner",
                                 "allow": "owner",
+                                "identityClaim": "cognito:username",
                                 "operations": [
-                                    "read",
-                                    "update"
-                                ],
-                                "identityClaim": "cognito:username"
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
                             },
                             {
                                 "allow": "private",
@@ -539,6 +548,6 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "codegenVersion": "3.4.0",
+    "codegenVersion": "3.4.2",
     "version": "5a752773b2f46f33307dc07021f6b63f"
 };

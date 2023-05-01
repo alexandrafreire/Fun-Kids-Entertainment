@@ -25,6 +25,12 @@
       },
       "geo": {
         "MyGeoCodeResource": {}
+      },
+      "function": {
+        "InsertUserCognitoToDataStore": {
+          "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+          "s3Key": "amplify-builds/InsertUserCognitoToDataStore-68484163776c452b6a76-build.zip"
+        }
       }
     }
   }

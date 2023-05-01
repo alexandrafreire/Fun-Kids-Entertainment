@@ -20,6 +20,15 @@ export type AmplifyDependentResourcesAttributes = {
       "AppAdminGroupRole": "string"
     }
   },
+  "function": {
+    "InsertUserCognitoToDataStore": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    }
+  },
   "geo": {
     "MyGeoCodeResource": {
       "Arn": "string",

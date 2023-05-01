@@ -9,6 +9,7 @@
     "@aws-amplify/notifications": "^1.1.3",
     "@aws-amplify/pubsub": "^5.1.12",
     "@aws-amplify/ui-react": "^4.6.0",
+    "@aws-amplify/ui-react-storage": "^1.1.0",
     "@aws-sdk/client-dynamodb": "^3.316.0",
     "@aws-sdk/token-providers": "^3.316.0",
     "@aws-sdk/util-config-provider": "^3.310.0",

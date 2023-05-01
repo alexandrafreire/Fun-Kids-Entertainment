@@ -21,11 +21,11 @@ import {
 export default function SiteDetail(props) {
   const { sites, siteComments, usersProfile, overrides, ...rest } = props;
   const nmberofreviewsThreeSixFiveSevenTwoEightNineTwoOnClick =
-    useNavigateAction({ anchor: "", type: "anchor" });
+    useNavigateAction({ type: "anchor", anchor: "" });
   const buttonOnClick = useNavigateAction({
-    target: "_blank",
     type: "url",
     url: sites?.SiteMapURL,
+    target: "_blank",
   });
   return (
     <Flex
