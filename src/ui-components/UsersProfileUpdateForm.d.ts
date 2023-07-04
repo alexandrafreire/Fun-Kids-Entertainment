@@ -5,9 +5,9 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { AutocompleteProps, GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { Users } from "../models";
+import { Users, FavoriteSites } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -21,6 +21,7 @@ export declare type UsersProfileUpdateFormInputValues = {
     preferredLocation?: string;
     preferredAgeRanges?: string;
     preferredAmusementTypes?: string;
+    favoriteSites?: FavoriteSites[];
 };
 export declare type UsersProfileUpdateFormValidationValues = {
     name?: ValidationFunction<string>;
@@ -30,6 +31,7 @@ export declare type UsersProfileUpdateFormValidationValues = {
     preferredLocation?: ValidationFunction<string>;
     preferredAgeRanges?: ValidationFunction<string>;
     preferredAmusementTypes?: ValidationFunction<string>;
+    favoriteSites?: ValidationFunction<FavoriteSites>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type UsersProfileUpdateFormOverridesProps = {
@@ -41,6 +43,7 @@ export declare type UsersProfileUpdateFormOverridesProps = {
     preferredLocation?: PrimitiveOverrideProps<SelectFieldProps>;
     preferredAgeRanges?: PrimitiveOverrideProps<SelectFieldProps>;
     preferredAmusementTypes?: PrimitiveOverrideProps<SelectFieldProps>;
+    favoriteSites?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
 export declare type UsersProfileUpdateFormProps = React.PropsWithChildren<{
     overrides?: UsersProfileUpdateFormOverridesProps | undefined | null;

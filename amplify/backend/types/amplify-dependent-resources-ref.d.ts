@@ -1,5 +1,10 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
+    "AdminQueries": {
+      "ApiId": "string",
+      "ApiName": "string",
+      "RootUrl": "string"
+    },
     "funkidsentertainmentAPI": {
       "GraphQLAPIEndpointOutput": "string",
       "GraphQLAPIIdOutput": "string",
@@ -17,10 +22,18 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolName": "string"
     },
     "userPoolGroups": {
-      "AppAdminGroupRole": "string"
+      "AppUsersGroupRole": "string",
+      "adminGroupRole": "string"
     }
   },
   "function": {
+    "AdminQueriesbc4092b1": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "InsertUserCognitoToDataStore": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

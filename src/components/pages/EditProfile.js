@@ -1,6 +1,6 @@
 import "./UsersProfile.css";
 import { useState, useEffect, useCallback } from "react";
-import { DataStore } from "aws-amplify";
+import { DataStore, Auth } from "aws-amplify";
 import { TextField, SelectField, Button, Flex } from "@aws-amplify/ui-react";
 import { useParams } from "react-router-dom";
 import { Users, Sites } from "./../../models";
@@ -39,6 +39,17 @@ function EditProfile() {
 
   const fetchUserData = useCallback(async () => {
     try {
+      // Check if the user is authenticated and if their token is still valid.
+      const currentUser = await Auth.currentAuthenticatedUser();
+      const session = await Auth.currentSession();
+      const isTokenExpired =
+        session.getIdToken().getExpiration() < new Date().getTime() / 1000;
+      if (isTokenExpired) {
+        await currentUser.getSession();
+      }
+
+      console.log("Current User: ", currentUser);
+
       const userQuery = await DataStore.query(Users, id);
       setUserData(userQuery);
       setName(userQuery.name);
@@ -126,6 +137,7 @@ function EditProfile() {
               width="25%"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              isDisabled={true}
             />
             <TextField
               label="Email"
@@ -133,6 +145,7 @@ function EditProfile() {
               width="25%"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              isDisabled={true}
             />
             <SelectField
               label="Preferred Location"
@@ -148,13 +161,13 @@ function EditProfile() {
               ))}
             </SelectField>
             <SelectField
-              label="Preferred Age Ranges"
+              label="Preferred Amusement Types"
               size="default"
               width="25%"
-              value={preferredAgeRanges}
-              onChange={(e) => setPreferredAgeRanges(e.target.value)}
+              value={preferredAmusementTypes}
+              onChange={(e) => setPreferredAmusementTypes(e.target.value)}
             >
-              {Object.entries(siteAgeRangesDisplayNames).map(
+              {Object.entries(amusementTypeNameDisplayNames).map(
                 ([value, displayName]) => (
                   <option key={value} value={value}>
                     {displayName}
@@ -163,13 +176,13 @@ function EditProfile() {
               )}
             </SelectField>
             <SelectField
-              label="Preferred Amusement Types"
+              label="Preferred Age Ranges"
               size="default"
               width="25%"
-              value={preferredAmusementTypes}
-              onChange={(e) => setPreferredAmusementTypes(e.target.value)}
+              value={preferredAgeRanges}
+              onChange={(e) => setPreferredAgeRanges(e.target.value)}
             >
-              {Object.entries(amusementTypeNameDisplayNames).map(
+              {Object.entries(siteAgeRangesDisplayNames).map(
                 ([value, displayName]) => (
                   <option key={value} value={value}>
                     {displayName}

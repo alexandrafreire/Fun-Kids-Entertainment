@@ -4,9 +4,9 @@
 export const onCreateUsers = /* GraphQL */ `
   subscription OnCreateUsers(
     $filter: ModelSubscriptionUsersFilterInput
-    $owner: String
+    $id: String
   ) {
-    onCreateUsers(filter: $filter, owner: $owner) {
+    onCreateUsers(filter: $filter, id: $id) {
       id
       name
       email
@@ -15,30 +15,11 @@ export const onCreateUsers = /* GraphQL */ `
       preferredLocation
       preferredAgeRanges
       preferredAmusementTypes
-      Sites {
+      favoriteSites {
         items {
           id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          cityLat
-          cityLng
-          usersID
+          userID
+          siteID
           createdAt
           updatedAt
           _version
@@ -54,16 +35,15 @@ export const onCreateUsers = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onUpdateUsers = /* GraphQL */ `
   subscription OnUpdateUsers(
     $filter: ModelSubscriptionUsersFilterInput
-    $owner: String
+    $id: String
   ) {
-    onUpdateUsers(filter: $filter, owner: $owner) {
+    onUpdateUsers(filter: $filter, id: $id) {
       id
       name
       email
@@ -72,30 +52,11 @@ export const onUpdateUsers = /* GraphQL */ `
       preferredLocation
       preferredAgeRanges
       preferredAmusementTypes
-      Sites {
+      favoriteSites {
         items {
           id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          cityLat
-          cityLng
-          usersID
+          userID
+          siteID
           createdAt
           updatedAt
           _version
@@ -111,16 +72,15 @@ export const onUpdateUsers = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onDeleteUsers = /* GraphQL */ `
   subscription OnDeleteUsers(
     $filter: ModelSubscriptionUsersFilterInput
-    $owner: String
+    $id: String
   ) {
-    onDeleteUsers(filter: $filter, owner: $owner) {
+    onDeleteUsers(filter: $filter, id: $id) {
       id
       name
       email
@@ -129,30 +89,11 @@ export const onDeleteUsers = /* GraphQL */ `
       preferredLocation
       preferredAgeRanges
       preferredAmusementTypes
-      Sites {
+      favoriteSites {
         items {
           id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          siteCity
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          cityLat
-          cityLng
-          usersID
+          userID
+          siteID
           createdAt
           updatedAt
           _version
@@ -168,15 +109,15 @@ export const onDeleteUsers = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onCreateContactUs = /* GraphQL */ `
   subscription OnCreateContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
+    $owner: String
   ) {
-    onCreateContactUs(filter: $filter) {
+    onCreateContactUs(filter: $filter, owner: $owner) {
       id
       firstname
       email
@@ -188,14 +129,16 @@ export const onCreateContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onUpdateContactUs = /* GraphQL */ `
   subscription OnUpdateContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
+    $owner: String
   ) {
-    onUpdateContactUs(filter: $filter) {
+    onUpdateContactUs(filter: $filter, owner: $owner) {
       id
       firstname
       email
@@ -207,14 +150,16 @@ export const onUpdateContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onDeleteContactUs = /* GraphQL */ `
   subscription OnDeleteContactUs(
     $filter: ModelSubscriptionContactUsFilterInput
+    $owner: String
   ) {
-    onDeleteContactUs(filter: $filter) {
+    onDeleteContactUs(filter: $filter, owner: $owner) {
       id
       firstname
       email
@@ -226,15 +171,13 @@ export const onDeleteContactUs = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+      owner
     }
   }
 `;
 export const onCreateSites = /* GraphQL */ `
-  subscription OnCreateSites(
-    $filter: ModelSubscriptionSitesFilterInput
-    $owner: String
-  ) {
-    onCreateSites(filter: $filter, owner: $owner) {
+  subscription OnCreateSites($filter: ModelSubscriptionSitesFilterInput) {
+    onCreateSites(filter: $filter) {
       id
       siteName
       siteDescription
@@ -256,22 +199,32 @@ export const onCreateSites = /* GraphQL */ `
       SiteMapURL
       cityLat
       cityLng
-      usersID
+      favoritedBy {
+        items {
+          id
+          userID
+          siteID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      owner
     }
   }
 `;
 export const onUpdateSites = /* GraphQL */ `
-  subscription OnUpdateSites(
-    $filter: ModelSubscriptionSitesFilterInput
-    $owner: String
-  ) {
-    onUpdateSites(filter: $filter, owner: $owner) {
+  subscription OnUpdateSites($filter: ModelSubscriptionSitesFilterInput) {
+    onUpdateSites(filter: $filter) {
       id
       siteName
       siteDescription
@@ -293,7 +246,136 @@ export const onUpdateSites = /* GraphQL */ `
       SiteMapURL
       cityLat
       cityLng
-      usersID
+      favoritedBy {
+        items {
+          id
+          userID
+          siteID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteSites = /* GraphQL */ `
+  subscription OnDeleteSites($filter: ModelSubscriptionSitesFilterInput) {
+    onDeleteSites(filter: $filter) {
+      id
+      siteName
+      siteDescription
+      siteTotalRating
+      siteNumberOfRatings
+      siteAgeRange
+      amusementTypeName
+      siteType
+      siteVillage
+      siteCity
+      siteCounty
+      siteAddress
+      siteLat
+      siteLng
+      SiteDistanceToGeoLoc
+      SiteTimeToGeoLocation
+      SiteWebsite
+      siteImage
+      SiteMapURL
+      cityLat
+      cityLng
+      favoritedBy {
+        items {
+          id
+          userID
+          siteID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          owner
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateFavoriteSites = /* GraphQL */ `
+  subscription OnCreateFavoriteSites(
+    $filter: ModelSubscriptionFavoriteSitesFilterInput
+    $owner: String
+  ) {
+    onCreateFavoriteSites(filter: $filter, owner: $owner) {
+      id
+      userID
+      siteID
+      user {
+        id
+        name
+        email
+        username
+        profilePic
+        preferredLocation
+        preferredAgeRanges
+        preferredAmusementTypes
+        favoriteSites {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      site {
+        id
+        siteName
+        siteDescription
+        siteTotalRating
+        siteNumberOfRatings
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        SiteWebsite
+        siteImage
+        SiteMapURL
+        cityLat
+        cityLng
+        favoritedBy {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version
@@ -303,34 +385,135 @@ export const onUpdateSites = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteSites = /* GraphQL */ `
-  subscription OnDeleteSites(
-    $filter: ModelSubscriptionSitesFilterInput
+export const onUpdateFavoriteSites = /* GraphQL */ `
+  subscription OnUpdateFavoriteSites(
+    $filter: ModelSubscriptionFavoriteSitesFilterInput
     $owner: String
   ) {
-    onDeleteSites(filter: $filter, owner: $owner) {
+    onUpdateFavoriteSites(filter: $filter, owner: $owner) {
       id
-      siteName
-      siteDescription
-      siteTotalRating
-      siteNumberOfRatings
-      siteAgeRange
-      amusementTypeName
-      siteType
-      siteVillage
-      siteCity
-      siteCounty
-      siteAddress
-      siteLat
-      siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
-      SiteWebsite
-      siteImage
-      SiteMapURL
-      cityLat
-      cityLng
-      usersID
+      userID
+      siteID
+      user {
+        id
+        name
+        email
+        username
+        profilePic
+        preferredLocation
+        preferredAgeRanges
+        preferredAmusementTypes
+        favoriteSites {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      site {
+        id
+        siteName
+        siteDescription
+        siteTotalRating
+        siteNumberOfRatings
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        SiteWebsite
+        siteImage
+        SiteMapURL
+        cityLat
+        cityLng
+        favoritedBy {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+    }
+  }
+`;
+export const onDeleteFavoriteSites = /* GraphQL */ `
+  subscription OnDeleteFavoriteSites(
+    $filter: ModelSubscriptionFavoriteSitesFilterInput
+    $owner: String
+  ) {
+    onDeleteFavoriteSites(filter: $filter, owner: $owner) {
+      id
+      userID
+      siteID
+      user {
+        id
+        name
+        email
+        username
+        profilePic
+        preferredLocation
+        preferredAgeRanges
+        preferredAmusementTypes
+        favoriteSites {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      site {
+        id
+        siteName
+        siteDescription
+        siteTotalRating
+        siteNumberOfRatings
+        siteAgeRange
+        amusementTypeName
+        siteType
+        siteVillage
+        siteCity
+        siteCounty
+        siteAddress
+        siteLat
+        siteLng
+        SiteDistanceToGeoLoc
+        SiteTimeToGeoLocation
+        SiteWebsite
+        siteImage
+        SiteMapURL
+        cityLat
+        cityLng
+        favoritedBy {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
       createdAt
       updatedAt
       _version

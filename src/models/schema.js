@@ -63,11 +63,11 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "Sites": {
-                    "name": "Sites",
+                "favoriteSites": {
+                    "name": "favoriteSites",
                     "isArray": true,
                     "type": {
-                        "model": "Sites"
+                        "model": "FavoriteSites"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -75,7 +75,7 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
-                            "usersID"
+                            "user"
                         ]
                     }
                 },
@@ -112,38 +112,30 @@ export const schema = {
                                 "provider": "userPools",
                                 "allow": "groups",
                                 "groups": [
-                                    "AppAdmin"
+                                    "admin"
                                 ],
                                 "operations": [
                                     "create",
+                                    "read",
                                     "update",
-                                    "delete",
+                                    "delete"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
                                     "read"
                                 ]
                             },
                             {
                                 "provider": "userPools",
-                                "ownerField": "owner",
+                                "ownerField": "id",
                                 "allow": "owner",
                                 "operations": [
                                     "read",
                                     "update"
                                 ],
                                 "identityClaim": "cognito:username"
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
-                                    "read"
-                                ],
-                                "provider": "userPools"
-                            },
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "read"
-                                ],
-                                "provider": "apiKey"
                             }
                         ]
                     }
@@ -232,7 +224,7 @@ export const schema = {
                                 "provider": "userPools",
                                 "allow": "groups",
                                 "groups": [
-                                    "AppAdmin"
+                                    "admin"
                                 ],
                                 "operations": [
                                     "create",
@@ -247,17 +239,19 @@ export const schema = {
                                     "create",
                                     "read",
                                     "update"
-                                ],
-                                "provider": "userPools"
+                                ]
                             },
                             {
-                                "allow": "public",
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
                                 "operations": [
                                     "create",
-                                    "read",
-                                    "update"
-                                ],
-                                "provider": "apiKey"
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
                             }
                         ]
                     }
@@ -414,12 +408,21 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "usersID": {
-                    "name": "usersID",
-                    "isArray": false,
-                    "type": "ID",
+                "favoritedBy": {
+                    "name": "favoritedBy",
+                    "isArray": true,
+                    "type": {
+                        "model": "FavoriteSites"
+                    },
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "site"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -446,15 +449,6 @@ export const schema = {
                     "properties": {}
                 },
                 {
-                    "type": "key",
-                    "properties": {
-                        "name": "byUsers",
-                        "fields": [
-                            "usersID"
-                        ]
-                    }
-                },
-                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -463,15 +457,114 @@ export const schema = {
                                 "provider": "userPools",
                                 "allow": "groups",
                                 "groups": [
-                                    "AppAdmin"
+                                    "admin"
                                 ],
                                 "operations": [
                                     "create",
+                                    "read",
                                     "update",
-                                    "delete",
+                                    "delete"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
                                     "read"
                                 ]
                             },
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "FavoriteSites": {
+            "name": "FavoriteSites",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "userID": {
+                    "name": "userID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "siteID": {
+                    "name": "siteID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": {
+                        "model": "Users"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "userID"
+                        ]
+                    }
+                },
+                "site": {
+                    "name": "site",
+                    "isArray": false,
+                    "type": {
+                        "model": "Sites"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "siteID"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "FavoriteSites",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
                             {
                                 "provider": "userPools",
                                 "ownerField": "owner",
@@ -485,19 +578,18 @@ export const schema = {
                                 ]
                             },
                             {
-                                "allow": "private",
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "admin"
+                                ],
                                 "operations": [
+                                    "create",
                                     "read",
-                                    "update"
-                                ],
-                                "provider": "userPools"
-                            },
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "read"
-                                ],
-                                "provider": "apiKey"
+                                    "update",
+                                    "delete"
+                                ]
                             }
                         ]
                     }
@@ -549,5 +641,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.2",
-    "version": "5a752773b2f46f33307dc07021f6b63f"
+    "version": "676d41ce40c62276e08ac0a35e48ad47"
 };

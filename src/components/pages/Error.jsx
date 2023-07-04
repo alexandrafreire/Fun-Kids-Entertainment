@@ -5,7 +5,7 @@ function Error() {
   return (
     <section className="error">
       <h2>404</h2>
-      <p>page not found</p>
+      <p>Page not found</p>
       <Link to="/">back home</Link>
     </section>
   );

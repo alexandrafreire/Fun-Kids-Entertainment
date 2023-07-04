@@ -18,7 +18,8 @@
         "userPoolGroups": {}
       },
       "api": {
-        "funkidsentertainmentAPI": {}
+        "funkidsentertainmentAPI": {},
+        "AdminQueries": {}
       },
       "storage": {
         "s3funkidsentertainmentstorage": {}
@@ -29,7 +30,11 @@
       "function": {
         "InsertUserCognitoToDataStore": {
           "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
-          "s3Key": "amplify-builds/InsertUserCognitoToDataStore-68484163776c452b6a76-build.zip"
+          "s3Key": "amplify-builds/InsertUserCognitoToDataStore-502f50423269744d6130-build.zip"
+        },
+        "AdminQueriesbc4092b1": {
+          "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+          "s3Key": "amplify-builds/AdminQueriesbc4092b1-56784d37723071527166-build.zip"
         }
       }
     }

@@ -1,5 +1,27 @@
 {
   "api": {
+    "AdminQueries": {
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "AdminQueriesbc4092b1"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
     "funkidsentertainmentAPI": {
       "dependsOn": [
         {
@@ -87,6 +109,20 @@
     }
   },
   "function": {
+    "AdminQueriesbc4092b1": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "InsertUserCognitoToDataStore": {
       "build": true,
       "dependsOn": [
@@ -124,6 +160,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_AdminQueriesbc4092b1_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AdminQueriesbc4092b1"
+        }
+      ]
+    },
+    "AMPLIFY_function_AdminQueriesbc4092b1_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "AdminQueriesbc4092b1"
+        }
+      ]
+    },
     "AMPLIFY_function_InsertUserCognitoToDataStore_deploymentBucketName": {
       "usedBy": [
         {
@@ -143,7 +195,29 @@
   },
   "storage": {
     "s3funkidsentertainmentstorage": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        },
+        {
+          "attributes": [
+            "adminGroupRole"
+          ],
+          "category": "auth",
+          "resourceName": "userPoolGroups"
+        },
+        {
+          "attributes": [
+            "AppUsersGroupRole"
+          ],
+          "category": "auth",
+          "resourceName": "userPoolGroups"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "S3"
     }

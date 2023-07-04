@@ -14,10 +14,13 @@ type Users
   @model
   @auth(
     rules: [
-      { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      { allow: owner, operations: [read, update], provider: userPools }
-      { allow: private, operations: [read], provider: userPools }
-      { allow: public, operations: [read], provider: apiKey }
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: owner, ownerField: "id", operations: [read, update] }
     ]
   ) {
   id: ID!
@@ -28,7 +31,7 @@ type Users
   preferredLocation: String
   preferredAgeRanges: SiteAgeRangesValues
   preferredAmusementTypes: AmusementTypeNameValues
-  Sites: [Sites] @hasMany(indexName: "byUsers", fields: ["id"])
+  favoriteSites: [FavoriteSites] @hasMany(fields: ["id"])
 }
 
 type ContactUs
@@ -37,16 +40,11 @@ type ContactUs
     rules: [
       {
         allow: groups
-        groups: ["AppAdmin"]
+        groups: ["admin"]
         operations: [create, read, update, delete]
-        provider: userPools
       }
-      {
-        allow: private
-        operations: [create, read, update]
-        provider: userPools
-      }
-      { allow: public, operations: [create, read, update], provider: apiKey }
+      { allow: private, operations: [create, read, update] }
+      { allow: owner }
     ]
   ) {
   id: ID!
@@ -81,10 +79,13 @@ type Sites
   @model
   @auth(
     rules: [
-      { allow: groups, groups: ["AppAdmin"], provider: userPools }
-      { allow: owner, provider: userPools }
-      { allow: private, operations: [read, update], provider: userPools }
-      { allow: public, operations: [read], provider: apiKey }
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
@@ -108,5 +109,24 @@ type Sites
   SiteMapURL: AWSURL
   cityLat: Float
   cityLng: Float
-  usersID: ID @index(name: "byUsers")
+  favoritedBy: [FavoriteSites] @hasMany(fields: ["id"])
+}
+
+type FavoriteSites
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  userID: ID!
+  siteID: ID!
+  user: Users @belongsTo(fields: ["userID"])
+  site: Sites @belongsTo(fields: ["siteID"])
 }

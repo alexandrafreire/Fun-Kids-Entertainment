@@ -45,7 +45,8 @@
     "useDefault": "manual",
     "userPoolGroups": true,
     "userPoolGroupList": [
-      "AppAdmin"
+      "admin",
+      "AppUsers"
     ],
     "adminQueries": false,
     "thirdPartyAuth": false,
@@ -71,6 +72,7 @@
     "parentStack": {
       "Ref": "AWS::StackId"
     },
-    "permissions": []
+    "permissions": [],
+    "adminQueryGroup": "admin"
   }
 }

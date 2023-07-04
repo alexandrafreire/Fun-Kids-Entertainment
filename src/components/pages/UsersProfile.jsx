@@ -9,17 +9,23 @@ import {
   SelectField,
   Button,
 } from "@aws-amplify/ui-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Auth } from "aws-amplify";
 import { DataStore } from "@aws-amplify/datastore";
 import { Users, Sites } from "../../models";
-import { Predicates } from "@aws-amplify/datastore";
 import { useNavigate } from "react-router-dom";
 
 function UsersProfile() {
   const [userData, setUserData] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [preferredLocations, setPreferredLocations] = useState([]);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [preferredLocation, setPreferredLocation] = useState("");
+  const [preferredAgeRange, setPreferredAgeRange] = useState("");
+  const [preferredAmusementType, setPreferredAmusementType] = useState("");
+  const [uniqueSiteCities, setUniqueSiteCities] = useState([]);
+  const navigate = useNavigate(); // Move it to the top level of your function.
 
   const handleEditProfile = () => {
     navigate(`/edit-profile/${userData.id}`);
@@ -45,24 +51,34 @@ function UsersProfile() {
     LANDSCAPE: "Landscape",
   };
 
+  const userDataIdRef = useRef();
+
   useEffect(() => {
     const getData = async () => {
       try {
         const user = await Auth.currentAuthenticatedUser();
         setIsAuthenticated(true);
 
-        const userQuery = await DataStore.query(Users, Predicates.ALL, {
-          filter: (u) => u.id("eq", user.attributes.sub),
-        });
+        const userQuery = await DataStore.query(Users, user.attributes.sub);
+        console.log(userQuery);
 
-        if (userQuery.length > 0) {
-          setUserData(userQuery[0]);
+        if (userQuery) {
+          setUserData(userQuery);
+          userDataIdRef.current = userQuery.id;
+
+          // Set the state variables when the user data is fetched
+          setName(userQuery.name);
+          setEmail(userQuery.email);
+          setUsername(userQuery.username);
+          setPreferredLocation(userQuery.preferredLocation);
+          setPreferredAgeRange(userQuery.preferredAgeRanges);
+          setPreferredAmusementType(userQuery.preferredAmusementTypes);
 
           const sites = await DataStore.query(Sites);
-          const uniqueSiteCities = Array.from(
+          const uniqueCities = Array.from(
             new Set(sites.map((site) => site.siteCity))
           );
-          setPreferredLocations(uniqueSiteCities);
+          setUniqueSiteCities(uniqueCities);
         } else {
           console.log("User not found in the Users table.");
         }
@@ -72,24 +88,28 @@ function UsersProfile() {
     };
 
     getData();
+  }, []);
 
+  useEffect(() => {
     // Observe changes in Users table and update userData when the user is updated
     const subscription = DataStore.observe(Users).subscribe((msg) => {
-      if (msg.opType === "UPDATE" && msg.element.id === userData?.id) {
+      if (msg.opType === "UPDATE" && msg.element.id === userDataIdRef.current) {
         setUserData(msg.element);
       }
     });
 
     // Unsubscribe from the DataStore.observe when the component is unmounted
     return () => subscription.unsubscribe();
-  }, [userData]);
+  }, []); // Added userData?.id here
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]); // New useEffect to log userData when it changes
 
   return (
     <>
       {isAuthenticated && userData ? (
-        <View className="profile-view">
+        <View className="profile-view" key={userData.id}>
           <Tabs justifyContent="flex-start">
             <TabItem title="User Profile">
               <Flex direction="column">
@@ -97,7 +117,7 @@ function UsersProfile() {
                   label="Name"
                   size="default"
                   width="25%"
-                  value={userData.name}
+                  value={name}
                   readOnly
                   isDisabled={true}
                 />
@@ -105,7 +125,7 @@ function UsersProfile() {
                   label="Username"
                   size="default"
                   width="25%"
-                  value={userData.username}
+                  value={username}
                   readOnly
                   isDisabled={true}
                 />
@@ -113,7 +133,7 @@ function UsersProfile() {
                   label="Email"
                   size="default"
                   width="25%"
-                  value={userData.email}
+                  value={email}
                   readOnly
                   isDisabled={true}
                 />
@@ -121,11 +141,11 @@ function UsersProfile() {
                   label="Preferred Location"
                   size="default"
                   width="25%"
-                  defaultValue={userData.preferredLocation}
+                  value={preferredLocation || "Not set"}
                   readOnly
                   isDisabled={true}
                 >
-                  {preferredLocations.map((location) => (
+                  {uniqueSiteCities.map((location) => (
                     <option key={location} value={location}>
                       {location}
                     </option>
@@ -136,13 +156,13 @@ function UsersProfile() {
                   size="default"
                   width="25%"
                   isDisabled={true}
-                  defaultValue={userData.preferredAmusementTypes}
+                  value={preferredAmusementType || "Not set"}
                   readOnly
                 >
-                  {Object.values(amusementTypeNameDisplayNames).map(
-                    (activity) => (
-                      <option key={activity} value={activity}>
-                        {activity}
+                  {Object.entries(amusementTypeNameDisplayNames).map(
+                    ([value, displayName]) => (
+                      <option key={value} value={value}>
+                        {displayName}
                       </option>
                     )
                   )}
@@ -152,15 +172,17 @@ function UsersProfile() {
                   label="Preferred Age Range"
                   size="default"
                   width="25%"
-                  defaultValue={userData.preferredAgeRanges}
+                  value={preferredAgeRange || "Not set"}
                   readOnly
                   isDisabled={true}
                 >
-                  {Object.values(siteAgeRangesDisplayNames).map((ageRange) => (
-                    <option key={ageRange} value={ageRange}>
-                      {ageRange}
-                    </option>
-                  ))}
+                  {Object.entries(siteAgeRangesDisplayNames).map(
+                    ([value, displayName]) => (
+                      <option key={value} value={value}>
+                        {displayName}
+                      </option>
+                    )
+                  )}
                 </SelectField>
               </Flex>
               <Button
