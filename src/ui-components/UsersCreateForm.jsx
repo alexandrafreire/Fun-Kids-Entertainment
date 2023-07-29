@@ -702,7 +702,7 @@ export default function UsersCreateForm(props) {
         getBadgeText={getDisplayValue.favoriteSites}
         setFieldValue={(model) => {
           setCurrentFavoriteSitesDisplayValue(
-            getDisplayValue.favoriteSites(model)
+            model ? getDisplayValue.favoriteSites(model) : ""
           );
           setCurrentFavoriteSitesValue(model);
         }}

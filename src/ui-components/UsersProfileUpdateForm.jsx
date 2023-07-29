@@ -757,7 +757,7 @@ export default function UsersProfileUpdateForm(props) {
         getBadgeText={getDisplayValue.favoriteSites}
         setFieldValue={(model) => {
           setCurrentFavoriteSitesDisplayValue(
-            getDisplayValue.favoriteSites(model)
+            model ? getDisplayValue.favoriteSites(model) : ""
           );
           setCurrentFavoriteSitesValue(model);
         }}

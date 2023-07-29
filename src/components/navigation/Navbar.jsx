@@ -6,6 +6,7 @@ import logo from "./../../images/logo.png";
 import DropdownExplore from "./DropdownExplore";
 import DropdownOnTheWay from "./DropdownOnTheWay";
 import { ButtonSignIn, ButtonContactUs } from "./Button";
+import useAdminCheck from "./../pages/AdminCheck";
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -15,6 +16,8 @@ function Navbar() {
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
   const [username, setUsername] = useState("");
+  const isAdmin = useAdminCheck();
+  console.log(isAdmin);
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
@@ -73,14 +76,11 @@ function Navbar() {
 
     checkUser();
 
-    const listener = Hub.listen("auth", (data) => {
+    const listener = Hub.listen("auth", async (data) => {
       switch (data.payload.event) {
         case "signIn":
-          checkUser();
-          navigate("/");
-          break;
         case "signOut":
-          checkUser();
+          await checkUser();
           navigate("/");
           break;
         default:
@@ -121,6 +121,13 @@ function Navbar() {
                       Profile Settings
                     </Link>
                   </li>
+                  {isAdmin && (
+                    <li>
+                      <Link to="/Admin" className="nav-links">
+                        Admin Panel
+                      </Link>
+                    </li>
+                  )}
                   <li>
                     <div
                       className="nav-links signout-btn"

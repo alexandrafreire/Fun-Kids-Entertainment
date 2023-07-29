@@ -1483,7 +1483,9 @@ export default function SitesUpdateForm(props) {
         errorMessage={errors?.favoritedBy?.errorMessage}
         getBadgeText={getDisplayValue.favoritedBy}
         setFieldValue={(model) => {
-          setCurrentFavoritedByDisplayValue(getDisplayValue.favoritedBy(model));
+          setCurrentFavoritedByDisplayValue(
+            model ? getDisplayValue.favoritedBy(model) : ""
+          );
           setCurrentFavoritedByValue(model);
         }}
         inputFieldRef={favoritedByRef}

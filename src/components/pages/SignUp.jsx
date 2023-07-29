@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { Hub } from "aws-amplify";
-import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify, DataStore } from "aws-amplify";
 import { Users } from "./../../models";
 import awsExports from "./../../aws-exports";
+import { Authenticator, Button } from "@aws-amplify/ui-react";
 
 Amplify.configure(awsExports);
 
@@ -27,8 +27,8 @@ export default function SignUp() {
   }, []);
 
   return (
-    <Authenticator variation="modal">
-      {({ signOut }) => <button onClick={signOut}>Sign out</button>}
+    <Authenticator>
+      {({ signOut }) => <Button onClick={signOut}>Sign Out</Button>}
     </Authenticator>
   );
 }

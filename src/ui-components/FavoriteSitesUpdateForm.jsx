@@ -380,7 +380,7 @@ export default function FavoriteSitesUpdateForm(props) {
         errorMessage={errors?.user?.errorMessage}
         getBadgeText={getDisplayValue.user}
         setFieldValue={(model) => {
-          setCurrentUserDisplayValue(getDisplayValue.user(model));
+          setCurrentUserDisplayValue(model ? getDisplayValue.user(model) : "");
           setCurrentUserValue(model);
         }}
         inputFieldRef={userRef}
@@ -452,7 +452,7 @@ export default function FavoriteSitesUpdateForm(props) {
         errorMessage={errors?.site?.errorMessage}
         getBadgeText={getDisplayValue.site}
         setFieldValue={(model) => {
-          setCurrentSiteDisplayValue(getDisplayValue.site(model));
+          setCurrentSiteDisplayValue(model ? getDisplayValue.site(model) : "");
           setCurrentSiteValue(model);
         }}
         inputFieldRef={siteRef}

@@ -19,7 +19,7 @@ export default function SitesCollectionHomeFavorites(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
   const itemsFilterObj = {
     and: [
-      { field: "siteTotalRating", operator: "ge", operand: "4.7" },
+      { field: "siteTotalRating", operator: "ge", operand: 4.7 },
       { field: "siteCounty", operator: "contains", operand: "Dublin" },
     ],
   };

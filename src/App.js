@@ -24,6 +24,7 @@ import TermsOfService from "./components/pages/TermsOfService";
 import Footer from "./components/sections/Footer";
 import SignUp from "./components/pages/SignUp";
 import Admin from "./components/pages/Admin";
+import withAdminAuthenticator from "./components/pages/AdminAuth";
 import Error from "./components/pages/Error";
 import "./App.css";
 

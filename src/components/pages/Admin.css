@@ -1,0 +1,66 @@
+/* Admin.css */
+
+.Admin {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+  }
+  
+  h1 {
+    margin: 10px;
+    color: #018b01;
+  }
+
+  h2{
+    margin: 10px;
+    color: #018b01;
+  }
+
+  h3{
+    margin: 10px;
+    color: #018b01;
+  }
+  input{
+    margin-right: 20px;
+    background-color: whitesmoke;
+    padding: 6px 18px 6px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+    
+  }
+
+  
+  form {
+    margin: 15px;
+  }
+  
+  form label {
+    margin-right: 10px;
+  }
+  
+  form input[type="text"] {
+    margin-left: 10px;
+  }
+  
+  form input[type="submit"] {
+    margin-left: 10px;
+  }
+  
+  button {
+    margin-bottom: 10px;
+  }
+  
+  table {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  table th, table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
