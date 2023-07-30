@@ -19,7 +19,20 @@
     margin: 10px;
     color: #018b01;
   }
-  input{
+  input {
+    margin-right: 20px;
+    background-color: whitesmoke;
+    padding: 6px 18px 6px;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    color: black;
+    cursor: pointer;
+    
+  }
+
+  button{
     margin-right: 20px;
     background-color: whitesmoke;
     padding: 6px 18px 6px;

@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3funkidsentertainmentstorage",
+  "bucketName": "fun-kids-entertainment-storage",
+  "policyUUID": "abdc3e71",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}
