@@ -5,14 +5,16 @@ import "./Admin.css";
 import awsconfig from "./../../aws-exports";
 Amplify.configure(awsconfig);
 
-async function addToGroup(username, groupname) {
+let nextToken;
+
+//Enable User
+async function enableUser(username) {
   try {
     let apiName = "AdminQueries";
-    let path = "/addUserToGroup";
+    let path = "/enableUser";
     let myInit = {
       body: {
         username,
-        groupname,
       },
       headers: {
         "Content-Type": "application/json",
@@ -23,12 +25,33 @@ async function addToGroup(username, groupname) {
     };
     return await API.post(apiName, path, myInit);
   } catch (error) {
-    console.error("Error adding user to group:", error);
+    console.error("Error enabling user:", error);
   }
 }
 
-let nextToken;
+//Disable User
+async function disableUser(username) {
+  try {
+    let apiName = "AdminQueries";
+    let path = "/disableUser";
+    let myInit = {
+      body: {
+        username,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${(await Auth.currentSession())
+          .getAccessToken()
+          .getJwtToken()}`,
+      },
+    };
+    return await API.post(apiName, path, myInit);
+  } catch (error) {
+    console.error("Error disabling user:", error);
+  }
+}
 
+//List all Users
 async function listUsers(limit) {
   try {
     let apiName = "AdminQueries";
@@ -53,6 +76,52 @@ async function listUsers(limit) {
   }
 }
 
+//Add User to Group
+async function addToGroup(username, groupname) {
+  try {
+    let apiName = "AdminQueries";
+    let path = "/addUserToGroup";
+    let myInit = {
+      body: {
+        username,
+        groupname,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${(await Auth.currentSession())
+          .getAccessToken()
+          .getJwtToken()}`,
+      },
+    };
+    return await API.post(apiName, path, myInit);
+  } catch (error) {
+    console.error("Error adding user to group:", error);
+  }
+}
+//remove user from group
+async function removeUserFromGroup(username, groupname) {
+  try {
+    let apiName = "AdminQueries";
+    let path = "/removeUserFromGroup";
+    let myInit = {
+      body: {
+        username,
+        groupname,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${(await Auth.currentSession())
+          .getAccessToken()
+          .getJwtToken()}`,
+      },
+    };
+    return await API.post(apiName, path, myInit);
+  } catch (error) {
+    console.error("Error removing user from group:", error);
+  }
+}
+
+//List all users in the selected group
 async function listUsersInGroup(groupname, limit) {
   try {
     let apiName = "AdminQueries";
@@ -84,6 +153,8 @@ function Admin() {
   const [userListResponse, setUserListResponse] = useState(null);
   const [username, setUsername] = useState("");
   const [groupname, setGroupname] = useState("");
+  const [removeUsername, setRemoveUsername] = useState("");
+  const [removeGroupname, setRemoveGroupname] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -130,44 +201,113 @@ function Admin() {
     setErrorMessage(""); // Clear the error message upon successful response.
   };
 
+  const [removeGroupResponse, setRemoveGroupResponse] = useState(null);
+
+  const handleRemoveUserSubmit = async (event) => {
+    event.preventDefault();
+    if (!removeGroupname) {
+      setRemoveGroupResponse({
+        success: false,
+        message: "Group name is required",
+      });
+      return;
+    }
+    const response = await removeUserFromGroup(removeUsername, removeGroupname);
+    setRemoveGroupResponse(response);
+  };
+
+  const handleRemoveUsernameChange = (event) => {
+    setRemoveUsername(event.target.value);
+  };
+
+  const handleRemoveGroupnameChange = (event) => {
+    setRemoveGroupname(event.target.value);
+  };
+
+  // Enable and disable user responses
+  const [enableUserResponse, setEnableUserResponse] = useState(null);
+  const [disableUserResponse, setDisableUserResponse] = useState(null);
+
+  // Enable and disable user submit handlers
+  // Enable and disable user submit handlers
+  const handleEnableUserSubmit = async (event) => {
+    event.preventDefault();
+    const response = await enableUser(enableUsername);
+    setEnableUserResponse(response);
+  };
+
+  const handleDisableUserSubmit = async (event) => {
+    event.preventDefault();
+    const response = await disableUser(disableUsername);
+    setDisableUserResponse(response);
+  };
+
+  const [enableUsername, setEnableUsername] = useState("");
+  const [disableUsername, setDisableUsername] = useState("");
+
+  const handleEnableUsernameChange = (event) => {
+    setEnableUsername(event.target.value);
+  };
+
+  const handleDisableUsernameChange = (event) => {
+    setDisableUsername(event.target.value);
+  };
+
   return (
     <div className="Admin">
-      <div>
-        <h1>User Administration Panel</h1>
-      </div>
-      <div>
-        <h2>Add User to Group</h2>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          User Id:
-          <input type="text" value={username} onChange={handleUsernameChange} />
-        </label>
-        <label>
-          Group Name:
-          <input
-            type="text"
-            value={groupname}
-            onChange={handleGroupnameChange}
-          />
-        </label>
-        <input type="submit" value="Add to Group" />
-      </form>
+      {/* ... */}
 
-      <div>
-        <h3>Group Response:</h3>
-        {groupResponse &&
-          (groupResponse.success ? (
-            <p style={{ color: "green" }}>{groupResponse.message}</p>
-          ) : (
-            <p style={{ color: "red" }}>{groupResponse.message}</p>
-          ))}
+      <div className="userContainer">
+        <div className="userActions">
+          <h2>Enable User</h2>
+          <form onSubmit={handleEnableUserSubmit}>
+            <label>
+              User Id:
+              <input
+                type="text"
+                value={enableUsername}
+                onChange={handleEnableUsernameChange}
+              />
+            </label>
+            <input type="submit" value="Enable User" />
+          </form>
+
+          <h3>User Response:</h3>
+          {enableUserResponse &&
+            (enableUserResponse.success ? (
+              <p style={{ color: "green" }}>{enableUserResponse.message}</p>
+            ) : (
+              <p style={{ color: "red" }}>{enableUserResponse.message}</p>
+            ))}
+        </div>
+
+        <div className="userActions">
+          <h2>Disable User</h2>
+          <form onSubmit={handleDisableUserSubmit}>
+            <label>
+              User Id:
+              <input
+                type="text"
+                value={disableUsername}
+                onChange={handleDisableUsernameChange}
+              />
+            </label>
+            <input type="submit" value="Disable User" />
+          </form>
+
+          <h3>User Response:</h3>
+          {disableUserResponse &&
+            (disableUserResponse.success ? (
+              <p style={{ color: "green" }}>{disableUserResponse.message}</p>
+            ) : (
+              <p style={{ color: "red" }}>{disableUserResponse.message}</p>
+            ))}
+        </div>
       </div>
 
+      <br></br>
       <h2> Users Table:</h2>
-
       <div>
-        <h2></h2>
         <table>
           <thead>
             <tr>
@@ -216,8 +356,76 @@ function Admin() {
           </tbody>
         </table>
       </div>
+      <br></br>
+      <div className="groupContainer">
+        <div className="groupActions">
+          <h2>Add User To Group</h2>
+          <form onSubmit={handleSubmit}>
+            <label>
+              User Id:
+              <input
+                type="text"
+                value={username}
+                onChange={handleUsernameChange}
+              />
+            </label>
+            <label>
+              Group Name:
+              <input
+                type="text"
+                value={groupname}
+                onChange={handleGroupnameChange}
+              />
+            </label>
+            <input type="submit" value="Add to Group" />
+          </form>
+
+          <div>
+            <h3>Group Response:</h3>
+            {groupResponse &&
+              (groupResponse.success ? (
+                <p style={{ color: "green" }}>{groupResponse.message}</p>
+              ) : (
+                <p style={{ color: "red" }}>{groupResponse.message}</p>
+              ))}
+          </div>
+        </div>
+
+        <div className="groupActions">
+          <h2>Remove User From Group</h2>
+          <form onSubmit={handleRemoveUserSubmit}>
+            <label>
+              User Id:
+              <input
+                type="text"
+                value={removeUsername}
+                onChange={handleRemoveUsernameChange}
+              />
+            </label>
+            <label>
+              Group Name:
+              <input
+                type="text"
+                value={removeGroupname}
+                onChange={handleRemoveGroupnameChange}
+              />
+            </label>
+            <input type="submit" value="Remove from Group" />
+          </form>
+
+          <div>
+            <h3>Group Response:</h3>
+            {removeGroupResponse &&
+              (removeGroupResponse.success ? (
+                <p style={{ color: "green" }}>{removeGroupResponse.message}</p>
+              ) : (
+                <p style={{ color: "red" }}>{removeGroupResponse.message}</p>
+              ))}
+          </div>
+        </div>
+      </div>
+      <br></br>
       <div className="Admin">
-        {/* ... */}
         <div>
           <h2>Display Users in Group</h2>
           <label>

@@ -20,30 +20,54 @@
     color: #018b01;
   }
   input {
-    margin-right: 20px;
+    
     background-color: whitesmoke;
     padding: 6px 18px 6px;
     border-radius: 4px;
     outline: none;
     border: none;
-    font-size: 18px;
     color: black;
     cursor: pointer;
     
   }
 
   button{
-    margin-right: 20px;
     background-color: whitesmoke;
     padding: 6px 18px 6px;
     border-radius: 4px;
     outline: none;
     border: none;
-    font-size: 18px;
     color: black;
     cursor: pointer;
     
+    
   }
+
+.userContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.userActions {
+  flex: 0 0 45%;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px  #018b01;
+}
+
+.groupContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.groupActions {
+  flex: 0 0 45%; /* This means the div will not grow or shrink, and base width is 45% of the container */
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px #018b01;
+}
 
   
   form {
@@ -63,7 +87,7 @@
   }
   
   button {
-    margin-bottom: 10px;
+    margin:10px;
   }
   
   table {
