@@ -36,9 +36,9 @@ export default function SitesCard(props) {
     url: "itemsDescription.id",
   });
   const buttonOnClick = useNavigateAction({
+    target: "_blank",
     type: "url",
     url: sites?.SiteMapURL,
-    target: "_blank",
   });
   return (
     <Flex

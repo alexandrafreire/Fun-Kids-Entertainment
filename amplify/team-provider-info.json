@@ -30,7 +30,7 @@
       "function": {
         "InsertUserCognitoToDataStore": {
           "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
-          "s3Key": "amplify-builds/InsertUserCognitoToDataStore-502f50423269744d6130-build.zip"
+          "s3Key": "amplify-builds/InsertUserCognitoToDataStore-70465159617162514948-build.zip"
         },
         "AdminQueriesbc4092b1": {
           "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
