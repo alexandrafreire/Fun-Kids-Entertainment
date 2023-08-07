@@ -5,11 +5,13 @@ import "../../App.css";
 import HomePageBanner from "../sections/Banner";
 import CustomDivider from "../sections/Divider";
 import SitesCollectionCards from "../sections/SitesCollectionCards";
+import withDistanceToPrefLocation from "./../Locations/withDistanceToPrefLocation";
 import { Users } from "../../models";
 
 function Home() {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [users, setUsers] = useState([]);
+  const SitesCollectionCardsWithDistance =
+    withDistanceToPrefLocation(SitesCollectionCards);
 
   useEffect(() => {
     const getUsersData = async () => {
@@ -36,7 +38,7 @@ function Home() {
     <>
       <HomePageBanner />
       <CustomDivider />
-      <SitesCollectionCards />
+      <SitesCollectionCardsWithDistance />
     </>
   );
 }

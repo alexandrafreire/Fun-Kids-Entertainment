@@ -7,7 +7,7 @@
 import * as React from "react";
 import { AutocompleteProps, GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { FavoriteSites } from "../models";
+import { City, FavoriteSites } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -18,7 +18,7 @@ export declare type UsersCreateFormInputValues = {
     email?: string;
     username?: string;
     profilePic?: string;
-    preferredLocation?: string;
+    preferredLocation?: City;
     preferredAgeRanges?: string;
     preferredAmusementTypes?: string;
     favoriteSites?: FavoriteSites[];
@@ -28,7 +28,7 @@ export declare type UsersCreateFormValidationValues = {
     email?: ValidationFunction<string>;
     username?: ValidationFunction<string>;
     profilePic?: ValidationFunction<string>;
-    preferredLocation?: ValidationFunction<string>;
+    preferredLocation?: ValidationFunction<City>;
     preferredAgeRanges?: ValidationFunction<string>;
     preferredAmusementTypes?: ValidationFunction<string>;
     favoriteSites?: ValidationFunction<FavoriteSites>;
@@ -40,7 +40,7 @@ export declare type UsersCreateFormOverridesProps = {
     email?: PrimitiveOverrideProps<TextFieldProps>;
     username?: PrimitiveOverrideProps<TextFieldProps>;
     profilePic?: PrimitiveOverrideProps<TextFieldProps>;
-    preferredLocation?: PrimitiveOverrideProps<TextFieldProps>;
+    preferredLocation?: PrimitiveOverrideProps<AutocompleteProps>;
     preferredAgeRanges?: PrimitiveOverrideProps<SelectFieldProps>;
     preferredAmusementTypes?: PrimitiveOverrideProps<SelectFieldProps>;
     favoriteSites?: PrimitiveOverrideProps<AutocompleteProps>;

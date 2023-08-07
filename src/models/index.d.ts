@@ -1,6 +1,6 @@
 import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncCollection, AsyncItem } from "@aws-amplify/datastore";
+import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
 
 export enum OverallSiteRatingValues {
   GOOD = "GOOD",
@@ -46,7 +46,8 @@ type EagerUsers = {
   readonly email: string;
   readonly username: string;
   readonly profilePic?: string | null;
-  readonly preferredLocation?: string | null;
+  readonly cityID?: string | null;
+  readonly preferredLocation?: City | null;
   readonly preferredAgeRanges?: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues | null;
   readonly preferredAmusementTypes?: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues | null;
   readonly favoriteSites?: (FavoriteSites | null)[] | null;
@@ -64,7 +65,8 @@ type LazyUsers = {
   readonly email: string;
   readonly username: string;
   readonly profilePic?: string | null;
-  readonly preferredLocation?: string | null;
+  readonly cityID?: string | null;
+  readonly preferredLocation: AsyncItem<City | undefined>;
   readonly preferredAgeRanges?: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues | null;
   readonly preferredAmusementTypes?: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues | null;
   readonly favoriteSites: AsyncCollection<FavoriteSites>;
@@ -114,6 +116,40 @@ export declare const ContactUs: (new (init: ModelInit<ContactUs>) => ContactUs) 
   copyOf(source: ContactUs, mutator: (draft: MutableModel<ContactUs>) => MutableModel<ContactUs> | void): ContactUs;
 }
 
+type EagerCity = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<City, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly cityName: string;
+  readonly cityLat: number;
+  readonly citylng: number;
+  readonly sites?: (Sites | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyCity = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<City, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly cityName: string;
+  readonly cityLat: number;
+  readonly citylng: number;
+  readonly sites: AsyncCollection<Sites>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type City = LazyLoading extends LazyLoadingDisabled ? EagerCity : LazyCity
+
+export declare const City: (new (init: ModelInit<City>) => City) & {
+  copyOf(source: City, mutator: (draft: MutableModel<City>) => MutableModel<City> | void): City;
+}
+
 type EagerSites = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Sites, 'id'>;
@@ -124,22 +160,20 @@ type EagerSites = {
   readonly siteDescription: string;
   readonly siteTotalRating: number;
   readonly siteNumberOfRatings?: number | null;
-  readonly siteAgeRange: string;
-  readonly amusementTypeName: string;
+  readonly siteAgeRange: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues;
+  readonly amusementTypeName: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues;
   readonly siteType: string;
   readonly siteVillage: string;
-  readonly siteCity: string;
+  readonly cityID: string;
+  readonly siteCity?: City | null;
   readonly siteCounty: string;
   readonly siteAddress: string;
   readonly siteLat: number;
   readonly siteLng: number;
-  readonly SiteDistanceToGeoLoc?: number | null;
-  readonly SiteTimeToGeoLocation?: number | null;
+  readonly SiteDistanceToPrefLocation?: number | null;
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
-  readonly cityLat?: number | null;
-  readonly cityLng?: number | null;
   readonly favoritedBy?: (FavoriteSites | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -155,22 +189,20 @@ type LazySites = {
   readonly siteDescription: string;
   readonly siteTotalRating: number;
   readonly siteNumberOfRatings?: number | null;
-  readonly siteAgeRange: string;
-  readonly amusementTypeName: string;
+  readonly siteAgeRange: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues;
+  readonly amusementTypeName: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues;
   readonly siteType: string;
   readonly siteVillage: string;
-  readonly siteCity: string;
+  readonly cityID: string;
+  readonly siteCity: AsyncItem<City | undefined>;
   readonly siteCounty: string;
   readonly siteAddress: string;
   readonly siteLat: number;
   readonly siteLng: number;
-  readonly SiteDistanceToGeoLoc?: number | null;
-  readonly SiteTimeToGeoLocation?: number | null;
+  readonly SiteDistanceToPrefLocation?: number | null;
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
-  readonly cityLat?: number | null;
-  readonly cityLng?: number | null;
   readonly favoritedBy: AsyncCollection<FavoriteSites>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

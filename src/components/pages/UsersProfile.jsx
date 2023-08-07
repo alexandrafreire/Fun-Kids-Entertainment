@@ -10,7 +10,7 @@ import {
 } from "@aws-amplify/ui-react";
 import { Auth } from "aws-amplify";
 import { DataStore } from "@aws-amplify/datastore";
-import { Users, Sites } from "../../models";
+import { Users } from "../../models";
 import { useNavigate } from "react-router-dom";
 
 const siteAgeRangesDisplayNames = {
@@ -37,8 +37,10 @@ function UsersProfile() {
   const [userData, setUserData] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [uniqueSiteCities, setUniqueSiteCities] = useState([]);
   const navigate = useNavigate();
+  const locations = userData?.preferredLocation
+    ? [userData.preferredLocation]
+    : [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,10 +49,17 @@ function UsersProfile() {
         setIsAuthenticated(true);
 
         const userQuery = await DataStore.query(Users, user.attributes.sub);
-        console.log(userQuery);
+        console.log("userQuery:", userQuery);
 
         if (userQuery) {
-          setUserData(userQuery);
+          // If preferredLocation is a Promise, await it
+          const preferredLocation = await userQuery.preferredLocation;
+          console.log("preferredLocation:", preferredLocation);
+
+          // Clone the userQuery object and set the preferredLocation on the cloned object
+          const updatedUserQuery = { ...userQuery, preferredLocation };
+
+          setUserData(updatedUserQuery);
         } else {
           console.log("User not found in the Users table.");
         }
@@ -62,22 +71,6 @@ function UsersProfile() {
     };
 
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchUniqueCities = async () => {
-      try {
-        const sites = await DataStore.query(Sites);
-        const uniqueCities = Array.from(
-          new Set(sites.map((site) => site.siteCity))
-        );
-        setUniqueSiteCities(uniqueCities);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchUniqueCities();
   }, []);
 
   const handleEditProfile = () => {
@@ -123,13 +116,13 @@ function UsersProfile() {
                   label="Preferred Location"
                   size="default"
                   width="25%"
-                  value={userData.preferredLocation || "Not set"}
+                  value={userData.preferredLocation?.cityName || "Not set"}
                   readOnly
                   isDisabled={true}
                 >
-                  {uniqueSiteCities.map((location) => (
-                    <option key={location} value={location}>
-                      {location}
+                  {locations.map((location) => (
+                    <option key={location.id} value={location.id}>
+                      {location.cityName}
                     </option>
                   ))}
                 </SelectField>

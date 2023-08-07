@@ -24,7 +24,7 @@ import {
   getOverrideProps,
   useDataStoreBinding,
 } from "@aws-amplify/ui-react/internal";
-import { Users, FavoriteSites } from "../models";
+import { Users, City, FavoriteSites } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 function ArrayField({
@@ -201,7 +201,7 @@ export default function UsersCreateForm(props) {
     email: "",
     username: "",
     profilePic: "",
-    preferredLocation: "",
+    preferredLocation: undefined,
     preferredAgeRanges: "",
     preferredAmusementTypes: "",
     favoriteSites: [],
@@ -229,6 +229,8 @@ export default function UsersCreateForm(props) {
     setUsername(initialValues.username);
     setProfilePic(initialValues.profilePic);
     setPreferredLocation(initialValues.preferredLocation);
+    setCurrentPreferredLocationValue(undefined);
+    setCurrentPreferredLocationDisplayValue("");
     setPreferredAgeRanges(initialValues.preferredAgeRanges);
     setPreferredAmusementTypes(initialValues.preferredAmusementTypes);
     setFavoriteSites(initialValues.favoriteSites);
@@ -237,6 +239,13 @@ export default function UsersCreateForm(props) {
     setErrors({});
   };
   const [
+    currentPreferredLocationDisplayValue,
+    setCurrentPreferredLocationDisplayValue,
+  ] = React.useState("");
+  const [currentPreferredLocationValue, setCurrentPreferredLocationValue] =
+    React.useState(undefined);
+  const preferredLocationRef = React.createRef();
+  const [
     currentFavoriteSitesDisplayValue,
     setCurrentFavoriteSitesDisplayValue,
   ] = React.useState("");
@@ -244,18 +253,30 @@ export default function UsersCreateForm(props) {
     React.useState(undefined);
   const favoriteSitesRef = React.createRef();
   const getIDValue = {
+    preferredLocation: (r) => JSON.stringify({ id: r?.id }),
     favoriteSites: (r) => JSON.stringify({ id: r?.id }),
   };
+  const preferredLocationIdSet = new Set(
+    Array.isArray(preferredLocation)
+      ? preferredLocation.map((r) => getIDValue.preferredLocation?.(r))
+      : getIDValue.preferredLocation?.(preferredLocation)
+  );
   const favoriteSitesIdSet = new Set(
     Array.isArray(favoriteSites)
       ? favoriteSites.map((r) => getIDValue.favoriteSites?.(r))
       : getIDValue.favoriteSites?.(favoriteSites)
   );
+  const cityRecords = useDataStoreBinding({
+    type: "collection",
+    model: City,
+  }).items;
   const favoriteSitesRecords = useDataStoreBinding({
     type: "collection",
     model: FavoriteSites,
   }).items;
   const getDisplayValue = {
+    preferredLocation: (r) =>
+      `${r?.cityName ? r?.cityName + " - " : ""}${r?.id}`,
     favoriteSites: (r) => r?.id,
   };
   const validations = {
@@ -502,13 +523,10 @@ export default function UsersCreateForm(props) {
         hasError={errors.profilePic?.hasError}
         {...getOverrideProps(overrides, "profilePic")}
       ></TextField>
-      <TextField
-        label="Preferred location"
-        isRequired={false}
-        isReadOnly={false}
-        value={preferredLocation}
-        onChange={(e) => {
-          let { value } = e.target;
+      <ArrayField
+        lengthLimit={1}
+        onChange={async (items) => {
+          let value = items[0];
           if (onChange) {
             const modelFields = {
               name,
@@ -523,18 +541,75 @@ export default function UsersCreateForm(props) {
             const result = onChange(modelFields);
             value = result?.preferredLocation ?? value;
           }
-          if (errors.preferredLocation?.hasError) {
-            runValidationTasks("preferredLocation", value);
-          }
           setPreferredLocation(value);
+          setCurrentPreferredLocationValue(undefined);
+          setCurrentPreferredLocationDisplayValue("");
         }}
-        onBlur={() =>
-          runValidationTasks("preferredLocation", preferredLocation)
-        }
-        errorMessage={errors.preferredLocation?.errorMessage}
-        hasError={errors.preferredLocation?.hasError}
-        {...getOverrideProps(overrides, "preferredLocation")}
-      ></TextField>
+        currentFieldValue={currentPreferredLocationValue}
+        label={"Preferred location"}
+        items={preferredLocation ? [preferredLocation] : []}
+        hasError={errors?.preferredLocation?.hasError}
+        errorMessage={errors?.preferredLocation?.errorMessage}
+        getBadgeText={getDisplayValue.preferredLocation}
+        setFieldValue={(model) => {
+          setCurrentPreferredLocationDisplayValue(
+            model ? getDisplayValue.preferredLocation(model) : ""
+          );
+          setCurrentPreferredLocationValue(model);
+        }}
+        inputFieldRef={preferredLocationRef}
+        defaultFieldValue={""}
+      >
+        <Autocomplete
+          label="Preferred location"
+          isRequired={false}
+          isReadOnly={false}
+          placeholder="Search City"
+          value={currentPreferredLocationDisplayValue}
+          options={cityRecords
+            .filter(
+              (r) =>
+                !preferredLocationIdSet.has(getIDValue.preferredLocation?.(r))
+            )
+            .map((r) => ({
+              id: getIDValue.preferredLocation?.(r),
+              label: getDisplayValue.preferredLocation?.(r),
+            }))}
+          onSelect={({ id, label }) => {
+            setCurrentPreferredLocationValue(
+              cityRecords.find((r) =>
+                Object.entries(JSON.parse(id)).every(
+                  ([key, value]) => r[key] === value
+                )
+              )
+            );
+            setCurrentPreferredLocationDisplayValue(label);
+            runValidationTasks("preferredLocation", label);
+          }}
+          onClear={() => {
+            setCurrentPreferredLocationDisplayValue("");
+          }}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.preferredLocation?.hasError) {
+              runValidationTasks("preferredLocation", value);
+            }
+            setCurrentPreferredLocationDisplayValue(value);
+            setCurrentPreferredLocationValue(undefined);
+          }}
+          onBlur={() =>
+            runValidationTasks(
+              "preferredLocation",
+              currentPreferredLocationDisplayValue
+            )
+          }
+          errorMessage={errors.preferredLocation?.errorMessage}
+          hasError={errors.preferredLocation?.hasError}
+          ref={preferredLocationRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "preferredLocation")}
+        ></Autocomplete>
+      </ArrayField>
       <SelectField
         label="Preferred age ranges"
         placeholder="Please select an option"

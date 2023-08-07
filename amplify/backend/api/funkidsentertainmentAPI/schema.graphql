@@ -28,7 +28,8 @@ type Users
   email: AWSEmail!
   username: String!
   profilePic: String
-  preferredLocation: String
+  cityID: ID
+  preferredLocation: City @hasOne(fields: ["cityID"])
   preferredAgeRanges: SiteAgeRangesValues
   preferredAmusementTypes: AmusementTypeNameValues
   favoriteSites: [FavoriteSites] @hasMany(fields: ["id"])
@@ -75,6 +76,26 @@ enum SiteAgeRangesValues {
   ADOLESCENTS_ADULTS
 }
 
+type City
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: owner, ownerField: "id", operations: [read, update] }
+    ]
+  ) {
+  id: ID!
+  cityName: String!
+  cityLat: Float!
+  citylng: Float!
+  sites: [Sites] @hasMany(fields: ["id"])
+}
+
 type Sites
   @model
   @auth(
@@ -93,22 +114,20 @@ type Sites
   siteDescription: String!
   siteTotalRating: Float!
   siteNumberOfRatings: Float
-  siteAgeRange: String!
-  amusementTypeName: String!
+  siteAgeRange: SiteAgeRangesValues!
+  amusementTypeName: AmusementTypeNameValues!
   siteType: String!
   siteVillage: String!
-  siteCity: String!
+  cityID: ID!
+  siteCity: City @belongsTo(fields: ["cityID"])
   siteCounty: String!
   siteAddress: String!
   siteLat: Float!
   siteLng: Float!
-  SiteDistanceToGeoLoc: Float
-  SiteTimeToGeoLocation: Float
+  SiteDistanceToPrefLocation: Float
   SiteWebsite: AWSURL
   siteImage: AWSURL
   SiteMapURL: AWSURL
-  cityLat: Float
-  cityLng: Float
   favoritedBy: [FavoriteSites] @hasMany(fields: ["id"])
 }
 

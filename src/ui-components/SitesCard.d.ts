@@ -35,12 +35,12 @@ export declare type SitesCardOverridesProps = {
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type SitesCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    sites?: Sites;
     sitesCard?: Sites;
     header?: React.ReactNode;
     usersProfile?: UsersProfile;
     EventOnClick?: (event: SyntheticEvent) => void;
     Margin?: String;
+    sites?: Sites;
 } & {
     overrides?: SitesCardOverridesProps | undefined | null;
 }>;

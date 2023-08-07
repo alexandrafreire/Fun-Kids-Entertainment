@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { DataStore, Auth } from "aws-amplify";
 import { TextField, SelectField, Button, Flex } from "@aws-amplify/ui-react";
 import { useParams } from "react-router-dom";
-import { Users, Sites } from "./../../models";
+import { Users, City } from "./../../models";
 
 function EditProfile() {
   const [userData, setUserData] = useState(null);
@@ -16,6 +16,7 @@ function EditProfile() {
   const [preferredAgeRanges, setPreferredAgeRanges] = useState("");
   const [preferredAmusementTypes, setPreferredAmusementTypes] = useState("");
   const [message, setMessage] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
 
   const siteAgeRangesDisplayNames = {
     FAMILY_ACTIVITIES: "Family Activities",
@@ -55,15 +56,15 @@ function EditProfile() {
       setName(userQuery.name);
       setEmail(userQuery.email);
       setUsername(userQuery.username);
-      setPreferredLocation(userQuery.preferredLocation);
+      setPreferredLocation(userQuery.preferredLocation.cityName);
       setPreferredAgeRanges(userQuery.preferredAgeRanges);
       setPreferredAmusementTypes(userQuery.preferredAmusementTypes);
 
-      const sites = await DataStore.query(Sites);
-      const uniqueSiteCities = Array.from(
-        new Set(sites.map((site) => site.siteCity))
+      const cities = await DataStore.query(City);
+      const uniqueCityNames = Array.from(
+        new Set(cities.map((city) => city.cityName))
       );
-      setPreferredLocations(uniqueSiteCities);
+      setPreferredLocations(uniqueCityNames);
     } catch (err) {
       console.error(err);
     }
@@ -87,6 +88,15 @@ function EditProfile() {
     if (!userData) return;
 
     try {
+      const cities = await DataStore.query(City, (c) =>
+        c.cityName.eq(preferredLocation)
+      );
+      const city = cities[0];
+      if (!city) {
+        console.error(`City with name ${preferredLocation} not found.`);
+        return;
+      }
+
       const existingUser = await DataStore.query(Users, userData.id);
 
       const updatedUser = await DataStore.save(
@@ -94,7 +104,7 @@ function EditProfile() {
           updated.name = name;
           updated.email = email;
           updated.username = username;
-          updated.preferredLocation = preferredLocation;
+          updated.preferredLocation = city; // Set the city object as the preferred location
           updated.preferredAgeRanges = preferredAgeRanges;
           updated.preferredAmusementTypes = preferredAmusementTypes;
         })
@@ -109,6 +119,8 @@ function EditProfile() {
       const latestUserData = await DataStore.query(Users, updatedUser.id);
       console.log("Updated user data from the DataStore:", latestUserData);
       setMessage("User profile updated successfully.");
+
+      setIsSaved(true); // Mark the form as saved
 
       // Fetch the latest user data and update the state
       fetchUserData();
@@ -130,6 +142,7 @@ function EditProfile() {
               width="25%"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              isDisabled={isSaved}
             />
             <TextField
               label="Username"
@@ -153,6 +166,7 @@ function EditProfile() {
               width="25%"
               value={preferredLocation}
               onChange={(e) => setPreferredLocation(e.target.value)}
+              isDisabled={isSaved}
             >
               {preferredLocations.map((location) => (
                 <option key={location} value={location}>
@@ -166,6 +180,7 @@ function EditProfile() {
               width="25%"
               value={preferredAmusementTypes}
               onChange={(e) => setPreferredAmusementTypes(e.target.value)}
+              isDisabled={isSaved}
             >
               {Object.entries(amusementTypeNameDisplayNames).map(
                 ([value, displayName]) => (
@@ -181,6 +196,7 @@ function EditProfile() {
               width="25%"
               value={preferredAgeRanges}
               onChange={(e) => setPreferredAgeRanges(e.target.value)}
+              isDisabled={isSaved}
             >
               {Object.entries(siteAgeRangesDisplayNames).map(
                 ([value, displayName]) => (
@@ -191,7 +207,9 @@ function EditProfile() {
               )}
             </SelectField>
           </Flex>
-          <Button onClick={handleUpdateProfile}>Save Changes</Button>
+          <Button onClick={handleUpdateProfile} isDisabled={isSaved}>
+            Save Changes
+          </Button>
           {message && <p>{message}</p>}
         </div>
       ) : (

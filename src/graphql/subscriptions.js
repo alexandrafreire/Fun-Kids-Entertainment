@@ -12,7 +12,24 @@ export const onCreateUsers = /* GraphQL */ `
       email
       username
       profilePic
-      preferredLocation
+      cityID
+      preferredLocation {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       preferredAgeRanges
       preferredAmusementTypes
       favoriteSites {
@@ -26,15 +43,18 @@ export const onCreateUsers = /* GraphQL */ `
           _deleted
           _lastChangedAt
           owner
+          __typename
         }
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -49,7 +69,24 @@ export const onUpdateUsers = /* GraphQL */ `
       email
       username
       profilePic
-      preferredLocation
+      cityID
+      preferredLocation {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       preferredAgeRanges
       preferredAmusementTypes
       favoriteSites {
@@ -63,15 +100,18 @@ export const onUpdateUsers = /* GraphQL */ `
           _deleted
           _lastChangedAt
           owner
+          __typename
         }
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -86,7 +126,24 @@ export const onDeleteUsers = /* GraphQL */ `
       email
       username
       profilePic
-      preferredLocation
+      cityID
+      preferredLocation {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       preferredAgeRanges
       preferredAmusementTypes
       favoriteSites {
@@ -100,15 +157,18 @@ export const onDeleteUsers = /* GraphQL */ `
           _deleted
           _lastChangedAt
           owner
+          __typename
         }
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -130,6 +190,7 @@ export const onCreateContactUs = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+      __typename
     }
   }
 `;
@@ -151,6 +212,7 @@ export const onUpdateContactUs = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+      __typename
     }
   }
 `;
@@ -172,6 +234,157 @@ export const onDeleteContactUs = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+      __typename
+    }
+  }
+`;
+export const onCreateCity = /* GraphQL */ `
+  subscription OnCreateCity(
+    $filter: ModelSubscriptionCityFilterInput
+    $id: String
+  ) {
+    onCreateCity(filter: $filter, id: $id) {
+      id
+      cityName
+      cityLat
+      citylng
+      sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          cityID
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToPrefLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateCity = /* GraphQL */ `
+  subscription OnUpdateCity(
+    $filter: ModelSubscriptionCityFilterInput
+    $id: String
+  ) {
+    onUpdateCity(filter: $filter, id: $id) {
+      id
+      cityName
+      cityLat
+      citylng
+      sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          cityID
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToPrefLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteCity = /* GraphQL */ `
+  subscription OnDeleteCity(
+    $filter: ModelSubscriptionCityFilterInput
+    $id: String
+  ) {
+    onDeleteCity(filter: $filter, id: $id) {
+      id
+      cityName
+      cityLat
+      citylng
+      sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          cityID
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToPrefLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
     }
   }
 `;
@@ -187,18 +400,32 @@ export const onCreateSites = /* GraphQL */ `
       amusementTypeName
       siteType
       siteVillage
-      siteCity
+      cityID
+      siteCity {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       siteCounty
       siteAddress
       siteLat
       siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
+      SiteDistanceToPrefLocation
       SiteWebsite
       siteImage
       SiteMapURL
-      cityLat
-      cityLng
       favoritedBy {
         items {
           id
@@ -210,15 +437,18 @@ export const onCreateSites = /* GraphQL */ `
           _deleted
           _lastChangedAt
           owner
+          __typename
         }
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -234,18 +464,32 @@ export const onUpdateSites = /* GraphQL */ `
       amusementTypeName
       siteType
       siteVillage
-      siteCity
+      cityID
+      siteCity {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       siteCounty
       siteAddress
       siteLat
       siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
+      SiteDistanceToPrefLocation
       SiteWebsite
       siteImage
       SiteMapURL
-      cityLat
-      cityLng
       favoritedBy {
         items {
           id
@@ -257,15 +501,18 @@ export const onUpdateSites = /* GraphQL */ `
           _deleted
           _lastChangedAt
           owner
+          __typename
         }
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -281,18 +528,32 @@ export const onDeleteSites = /* GraphQL */ `
       amusementTypeName
       siteType
       siteVillage
-      siteCity
+      cityID
+      siteCity {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       siteCounty
       siteAddress
       siteLat
       siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
+      SiteDistanceToPrefLocation
       SiteWebsite
       siteImage
       SiteMapURL
-      cityLat
-      cityLng
       favoritedBy {
         items {
           id
@@ -304,15 +565,18 @@ export const onDeleteSites = /* GraphQL */ `
           _deleted
           _lastChangedAt
           owner
+          __typename
         }
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -331,18 +595,32 @@ export const onCreateFavoriteSites = /* GraphQL */ `
         email
         username
         profilePic
-        preferredLocation
+        cityID
+        preferredLocation {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         preferredAgeRanges
         preferredAmusementTypes
         favoriteSites {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       site {
         id
@@ -354,27 +632,38 @@ export const onCreateFavoriteSites = /* GraphQL */ `
         amusementTypeName
         siteType
         siteVillage
-        siteCity
+        cityID
+        siteCity {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         siteCounty
         siteAddress
         siteLat
         siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
+        SiteDistanceToPrefLocation
         SiteWebsite
         siteImage
         SiteMapURL
-        cityLat
-        cityLng
         favoritedBy {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       createdAt
       updatedAt
@@ -382,6 +671,7 @@ export const onCreateFavoriteSites = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+      __typename
     }
   }
 `;
@@ -400,18 +690,32 @@ export const onUpdateFavoriteSites = /* GraphQL */ `
         email
         username
         profilePic
-        preferredLocation
+        cityID
+        preferredLocation {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         preferredAgeRanges
         preferredAmusementTypes
         favoriteSites {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       site {
         id
@@ -423,27 +727,38 @@ export const onUpdateFavoriteSites = /* GraphQL */ `
         amusementTypeName
         siteType
         siteVillage
-        siteCity
+        cityID
+        siteCity {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         siteCounty
         siteAddress
         siteLat
         siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
+        SiteDistanceToPrefLocation
         SiteWebsite
         siteImage
         SiteMapURL
-        cityLat
-        cityLng
         favoritedBy {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       createdAt
       updatedAt
@@ -451,6 +766,7 @@ export const onUpdateFavoriteSites = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+      __typename
     }
   }
 `;
@@ -469,18 +785,32 @@ export const onDeleteFavoriteSites = /* GraphQL */ `
         email
         username
         profilePic
-        preferredLocation
+        cityID
+        preferredLocation {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         preferredAgeRanges
         preferredAmusementTypes
         favoriteSites {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       site {
         id
@@ -492,27 +822,38 @@ export const onDeleteFavoriteSites = /* GraphQL */ `
         amusementTypeName
         siteType
         siteVillage
-        siteCity
+        cityID
+        siteCity {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         siteCounty
         siteAddress
         siteLat
         siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
+        SiteDistanceToPrefLocation
         SiteWebsite
         siteImage
         SiteMapURL
-        cityLat
-        cityLng
         favoritedBy {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       createdAt
       updatedAt
@@ -520,6 +861,7 @@ export const onDeleteFavoriteSites = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+      __typename
     }
   }
 `;

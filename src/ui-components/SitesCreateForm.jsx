@@ -15,6 +15,7 @@ import {
   Grid,
   Icon,
   ScrollView,
+  SelectField,
   Text,
   TextField,
   useTheme,
@@ -23,7 +24,7 @@ import {
   getOverrideProps,
   useDataStoreBinding,
 } from "@aws-amplify/ui-react/internal";
-import { Sites, FavoriteSites } from "../models";
+import { Sites, City, FavoriteSites } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 function ArrayField({
@@ -204,18 +205,15 @@ export default function SitesCreateForm(props) {
     amusementTypeName: "",
     siteType: "",
     siteVillage: "",
-    siteCity: "",
+    siteCity: undefined,
     siteCounty: "",
     siteAddress: "",
     siteLat: "",
     siteLng: "",
-    SiteDistanceToGeoLoc: "",
-    SiteTimeToGeoLocation: "",
+    SiteDistanceToPrefLocation: "",
     SiteWebsite: "",
     siteImage: "",
     SiteMapURL: "",
-    cityLat: "",
-    cityLng: "",
     favoritedBy: [],
   };
   const [siteName, setSiteName] = React.useState(initialValues.siteName);
@@ -245,19 +243,13 @@ export default function SitesCreateForm(props) {
   );
   const [siteLat, setSiteLat] = React.useState(initialValues.siteLat);
   const [siteLng, setSiteLng] = React.useState(initialValues.siteLng);
-  const [SiteDistanceToGeoLoc, setSiteDistanceToGeoLoc] = React.useState(
-    initialValues.SiteDistanceToGeoLoc
-  );
-  const [SiteTimeToGeoLocation, setSiteTimeToGeoLocation] = React.useState(
-    initialValues.SiteTimeToGeoLocation
-  );
+  const [SiteDistanceToPrefLocation, setSiteDistanceToPrefLocation] =
+    React.useState(initialValues.SiteDistanceToPrefLocation);
   const [SiteWebsite, setSiteWebsite] = React.useState(
     initialValues.SiteWebsite
   );
   const [siteImage, setSiteImage] = React.useState(initialValues.siteImage);
   const [SiteMapURL, setSiteMapURL] = React.useState(initialValues.SiteMapURL);
-  const [cityLat, setCityLat] = React.useState(initialValues.cityLat);
-  const [cityLng, setCityLng] = React.useState(initialValues.cityLng);
   const [favoritedBy, setFavoritedBy] = React.useState(
     initialValues.favoritedBy
   );
@@ -272,40 +264,55 @@ export default function SitesCreateForm(props) {
     setSiteType(initialValues.siteType);
     setSiteVillage(initialValues.siteVillage);
     setSiteCity(initialValues.siteCity);
+    setCurrentSiteCityValue(undefined);
+    setCurrentSiteCityDisplayValue("");
     setSiteCounty(initialValues.siteCounty);
     setSiteAddress(initialValues.siteAddress);
     setSiteLat(initialValues.siteLat);
     setSiteLng(initialValues.siteLng);
-    setSiteDistanceToGeoLoc(initialValues.SiteDistanceToGeoLoc);
-    setSiteTimeToGeoLocation(initialValues.SiteTimeToGeoLocation);
+    setSiteDistanceToPrefLocation(initialValues.SiteDistanceToPrefLocation);
     setSiteWebsite(initialValues.SiteWebsite);
     setSiteImage(initialValues.siteImage);
     setSiteMapURL(initialValues.SiteMapURL);
-    setCityLat(initialValues.cityLat);
-    setCityLng(initialValues.cityLng);
     setFavoritedBy(initialValues.favoritedBy);
     setCurrentFavoritedByValue(undefined);
     setCurrentFavoritedByDisplayValue("");
     setErrors({});
   };
+  const [currentSiteCityDisplayValue, setCurrentSiteCityDisplayValue] =
+    React.useState("");
+  const [currentSiteCityValue, setCurrentSiteCityValue] =
+    React.useState(undefined);
+  const siteCityRef = React.createRef();
   const [currentFavoritedByDisplayValue, setCurrentFavoritedByDisplayValue] =
     React.useState("");
   const [currentFavoritedByValue, setCurrentFavoritedByValue] =
     React.useState(undefined);
   const favoritedByRef = React.createRef();
   const getIDValue = {
+    siteCity: (r) => JSON.stringify({ id: r?.id }),
     favoritedBy: (r) => JSON.stringify({ id: r?.id }),
   };
+  const siteCityIdSet = new Set(
+    Array.isArray(siteCity)
+      ? siteCity.map((r) => getIDValue.siteCity?.(r))
+      : getIDValue.siteCity?.(siteCity)
+  );
   const favoritedByIdSet = new Set(
     Array.isArray(favoritedBy)
       ? favoritedBy.map((r) => getIDValue.favoritedBy?.(r))
       : getIDValue.favoritedBy?.(favoritedBy)
   );
+  const cityRecords = useDataStoreBinding({
+    type: "collection",
+    model: City,
+  }).items;
   const favoriteSitesRecords = useDataStoreBinding({
     type: "collection",
     model: FavoriteSites,
   }).items;
   const getDisplayValue = {
+    siteCity: (r) => `${r?.cityName ? r?.cityName + " - " : ""}${r?.id}`,
     favoritedBy: (r) => r?.id,
   };
   const validations = {
@@ -317,18 +324,15 @@ export default function SitesCreateForm(props) {
     amusementTypeName: [{ type: "Required" }],
     siteType: [{ type: "Required" }],
     siteVillage: [{ type: "Required" }],
-    siteCity: [{ type: "Required" }],
+    siteCity: [],
     siteCounty: [{ type: "Required" }],
     siteAddress: [{ type: "Required" }],
     siteLat: [{ type: "Required" }],
     siteLng: [{ type: "Required" }],
-    SiteDistanceToGeoLoc: [],
-    SiteTimeToGeoLocation: [],
+    SiteDistanceToPrefLocation: [],
     SiteWebsite: [{ type: "URL" }],
     siteImage: [{ type: "URL" }],
     SiteMapURL: [{ type: "URL" }],
-    cityLat: [],
-    cityLng: [],
     favoritedBy: [],
   };
   const runValidationTasks = async (
@@ -370,13 +374,10 @@ export default function SitesCreateForm(props) {
           siteAddress,
           siteLat,
           siteLng,
-          SiteDistanceToGeoLoc,
-          SiteTimeToGeoLocation,
+          SiteDistanceToPrefLocation,
           SiteWebsite,
           siteImage,
           SiteMapURL,
-          cityLat,
-          cityLng,
           favoritedBy,
         };
         const validationResponses = await Promise.all(
@@ -429,13 +430,10 @@ export default function SitesCreateForm(props) {
             siteAddress: modelFields.siteAddress,
             siteLat: modelFields.siteLat,
             siteLng: modelFields.siteLng,
-            SiteDistanceToGeoLoc: modelFields.SiteDistanceToGeoLoc,
-            SiteTimeToGeoLocation: modelFields.SiteTimeToGeoLocation,
+            SiteDistanceToPrefLocation: modelFields.SiteDistanceToPrefLocation,
             SiteWebsite: modelFields.SiteWebsite,
             siteImage: modelFields.siteImage,
             SiteMapURL: modelFields.SiteMapURL,
-            cityLat: modelFields.cityLat,
-            cityLng: modelFields.cityLng,
           };
           const sites = await DataStore.save(new Sites(modelFieldsToSave));
           const promises = [];
@@ -489,13 +487,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -533,13 +528,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -581,13 +573,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -629,13 +618,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -653,10 +639,10 @@ export default function SitesCreateForm(props) {
         hasError={errors.siteNumberOfRatings?.hasError}
         {...getOverrideProps(overrides, "siteNumberOfRatings")}
       ></TextField>
-      <TextField
+      <SelectField
         label="Site age range"
-        isRequired={true}
-        isReadOnly={false}
+        placeholder="Please select an option"
+        isDisabled={false}
         value={siteAgeRange}
         onChange={(e) => {
           let { value } = e.target;
@@ -675,13 +661,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -696,11 +679,42 @@ export default function SitesCreateForm(props) {
         errorMessage={errors.siteAgeRange?.errorMessage}
         hasError={errors.siteAgeRange?.hasError}
         {...getOverrideProps(overrides, "siteAgeRange")}
-      ></TextField>
-      <TextField
+      >
+        <option
+          children="Family activities"
+          value="FAMILY_ACTIVITIES"
+          {...getOverrideProps(overrides, "siteAgeRangeoption0")}
+        ></option>
+        <option
+          children="Toddler"
+          value="TODDLER"
+          {...getOverrideProps(overrides, "siteAgeRangeoption1")}
+        ></option>
+        <option
+          children="Preschooler"
+          value="PRESCHOOLER"
+          {...getOverrideProps(overrides, "siteAgeRangeoption2")}
+        ></option>
+        <option
+          children="School aged child"
+          value="SCHOOL_AGED_CHILD"
+          {...getOverrideProps(overrides, "siteAgeRangeoption3")}
+        ></option>
+        <option
+          children="All ages kids"
+          value="ALL_AGES_KIDS"
+          {...getOverrideProps(overrides, "siteAgeRangeoption4")}
+        ></option>
+        <option
+          children="Adolescents adults"
+          value="ADOLESCENTS_ADULTS"
+          {...getOverrideProps(overrides, "siteAgeRangeoption5")}
+        ></option>
+      </SelectField>
+      <SelectField
         label="Amusement type name"
-        isRequired={true}
-        isReadOnly={false}
+        placeholder="Please select an option"
+        isDisabled={false}
         value={amusementTypeName}
         onChange={(e) => {
           let { value } = e.target;
@@ -719,13 +733,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -742,7 +753,48 @@ export default function SitesCreateForm(props) {
         errorMessage={errors.amusementTypeName?.errorMessage}
         hasError={errors.amusementTypeName?.hasError}
         {...getOverrideProps(overrides, "amusementTypeName")}
-      ></TextField>
+      >
+        <option
+          children="Playground"
+          value="PLAYGROUND"
+          {...getOverrideProps(overrides, "amusementTypeNameoption0")}
+        ></option>
+        <option
+          children="Amusement park"
+          value="AMUSEMENT_PARK"
+          {...getOverrideProps(overrides, "amusementTypeNameoption1")}
+        ></option>
+        <option
+          children="Exhibition"
+          value="EXHIBITION"
+          {...getOverrideProps(overrides, "amusementTypeNameoption2")}
+        ></option>
+        <option
+          children="Nature animals"
+          value="NATURE_ANIMALS"
+          {...getOverrideProps(overrides, "amusementTypeNameoption3")}
+        ></option>
+        <option
+          children="Water park"
+          value="WATER_PARK"
+          {...getOverrideProps(overrides, "amusementTypeNameoption4")}
+        ></option>
+        <option
+          children="Museum"
+          value="MUSEUM"
+          {...getOverrideProps(overrides, "amusementTypeNameoption5")}
+        ></option>
+        <option
+          children="Beach"
+          value="BEACH"
+          {...getOverrideProps(overrides, "amusementTypeNameoption6")}
+        ></option>
+        <option
+          children="Landscape"
+          value="LANDSCAPE"
+          {...getOverrideProps(overrides, "amusementTypeNameoption7")}
+        ></option>
+      </SelectField>
       <TextField
         label="Site type"
         isRequired={true}
@@ -765,13 +817,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -809,13 +858,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -831,13 +877,10 @@ export default function SitesCreateForm(props) {
         hasError={errors.siteVillage?.hasError}
         {...getOverrideProps(overrides, "siteVillage")}
       ></TextField>
-      <TextField
-        label="Site city"
-        isRequired={true}
-        isReadOnly={false}
-        value={siteCity}
-        onChange={(e) => {
-          let { value } = e.target;
+      <ArrayField
+        lengthLimit={1}
+        onChange={async (items) => {
+          let value = items[0];
           if (onChange) {
             const modelFields = {
               siteName,
@@ -853,28 +896,78 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
             value = result?.siteCity ?? value;
           }
-          if (errors.siteCity?.hasError) {
-            runValidationTasks("siteCity", value);
-          }
           setSiteCity(value);
+          setCurrentSiteCityValue(undefined);
+          setCurrentSiteCityDisplayValue("");
         }}
-        onBlur={() => runValidationTasks("siteCity", siteCity)}
-        errorMessage={errors.siteCity?.errorMessage}
-        hasError={errors.siteCity?.hasError}
-        {...getOverrideProps(overrides, "siteCity")}
-      ></TextField>
+        currentFieldValue={currentSiteCityValue}
+        label={"Site city"}
+        items={siteCity ? [siteCity] : []}
+        hasError={errors?.siteCity?.hasError}
+        errorMessage={errors?.siteCity?.errorMessage}
+        getBadgeText={getDisplayValue.siteCity}
+        setFieldValue={(model) => {
+          setCurrentSiteCityDisplayValue(
+            model ? getDisplayValue.siteCity(model) : ""
+          );
+          setCurrentSiteCityValue(model);
+        }}
+        inputFieldRef={siteCityRef}
+        defaultFieldValue={""}
+      >
+        <Autocomplete
+          label="Site city"
+          isRequired={false}
+          isReadOnly={false}
+          placeholder="Search City"
+          value={currentSiteCityDisplayValue}
+          options={cityRecords
+            .filter((r) => !siteCityIdSet.has(getIDValue.siteCity?.(r)))
+            .map((r) => ({
+              id: getIDValue.siteCity?.(r),
+              label: getDisplayValue.siteCity?.(r),
+            }))}
+          onSelect={({ id, label }) => {
+            setCurrentSiteCityValue(
+              cityRecords.find((r) =>
+                Object.entries(JSON.parse(id)).every(
+                  ([key, value]) => r[key] === value
+                )
+              )
+            );
+            setCurrentSiteCityDisplayValue(label);
+            runValidationTasks("siteCity", label);
+          }}
+          onClear={() => {
+            setCurrentSiteCityDisplayValue("");
+          }}
+          onChange={(e) => {
+            let { value } = e.target;
+            if (errors.siteCity?.hasError) {
+              runValidationTasks("siteCity", value);
+            }
+            setCurrentSiteCityDisplayValue(value);
+            setCurrentSiteCityValue(undefined);
+          }}
+          onBlur={() =>
+            runValidationTasks("siteCity", currentSiteCityDisplayValue)
+          }
+          errorMessage={errors.siteCity?.errorMessage}
+          hasError={errors.siteCity?.hasError}
+          ref={siteCityRef}
+          labelHidden={true}
+          {...getOverrideProps(overrides, "siteCity")}
+        ></Autocomplete>
+      </ArrayField>
       <TextField
         label="Site county"
         isRequired={true}
@@ -897,13 +990,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -941,13 +1031,10 @@ export default function SitesCreateForm(props) {
               siteAddress: value,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -989,13 +1076,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat: value,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -1037,13 +1121,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng: value,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -1060,12 +1141,12 @@ export default function SitesCreateForm(props) {
         {...getOverrideProps(overrides, "siteLng")}
       ></TextField>
       <TextField
-        label="Site distance to geo loc"
+        label="Site distance to pref location"
         isRequired={false}
         isReadOnly={false}
         type="number"
         step="any"
-        value={SiteDistanceToGeoLoc}
+        value={SiteDistanceToPrefLocation}
         onChange={(e) => {
           let value = isNaN(parseFloat(e.target.value))
             ? e.target.value
@@ -1085,79 +1166,29 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc: value,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation: value,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
-            value = result?.SiteDistanceToGeoLoc ?? value;
+            value = result?.SiteDistanceToPrefLocation ?? value;
           }
-          if (errors.SiteDistanceToGeoLoc?.hasError) {
-            runValidationTasks("SiteDistanceToGeoLoc", value);
+          if (errors.SiteDistanceToPrefLocation?.hasError) {
+            runValidationTasks("SiteDistanceToPrefLocation", value);
           }
-          setSiteDistanceToGeoLoc(value);
+          setSiteDistanceToPrefLocation(value);
         }}
         onBlur={() =>
-          runValidationTasks("SiteDistanceToGeoLoc", SiteDistanceToGeoLoc)
+          runValidationTasks(
+            "SiteDistanceToPrefLocation",
+            SiteDistanceToPrefLocation
+          )
         }
-        errorMessage={errors.SiteDistanceToGeoLoc?.errorMessage}
-        hasError={errors.SiteDistanceToGeoLoc?.hasError}
-        {...getOverrideProps(overrides, "SiteDistanceToGeoLoc")}
-      ></TextField>
-      <TextField
-        label="Site time to geo location"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={SiteTimeToGeoLocation}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              siteName,
-              siteDescription,
-              siteTotalRating,
-              siteNumberOfRatings,
-              siteAgeRange,
-              amusementTypeName,
-              siteType,
-              siteVillage,
-              siteCity,
-              siteCounty,
-              siteAddress,
-              siteLat,
-              siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation: value,
-              SiteWebsite,
-              siteImage,
-              SiteMapURL,
-              cityLat,
-              cityLng,
-              favoritedBy,
-            };
-            const result = onChange(modelFields);
-            value = result?.SiteTimeToGeoLocation ?? value;
-          }
-          if (errors.SiteTimeToGeoLocation?.hasError) {
-            runValidationTasks("SiteTimeToGeoLocation", value);
-          }
-          setSiteTimeToGeoLocation(value);
-        }}
-        onBlur={() =>
-          runValidationTasks("SiteTimeToGeoLocation", SiteTimeToGeoLocation)
-        }
-        errorMessage={errors.SiteTimeToGeoLocation?.errorMessage}
-        hasError={errors.SiteTimeToGeoLocation?.hasError}
-        {...getOverrideProps(overrides, "SiteTimeToGeoLocation")}
+        errorMessage={errors.SiteDistanceToPrefLocation?.errorMessage}
+        hasError={errors.SiteDistanceToPrefLocation?.hasError}
+        {...getOverrideProps(overrides, "SiteDistanceToPrefLocation")}
       ></TextField>
       <TextField
         label="Site website"
@@ -1181,13 +1212,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite: value,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -1225,13 +1253,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage: value,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -1269,13 +1294,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL: value,
-              cityLat,
-              cityLng,
               favoritedBy,
             };
             const result = onChange(modelFields);
@@ -1290,102 +1312,6 @@ export default function SitesCreateForm(props) {
         errorMessage={errors.SiteMapURL?.errorMessage}
         hasError={errors.SiteMapURL?.hasError}
         {...getOverrideProps(overrides, "SiteMapURL")}
-      ></TextField>
-      <TextField
-        label="City lat"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={cityLat}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              siteName,
-              siteDescription,
-              siteTotalRating,
-              siteNumberOfRatings,
-              siteAgeRange,
-              amusementTypeName,
-              siteType,
-              siteVillage,
-              siteCity,
-              siteCounty,
-              siteAddress,
-              siteLat,
-              siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
-              SiteWebsite,
-              siteImage,
-              SiteMapURL,
-              cityLat: value,
-              cityLng,
-              favoritedBy,
-            };
-            const result = onChange(modelFields);
-            value = result?.cityLat ?? value;
-          }
-          if (errors.cityLat?.hasError) {
-            runValidationTasks("cityLat", value);
-          }
-          setCityLat(value);
-        }}
-        onBlur={() => runValidationTasks("cityLat", cityLat)}
-        errorMessage={errors.cityLat?.errorMessage}
-        hasError={errors.cityLat?.hasError}
-        {...getOverrideProps(overrides, "cityLat")}
-      ></TextField>
-      <TextField
-        label="City lng"
-        isRequired={false}
-        isReadOnly={false}
-        type="number"
-        step="any"
-        value={cityLng}
-        onChange={(e) => {
-          let value = isNaN(parseFloat(e.target.value))
-            ? e.target.value
-            : parseFloat(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              siteName,
-              siteDescription,
-              siteTotalRating,
-              siteNumberOfRatings,
-              siteAgeRange,
-              amusementTypeName,
-              siteType,
-              siteVillage,
-              siteCity,
-              siteCounty,
-              siteAddress,
-              siteLat,
-              siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
-              SiteWebsite,
-              siteImage,
-              SiteMapURL,
-              cityLat,
-              cityLng: value,
-              favoritedBy,
-            };
-            const result = onChange(modelFields);
-            value = result?.cityLng ?? value;
-          }
-          if (errors.cityLng?.hasError) {
-            runValidationTasks("cityLng", value);
-          }
-          setCityLng(value);
-        }}
-        onBlur={() => runValidationTasks("cityLng", cityLng)}
-        errorMessage={errors.cityLng?.errorMessage}
-        hasError={errors.cityLng?.hasError}
-        {...getOverrideProps(overrides, "cityLng")}
       ></TextField>
       <ArrayField
         onChange={async (items) => {
@@ -1405,13 +1331,10 @@ export default function SitesCreateForm(props) {
               siteAddress,
               siteLat,
               siteLng,
-              SiteDistanceToGeoLoc,
-              SiteTimeToGeoLocation,
+              SiteDistanceToPrefLocation,
               SiteWebsite,
               siteImage,
               SiteMapURL,
-              cityLat,
-              cityLng,
               favoritedBy: values,
             };
             const result = onChange(modelFields);

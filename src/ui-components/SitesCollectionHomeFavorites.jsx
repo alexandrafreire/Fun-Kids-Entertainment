@@ -43,6 +43,7 @@ export default function SitesCollectionHomeFavorites(props) {
       var loaded = await Promise.all(
         itemsDataStore.map(async (item) => ({
           ...item,
+          siteCity: await item.siteCity,
           favoritedBy: await item.favoritedBy.toArray(),
         }))
       );

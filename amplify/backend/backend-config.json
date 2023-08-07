@@ -138,27 +138,14 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    }
-  },
-  "geo": {
-    "MyGeoCodeResource": {
-      "accessType": "AuthorizedAndGuestUsers",
-      "dataProvider": "Here",
-      "dataSourceIntendedUse": "Storage",
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "FunKidsEntertainment"
-        }
-      ],
-      "isDefault": true,
+    },
+    "distanceMatrix": {
+      "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "PlaceIndex"
+      "service": "Lambda"
     }
   },
+  "geo": {},
   "parameters": {
     "AMPLIFY_function_AdminQueriesbc4092b1_deploymentBucketName": {
       "usedBy": [
@@ -189,6 +176,22 @@
         {
           "category": "function",
           "resourceName": "InsertUserCognitoToDataStore"
+        }
+      ]
+    },
+    "AMPLIFY_function_distanceMatrix_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "distanceMatrix"
+        }
+      ]
+    },
+    "AMPLIFY_function_distanceMatrix_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "distanceMatrix"
         }
       ]
     }

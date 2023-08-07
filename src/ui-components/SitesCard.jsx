@@ -22,12 +22,12 @@ import {
 import MyIcon from "./MyIcon";
 export default function SitesCard(props) {
   const {
-    sites,
     sitesCard,
     header,
     usersProfile,
     EventOnClick,
     Margin,
+    sites,
     overrides,
     ...rest
   } = props;
@@ -77,8 +77,8 @@ export default function SitesCard(props) {
       <Flex
         gap="10px"
         direction="row"
-        width="381px"
-        height="39px"
+        width="368px"
+        height="34px"
         justifyContent="flex-start"
         alignItems="center"
         shrink="0"

@@ -9,7 +9,24 @@ export const getUsers = /* GraphQL */ `
       email
       username
       profilePic
-      preferredLocation
+      cityID
+      preferredLocation {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       preferredAgeRanges
       preferredAmusementTypes
       favoriteSites {
@@ -23,15 +40,18 @@ export const getUsers = /* GraphQL */ `
           _deleted
           _lastChangedAt
           owner
+          __typename
         }
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -48,21 +68,36 @@ export const listUsers = /* GraphQL */ `
         email
         username
         profilePic
-        preferredLocation
+        cityID
+        preferredLocation {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         preferredAgeRanges
         preferredAmusementTypes
         favoriteSites {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -85,21 +120,36 @@ export const syncUsers = /* GraphQL */ `
         email
         username
         profilePic
-        preferredLocation
+        cityID
+        preferredLocation {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         preferredAgeRanges
         preferredAmusementTypes
         favoriteSites {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -118,6 +168,7 @@ export const getContactUs = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+      __typename
     }
   }
 `;
@@ -141,9 +192,11 @@ export const listContactuses = /* GraphQL */ `
         _deleted
         _lastChangedAt
         owner
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -173,9 +226,124 @@ export const syncContactuses = /* GraphQL */ `
         _deleted
         _lastChangedAt
         owner
+        __typename
       }
       nextToken
       startedAt
+      __typename
+    }
+  }
+`;
+export const getCity = /* GraphQL */ `
+  query GetCity($id: ID!) {
+    getCity(id: $id) {
+      id
+      cityName
+      cityLat
+      citylng
+      sites {
+        items {
+          id
+          siteName
+          siteDescription
+          siteTotalRating
+          siteNumberOfRatings
+          siteAgeRange
+          amusementTypeName
+          siteType
+          siteVillage
+          cityID
+          siteCounty
+          siteAddress
+          siteLat
+          siteLng
+          SiteDistanceToPrefLocation
+          SiteWebsite
+          siteImage
+          SiteMapURL
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
+        nextToken
+        startedAt
+        __typename
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listCities = /* GraphQL */ `
+  query ListCities(
+    $filter: ModelCityFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCities(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncCities = /* GraphQL */ `
+  query SyncCities(
+    $filter: ModelCityFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncCities(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
     }
   }
 `;
@@ -191,18 +359,32 @@ export const getSites = /* GraphQL */ `
       amusementTypeName
       siteType
       siteVillage
-      siteCity
+      cityID
+      siteCity {
+        id
+        cityName
+        cityLat
+        citylng
+        sites {
+          nextToken
+          startedAt
+          __typename
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
       siteCounty
       siteAddress
       siteLat
       siteLng
-      SiteDistanceToGeoLoc
-      SiteTimeToGeoLocation
+      SiteDistanceToPrefLocation
       SiteWebsite
       siteImage
       SiteMapURL
-      cityLat
-      cityLng
       favoritedBy {
         items {
           id
@@ -214,15 +396,18 @@ export const getSites = /* GraphQL */ `
           _deleted
           _lastChangedAt
           owner
+          __typename
         }
         nextToken
         startedAt
+        __typename
       }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      __typename
     }
   }
 `;
@@ -243,30 +428,42 @@ export const listSites = /* GraphQL */ `
         amusementTypeName
         siteType
         siteVillage
-        siteCity
+        cityID
+        siteCity {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         siteCounty
         siteAddress
         siteLat
         siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
+        SiteDistanceToPrefLocation
         SiteWebsite
         siteImage
         SiteMapURL
-        cityLat
-        cityLng
         favoritedBy {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -293,30 +490,42 @@ export const syncSites = /* GraphQL */ `
         amusementTypeName
         siteType
         siteVillage
-        siteCity
+        cityID
+        siteCity {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         siteCounty
         siteAddress
         siteLat
         siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
+        SiteDistanceToPrefLocation
         SiteWebsite
         siteImage
         SiteMapURL
-        cityLat
-        cityLng
         favoritedBy {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -332,18 +541,32 @@ export const getFavoriteSites = /* GraphQL */ `
         email
         username
         profilePic
-        preferredLocation
+        cityID
+        preferredLocation {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         preferredAgeRanges
         preferredAmusementTypes
         favoriteSites {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       site {
         id
@@ -355,27 +578,38 @@ export const getFavoriteSites = /* GraphQL */ `
         amusementTypeName
         siteType
         siteVillage
-        siteCity
+        cityID
+        siteCity {
+          id
+          cityName
+          cityLat
+          citylng
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          __typename
+        }
         siteCounty
         siteAddress
         siteLat
         siteLng
-        SiteDistanceToGeoLoc
-        SiteTimeToGeoLocation
+        SiteDistanceToPrefLocation
         SiteWebsite
         siteImage
         SiteMapURL
-        cityLat
-        cityLng
         favoritedBy {
           nextToken
           startedAt
+          __typename
         }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+        __typename
       }
       createdAt
       updatedAt
@@ -383,6 +617,7 @@ export const getFavoriteSites = /* GraphQL */ `
       _deleted
       _lastChangedAt
       owner
+      __typename
     }
   }
 `;
@@ -403,7 +638,7 @@ export const listFavoriteSites = /* GraphQL */ `
           email
           username
           profilePic
-          preferredLocation
+          cityID
           preferredAgeRanges
           preferredAmusementTypes
           createdAt
@@ -411,6 +646,7 @@ export const listFavoriteSites = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          __typename
         }
         site {
           id
@@ -422,23 +658,21 @@ export const listFavoriteSites = /* GraphQL */ `
           amusementTypeName
           siteType
           siteVillage
-          siteCity
+          cityID
           siteCounty
           siteAddress
           siteLat
           siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
+          SiteDistanceToPrefLocation
           SiteWebsite
           siteImage
           SiteMapURL
-          cityLat
-          cityLng
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          __typename
         }
         createdAt
         updatedAt
@@ -446,9 +680,11 @@ export const listFavoriteSites = /* GraphQL */ `
         _deleted
         _lastChangedAt
         owner
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;
@@ -475,7 +711,7 @@ export const syncFavoriteSites = /* GraphQL */ `
           email
           username
           profilePic
-          preferredLocation
+          cityID
           preferredAgeRanges
           preferredAmusementTypes
           createdAt
@@ -483,6 +719,7 @@ export const syncFavoriteSites = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+          __typename
         }
         site {
           id
@@ -494,23 +731,21 @@ export const syncFavoriteSites = /* GraphQL */ `
           amusementTypeName
           siteType
           siteVillage
-          siteCity
+          cityID
           siteCounty
           siteAddress
           siteLat
           siteLng
-          SiteDistanceToGeoLoc
-          SiteTimeToGeoLocation
+          SiteDistanceToPrefLocation
           SiteWebsite
           siteImage
           SiteMapURL
-          cityLat
-          cityLng
           createdAt
           updatedAt
           _version
           _deleted
           _lastChangedAt
+          __typename
         }
         createdAt
         updatedAt
@@ -518,9 +753,11 @@ export const syncFavoriteSites = /* GraphQL */ `
         _deleted
         _lastChangedAt
         owner
+        __typename
       }
       nextToken
       startedAt
+      __typename
     }
   }
 `;

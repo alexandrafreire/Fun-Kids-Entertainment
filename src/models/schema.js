@@ -38,12 +38,30 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "cityID": {
+                    "name": "cityID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "preferredLocation": {
                     "name": "preferredLocation",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "model": "City"
+                    },
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": [
+                            "id"
+                        ],
+                        "targetNames": [
+                            "cityID"
+                        ]
+                    }
                 },
                 "preferredAgeRanges": {
                     "name": "preferredAgeRanges",
@@ -258,6 +276,116 @@ export const schema = {
                 }
             ]
         },
+        "City": {
+            "name": "City",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "cityName": {
+                    "name": "cityName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "cityLat": {
+                    "name": "cityLat",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "citylng": {
+                    "name": "citylng",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "sites": {
+                    "name": "sites",
+                    "isArray": true,
+                    "type": {
+                        "model": "Sites"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "siteCity"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "Cities",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groups": [
+                                    "admin"
+                                ],
+                                "operations": [
+                                    "create",
+                                    "read",
+                                    "update",
+                                    "delete"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "provider": "userPools",
+                                "ownerField": "id",
+                                "allow": "owner",
+                                "operations": [
+                                    "read",
+                                    "update"
+                                ],
+                                "identityClaim": "cognito:username"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "Sites": {
             "name": "Sites",
             "fields": {
@@ -299,14 +427,18 @@ export const schema = {
                 "siteAgeRange": {
                     "name": "siteAgeRange",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "enum": "SiteAgeRangesValues"
+                    },
                     "isRequired": true,
                     "attributes": []
                 },
                 "amusementTypeName": {
                     "name": "amusementTypeName",
                     "isArray": false,
-                    "type": "String",
+                    "type": {
+                        "enum": "AmusementTypeNameValues"
+                    },
                     "isRequired": true,
                     "attributes": []
                 },
@@ -324,12 +456,27 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "cityID": {
+                    "name": "cityID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "siteCity": {
                     "name": "siteCity",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
+                    "type": {
+                        "model": "City"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "cityID"
+                        ]
+                    }
                 },
                 "siteCounty": {
                     "name": "siteCounty",
@@ -359,15 +506,8 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "SiteDistanceToGeoLoc": {
-                    "name": "SiteDistanceToGeoLoc",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "SiteTimeToGeoLocation": {
-                    "name": "SiteTimeToGeoLocation",
+                "SiteDistanceToPrefLocation": {
+                    "name": "SiteDistanceToPrefLocation",
                     "isArray": false,
                     "type": "Float",
                     "isRequired": false,
@@ -391,20 +531,6 @@ export const schema = {
                     "name": "SiteMapURL",
                     "isArray": false,
                     "type": "AWSURL",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "cityLat": {
-                    "name": "cityLat",
-                    "isArray": false,
-                    "type": "Float",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "cityLng": {
-                    "name": "cityLng",
-                    "isArray": false,
-                    "type": "Float",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -641,5 +767,5 @@ export const schema = {
     },
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "676d41ce40c62276e08ac0a35e48ad47"
+    "version": "d4cdb05f27fc95190c7140d6c2a9cd6b"
 };

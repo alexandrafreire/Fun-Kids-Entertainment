@@ -5,6 +5,7 @@
  **************************************************************************/
 
 export { default as ActionCard } from "./ActionCard";
+export { default as CityCreateForm } from "./CityCreateForm";
 export { default as CommentCard } from "./CommentCard";
 export { default as ContactUs } from "./ContactUs";
 export { default as ContactUsForm } from "./ContactUsForm";
