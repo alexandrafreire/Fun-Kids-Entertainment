@@ -2,49 +2,40 @@ import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { DataStore } from "@aws-amplify/datastore";
 import "../../App.css";
-import { Users, Sites } from "../../models";
 import HomePageBanner from "../sections/Banner";
 import CustomDivider from "../sections/Divider";
 import SitesCollectionCards from "../sections/SitesCollectionCards";
+import { Users } from "../../models";
 
 function Home() {
-  const [sites, setSites] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
+    const getUsersData = async () => {
       try {
-        // Fetch sites
-        const fetchedSites = await DataStore.query(Sites);
-        setSites(fetchedSites);
-
-        // Check user authentication
+        // fetch the current signed in user
         const user = await Auth.currentAuthenticatedUser();
-        setCurrentUser(user);
-        const userData = await DataStore.query(Users, user.attributes.sub);
-        console.log(userData);
-      } catch (error) {
-        if (error === "The user is not authenticated") {
-          console.log("User is not signed in");
+        // check if the user is authenticated with an API key
+        if (user.signInUserSession.accessToken.payload.auth_time === 0) {
+          // if the user is authenticated with an API key, do not query the Users table
+          console.log("User is authenticated with an API key");
         } else {
-          console.error("Error:", error);
+          // if the user is not authenticated with an API key, query the Users table
+          const usersData = await DataStore.query(Users);
+          setUsers(usersData);
         }
+      } catch (err) {
+        console.error(err);
       }
-    }
-
-    fetchData();
+    };
+    getUsersData();
   }, []);
 
   return (
     <>
       <HomePageBanner />
       <CustomDivider />
-      {currentUser ? (
-        <p>Welcome back, {currentUser.attributes.name}!</p>
-      ) : (
-        <p>Please sign in to see personalized content.</p>
-      )}
-      <SitesCollectionCards sites={sites} />
+      <SitesCollectionCards />
     </>
   );
 }
