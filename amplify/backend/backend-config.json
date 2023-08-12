@@ -138,11 +138,6 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
-    },
-    "distanceMatrix": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
     }
   },
   "geo": {},
@@ -176,22 +171,6 @@
         {
           "category": "function",
           "resourceName": "InsertUserCognitoToDataStore"
-        }
-      ]
-    },
-    "AMPLIFY_function_distanceMatrix_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "distanceMatrix"
-        }
-      ]
-    },
-    "AMPLIFY_function_distanceMatrix_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "distanceMatrix"
         }
       ]
     }

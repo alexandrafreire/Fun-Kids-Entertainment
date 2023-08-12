@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { Sites, SiteComments, UsersProfile } from "../models";
+import { Sites, City } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { ButtonProps, DividerProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -46,8 +46,8 @@ export declare type SiteDetailOverridesProps = {
 } & EscapeHatchProps;
 export declare type SiteDetailProps = React.PropsWithChildren<Partial<FlexProps> & {
     sites?: Sites;
-    siteComments?: SiteComments;
-    usersProfile?: UsersProfile;
+    siteComments?: Sites;
+    usersProfile?: City;
 } & {
     overrides?: SiteDetailOverridesProps | undefined | null;
 }>;

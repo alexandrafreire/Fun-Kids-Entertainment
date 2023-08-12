@@ -22,12 +22,17 @@ import {
 import MyIcon from "./MyIcon";
 export default function SitesCard(props) {
   const {
-    sitesCard,
-    header,
-    usersProfile,
-    EventOnClick,
     Margin,
     sites,
+    usersProfile,
+    City,
+    sitesCard,
+    city,
+    Color,
+    color,
+    EventOnClick,
+    header,
+    FavoritesLess1,
     overrides,
     ...rest
   } = props;
@@ -218,6 +223,7 @@ export default function SitesCard(props) {
             justifyContent="unset"
             shrink="0"
             position="relative"
+            additive=""
             {...getOverrideProps(overrides, "Vector")}
           ></Icon>
         </Flex>
@@ -344,7 +350,7 @@ export default function SitesCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={`${sites?.siteVillage}${",  "}${sites?.siteCity}`}
+            children={`${sites?.siteVillage}${", "}${sites?.siteCounty}`}
             {...getOverrideProps(overrides, "Site Village, Site City")}
           ></Text>
           <Text

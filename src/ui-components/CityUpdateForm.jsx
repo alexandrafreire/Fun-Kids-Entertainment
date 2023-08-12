@@ -23,7 +23,7 @@ import {
   getOverrideProps,
   useDataStoreBinding,
 } from "@aws-amplify/ui-react/internal";
-import { City, Users, Sites } from "../models";
+import { City, Sites } from "../models";
 import { fetchByPath, validateField } from "./utils";
 import { DataStore } from "aws-amplify";
 function ArrayField({
@@ -200,38 +200,26 @@ export default function CityUpdateForm(props) {
     cityName: "",
     cityLat: "",
     citylng: "",
-    users: [],
     sites: [],
   };
   const [cityName, setCityName] = React.useState(initialValues.cityName);
   const [cityLat, setCityLat] = React.useState(initialValues.cityLat);
   const [citylng, setCitylng] = React.useState(initialValues.citylng);
-  const [users, setUsers] = React.useState(initialValues.users);
   const [sites, setSites] = React.useState(initialValues.sites);
   const [errors, setErrors] = React.useState({});
   const resetStateValues = () => {
     const cleanValues = cityRecord
-      ? {
-          ...initialValues,
-          ...cityRecord,
-          users: linkedUsers,
-          sites: linkedSites,
-        }
+      ? { ...initialValues, ...cityRecord, sites: linkedSites }
       : initialValues;
     setCityName(cleanValues.cityName);
     setCityLat(cleanValues.cityLat);
     setCitylng(cleanValues.citylng);
-    setUsers(cleanValues.users ?? []);
-    setCurrentUsersValue(undefined);
-    setCurrentUsersDisplayValue("");
     setSites(cleanValues.sites ?? []);
     setCurrentSitesValue(undefined);
     setCurrentSitesDisplayValue("");
     setErrors({});
   };
   const [cityRecord, setCityRecord] = React.useState(cityModelProp);
-  const [linkedUsers, setLinkedUsers] = React.useState([]);
-  const canUnlinkUsers = true;
   const [linkedSites, setLinkedSites] = React.useState([]);
   const canUnlinkSites = true;
   React.useEffect(() => {
@@ -240,53 +228,35 @@ export default function CityUpdateForm(props) {
         ? await DataStore.query(City, idProp)
         : cityModelProp;
       setCityRecord(record);
-      const linkedUsers = record ? await record.users.toArray() : [];
-      setLinkedUsers(linkedUsers);
       const linkedSites = record ? await record.sites.toArray() : [];
       setLinkedSites(linkedSites);
     };
     queryData();
   }, [idProp, cityModelProp]);
-  React.useEffect(resetStateValues, [cityRecord, linkedUsers, linkedSites]);
-  const [currentUsersDisplayValue, setCurrentUsersDisplayValue] =
-    React.useState("");
-  const [currentUsersValue, setCurrentUsersValue] = React.useState(undefined);
-  const usersRef = React.createRef();
+  React.useEffect(resetStateValues, [cityRecord, linkedSites]);
   const [currentSitesDisplayValue, setCurrentSitesDisplayValue] =
     React.useState("");
   const [currentSitesValue, setCurrentSitesValue] = React.useState(undefined);
   const sitesRef = React.createRef();
   const getIDValue = {
-    users: (r) => JSON.stringify({ id: r?.id }),
     sites: (r) => JSON.stringify({ id: r?.id }),
   };
-  const usersIdSet = new Set(
-    Array.isArray(users)
-      ? users.map((r) => getIDValue.users?.(r))
-      : getIDValue.users?.(users)
-  );
   const sitesIdSet = new Set(
     Array.isArray(sites)
       ? sites.map((r) => getIDValue.sites?.(r))
       : getIDValue.sites?.(sites)
   );
-  const usersRecords = useDataStoreBinding({
-    type: "collection",
-    model: Users,
-  }).items;
   const sitesRecords = useDataStoreBinding({
     type: "collection",
     model: Sites,
   }).items;
   const getDisplayValue = {
-    users: (r) => `${r?.name ? r?.name + " - " : ""}${r?.id}`,
     sites: (r) => `${r?.siteName ? r?.siteName + " - " : ""}${r?.id}`,
   };
   const validations = {
     cityName: [{ type: "Required" }],
     cityLat: [{ type: "Required" }],
     citylng: [{ type: "Required" }],
-    users: [],
     sites: [],
   };
   const runValidationTasks = async (
@@ -318,7 +288,6 @@ export default function CityUpdateForm(props) {
           cityName,
           cityLat,
           citylng,
-          users,
           sites,
         };
         const validationResponses = await Promise.all(
@@ -358,47 +327,6 @@ export default function CityUpdateForm(props) {
             }
           });
           const promises = [];
-          const usersToLink = [];
-          const usersToUnLink = [];
-          const usersSet = new Set();
-          const linkedUsersSet = new Set();
-          users.forEach((r) => usersSet.add(getIDValue.users?.(r)));
-          linkedUsers.forEach((r) => linkedUsersSet.add(getIDValue.users?.(r)));
-          linkedUsers.forEach((r) => {
-            if (!usersSet.has(getIDValue.users?.(r))) {
-              usersToUnLink.push(r);
-            }
-          });
-          users.forEach((r) => {
-            if (!linkedUsersSet.has(getIDValue.users?.(r))) {
-              usersToLink.push(r);
-            }
-          });
-          usersToUnLink.forEach((original) => {
-            if (!canUnlinkUsers) {
-              throw Error(
-                `Users ${original.id} cannot be unlinked from City because cityUsersId is a required field.`
-              );
-            }
-            promises.push(
-              DataStore.save(
-                Users.copyOf(original, (updated) => {
-                  updated.cityUsersId = null;
-                  updated.preferredLocation = null;
-                })
-              )
-            );
-          });
-          usersToLink.forEach((original) => {
-            promises.push(
-              DataStore.save(
-                Users.copyOf(original, (updated) => {
-                  updated.cityUsersId = cityRecord.id;
-                  updated.preferredLocation = cityRecord;
-                })
-              )
-            );
-          });
           const sitesToLink = [];
           const sitesToUnLink = [];
           const sitesSet = new Set();
@@ -418,13 +346,12 @@ export default function CityUpdateForm(props) {
           sitesToUnLink.forEach((original) => {
             if (!canUnlinkSites) {
               throw Error(
-                `Sites ${original.id} cannot be unlinked from City because citySitesId is a required field.`
+                `Sites ${original.id} cannot be unlinked from City because undefined is a required field.`
               );
             }
             promises.push(
               DataStore.save(
                 Sites.copyOf(original, (updated) => {
-                  updated.citySitesId = null;
                   updated.siteCity = null;
                 })
               )
@@ -434,7 +361,6 @@ export default function CityUpdateForm(props) {
             promises.push(
               DataStore.save(
                 Sites.copyOf(original, (updated) => {
-                  updated.citySitesId = cityRecord.id;
                   updated.siteCity = cityRecord;
                 })
               )
@@ -477,7 +403,6 @@ export default function CityUpdateForm(props) {
               cityName: value,
               cityLat,
               citylng,
-              users,
               sites,
             };
             const result = onChange(modelFields);
@@ -509,7 +434,6 @@ export default function CityUpdateForm(props) {
               cityName,
               cityLat: value,
               citylng,
-              users,
               sites,
             };
             const result = onChange(modelFields);
@@ -541,7 +465,6 @@ export default function CityUpdateForm(props) {
               cityName,
               cityLat,
               citylng: value,
-              users,
               sites,
             };
             const result = onChange(modelFields);
@@ -565,82 +488,6 @@ export default function CityUpdateForm(props) {
               cityName,
               cityLat,
               citylng,
-              users: values,
-              sites,
-            };
-            const result = onChange(modelFields);
-            values = result?.users ?? values;
-          }
-          setUsers(values);
-          setCurrentUsersValue(undefined);
-          setCurrentUsersDisplayValue("");
-        }}
-        currentFieldValue={currentUsersValue}
-        label={"Users"}
-        items={users}
-        hasError={errors?.users?.hasError}
-        errorMessage={errors?.users?.errorMessage}
-        getBadgeText={getDisplayValue.users}
-        setFieldValue={(model) => {
-          setCurrentUsersDisplayValue(
-            model ? getDisplayValue.users(model) : ""
-          );
-          setCurrentUsersValue(model);
-        }}
-        inputFieldRef={usersRef}
-        defaultFieldValue={""}
-      >
-        <Autocomplete
-          label="Users"
-          isRequired={false}
-          isReadOnly={false}
-          placeholder="Search Users"
-          value={currentUsersDisplayValue}
-          options={usersRecords
-            .filter((r) => !usersIdSet.has(getIDValue.users?.(r)))
-            .map((r) => ({
-              id: getIDValue.users?.(r),
-              label: getDisplayValue.users?.(r),
-            }))}
-          onSelect={({ id, label }) => {
-            setCurrentUsersValue(
-              usersRecords.find((r) =>
-                Object.entries(JSON.parse(id)).every(
-                  ([key, value]) => r[key] === value
-                )
-              )
-            );
-            setCurrentUsersDisplayValue(label);
-            runValidationTasks("users", label);
-          }}
-          onClear={() => {
-            setCurrentUsersDisplayValue("");
-          }}
-          onChange={(e) => {
-            let { value } = e.target;
-            if (errors.users?.hasError) {
-              runValidationTasks("users", value);
-            }
-            setCurrentUsersDisplayValue(value);
-            setCurrentUsersValue(undefined);
-          }}
-          onBlur={() => runValidationTasks("users", currentUsersDisplayValue)}
-          errorMessage={errors.users?.errorMessage}
-          hasError={errors.users?.hasError}
-          ref={usersRef}
-          labelHidden={true}
-          {...getOverrideProps(overrides, "users")}
-        ></Autocomplete>
-      </ArrayField>
-      <ArrayField
-        onChange={async (items) => {
-          let values = items;
-          if (onChange) {
-            const modelFields = {
-              cityName,
-              cityLat,
-              citylng,
-              users,
               sites: values,
             };
             const result = onChange(modelFields);

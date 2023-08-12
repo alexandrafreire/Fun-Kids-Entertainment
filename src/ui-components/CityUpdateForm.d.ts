@@ -7,7 +7,7 @@
 import * as React from "react";
 import { AutocompleteProps, GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { City, Users, Sites } from "../models";
+import { City, Sites } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -17,14 +17,12 @@ export declare type CityUpdateFormInputValues = {
     cityName?: string;
     cityLat?: number;
     citylng?: number;
-    users?: Users[];
     sites?: Sites[];
 };
 export declare type CityUpdateFormValidationValues = {
     cityName?: ValidationFunction<string>;
     cityLat?: ValidationFunction<number>;
     citylng?: ValidationFunction<number>;
-    users?: ValidationFunction<Users>;
     sites?: ValidationFunction<Sites>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -33,7 +31,6 @@ export declare type CityUpdateFormOverridesProps = {
     cityName?: PrimitiveOverrideProps<TextFieldProps>;
     cityLat?: PrimitiveOverrideProps<TextFieldProps>;
     citylng?: PrimitiveOverrideProps<TextFieldProps>;
-    users?: PrimitiveOverrideProps<AutocompleteProps>;
     sites?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
 export declare type CityUpdateFormProps = React.PropsWithChildren<{

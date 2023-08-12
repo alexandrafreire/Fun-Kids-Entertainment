@@ -5,9 +5,9 @@
  **************************************************************************/
 
 import * as React from "react";
-import { AutocompleteProps, GridProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { AutocompleteProps, GridProps, SelectFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
-import { Sites, FavoriteSites } from "../models";
+import { Sites, City, FavoriteSites } from "../models";
 export declare type ValidationResponse = {
     hasError: boolean;
     errorMessage?: string;
@@ -22,18 +22,15 @@ export declare type SitesUpdateFormInputValues = {
     amusementTypeName?: string;
     siteType?: string;
     siteVillage?: string;
-    siteCity?: string;
+    siteCity?: City;
     siteCounty?: string;
     siteAddress?: string;
     siteLat?: number;
     siteLng?: number;
-    SiteDistanceToGeoLoc?: number;
-    SiteTimeToGeoLocation?: number;
+    SiteDistanceToPrefLocation?: number;
     SiteWebsite?: string;
     siteImage?: string;
     SiteMapURL?: string;
-    cityLat?: number;
-    cityLng?: number;
     favoritedBy?: FavoriteSites[];
 };
 export declare type SitesUpdateFormValidationValues = {
@@ -45,18 +42,15 @@ export declare type SitesUpdateFormValidationValues = {
     amusementTypeName?: ValidationFunction<string>;
     siteType?: ValidationFunction<string>;
     siteVillage?: ValidationFunction<string>;
-    siteCity?: ValidationFunction<string>;
+    siteCity?: ValidationFunction<City>;
     siteCounty?: ValidationFunction<string>;
     siteAddress?: ValidationFunction<string>;
     siteLat?: ValidationFunction<number>;
     siteLng?: ValidationFunction<number>;
-    SiteDistanceToGeoLoc?: ValidationFunction<number>;
-    SiteTimeToGeoLocation?: ValidationFunction<number>;
+    SiteDistanceToPrefLocation?: ValidationFunction<number>;
     SiteWebsite?: ValidationFunction<string>;
     siteImage?: ValidationFunction<string>;
     SiteMapURL?: ValidationFunction<string>;
-    cityLat?: ValidationFunction<number>;
-    cityLng?: ValidationFunction<number>;
     favoritedBy?: ValidationFunction<FavoriteSites>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -66,22 +60,19 @@ export declare type SitesUpdateFormOverridesProps = {
     siteDescription?: PrimitiveOverrideProps<TextFieldProps>;
     siteTotalRating?: PrimitiveOverrideProps<TextFieldProps>;
     siteNumberOfRatings?: PrimitiveOverrideProps<TextFieldProps>;
-    siteAgeRange?: PrimitiveOverrideProps<TextFieldProps>;
-    amusementTypeName?: PrimitiveOverrideProps<TextFieldProps>;
+    siteAgeRange?: PrimitiveOverrideProps<SelectFieldProps>;
+    amusementTypeName?: PrimitiveOverrideProps<SelectFieldProps>;
     siteType?: PrimitiveOverrideProps<TextFieldProps>;
     siteVillage?: PrimitiveOverrideProps<TextFieldProps>;
-    siteCity?: PrimitiveOverrideProps<TextFieldProps>;
+    siteCity?: PrimitiveOverrideProps<AutocompleteProps>;
     siteCounty?: PrimitiveOverrideProps<TextFieldProps>;
     siteAddress?: PrimitiveOverrideProps<TextFieldProps>;
     siteLat?: PrimitiveOverrideProps<TextFieldProps>;
     siteLng?: PrimitiveOverrideProps<TextFieldProps>;
-    SiteDistanceToGeoLoc?: PrimitiveOverrideProps<TextFieldProps>;
-    SiteTimeToGeoLocation?: PrimitiveOverrideProps<TextFieldProps>;
+    SiteDistanceToPrefLocation?: PrimitiveOverrideProps<TextFieldProps>;
     SiteWebsite?: PrimitiveOverrideProps<TextFieldProps>;
     siteImage?: PrimitiveOverrideProps<TextFieldProps>;
     SiteMapURL?: PrimitiveOverrideProps<TextFieldProps>;
-    cityLat?: PrimitiveOverrideProps<TextFieldProps>;
-    cityLng?: PrimitiveOverrideProps<TextFieldProps>;
     favoritedBy?: PrimitiveOverrideProps<AutocompleteProps>;
 } & EscapeHatchProps;
 export declare type SitesUpdateFormProps = React.PropsWithChildren<{

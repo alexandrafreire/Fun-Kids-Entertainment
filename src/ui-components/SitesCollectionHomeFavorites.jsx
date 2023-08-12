@@ -7,23 +7,15 @@
 /* eslint-disable */
 import * as React from "react";
 import { Sites } from "../models";
+import { SortDirection } from "@aws-amplify/datastore";
 import {
-  createDataStorePredicate,
   getOverrideProps,
   useDataStoreBinding,
 } from "@aws-amplify/ui-react/internal";
-import { SortDirection } from "@aws-amplify/datastore";
 import SitesCard from "./SitesCard";
 import { Collection } from "@aws-amplify/ui-react";
 export default function SitesCollectionHomeFavorites(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
-  const itemsFilterObj = {
-    and: [
-      { field: "siteTotalRating", operand: 4.7, operator: "ge" },
-      { field: "siteCounty", operand: "Dublin", operator: "contains" },
-    ],
-  };
-  const itemsFilter = createDataStorePredicate(itemsFilterObj);
   const itemsPagination = {
     sort: (s) => s.siteTotalRating(SortDirection.DESCENDING),
   };
@@ -31,7 +23,6 @@ export default function SitesCollectionHomeFavorites(props) {
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Sites,
-    criteria: itemsFilter,
     pagination: itemsPagination,
   }).items;
   React.useEffect(() => {
@@ -54,8 +45,10 @@ export default function SitesCollectionHomeFavorites(props) {
   return (
     <Collection
       type="grid"
-      searchPlaceholder="Search..."
-      itemsPerPage={8}
+      isSearchable="true"
+      isPaginated={true}
+      searchPlaceholder="Find you favorite site or destination"
+      itemsPerPage={9}
       templateColumns="1fr 1fr 1fr"
       autoFlow="row"
       alignItems="stretch"

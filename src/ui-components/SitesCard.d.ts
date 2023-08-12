@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { Sites, UsersProfile } from "../models";
+import { Sites, City } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { BadgeProps, ButtonProps, DividerProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 import { MyIconProps } from "./MyIcon";
@@ -35,12 +35,17 @@ export declare type SitesCardOverridesProps = {
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type SitesCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    sitesCard?: Sites;
-    header?: React.ReactNode;
-    usersProfile?: UsersProfile;
-    EventOnClick?: (event: SyntheticEvent) => void;
     Margin?: String;
     sites?: Sites;
+    usersProfile?: Sites;
+    City?: String;
+    sitesCard?: Sites;
+    city?: City;
+    Color?: React.ReactNode;
+    color?: String;
+    EventOnClick?: (event: SyntheticEvent) => void;
+    header?: React.ReactNode;
+    FavoritesLess1?: Sites;
 } & {
     overrides?: SitesCardOverridesProps | undefined | null;
 }>;
