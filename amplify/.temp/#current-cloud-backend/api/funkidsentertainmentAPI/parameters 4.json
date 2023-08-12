@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "funkidsentertainmentAPI",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authFunKidsEntertainment",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2022-12-13T12:45:21.163Z"
+}

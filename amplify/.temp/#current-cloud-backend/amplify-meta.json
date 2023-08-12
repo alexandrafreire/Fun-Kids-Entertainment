@@ -1,0 +1,320 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifydf1cab9fad9f4-staging-151408-authRole",
+      "UnauthRoleArn": "arn:aws:iam::575559040672:role/amplify-amplifydf1cab9fad9f4-staging-151408-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::575559040672:role/amplify-amplifydf1cab9fad9f4-staging-151408-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+      "UnauthRoleName": "amplify-amplifydf1cab9fad9f4-staging-151408-unauthRole",
+      "StackName": "amplify-amplifydf1cab9fad9f4-staging-151408",
+      "StackId": "arn:aws:cloudformation:eu-west-1:575559040672:stack/amplify-amplifydf1cab9fad9f4-staging-151408/760704f0-7966-11ed-ac73-02efdd9c2d05",
+      "AmplifyAppId": "dg5t04iysr12r"
+    }
+  },
+  "api": {
+    "AdminQueries": {
+      "authorizationType": "AMAZON_COGNITO_USER_POOLS",
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "AdminQueriesbc4092b1"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway",
+      "output": {
+        "ApiName": "AdminQueries",
+        "RootUrl": "https://qqwdm1ydzf.execute-api.eu-west-1.amazonaws.com/staging",
+        "ApiId": "qqwdm1ydzf"
+      },
+      "lastPushTimeStamp": "2023-08-12T20:47:58.232Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/api/AdminQueries-cloudformation-template.json",
+        "logicalId": "apiAdminQueries"
+      },
+      "lastPushDirHash": "qY6q4mMgYP5yLt3oh8hAzXOKLBA="
+    },
+    "funkidsentertainmentAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        }
+      ],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            },
+            {
+              "apiKeyConfig": {
+                "apiKeyExpirationDays": 30,
+                "description": "api key description"
+              },
+              "authenticationType": "API_KEY"
+            }
+          ],
+          "defaultAuthentication": {
+            "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+            "userPoolConfig": {
+              "userPoolId": "authFunKidsEntertainment"
+            }
+          }
+        },
+        "GraphQLAPIIdOutput": "dzrrg4e5obe6pcmhcqmzhxvr3u",
+        "GraphQLAPIEndpointOutput": "https://2ucq4bc57rhcley4gnay2louqm.appsync-api.eu-west-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-uhl5iwyfxner3doaqiizwq2hem"
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2023-08-12T20:48:07.980Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apifunkidsentertainmentAPI"
+      },
+      "lastPushDirHash": "o8bSXXTzu+fYpeFXSyawKiv/6ZA="
+    }
+  },
+  "auth": {
+    "FunKidsEntertainment": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ]
+        },
+        "signupAttributes": [
+          "NAME",
+          "PREFERRED_USERNAME"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "output": {
+        "UserPoolId": "eu-west-1_l9JZPGoLr",
+        "AppClientIDWeb": "1okh4auminjte9bproqft0m76q",
+        "AppClientID": "3utm307on34rvaam9ag4c48bh5",
+        "IdentityPoolId": "eu-west-1:73db52c3-4c88-45af-ac1a-8bfd2c03130a",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-1:575559040672:userpool/eu-west-1_l9JZPGoLr",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "FunKidsEntertainment"
+      },
+      "lastPushTimeStamp": "2023-08-12T20:47:58.237Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/auth/FunKidsEntertainment-cloudformation-template.json",
+        "logicalId": "authFunKidsEntertainment"
+      },
+      "lastPushDirHash": "q/mfjFZ8ZFf+9ujG9apleeIm3So="
+    },
+    "userPoolGroups": {
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito-UserPool-Groups",
+      "output": {
+        "adminGroupRole": "arn:aws:iam::575559040672:role/eu-west-1_l9JZPGoLr-adminGroupRole",
+        "AppUsersGroupRole": "arn:aws:iam::575559040672:role/eu-west-1_l9JZPGoLr-AppUsersGroupRole"
+      },
+      "lastPushTimeStamp": "2023-08-12T20:47:58.238Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
+        "logicalId": "authuserPoolGroups"
+      },
+      "lastPushDirHash": "GRg+S5lb8pWiHwYg3daDNND+MmI="
+    }
+  },
+  "function": {
+    "AdminQueriesbc4092b1": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::575559040672:role/AdminQueriesbc4092b1LambdaRole-staging",
+        "Region": "eu-west-1",
+        "Arn": "arn:aws:lambda:eu-west-1:575559040672:function:AdminQueriesbc4092b1-staging",
+        "Name": "AdminQueriesbc4092b1-staging",
+        "LambdaExecutionRole": "AdminQueriesbc4092b1LambdaRole-staging"
+      },
+      "lastPushTimeStamp": "2023-08-12T20:47:58.240Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/function/AdminQueriesbc4092b1-cloudformation-template.json",
+        "logicalId": "functionAdminQueriesbc4092b1"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+        "s3Key": "amplify-builds/AdminQueriesbc4092b1-56784d37723071527166-build.zip"
+      },
+      "lastBuildTimeStamp": "2023-08-12T13:57:48.970Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-08-12T13:57:49.441Z",
+      "distZipFilename": "AdminQueriesbc4092b1-56784d37723071527166-build.zip",
+      "lastPushDirHash": "IExAmDQ5ZGR/64Q/E3VFgsuxrfE="
+    },
+    "InsertUserCognitoToDataStore": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "funkidsentertainmentAPI"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::575559040672:role/funkidsentertainmentLambdaRoled1d29582-staging",
+        "Region": "eu-west-1",
+        "Arn": "arn:aws:lambda:eu-west-1:575559040672:function:InsertUserCognitoToDataStore-staging",
+        "Name": "InsertUserCognitoToDataStore-staging",
+        "LambdaExecutionRole": "funkidsentertainmentLambdaRoled1d29582-staging"
+      },
+      "lastPushTimeStamp": "2023-08-12T20:47:58.241Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/function/InsertUserCognitoToDataStore-cloudformation-template.json",
+        "logicalId": "functionInsertUserCognitoToDataStore"
+      },
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+        "s3Key": "amplify-builds/InsertUserCognitoToDataStore-70465159617162514948-build.zip"
+      },
+      "lastBuildTimeStamp": "2023-08-12T13:57:53.736Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-08-12T13:57:57.532Z",
+      "distZipFilename": "InsertUserCognitoToDataStore-70465159617162514948-build.zip",
+      "lastPushDirHash": "hC/imuoY8BcgHu8am7+35yjMcHU="
+    },
+    "getSitesWithDistances": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2023-08-12T20:40:34.096Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2023-08-12T20:40:51.844Z",
+      "distZipFilename": "getSitesWithDistances-557158716f7874366876-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+        "s3Key": "amplify-builds/getSitesWithDistances-557158716f7874366876-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/function/getSitesWithDistances-cloudformation-template.json",
+        "logicalId": "functiongetSitesWithDistances"
+      },
+      "lastPushTimeStamp": "2023-08-12T20:48:07.980Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::575559040672:role/funkidsentertainmentLambdaRoleababeba7-staging",
+        "Region": "eu-west-1",
+        "Arn": "arn:aws:lambda:eu-west-1:575559040672:function:getSitesWithDistances-staging",
+        "Name": "getSitesWithDistances-staging",
+        "LambdaExecutionRole": "funkidsentertainmentLambdaRoleababeba7-staging"
+      },
+      "lastPushDirHash": "+VSu/GnoMRQ53ixHQxvTqABhmds=",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "funkidsentertainmentAPI",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ]
+        }
+      ]
+    }
+  },
+  "geo": {},
+  "storage": {
+    "s3funkidsentertainmentstorage": {
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "userPoolGroups",
+          "attributes": [
+            "adminGroupRole"
+          ]
+        },
+        {
+          "category": "auth",
+          "resourceName": "userPoolGroups",
+          "attributes": [
+            "AppUsersGroupRole"
+          ]
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "output": {
+        "BucketName": "fun-kids-entertainment-storage151408-staging",
+        "Region": "eu-west-1"
+      },
+      "lastPushTimeStamp": "2023-08-12T20:47:58.244Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplifydf1cab9fad9f4-staging-151408-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storages3funkidsentertainmentstorage"
+      },
+      "lastPushDirHash": "kEMOW/qpDOzHVpqcf+vtHZ3d0hU="
+    }
+  }
+}

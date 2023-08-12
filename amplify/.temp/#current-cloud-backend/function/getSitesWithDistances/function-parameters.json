@@ -1,0 +1,32 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "api": {
+      "funkidsentertainmentAPI": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "storage": {
+      "Users:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "City:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Sites:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}

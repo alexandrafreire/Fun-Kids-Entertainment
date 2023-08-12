@@ -1,0 +1,153 @@
+enum OverallSiteRatingValues {
+  GOOD
+  AVERAGE
+  BAD
+}
+
+enum FeedbackTypeValues {
+  GENERAL_FEEDBACK
+  REPORT_PROBLEM
+  FEATURE_REQUEST
+}
+
+type Users
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: owner, ownerField: "id", operations: [read, update] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  email: AWSEmail!
+  username: String!
+  profilePic: String
+  cityID: ID
+  preferredLocation: City @hasOne(fields: ["cityID"])
+  preferredAgeRanges: SiteAgeRangesValues
+  preferredAmusementTypes: AmusementTypeNameValues
+  favoriteSites: [FavoriteSites] @hasMany(fields: ["id"])
+}
+
+type ContactUs
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read, update] }
+      { allow: owner }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  firstname: String
+  email: AWSEmail!
+  feedbackType: FeedbackTypeValues
+  overallSiteRating: OverallSiteRatingValues
+  message: String
+}
+
+enum AmusementTypeNameValues {
+  PLAYGROUND
+  AMUSEMENT_PARK
+  EXHIBITION
+  NATURE_ANIMALS
+  WATER_PARK
+  MUSEUM
+  BEACH
+  LANDSCAPE
+}
+
+enum SiteAgeRangesValues {
+  FAMILY_ACTIVITIES
+  TODDLER
+  PRESCHOOLER
+  SCHOOL_AGED_CHILD
+  ALL_AGES_KIDS
+  ADOLESCENTS_ADULTS
+}
+
+type City
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: owner, ownerField: "id", operations: [read, update] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  cityName: String!
+  cityLat: Float!
+  citylng: Float!
+  sites: [Sites] @hasMany(fields: ["id"])
+}
+
+type Sites
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  siteName: String!
+  siteDescription: String!
+  siteTotalRating: Float!
+  siteNumberOfRatings: Float
+  siteAgeRange: SiteAgeRangesValues!
+  amusementTypeName: AmusementTypeNameValues!
+  siteType: String!
+  siteVillage: String!
+  cityID: ID!
+  siteCity: City @belongsTo(fields: ["cityID"])
+  siteCounty: String!
+  siteAddress: String!
+  siteLat: Float!
+  siteLng: Float!
+  SiteDistanceToPrefLocation: Float
+  SiteWebsite: AWSURL
+  siteImage: AWSURL
+  SiteMapURL: AWSURL
+  favoritedBy: [FavoriteSites] @hasMany(fields: ["id"])
+}
+
+type FavoriteSites
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  userID: ID!
+  siteID: ID!
+  user: Users @belongsTo(fields: ["userID"])
+  site: Sites @belongsTo(fields: ["siteID"])
+}
