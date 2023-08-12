@@ -32,6 +32,11 @@
         "AdminQueriesbc4092b1": {
           "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
           "s3Key": "amplify-builds/AdminQueriesbc4092b1-56784d37723071527166-build.zip"
+        },
+        "FunKidsEntertainmentDefineAuthChallenge": {},
+        "FunKidsEntertainmentCreateAuthChallenge": {},
+        "FunKidsEntertainmentVerifyAuthChallengeResponse": {
+          "RECAPTCHASECRET": "123"
         }
       }
     }

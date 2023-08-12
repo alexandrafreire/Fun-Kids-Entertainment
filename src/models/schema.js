@@ -270,6 +270,12 @@ export const schema = {
                                     "delete",
                                     "read"
                                 ]
+                            },
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
                             }
                         ]
                     }
@@ -380,6 +386,12 @@ export const schema = {
                                     "update"
                                 ],
                                 "identityClaim": "cognito:username"
+                            },
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "read"
+                                ]
                             }
                         ]
                     }

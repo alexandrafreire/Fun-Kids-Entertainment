@@ -46,6 +46,7 @@ type ContactUs
       }
       { allow: private, operations: [create, read, update] }
       { allow: owner }
+      { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
@@ -87,6 +88,7 @@ type City
       }
       { allow: private, operations: [read] }
       { allow: owner, ownerField: "id", operations: [read, update] }
+      { allow: public, operations: [read] }
     ]
   ) {
   id: ID!

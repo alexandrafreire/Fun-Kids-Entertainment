@@ -158,6 +158,14 @@
         }
       ]
     },
+    "AMPLIFY_function_FunKidsEntertainmentVerifyAuthChallengeResponse_RECAPTCHASECRET": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "FunKidsEntertainmentVerifyAuthChallengeResponse"
+        }
+      ]
+    },
     "AMPLIFY_function_InsertUserCognitoToDataStore_deploymentBucketName": {
       "usedBy": [
         {

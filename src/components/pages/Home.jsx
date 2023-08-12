@@ -2,40 +2,49 @@ import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { DataStore } from "@aws-amplify/datastore";
 import "../../App.css";
+import { Users, Sites } from "../../models";
 import HomePageBanner from "../sections/Banner";
 import CustomDivider from "../sections/Divider";
 import SitesCollectionCards from "../sections/SitesCollectionCards";
-import { Users } from "../../models";
 
 function Home() {
-  const [users, setUsers] = useState([]);
+  const [sites, setSites] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const getUsersData = async () => {
+    async function fetchData() {
       try {
-        // fetch the current signed in user
+        // Fetch sites
+        const fetchedSites = await DataStore.query(Sites);
+        setSites(fetchedSites);
+
+        // Check user authentication
         const user = await Auth.currentAuthenticatedUser();
-        // check if the user is authenticated with an API key
-        if (user.signInUserSession.accessToken.payload.auth_time === 0) {
-          // if the user is authenticated with an API key, do not query the Users table
-          console.log("User is authenticated with an API key");
+        setCurrentUser(user);
+        const userData = await DataStore.query(Users, user.attributes.sub);
+        console.log(userData);
+      } catch (error) {
+        if (error === "The user is not authenticated") {
+          console.log("User is not signed in");
         } else {
-          // if the user is not authenticated with an API key, query the Users table
-          const usersData = await DataStore.query(Users);
-          setUsers(usersData);
+          console.error("Error:", error);
         }
-      } catch (err) {
-        console.error(err);
       }
-    };
-    getUsersData();
+    }
+
+    fetchData();
   }, []);
 
   return (
     <>
       <HomePageBanner />
       <CustomDivider />
-      <SitesCollectionCards />
+      {currentUser ? (
+        <p>Welcome back, {currentUser.attributes.name}!</p>
+      ) : (
+        <p>Please sign in to see personalized content.</p>
+      )}
+      <SitesCollectionCards sites={sites} />
     </>
   );
 }
