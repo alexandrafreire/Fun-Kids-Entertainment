@@ -239,11 +239,8 @@ export const onDeleteContactUs = /* GraphQL */ `
   }
 `;
 export const onCreateCity = /* GraphQL */ `
-  subscription OnCreateCity(
-    $filter: ModelSubscriptionCityFilterInput
-    $id: String
-  ) {
-    onCreateCity(filter: $filter, id: $id) {
+  subscription OnCreateCity($filter: ModelSubscriptionCityFilterInput) {
+    onCreateCity(filter: $filter) {
       id
       cityName
       cityLat
@@ -289,11 +286,8 @@ export const onCreateCity = /* GraphQL */ `
   }
 `;
 export const onUpdateCity = /* GraphQL */ `
-  subscription OnUpdateCity(
-    $filter: ModelSubscriptionCityFilterInput
-    $id: String
-  ) {
-    onUpdateCity(filter: $filter, id: $id) {
+  subscription OnUpdateCity($filter: ModelSubscriptionCityFilterInput) {
+    onUpdateCity(filter: $filter) {
       id
       cityName
       cityLat
@@ -339,11 +333,8 @@ export const onUpdateCity = /* GraphQL */ `
   }
 `;
 export const onDeleteCity = /* GraphQL */ `
-  subscription OnDeleteCity(
-    $filter: ModelSubscriptionCityFilterInput
-    $id: String
-  ) {
-    onDeleteCity(filter: $filter, id: $id) {
+  subscription OnDeleteCity($filter: ModelSubscriptionCityFilterInput) {
+    onDeleteCity(filter: $filter) {
       id
       cityName
       cityLat

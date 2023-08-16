@@ -86,7 +86,7 @@ type City
         operations: [create, read, update, delete]
       }
       { allow: private, operations: [read] }
-      { allow: owner, ownerField: "id", operations: [read, update] }
+      { allow: public, operations: [read] }
     ]
   ) {
   id: ID!
