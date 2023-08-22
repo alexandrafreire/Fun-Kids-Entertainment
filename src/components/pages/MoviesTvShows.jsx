@@ -1,11 +1,14 @@
-import React from "react";
+import "../../App.css";
+import { MoviesTVShowsBanner } from "../sections/Banner";
+import CustomDivider from "../sections/Divider";
 
-function MoviesTvShows() {
+function MoviesTVShows() {
   return (
-    <div>
-      <h1 className="movies-tvshows">On the Way: Movies & TV shows Page</h1>;
-    </div>
+    <>
+      <MoviesTVShowsBanner />
+      <CustomDivider />
+    </>
   );
 }
 
-export default MoviesTvShows;
+export default MoviesTVShows;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
 import { DataStore } from "@aws-amplify/datastore";
 import "../../App.css";
-import HomePageBanner from "../sections/Banner";
+import { HomePageBanner } from "../sections/Banner";
 import CustomDivider from "../sections/Divider";
 import SitesCollectionCards from "../sections/SitesCollectionCards";
 import { Users } from "../../models";

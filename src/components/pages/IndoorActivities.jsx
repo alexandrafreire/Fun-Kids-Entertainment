@@ -1,10 +1,15 @@
-import React from "react";
+import "../../App.css";
+import { IndoorActivitiesBanner } from "../sections/Banner";
+import CustomDivider from "../sections/Divider";
+import SitesCardCollectionIndoorActivities from "../sections/SitesCollectionCards";
 
 function IndoorActivities() {
   return (
-    <div>
-      <h1 className="indoor-activities">Explore: Indoor Activities Page</h1>
-    </div>
+    <>
+      <IndoorActivitiesBanner />
+      <CustomDivider />
+      <SitesCardCollectionIndoorActivities />
+    </>
   );
 }
 

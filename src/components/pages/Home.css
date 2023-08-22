@@ -1,21 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
-video{
-
- /* override other styles to make responsive */
-	width: 100%    !important;
-	height: auto   !important;
-	position: relative;
-  
-}
-
-video{
-
-    /* override other styles to make responsive */
-       width: 100%    !important;
-       height: auto   !important;
-       position: relative;
-     
-   }
 
 
 /* Divider */

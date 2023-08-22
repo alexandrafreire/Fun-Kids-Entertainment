@@ -1,10 +1,15 @@
-import React from "react";
+import "../../App.css";
+import { ConcertsShowsBanner } from "../sections/Banner";
+import CustomDivider from "../sections/Divider";
+import SitesCardCollectionConcertsShows from "../sections/SitesCollectionCards";
 
 function ConcertsShows() {
   return (
-    <div>
-      <h1 className="Concerts-Shows"> Explore: Concerts & Shows Page </h1>;
-    </div>
+    <>
+      <ConcertsShowsBanner />
+      <CustomDivider />
+      <SitesCardCollectionConcertsShows />
+    </>
   );
 }
 

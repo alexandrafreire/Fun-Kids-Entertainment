@@ -33,6 +33,7 @@ export default function SitesCard(props) {
     EventOnClick,
     header,
     FavoritesLess1,
+    AmusementType,
     overrides,
     ...rest
   } = props;

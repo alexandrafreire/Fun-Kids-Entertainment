@@ -12,7 +12,7 @@ export const MenuItemsExplore = [
     cName: "dropdown-link",
   },
   {
-    title: "Concerts & Shows",
+    title: "Culture & Shows",
     path: "/Explore/ConcertsShows",
     cName: "dropdown-link",
   },

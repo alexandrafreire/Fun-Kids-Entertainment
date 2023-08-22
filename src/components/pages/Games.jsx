@@ -1,10 +1,13 @@
-import React from "react";
+import "../../App.css";
+import { GamesBanner } from "../sections/Banner";
+import CustomDivider from "../sections/Divider";
 
 function Games() {
   return (
-    <div>
-      <h1 className="games">On the Way: Games Page</h1>;
-    </div>
+    <>
+      <GamesBanner />
+      <CustomDivider />
+    </>
   );
 }
 

@@ -1,10 +1,15 @@
-import React from "react";
+import "../../App.css";
+import { OutdoorActivitiesBanner } from "../sections/Banner";
+import CustomDivider from "../sections/Divider";
+import SitesCardCollectionOutdoorActivities from "../sections/SitesCollectionCards";
 
 function OutdoorActivities() {
   return (
-    <div>
-      <h1 className="outdoor-activities">Explore: Outdoor Activities Page</h1>;
-    </div>
+    <>
+      <OutdoorActivitiesBanner />
+      <CustomDivider />
+      <SitesCardCollectionOutdoorActivities />
+    </>
   );
 }
 

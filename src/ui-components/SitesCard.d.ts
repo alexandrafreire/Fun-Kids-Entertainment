@@ -46,6 +46,7 @@ export declare type SitesCardProps = React.PropsWithChildren<Partial<FlexProps> 
     EventOnClick?: (event: SyntheticEvent) => void;
     header?: React.ReactNode;
     FavoritesLess1?: Sites;
+    AmusementType?: String;
 } & {
     overrides?: SitesCardOverridesProps | undefined | null;
 }>;

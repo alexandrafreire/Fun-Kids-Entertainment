@@ -7,15 +7,23 @@
 /* eslint-disable */
 import * as React from "react";
 import { Sites } from "../models";
-import { SortDirection } from "@aws-amplify/datastore";
 import {
+  createDataStorePredicate,
   getOverrideProps,
   useDataStoreBinding,
 } from "@aws-amplify/ui-react/internal";
+import { SortDirection } from "@aws-amplify/datastore";
 import SitesCard from "./SitesCard";
 import { Collection } from "@aws-amplify/ui-react";
-export default function SitesCollectionHomeFavorites(props) {
+export default function SitesCardCollectionOutdoorActivities(props) {
   const { items: itemsProp, overrideItems, overrides, ...rest } = props;
+  const itemsFilterObj = {
+    and: [
+      { field: "siteType", operand: "Outdoor", operator: "eq" },
+      { field: "siteType", operand: "Exhibition", operator: "ne" },
+    ],
+  };
+  const itemsFilter = createDataStorePredicate(itemsFilterObj);
   const itemsPagination = {
     sort: (s) => s.siteTotalRating(SortDirection.DESCENDING),
   };
@@ -23,6 +31,7 @@ export default function SitesCollectionHomeFavorites(props) {
   const itemsDataStore = useDataStoreBinding({
     type: "collection",
     model: Sites,
+    criteria: itemsFilter,
     pagination: itemsPagination,
   }).items;
   React.useEffect(() => {
@@ -45,26 +54,25 @@ export default function SitesCollectionHomeFavorites(props) {
   return (
     <Collection
       type="grid"
-      isSearchable="true"
+      isSearchable={true}
       isPaginated={true}
-      searchPlaceholder="Find you favorite site"
-      itemsPerPage={9}
+      searchPlaceholder="Find Outdoor Activities"
+      itemsPerPage={6}
       templateColumns="1fr 1fr 1fr"
       autoFlow="row"
       alignItems="stretch"
       justifyContent="stretch"
       items={items || []}
-      {...getOverrideProps(overrides, "SitesCollectionHomeFavorites")}
+      {...getOverrideProps(overrides, "SitesCardCollectionOutdoorActivities")}
       {...rest}
     >
       {(item, index) => (
         <SitesCard
+          height="367px"
           width="426px"
           margin="20px 10px 20px 10px"
           sites={item}
           sitesCard={item}
-          height="367px"
-          EventOnClick={item.id}
           key={item.id}
           {...(overrideItems && overrideItems({ item, index }))}
         ></SitesCard>
