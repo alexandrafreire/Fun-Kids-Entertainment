@@ -264,12 +264,12 @@
     }
     
     .dropdown-menu {
-    background: red;
     width: 200px;
     position: absolute;
     top: 120px;
     list-style: none;
     text-align: start;
+    z-index:1;
     }
     
     .dropdown-menu li {
@@ -334,8 +334,11 @@
     
     @media screen and (max-width: 960px) {
     .fa-caret-down {
-    display: none;
+    display:none;
+    
     }
+
+    
     }
     
     .profile-pic {

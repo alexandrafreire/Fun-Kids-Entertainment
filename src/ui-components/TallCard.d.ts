@@ -5,6 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
+import { Sites } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { FlexProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
@@ -16,6 +17,8 @@ export declare type TallCardOverridesProps = {
     $99?: PrimitiveOverrideProps<TextProps>;
 } & EscapeHatchProps;
 export declare type TallCardProps = React.PropsWithChildren<Partial<FlexProps> & {
+    sites?: Sites;
+} & {
     overrides?: TallCardOverridesProps | undefined | null;
 }>;
 export default function TallCard(props: TallCardProps): React.ReactElement;

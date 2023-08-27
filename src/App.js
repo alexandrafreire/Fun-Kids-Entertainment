@@ -9,11 +9,9 @@ import Navbar from "./components/navigation/Navbar";
 import UsersProfile from "./components/pages/UsersProfile";
 import EditProfile from "./components/pages/EditProfile";
 import Home from "./components/pages/Home";
-import Explore from "./components/pages/Explore";
 import IndoorActivities from "./components/pages/IndoorActivities";
 import OutdoorActivities from "./components/pages/OutdoorActivities";
 import ConcertsShows from "./components/pages/ConcertsShows";
-import OnTheWay from "./components/pages/OnTheWay";
 import Games from "./components/pages/Games";
 import MoviesTvShows from "./components/pages/MoviesTvShows";
 import Books from "./components/pages/Books";
@@ -38,7 +36,6 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Explore/" element={<Explore />} />
         <Route
           path="/Explore/IndoorActivities"
           element={<IndoorActivities />}
@@ -48,9 +45,7 @@ function App() {
           element={<OutdoorActivities />}
         />
         <Route path="/Explore/ConcertsShows" element={<ConcertsShows />} />
-        <Route path="/OnTheWay" element={<OnTheWay />} />
         <Route path="/OnTheWay/Games" element={<Games />} />
-        <Route path="/OnTheWay" element={<Home />} />
         <Route path="/OnTheWay/MoviesTvShows" element={<MoviesTvShows />} />
         <Route path="/OnTheWay/Books" element={<Books />} />
         <Route path="/Subscribe" element={<Subscribe />} />

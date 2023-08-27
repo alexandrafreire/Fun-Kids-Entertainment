@@ -1,7 +1,7 @@
 import "../../App.css";
 import { IndoorActivitiesBanner } from "../sections/Banner";
 import CustomDivider from "../sections/Divider";
-import SitesCardCollectionIndoorActivities from "../sections/SitesCollectionCards";
+import SitesCardCollectionIndoorActivities from "../../ui-components/SitesCardCollectionIndoorActivities";
 
 function IndoorActivities() {
   return (

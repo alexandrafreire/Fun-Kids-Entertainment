@@ -247,3 +247,99 @@ export declare type FavoriteSites = LazyLoading extends LazyLoadingDisabled ? Ea
 export declare const FavoriteSites: (new (init: ModelInit<FavoriteSites>) => FavoriteSites) & {
   copyOf(source: FavoriteSites, mutator: (draft: MutableModel<FavoriteSites>) => MutableModel<FavoriteSites> | void): FavoriteSites;
 }
+
+type EagerGames = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Games, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly gameName: string;
+  readonly gameDescription: string;
+  readonly gameImage?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyGames = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Games, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly gameName: string;
+  readonly gameDescription: string;
+  readonly gameImage?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Games = LazyLoading extends LazyLoadingDisabled ? EagerGames : LazyGames
+
+export declare const Games: (new (init: ModelInit<Games>) => Games) & {
+  copyOf(source: Games, mutator: (draft: MutableModel<Games>) => MutableModel<Games> | void): Games;
+}
+
+type EagerMovies = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Movies, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly movieName: string;
+  readonly moviesDescription: string;
+  readonly movieImage?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyMovies = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Movies, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly movieName: string;
+  readonly moviesDescription: string;
+  readonly movieImage?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Movies = LazyLoading extends LazyLoadingDisabled ? EagerMovies : LazyMovies
+
+export declare const Movies: (new (init: ModelInit<Movies>) => Movies) & {
+  copyOf(source: Movies, mutator: (draft: MutableModel<Movies>) => MutableModel<Movies> | void): Movies;
+}
+
+type EagerBooks = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Books, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly bookName: string;
+  readonly bookDescription: string;
+  readonly bookImage?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyBooks = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Books, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly bookName: string;
+  readonly bookDescription: string;
+  readonly bookImage?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Books = LazyLoading extends LazyLoadingDisabled ? EagerBooks : LazyBooks
+
+export declare const Books: (new (init: ModelInit<Books>) => Books) & {
+  copyOf(source: Books, mutator: (draft: MutableModel<Books>) => MutableModel<Books> | void): Books;
+}

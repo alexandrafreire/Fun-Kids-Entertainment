@@ -874,3 +874,174 @@ export const deleteFavoriteSites = /* GraphQL */ `
     }
   }
 `;
+export const createGames = /* GraphQL */ `
+  mutation CreateGames(
+    $input: CreateGamesInput!
+    $condition: ModelGamesConditionInput
+  ) {
+    createGames(input: $input, condition: $condition) {
+      id
+      gameName
+      gameDescription
+      gameImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateGames = /* GraphQL */ `
+  mutation UpdateGames(
+    $input: UpdateGamesInput!
+    $condition: ModelGamesConditionInput
+  ) {
+    updateGames(input: $input, condition: $condition) {
+      id
+      gameName
+      gameDescription
+      gameImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteGames = /* GraphQL */ `
+  mutation DeleteGames(
+    $input: DeleteGamesInput!
+    $condition: ModelGamesConditionInput
+  ) {
+    deleteGames(input: $input, condition: $condition) {
+      id
+      gameName
+      gameDescription
+      gameImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createMovies = /* GraphQL */ `
+  mutation CreateMovies(
+    $input: CreateMoviesInput!
+    $condition: ModelMoviesConditionInput
+  ) {
+    createMovies(input: $input, condition: $condition) {
+      id
+      movieName
+      moviesDescription
+      movieImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateMovies = /* GraphQL */ `
+  mutation UpdateMovies(
+    $input: UpdateMoviesInput!
+    $condition: ModelMoviesConditionInput
+  ) {
+    updateMovies(input: $input, condition: $condition) {
+      id
+      movieName
+      moviesDescription
+      movieImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteMovies = /* GraphQL */ `
+  mutation DeleteMovies(
+    $input: DeleteMoviesInput!
+    $condition: ModelMoviesConditionInput
+  ) {
+    deleteMovies(input: $input, condition: $condition) {
+      id
+      movieName
+      moviesDescription
+      movieImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const createBooks = /* GraphQL */ `
+  mutation CreateBooks(
+    $input: CreateBooksInput!
+    $condition: ModelBooksConditionInput
+  ) {
+    createBooks(input: $input, condition: $condition) {
+      id
+      bookName
+      bookDescription
+      bookImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const updateBooks = /* GraphQL */ `
+  mutation UpdateBooks(
+    $input: UpdateBooksInput!
+    $condition: ModelBooksConditionInput
+  ) {
+    updateBooks(input: $input, condition: $condition) {
+      id
+      bookName
+      bookDescription
+      bookImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const deleteBooks = /* GraphQL */ `
+  mutation DeleteBooks(
+    $input: DeleteBooksInput!
+    $condition: ModelBooksConditionInput
+  ) {
+    deleteBooks(input: $input, condition: $condition) {
+      id
+      bookName
+      bookDescription
+      bookImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;

@@ -55,7 +55,7 @@ export default function SitesCardCollectionConcertsShows(props) {
       type="grid"
       isSearchable="true"
       isPaginated={true}
-      searchPlaceholder="Find Concerts & Exhibitions"
+      searchPlaceholder="Find cultural events "
       itemsPerPage={6}
       templateColumns="1fr 1fr 1fr"
       autoFlow="row"

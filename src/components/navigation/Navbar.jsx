@@ -173,9 +173,9 @@ function Navbar() {
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
-            <Link to="/Explore" className="nav-links" onClick={closeMobileMenu}>
+            <div className="nav-links" onClick={closeMobileMenu}>
               Explore <i className="fas fa-caret-down" />
-            </Link>
+            </div>
             {Dropdown && <DropdownExplore />}
           </li>
           <li
@@ -183,14 +183,9 @@ function Navbar() {
             onMouseEnter={onMouseEnter1}
             onMouseLeave={onMouseLeave1}
           >
-            <Link
-              to="/OnTheWay"
-              className="nav-links"
-              onClick={closeMobileMenu}
-            >
+            <div className="nav-links" onClick={closeMobileMenu}>
               On The Way <i className="fas fa-caret-down" />
-            </Link>
-            {/*if drop down is true*/}
+            </div>
             {Dropdown1 && <DropdownOnTheWay />}
           </li>
           <li className="nav-item">

@@ -37,6 +37,7 @@ function ArrayField({
   defaultFieldValue,
   lengthLimit,
   getBadgeText,
+  runValidationTasks,
   errorMessage,
 }) {
   const labelElement = <Text>{label}</Text>;
@@ -60,6 +61,7 @@ function ArrayField({
     setSelectedBadgeIndex(undefined);
   };
   const addItem = async () => {
+    const { hasError } = runValidationTasks();
     if (
       currentFieldValue !== undefined &&
       currentFieldValue !== null &&
@@ -169,12 +171,7 @@ function ArrayField({
               }}
             ></Button>
           )}
-          <Button
-            size="small"
-            variation="link"
-            isDisabled={hasError}
-            onClick={addItem}
-          >
+          <Button size="small" variation="link" onClick={addItem}>
             {selectedBadgeIndex !== undefined ? "Save" : "Add"}
           </Button>
         </Flex>
@@ -349,6 +346,9 @@ export default function FavoriteSitesCreateForm(props) {
         label={"User"}
         items={user ? [user] : []}
         hasError={errors?.user?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("user", currentUserValue)
+        }
         errorMessage={errors?.user?.errorMessage}
         getBadgeText={getDisplayValue.user}
         setFieldValue={(model) => {
@@ -420,6 +420,9 @@ export default function FavoriteSitesCreateForm(props) {
         label={"Site"}
         items={site ? [site] : []}
         hasError={errors?.site?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("site", currentSiteValue)
+        }
         errorMessage={errors?.site?.errorMessage}
         getBadgeText={getDisplayValue.site}
         setFieldValue={(model) => {

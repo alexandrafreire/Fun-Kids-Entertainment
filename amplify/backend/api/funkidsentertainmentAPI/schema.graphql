@@ -149,3 +149,60 @@ type FavoriteSites
   user: Users @belongsTo(fields: ["userID"])
   site: Sites @belongsTo(fields: ["siteID"])
 }
+
+type Games
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  gameName: String!
+  gameDescription: String!
+  gameImage: AWSURL
+}
+
+type Movies
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  movieName: String!
+  moviesDescription: String!
+  movieImage: AWSURL
+}
+
+type Books
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+      { allow: public, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  bookName: String!
+  bookDescription: String!
+  bookImage: AWSURL
+}

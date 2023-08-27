@@ -856,3 +856,147 @@ export const onDeleteFavoriteSites = /* GraphQL */ `
     }
   }
 `;
+export const onCreateGames = /* GraphQL */ `
+  subscription OnCreateGames($filter: ModelSubscriptionGamesFilterInput) {
+    onCreateGames(filter: $filter) {
+      id
+      gameName
+      gameDescription
+      gameImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateGames = /* GraphQL */ `
+  subscription OnUpdateGames($filter: ModelSubscriptionGamesFilterInput) {
+    onUpdateGames(filter: $filter) {
+      id
+      gameName
+      gameDescription
+      gameImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteGames = /* GraphQL */ `
+  subscription OnDeleteGames($filter: ModelSubscriptionGamesFilterInput) {
+    onDeleteGames(filter: $filter) {
+      id
+      gameName
+      gameDescription
+      gameImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateMovies = /* GraphQL */ `
+  subscription OnCreateMovies($filter: ModelSubscriptionMoviesFilterInput) {
+    onCreateMovies(filter: $filter) {
+      id
+      movieName
+      moviesDescription
+      movieImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateMovies = /* GraphQL */ `
+  subscription OnUpdateMovies($filter: ModelSubscriptionMoviesFilterInput) {
+    onUpdateMovies(filter: $filter) {
+      id
+      movieName
+      moviesDescription
+      movieImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteMovies = /* GraphQL */ `
+  subscription OnDeleteMovies($filter: ModelSubscriptionMoviesFilterInput) {
+    onDeleteMovies(filter: $filter) {
+      id
+      movieName
+      moviesDescription
+      movieImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onCreateBooks = /* GraphQL */ `
+  subscription OnCreateBooks($filter: ModelSubscriptionBooksFilterInput) {
+    onCreateBooks(filter: $filter) {
+      id
+      bookName
+      bookDescription
+      bookImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onUpdateBooks = /* GraphQL */ `
+  subscription OnUpdateBooks($filter: ModelSubscriptionBooksFilterInput) {
+    onUpdateBooks(filter: $filter) {
+      id
+      bookName
+      bookDescription
+      bookImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const onDeleteBooks = /* GraphQL */ `
+  subscription OnDeleteBooks($filter: ModelSubscriptionBooksFilterInput) {
+    onDeleteBooks(filter: $filter) {
+      id
+      bookName
+      bookDescription
+      bookImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;

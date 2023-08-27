@@ -1,7 +1,7 @@
 import "../../App.css";
 import { ConcertsShowsBanner } from "../sections/Banner";
 import CustomDivider from "../sections/Divider";
-import SitesCardCollectionConcertsShows from "../sections/SitesCollectionCards";
+import SitesCardCollectionConcertsShows from "../../ui-components/SitesCardCollectionConcertsShows";
 
 function ConcertsShows() {
   return (

@@ -38,6 +38,7 @@ function ArrayField({
   defaultFieldValue,
   lengthLimit,
   getBadgeText,
+  runValidationTasks,
   errorMessage,
 }) {
   const labelElement = <Text>{label}</Text>;
@@ -61,6 +62,7 @@ function ArrayField({
     setSelectedBadgeIndex(undefined);
   };
   const addItem = async () => {
+    const { hasError } = runValidationTasks();
     if (
       currentFieldValue !== undefined &&
       currentFieldValue !== null &&
@@ -170,12 +172,7 @@ function ArrayField({
               }}
             ></Button>
           )}
-          <Button
-            size="small"
-            variation="link"
-            isDisabled={hasError}
-            onClick={addItem}
-          >
+          <Button size="small" variation="link" onClick={addItem}>
             {selectedBadgeIndex !== undefined ? "Save" : "Add"}
           </Button>
         </Flex>
@@ -501,6 +498,9 @@ export default function CityUpdateForm(props) {
         label={"Sites"}
         items={sites}
         hasError={errors?.sites?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("sites", currentSitesValue)
+        }
         errorMessage={errors?.sites?.errorMessage}
         getBadgeText={getDisplayValue.sites}
         setFieldValue={(model) => {

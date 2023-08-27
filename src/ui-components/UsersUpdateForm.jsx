@@ -39,6 +39,7 @@ function ArrayField({
   defaultFieldValue,
   lengthLimit,
   getBadgeText,
+  runValidationTasks,
   errorMessage,
 }) {
   const labelElement = <Text>{label}</Text>;
@@ -62,6 +63,7 @@ function ArrayField({
     setSelectedBadgeIndex(undefined);
   };
   const addItem = async () => {
+    const { hasError } = runValidationTasks();
     if (
       currentFieldValue !== undefined &&
       currentFieldValue !== null &&
@@ -171,12 +173,7 @@ function ArrayField({
               }}
             ></Button>
           )}
-          <Button
-            size="small"
-            variation="link"
-            isDisabled={hasError}
-            onClick={addItem}
-          >
+          <Button size="small" variation="link" onClick={addItem}>
             {selectedBadgeIndex !== undefined ? "Save" : "Add"}
           </Button>
         </Flex>
@@ -620,6 +617,12 @@ export default function UsersUpdateForm(props) {
         label={"Preferred location"}
         items={preferredLocation ? [preferredLocation] : []}
         hasError={errors?.preferredLocation?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks(
+            "preferredLocation",
+            currentPreferredLocationValue
+          )
+        }
         errorMessage={errors?.preferredLocation?.errorMessage}
         getBadgeText={getDisplayValue.preferredLocation}
         setFieldValue={(model) => {
@@ -845,6 +848,9 @@ export default function UsersUpdateForm(props) {
         label={"Favorite sites"}
         items={favoriteSites}
         hasError={errors?.favoriteSites?.hasError}
+        runValidationTasks={async () =>
+          await runValidationTasks("favoriteSites", currentFavoriteSitesValue)
+        }
         errorMessage={errors?.favoriteSites?.errorMessage}
         getBadgeText={getDisplayValue.favoriteSites}
         setFieldValue={(model) => {

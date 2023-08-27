@@ -761,3 +761,219 @@ export const syncFavoriteSites = /* GraphQL */ `
     }
   }
 `;
+export const getGames = /* GraphQL */ `
+  query GetGames($id: ID!) {
+    getGames(id: $id) {
+      id
+      gameName
+      gameDescription
+      gameImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listGames = /* GraphQL */ `
+  query ListGames(
+    $filter: ModelGamesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        gameName
+        gameDescription
+        gameImage
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncGames = /* GraphQL */ `
+  query SyncGames(
+    $filter: ModelGamesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncGames(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        gameName
+        gameDescription
+        gameImage
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getMovies = /* GraphQL */ `
+  query GetMovies($id: ID!) {
+    getMovies(id: $id) {
+      id
+      movieName
+      moviesDescription
+      movieImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listMovies = /* GraphQL */ `
+  query ListMovies(
+    $filter: ModelMoviesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMovies(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        movieName
+        moviesDescription
+        movieImage
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncMovies = /* GraphQL */ `
+  query SyncMovies(
+    $filter: ModelMoviesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncMovies(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        movieName
+        moviesDescription
+        movieImage
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const getBooks = /* GraphQL */ `
+  query GetBooks($id: ID!) {
+    getBooks(id: $id) {
+      id
+      bookName
+      bookDescription
+      bookImage
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+  }
+`;
+export const listBooks = /* GraphQL */ `
+  query ListBooks(
+    $filter: ModelBooksFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listBooks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        bookName
+        bookDescription
+        bookImage
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncBooks = /* GraphQL */ `
+  query SyncBooks(
+    $filter: ModelBooksFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncBooks(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        bookName
+        bookDescription
+        bookImage
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
