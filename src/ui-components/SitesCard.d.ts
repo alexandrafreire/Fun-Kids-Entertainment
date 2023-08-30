@@ -5,48 +5,34 @@
  **************************************************************************/
 
 import * as React from "react";
-import { Sites, City } from "../models";
+import { Sites } from "../models";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 import { BadgeProps, ButtonProps, DividerProps, FlexProps, IconProps, ImageProps, TextProps } from "@aws-amplify/ui-react";
-import { MyIconProps } from "./MyIcon";
-import { SyntheticEvent } from "react";
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type SitesCardOverridesProps = {
     SitesCard?: PrimitiveOverrideProps<FlexProps>;
     image?: PrimitiveOverrideProps<ImageProps>;
-    "Frame 419"?: PrimitiveOverrideProps<FlexProps>;
-    "Site Name"?: PrimitiveOverrideProps<TextProps>;
-    Favorite?: MyIconProps;
+    "Site Name36643417"?: PrimitiveOverrideProps<FlexProps>;
+    "Site Name29766765"?: PrimitiveOverrideProps<TextProps>;
     Options?: PrimitiveOverrideProps<FlexProps>;
-    "Frame 421"?: PrimitiveOverrideProps<FlexProps>;
+    Reviews?: PrimitiveOverrideProps<FlexProps>;
     "4.7"?: PrimitiveOverrideProps<TextProps>;
-    "Frame 422"?: PrimitiveOverrideProps<FlexProps>;
+    "Review Stars"?: PrimitiveOverrideProps<FlexProps>;
     Vector?: PrimitiveOverrideProps<IconProps>;
-    "Frame 423"?: PrimitiveOverrideProps<FlexProps>;
+    "#of Reviews"?: PrimitiveOverrideProps<FlexProps>;
     "# of reviews"?: PrimitiveOverrideProps<TextProps>;
     Badges?: PrimitiveOverrideProps<FlexProps>;
-    Badge35692749?: PrimitiveOverrideProps<BadgeProps>;
-    Badge35692753?: PrimitiveOverrideProps<BadgeProps>;
+    "Amusement Type"?: PrimitiveOverrideProps<BadgeProps>;
+    "Site Age Range"?: PrimitiveOverrideProps<BadgeProps>;
     Divider?: PrimitiveOverrideProps<DividerProps>;
     Body?: PrimitiveOverrideProps<FlexProps>;
     Location?: PrimitiveOverrideProps<FlexProps>;
     "Site Village, Site City"?: PrimitiveOverrideProps<TextProps>;
-    "10,45"?: PrimitiveOverrideProps<TextProps>;
+    DistanceToLoc?: PrimitiveOverrideProps<TextProps>;
     Button?: PrimitiveOverrideProps<ButtonProps>;
 } & EscapeHatchProps;
 export declare type SitesCardProps = React.PropsWithChildren<Partial<FlexProps> & {
-    Margin?: String;
     sites?: Sites;
-    usersProfile?: Sites;
-    City?: String;
-    sitesCard?: Sites;
-    city?: City;
-    Color?: React.ReactNode;
-    color?: String;
-    EventOnClick?: (event: SyntheticEvent) => void;
-    header?: React.ReactNode;
-    FavoritesLess1?: Sites;
-    AmusementType?: String;
 } & {
     overrides?: SitesCardOverridesProps | undefined | null;
 }>;

@@ -44,7 +44,6 @@ export default function SitesCardCollectionOutdoorActivities(props) {
         itemsDataStore.map(async (item) => ({
           ...item,
           siteCity: await item.siteCity,
-          favoritedBy: await item.favoritedBy.toArray(),
         }))
       );
       setItems(loaded);

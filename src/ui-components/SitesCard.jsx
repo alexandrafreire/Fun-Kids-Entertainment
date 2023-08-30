@@ -6,10 +6,7 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  getOverrideProps,
-  useNavigateAction,
-} from "@aws-amplify/ui-react/internal";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Badge,
   Button,
@@ -19,33 +16,8 @@ import {
   Image,
   Text,
 } from "@aws-amplify/ui-react";
-import MyIcon from "./MyIcon";
 export default function SitesCard(props) {
-  const {
-    Margin,
-    sites,
-    usersProfile,
-    City,
-    sitesCard,
-    city,
-    Color,
-    color,
-    EventOnClick,
-    header,
-    FavoritesLess1,
-    AmusementType,
-    overrides,
-    ...rest
-  } = props;
-  const imageOnClick = useNavigateAction({
-    type: "url",
-    url: "itemsDescription.id",
-  });
-  const buttonOnClick = useNavigateAction({
-    target: "_blank",
-    type: "url",
-    url: sites?.SiteMapURL,
-  });
+  const { sites, overrides, ...rest } = props;
   return (
     <Flex
       gap="8px"
@@ -75,9 +47,6 @@ export default function SitesCard(props) {
         padding="0px 0px 0px 0px"
         objectFit="cover"
         src={sites?.siteImage}
-        onClick={() => {
-          imageOnClick();
-        }}
         {...getOverrideProps(overrides, "image")}
       ></Image>
       <Flex
@@ -90,7 +59,7 @@ export default function SitesCard(props) {
         shrink="0"
         position="relative"
         padding="10px 10px 10px 10px"
-        {...getOverrideProps(overrides, "Frame 419")}
+        {...getOverrideProps(overrides, "Site Name36643417")}
       >
         <Text
           fontFamily="Inter"
@@ -112,22 +81,8 @@ export default function SitesCard(props) {
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
           children={sites?.siteName}
-          {...getOverrideProps(overrides, "Site Name")}
+          {...getOverrideProps(overrides, "Site Name29766765")}
         ></Text>
-        <MyIcon
-          width="24px"
-          height="24px"
-          display="block"
-          gap="unset"
-          alignItems="unset"
-          justifyContent="unset"
-          overflow="hidden"
-          shrink="0"
-          position="relative"
-          padding="0px 0px 0px 0px"
-          type="favorite_border"
-          {...getOverrideProps(overrides, "Favorite")}
-        ></MyIcon>
       </Flex>
       <Flex
         gap="16px"
@@ -151,7 +106,7 @@ export default function SitesCard(props) {
           shrink="0"
           position="relative"
           padding="10px 6px 10px 6px"
-          {...getOverrideProps(overrides, "Frame 421")}
+          {...getOverrideProps(overrides, "Reviews")}
         >
           <Text
             fontFamily="Inter"
@@ -185,7 +140,7 @@ export default function SitesCard(props) {
           shrink="0"
           position="relative"
           padding="10px 10px 10px 10px"
-          {...getOverrideProps(overrides, "Frame 422")}
+          {...getOverrideProps(overrides, "Review Stars")}
         >
           <Icon
             width="123px"
@@ -224,7 +179,6 @@ export default function SitesCard(props) {
             justifyContent="unset"
             shrink="0"
             position="relative"
-            additive=""
             {...getOverrideProps(overrides, "Vector")}
           ></Icon>
         </Flex>
@@ -238,7 +192,7 @@ export default function SitesCard(props) {
           shrink="0"
           position="relative"
           padding="10px 10px 10px 10px"
-          {...getOverrideProps(overrides, "Frame 423")}
+          {...getOverrideProps(overrides, "#of Reviews")}
         >
           <Text
             fontFamily="Inter"
@@ -258,7 +212,7 @@ export default function SitesCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={`${sites?.siteNumberOfRatings}${" "}${"Reviews"}`}
+            children={`${sites?.siteNumberOfRatings}${" Reviews"}`}
             {...getOverrideProps(overrides, "# of reviews")}
           ></Text>
         </Flex>
@@ -285,7 +239,7 @@ export default function SitesCard(props) {
           variation="default"
           color="white"
           children={sites?.amusementTypeName}
-          {...getOverrideProps(overrides, "Badge35692749")}
+          {...getOverrideProps(overrides, "Amusement Type")}
         ></Badge>
         <Badge
           width="214px"
@@ -297,7 +251,7 @@ export default function SitesCard(props) {
           variation="default"
           color="white"
           children={sites?.siteAgeRange}
-          {...getOverrideProps(overrides, "Badge35692753")}
+          {...getOverrideProps(overrides, "Site Age Range")}
         ></Badge>
       </Flex>
       <Divider
@@ -372,8 +326,8 @@ export default function SitesCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={`${sites?.SiteDistanceToGeoLoc}${" Km away"}`}
-            {...getOverrideProps(overrides, "10,45")}
+            children={`${sites?.SiteDistanceToPrefLocation}${" Km Away"}`}
+            {...getOverrideProps(overrides, "DistanceToLoc")}
           ></Text>
           <Button
             width="67px"
@@ -383,9 +337,6 @@ export default function SitesCard(props) {
             isDisabled={false}
             variation="default"
             children="Map"
-            onClick={() => {
-              buttonOnClick();
-            }}
             {...getOverrideProps(overrides, "Button")}
           ></Button>
         </Flex>

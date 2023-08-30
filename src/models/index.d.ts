@@ -50,7 +50,6 @@ type EagerUsers = {
   readonly preferredLocation?: City | null;
   readonly preferredAgeRanges?: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues | null;
   readonly preferredAmusementTypes?: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues | null;
-  readonly favoriteSites?: (FavoriteSites | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -69,7 +68,6 @@ type LazyUsers = {
   readonly preferredLocation: AsyncItem<City | undefined>;
   readonly preferredAgeRanges?: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues | null;
   readonly preferredAmusementTypes?: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues | null;
-  readonly favoriteSites: AsyncCollection<FavoriteSites>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -160,8 +158,8 @@ type EagerSites = {
   readonly siteDescription: string;
   readonly siteTotalRating: number;
   readonly siteNumberOfRatings?: number | null;
-  readonly siteAgeRange: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues;
-  readonly amusementTypeName: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues;
+  readonly siteAgeRange?: string | null;
+  readonly amusementTypeName?: string | null;
   readonly siteType: string;
   readonly siteVillage: string;
   readonly cityID: string;
@@ -174,7 +172,6 @@ type EagerSites = {
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
-  readonly favoritedBy?: (FavoriteSites | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -189,8 +186,8 @@ type LazySites = {
   readonly siteDescription: string;
   readonly siteTotalRating: number;
   readonly siteNumberOfRatings?: number | null;
-  readonly siteAgeRange: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues;
-  readonly amusementTypeName: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues;
+  readonly siteAgeRange?: string | null;
+  readonly amusementTypeName?: string | null;
   readonly siteType: string;
   readonly siteVillage: string;
   readonly cityID: string;
@@ -203,7 +200,6 @@ type LazySites = {
   readonly SiteWebsite?: string | null;
   readonly siteImage?: string | null;
   readonly SiteMapURL?: string | null;
-  readonly favoritedBy: AsyncCollection<FavoriteSites>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -212,40 +208,6 @@ export declare type Sites = LazyLoading extends LazyLoadingDisabled ? EagerSites
 
 export declare const Sites: (new (init: ModelInit<Sites>) => Sites) & {
   copyOf(source: Sites, mutator: (draft: MutableModel<Sites>) => MutableModel<Sites> | void): Sites;
-}
-
-type EagerFavoriteSites = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<FavoriteSites, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly userID: string;
-  readonly siteID: string;
-  readonly user?: Users | null;
-  readonly site?: Sites | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyFavoriteSites = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<FavoriteSites, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly userID: string;
-  readonly siteID: string;
-  readonly user: AsyncItem<Users | undefined>;
-  readonly site: AsyncItem<Sites | undefined>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type FavoriteSites = LazyLoading extends LazyLoadingDisabled ? EagerFavoriteSites : LazyFavoriteSites
-
-export declare const FavoriteSites: (new (init: ModelInit<FavoriteSites>) => FavoriteSites) & {
-  copyOf(source: FavoriteSites, mutator: (draft: MutableModel<FavoriteSites>) => MutableModel<FavoriteSites> | void): FavoriteSites;
 }
 
 type EagerGames = {

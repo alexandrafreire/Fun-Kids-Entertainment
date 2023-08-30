@@ -32,23 +32,6 @@ export const onCreateUsers = /* GraphQL */ `
       }
       preferredAgeRanges
       preferredAmusementTypes
-      favoriteSites {
-        items {
-          id
-          userID
-          siteID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-          __typename
-        }
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -89,23 +72,6 @@ export const onUpdateUsers = /* GraphQL */ `
       }
       preferredAgeRanges
       preferredAmusementTypes
-      favoriteSites {
-        items {
-          id
-          userID
-          siteID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-          __typename
-        }
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -146,23 +112,6 @@ export const onDeleteUsers = /* GraphQL */ `
       }
       preferredAgeRanges
       preferredAmusementTypes
-      favoriteSites {
-        items {
-          id
-          userID
-          siteID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-          __typename
-        }
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -417,23 +366,6 @@ export const onCreateSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
-      favoritedBy {
-        items {
-          id
-          userID
-          siteID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-          __typename
-        }
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -481,23 +413,6 @@ export const onUpdateSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
-      favoritedBy {
-        items {
-          id
-          userID
-          siteID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-          __typename
-        }
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -545,313 +460,11 @@ export const onDeleteSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
-      favoritedBy {
-        items {
-          id
-          userID
-          siteID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-          __typename
-        }
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      __typename
-    }
-  }
-`;
-export const onCreateFavoriteSites = /* GraphQL */ `
-  subscription OnCreateFavoriteSites(
-    $filter: ModelSubscriptionFavoriteSitesFilterInput
-    $owner: String
-  ) {
-    onCreateFavoriteSites(filter: $filter, owner: $owner) {
-      id
-      userID
-      siteID
-      user {
-        id
-        name
-        email
-        username
-        profilePic
-        cityID
-        preferredLocation {
-          id
-          cityName
-          cityLat
-          citylng
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        preferredAgeRanges
-        preferredAmusementTypes
-        favoriteSites {
-          nextToken
-          startedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      site {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteNumberOfRatings
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        cityID
-        siteCity {
-          id
-          cityName
-          cityLat
-          citylng
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToPrefLocation
-        SiteWebsite
-        siteImage
-        SiteMapURL
-        favoritedBy {
-          nextToken
-          startedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const onUpdateFavoriteSites = /* GraphQL */ `
-  subscription OnUpdateFavoriteSites(
-    $filter: ModelSubscriptionFavoriteSitesFilterInput
-    $owner: String
-  ) {
-    onUpdateFavoriteSites(filter: $filter, owner: $owner) {
-      id
-      userID
-      siteID
-      user {
-        id
-        name
-        email
-        username
-        profilePic
-        cityID
-        preferredLocation {
-          id
-          cityName
-          cityLat
-          citylng
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        preferredAgeRanges
-        preferredAmusementTypes
-        favoriteSites {
-          nextToken
-          startedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      site {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteNumberOfRatings
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        cityID
-        siteCity {
-          id
-          cityName
-          cityLat
-          citylng
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToPrefLocation
-        SiteWebsite
-        siteImage
-        SiteMapURL
-        favoritedBy {
-          nextToken
-          startedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const onDeleteFavoriteSites = /* GraphQL */ `
-  subscription OnDeleteFavoriteSites(
-    $filter: ModelSubscriptionFavoriteSitesFilterInput
-    $owner: String
-  ) {
-    onDeleteFavoriteSites(filter: $filter, owner: $owner) {
-      id
-      userID
-      siteID
-      user {
-        id
-        name
-        email
-        username
-        profilePic
-        cityID
-        preferredLocation {
-          id
-          cityName
-          cityLat
-          citylng
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        preferredAgeRanges
-        preferredAmusementTypes
-        favoriteSites {
-          nextToken
-          startedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      site {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteNumberOfRatings
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        cityID
-        siteCity {
-          id
-          cityName
-          cityLat
-          citylng
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToPrefLocation
-        SiteWebsite
-        siteImage
-        SiteMapURL
-        favoritedBy {
-          nextToken
-          startedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      owner
       __typename
     }
   }

@@ -32,7 +32,6 @@ type Users
   preferredLocation: City @hasOne(fields: ["cityID"])
   preferredAgeRanges: SiteAgeRangesValues
   preferredAmusementTypes: AmusementTypeNameValues
-  favoriteSites: [FavoriteSites] @hasMany(fields: ["id"])
 }
 
 type ContactUs
@@ -114,8 +113,8 @@ type Sites
   siteDescription: String!
   siteTotalRating: Float!
   siteNumberOfRatings: Float
-  siteAgeRange: SiteAgeRangesValues!
-  amusementTypeName: AmusementTypeNameValues!
+  siteAgeRange: String
+  amusementTypeName: String
   siteType: String!
   siteVillage: String!
   cityID: ID!
@@ -128,26 +127,6 @@ type Sites
   SiteWebsite: AWSURL
   siteImage: AWSURL
   SiteMapURL: AWSURL
-  favoritedBy: [FavoriteSites] @hasMany(fields: ["id"])
-}
-
-type FavoriteSites
-  @model
-  @auth(
-    rules: [
-      { allow: owner }
-      {
-        allow: groups
-        groups: ["admin"]
-        operations: [create, read, update, delete]
-      }
-    ]
-  ) {
-  id: ID!
-  userID: ID!
-  siteID: ID!
-  user: Users @belongsTo(fields: ["userID"])
-  site: Sites @belongsTo(fields: ["siteID"])
 }
 
 type Games

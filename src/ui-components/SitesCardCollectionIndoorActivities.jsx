@@ -44,7 +44,6 @@ export default function SitesCardCollectionIndoorActivities(props) {
         itemsDataStore.map(async (item) => ({
           ...item,
           siteCity: await item.siteCity,
-          favoritedBy: await item.favoritedBy.toArray(),
         }))
       );
       setItems(loaded);

@@ -29,23 +29,6 @@ export const getUsers = /* GraphQL */ `
       }
       preferredAgeRanges
       preferredAmusementTypes
-      favoriteSites {
-        items {
-          id
-          userID
-          siteID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-          __typename
-        }
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -83,11 +66,6 @@ export const listUsers = /* GraphQL */ `
         }
         preferredAgeRanges
         preferredAmusementTypes
-        favoriteSites {
-          nextToken
-          startedAt
-          __typename
-        }
         createdAt
         updatedAt
         _version
@@ -135,11 +113,6 @@ export const syncUsers = /* GraphQL */ `
         }
         preferredAgeRanges
         preferredAmusementTypes
-        favoriteSites {
-          nextToken
-          startedAt
-          __typename
-        }
         createdAt
         updatedAt
         _version
@@ -385,23 +358,6 @@ export const getSites = /* GraphQL */ `
       SiteWebsite
       siteImage
       SiteMapURL
-      favoritedBy {
-        items {
-          id
-          userID
-          siteID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          owner
-          __typename
-        }
-        nextToken
-        startedAt
-        __typename
-      }
       createdAt
       updatedAt
       _version
@@ -449,11 +405,6 @@ export const listSites = /* GraphQL */ `
         SiteWebsite
         siteImage
         SiteMapURL
-        favoritedBy {
-          nextToken
-          startedAt
-          __typename
-        }
         createdAt
         updatedAt
         _version
@@ -511,248 +462,11 @@ export const syncSites = /* GraphQL */ `
         SiteWebsite
         siteImage
         SiteMapURL
-        favoritedBy {
-          nextToken
-          startedAt
-          __typename
-        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        __typename
-      }
-      nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const getFavoriteSites = /* GraphQL */ `
-  query GetFavoriteSites($id: ID!) {
-    getFavoriteSites(id: $id) {
-      id
-      userID
-      siteID
-      user {
-        id
-        name
-        email
-        username
-        profilePic
-        cityID
-        preferredLocation {
-          id
-          cityName
-          cityLat
-          citylng
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        preferredAgeRanges
-        preferredAmusementTypes
-        favoriteSites {
-          nextToken
-          startedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      site {
-        id
-        siteName
-        siteDescription
-        siteTotalRating
-        siteNumberOfRatings
-        siteAgeRange
-        amusementTypeName
-        siteType
-        siteVillage
-        cityID
-        siteCity {
-          id
-          cityName
-          cityLat
-          citylng
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        siteCounty
-        siteAddress
-        siteLat
-        siteLng
-        SiteDistanceToPrefLocation
-        SiteWebsite
-        siteImage
-        SiteMapURL
-        favoritedBy {
-          nextToken
-          startedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        __typename
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      owner
-      __typename
-    }
-  }
-`;
-export const listFavoriteSites = /* GraphQL */ `
-  query ListFavoriteSites(
-    $filter: ModelFavoriteSitesFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listFavoriteSites(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        userID
-        siteID
-        user {
-          id
-          name
-          email
-          username
-          profilePic
-          cityID
-          preferredAgeRanges
-          preferredAmusementTypes
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        site {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          cityID
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToPrefLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
-        __typename
-      }
-      nextToken
-      startedAt
-      __typename
-    }
-  }
-`;
-export const syncFavoriteSites = /* GraphQL */ `
-  query SyncFavoriteSites(
-    $filter: ModelFavoriteSitesFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncFavoriteSites(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userID
-        siteID
-        user {
-          id
-          name
-          email
-          username
-          profilePic
-          cityID
-          preferredAgeRanges
-          preferredAmusementTypes
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        site {
-          id
-          siteName
-          siteDescription
-          siteTotalRating
-          siteNumberOfRatings
-          siteAgeRange
-          amusementTypeName
-          siteType
-          siteVillage
-          cityID
-          siteCounty
-          siteAddress
-          siteLat
-          siteLng
-          SiteDistanceToPrefLocation
-          SiteWebsite
-          siteImage
-          SiteMapURL
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-          __typename
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        owner
         __typename
       }
       nextToken
