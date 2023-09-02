@@ -1,41 +1,64 @@
 import { useEffect, useState } from "react";
 import { Auth } from "aws-amplify";
-import { DataStore } from "@aws-amplify/datastore";
+import { DataStore, Predicates } from "@aws-amplify/datastore";
+import { Users, Sites } from "../../models";
 import "../../App.css";
 import { HomePageBanner } from "../sections/Banner";
 import CustomDivider from "../sections/Divider";
-import SitesCollectionCards from "../sections/SitesCollectionCards";
-import { Users } from "../../models";
+import SitesHomePage from "../sections/SitesHomePage";
+import fetchSitesBasedOnUserPreferences from "../sections/fetchSitesUserPreferences";
 
 function Home() {
-  const [users, setUsers] = useState([]);
+  const [allSites, setAllSites] = useState([]);
+  const [filteredSites, setFilteredSites] = useState([]);
+  const [userStatus, setUserStatus] = useState("guest");
 
   useEffect(() => {
-    const getUsersData = async () => {
+    const fetchData = async () => {
       try {
-        // fetch the current signed in user
         const user = await Auth.currentAuthenticatedUser();
-        // check if the user is authenticated with an API key
-        if (user.signInUserSession.accessToken.payload.auth_time === 0) {
-          // if the user is authenticated with an API key, do not query the Users table
-          console.log("User is authenticated with an API key");
-        } else {
-          // if the user is not authenticated with an API key, query the Users table
-          const usersData = await DataStore.query(Users);
-          setUsers(usersData);
+        console.log("User authenticated");
+        setUserStatus("authenticated");
+
+        const queriedAllSites = await DataStore.query(Sites, Predicates.ALL);
+        setAllSites(queriedAllSites);
+        console.log("All sites fetched:", queriedAllSites);
+
+        const userData = await DataStore.query(Users, user.attributes.sub);
+        if (userData) {
+          console.log("User has preferences:", userData);
+          setUserStatus("hasPreferences");
+
+          const queriedFilteredSites = await fetchSitesBasedOnUserPreferences(
+            user.attributes.sub
+          );
+          console.log("Filtered sites fetched:", queriedFilteredSites);
+          setFilteredSites(queriedFilteredSites);
         }
       } catch (err) {
-        console.error(err);
+        console.info(
+          "The user is not authenticated. Fetching all sites for guest users."
+        );
+        setUserStatus("guest");
+
+        const queriedAllSites = await DataStore.query(Sites, Predicates.ALL);
+        setAllSites(queriedAllSites);
+        console.log("All sites fetched for guest:", queriedAllSites);
       }
     };
-    getUsersData();
+
+    fetchData();
   }, []);
+
+  console.log("Current user status:", userStatus);
 
   return (
     <>
       <HomePageBanner />
       <CustomDivider />
-      <SitesCollectionCards />
+      <SitesHomePage
+        sitesArray={userStatus === "hasPreferences" ? filteredSites : allSites}
+      />
     </>
   );
 }

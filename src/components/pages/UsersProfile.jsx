@@ -168,7 +168,6 @@ function UsersProfile() {
                 Edit profile
               </Button>
             </TabItem>
-            <TabItem title="Favorite Sites"></TabItem>
           </Tabs>
         </View>
       ) : (

@@ -11,7 +11,7 @@ import EditProfile from "./components/pages/EditProfile";
 import Home from "./components/pages/Home";
 import IndoorActivities from "./components/pages/IndoorActivities";
 import OutdoorActivities from "./components/pages/OutdoorActivities";
-import ConcertsShows from "./components/pages/ConcertsShows";
+import CultureShows from "./components/pages/CultureShows";
 import Games from "./components/pages/Games";
 import MoviesTvShows from "./components/pages/MoviesTvShows";
 import Books from "./components/pages/Books";
@@ -22,7 +22,6 @@ import TermsOfService from "./components/pages/TermsOfService";
 import Footer from "./components/sections/Footer";
 import SignUp from "./components/pages/SignUp";
 import Admin from "./components/pages/Admin";
-import withAdminAuthenticator from "./components/pages/AdminAuth";
 import Error from "./components/pages/Error";
 import "./App.css";
 
@@ -44,7 +43,7 @@ function App() {
           path="/Explore/OutdoorActivities"
           element={<OutdoorActivities />}
         />
-        <Route path="/Explore/ConcertsShows" element={<ConcertsShows />} />
+        <Route path="/Explore/CultureShows" element={<CultureShows />} />
         <Route path="/OnTheWay/Games" element={<Games />} />
         <Route path="/OnTheWay/MoviesTvShows" element={<MoviesTvShows />} />
         <Route path="/OnTheWay/Books" element={<Books />} />

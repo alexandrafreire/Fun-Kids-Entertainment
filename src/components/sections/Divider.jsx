@@ -1,14 +1,12 @@
 import React from "react";
 import "../../App.css";
-import "../pages/Home.css";
 import { Flex, Text, Divider } from "@aws-amplify/ui-react";
 
 function CustomDivider() {
   return (
     <>
       <div className="container-divider">
-        <Flex direction="row">
-          <Divider orientation="horizontal" size="large" />
+        <Flex direction="column">
           <Text
             variation="primary"
             as="span"
@@ -23,8 +21,7 @@ function CustomDivider() {
           >
             SUGGESTIONS FOR TODAY
           </Text>
-
-          <Divider orientation="horizontal" size="large" />
+          <Divider orientation="horizontal" />
         </Flex>
       </div>
     </>

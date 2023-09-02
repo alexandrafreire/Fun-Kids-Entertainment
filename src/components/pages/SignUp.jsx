@@ -17,7 +17,6 @@ export default function SignUp() {
             id: data.userSub,
             name: data.username,
             email: data.attributes.email,
-            // set other fields if needed
           })
         ).catch((err) => console.error(err));
       }

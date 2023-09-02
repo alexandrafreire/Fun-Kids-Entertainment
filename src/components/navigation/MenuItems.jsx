@@ -13,7 +13,7 @@ export const MenuItemsExplore = [
   },
   {
     title: "Culture & Shows",
-    path: "/Explore/ConcertsShows",
+    path: "/Explore/CultureShows",
     cName: "dropdown-link",
   },
 ];

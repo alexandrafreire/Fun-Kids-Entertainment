@@ -6,23 +6,29 @@ const useAdminCheck = () => {
 
   useEffect(() => {
     const checkIfAdmin = async () => {
-      const user = await Auth.currentAuthenticatedUser();
-      const {
-        signInUserSession: {
-          idToken: { payload },
-        },
-      } = user;
+      try {
+        const user = await Auth.currentAuthenticatedUser();
+        const {
+          signInUserSession: {
+            idToken: { payload },
+          },
+        } = user;
 
-      // Log the payload to the console
-      console.log("Payload: ", payload);
+        // Log the payload to the console
+        console.log("Payload: ", payload);
 
-      if (
-        payload["cognito:groups"] &&
-        payload["cognito:groups"].includes("admin")
-      ) {
-        setIsAdmin(true);
+        if (
+          payload["cognito:groups"] &&
+          payload["cognito:groups"].includes("admin")
+        ) {
+          setIsAdmin(true);
+        }
+      } catch (error) {
+        console.log("The user is not authenticated: ", error);
+        setIsAdmin(false);
       }
     };
+
     checkIfAdmin();
   }, []);
 

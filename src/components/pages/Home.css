@@ -1,17 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap');
 
 
-/* Divider */
-.container-divider{
-  margin-bottom: 20px;
-  
-}
-
-
-
-.amplify-divider {
-  --amplify-components-divider-border-color: #79C91D;
-  --amplify-components-divider-label-margin-inline: 2px;
-}
-
 
