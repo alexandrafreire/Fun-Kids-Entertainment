@@ -613,3 +613,72 @@ export const onDeleteBooks = /* GraphQL */ `
     }
   }
 `;
+export const onCreateSuggestedActivities = /* GraphQL */ `
+  subscription OnCreateSuggestedActivities(
+    $filter: ModelSubscriptionSuggestedActivitiesFilterInput
+    $owner: String
+  ) {
+    onCreateSuggestedActivities(filter: $filter, owner: $owner) {
+      id
+      activityName
+      activityAddress
+      activityDescription
+      activityAgeRange
+      activityType
+      activityImageURLs
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onUpdateSuggestedActivities = /* GraphQL */ `
+  subscription OnUpdateSuggestedActivities(
+    $filter: ModelSubscriptionSuggestedActivitiesFilterInput
+    $owner: String
+  ) {
+    onUpdateSuggestedActivities(filter: $filter, owner: $owner) {
+      id
+      activityName
+      activityAddress
+      activityDescription
+      activityAgeRange
+      activityType
+      activityImageURLs
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const onDeleteSuggestedActivities = /* GraphQL */ `
+  subscription OnDeleteSuggestedActivities(
+    $filter: ModelSubscriptionSuggestedActivitiesFilterInput
+    $owner: String
+  ) {
+    onDeleteSuggestedActivities(filter: $filter, owner: $owner) {
+      id
+      activityName
+      activityAddress
+      activityDescription
+      activityAgeRange
+      activityType
+      activityImageURLs
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;

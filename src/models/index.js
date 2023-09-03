@@ -34,7 +34,7 @@ const SiteAgeRangesValues = {
   "ADOLESCENTS_ADULTS": "ADOLESCENTS_ADULTS"
 };
 
-const { Users, ContactUs, City, Sites, Games, Movies, Books } = initSchema(schema);
+const { Users, ContactUs, City, Sites, Games, Movies, Books, SuggestedActivities } = initSchema(schema);
 
 export {
   Users,
@@ -44,6 +44,7 @@ export {
   Games,
   Movies,
   Books,
+  SuggestedActivities,
   OverallSiteRatingValues,
   FeedbackTypeValues,
   AmusementTypeNameValues,

@@ -36,7 +36,10 @@ function ContactUs() {
       {alert && <Alert variation={alert.type}>{alert.message}</Alert>}
 
       <div className="form-container">
-        {showForm && <ContactUsForm onSubmit={handleFormSubmit} />}
+        <div className="inner-form-container">
+          <h1>Contact Us</h1>
+          {showForm && <ContactUsForm onSubmit={handleFormSubmit} />}
+        </div>
       </div>
     </div>
   );

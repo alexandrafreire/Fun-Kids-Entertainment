@@ -4,22 +4,19 @@ import "../../App.css";
 function Footer() {
   return (
     <footer>
-      <div>
-        <ul>
+      <div className="footer-container">
+        <ul className="footer-links">
           <li>
-            <Link to="/ContactUs">Contact us</Link>
+            <Link to="/ContactUs">Contact Us</Link>
           </li>
           <li>
             <Link to="/SignUp">Sign Up</Link>
           </li>
           <li>
-            <Link to="/TermsOfService">Terms of Service</Link>
-          </li>
-          <li>
             <Link to="/PrivacyPolicy">Privacy Policy</Link>
           </li>
         </ul>
-        <p>@2022 Fun Kids Entertainment</p>
+        <p className="footer-copyright">@2023 Fun Kids Entertainment</p>
       </div>
     </footer>
   );

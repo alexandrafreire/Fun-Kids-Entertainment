@@ -1,0 +1,36 @@
+/* Customizing Amplify UI Components */
+
+  /* Form layout and styling */
+  form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+
+  /* Enusure field Alignment  */
+.amplify-flex.amplify-field-group.amplify-field-group--horizontal,
+.amplify-select.amplify-field-group__control {
+    margin-bottom: 2px !important; 
+}
+
+.amplify-field-group__field-wrapper.amplify-field-group__field-wrapper--horizontal {
+    margin-right: 2px !important; 
+    margin-left: 2px !important;
+}
+
+input[aria-invalid="false"],
+select[aria-invalid="false"] {
+    margin: 0 !important; 
+}
+  
+ 
+
+  
+  
+  

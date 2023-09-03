@@ -658,3 +658,72 @@ export const deleteBooks = /* GraphQL */ `
     }
   }
 `;
+export const createSuggestedActivities = /* GraphQL */ `
+  mutation CreateSuggestedActivities(
+    $input: CreateSuggestedActivitiesInput!
+    $condition: ModelSuggestedActivitiesConditionInput
+  ) {
+    createSuggestedActivities(input: $input, condition: $condition) {
+      id
+      activityName
+      activityAddress
+      activityDescription
+      activityAgeRange
+      activityType
+      activityImageURLs
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const updateSuggestedActivities = /* GraphQL */ `
+  mutation UpdateSuggestedActivities(
+    $input: UpdateSuggestedActivitiesInput!
+    $condition: ModelSuggestedActivitiesConditionInput
+  ) {
+    updateSuggestedActivities(input: $input, condition: $condition) {
+      id
+      activityName
+      activityAddress
+      activityDescription
+      activityAgeRange
+      activityType
+      activityImageURLs
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const deleteSuggestedActivities = /* GraphQL */ `
+  mutation DeleteSuggestedActivities(
+    $input: DeleteSuggestedActivitiesInput!
+    $condition: ModelSuggestedActivitiesConditionInput
+  ) {
+    deleteSuggestedActivities(input: $input, condition: $condition) {
+      id
+      activityName
+      activityAddress
+      activityDescription
+      activityAgeRange
+      activityType
+      activityImageURLs
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;

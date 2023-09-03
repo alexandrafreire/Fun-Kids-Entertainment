@@ -45,7 +45,6 @@ function SitesHomePage({ sitesArray }) {
 
     const lastItemIndex = currentPage * itemsPerPage;
     const firstItemIndex = lastItemIndex - itemsPerPage;
-    console.log("First and Last Item Index:", firstItemIndex, lastItemIndex);
 
     const currentItems = sitesArray.slice(firstItemIndex, lastItemIndex);
     console.log("Current Items:", currentItems);

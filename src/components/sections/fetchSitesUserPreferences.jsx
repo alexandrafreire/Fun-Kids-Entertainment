@@ -28,7 +28,6 @@ const fetchSitesBasedOnUserPreferences = async (userId) => {
       .toUpperCase();
 
     const allSites = await DataStore.query(Sites);
-    console.log("All Sites:", JSON.stringify(allSites, null, 2));
 
     const filteredSites = allSites.filter((site) => {
       const isCityMatch = site.cityID === cityID;
@@ -45,16 +44,6 @@ const fetchSitesBasedOnUserPreferences = async (userId) => {
           site.amusementTypeName.toUpperCase() ===
           transformedPreferredAmusementTypes;
       }
-
-      console.log(
-        `Site Values: ${site.cityID} ${site.siteAgeRange} ${site.amusementTypeName}`
-      );
-      console.log(
-        `User Values: ${cityID} ${transformedPreferredAgeRanges} ${transformedPreferredAmusementTypes}`
-      );
-      console.log(`Is City Match: ${isCityMatch}`);
-      console.log(`Is Age Match: ${isAgeMatch}`);
-      console.log(`Is Amusement Match: ${isAmusementMatch}`);
 
       return isCityMatch && (isAgeMatch || isAmusementMatch);
     });

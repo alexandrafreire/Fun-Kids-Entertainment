@@ -691,3 +691,91 @@ export const syncBooks = /* GraphQL */ `
     }
   }
 `;
+export const getSuggestedActivities = /* GraphQL */ `
+  query GetSuggestedActivities($id: ID!) {
+    getSuggestedActivities(id: $id) {
+      id
+      activityName
+      activityAddress
+      activityDescription
+      activityAgeRange
+      activityType
+      activityImageURLs
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      owner
+      __typename
+    }
+  }
+`;
+export const listSuggestedActivities = /* GraphQL */ `
+  query ListSuggestedActivities(
+    $filter: ModelSuggestedActivitiesFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSuggestedActivities(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        activityName
+        activityAddress
+        activityDescription
+        activityAgeRange
+        activityType
+        activityImageURLs
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;
+export const syncSuggestedActivities = /* GraphQL */ `
+  query SyncSuggestedActivities(
+    $filter: ModelSuggestedActivitiesFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncSuggestedActivities(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        activityName
+        activityAddress
+        activityDescription
+        activityAgeRange
+        activityType
+        activityImageURLs
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+        __typename
+      }
+      nextToken
+      startedAt
+      __typename
+    }
+  }
+`;

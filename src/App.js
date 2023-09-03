@@ -15,10 +15,9 @@ import CultureShows from "./components/pages/CultureShows";
 import Games from "./components/pages/Games";
 import MoviesTvShows from "./components/pages/MoviesTvShows";
 import Books from "./components/pages/Books";
-import Subscribe from "./components/pages/Subscribe";
+import SuggestAnActivity from "./components/pages/SuggestAnActivity";
 import ContactUs from "./components/pages/ContactUs";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy";
-import TermsOfService from "./components/pages/TermsOfService";
 import Footer from "./components/sections/Footer";
 import SignUp from "./components/pages/SignUp";
 import Admin from "./components/pages/Admin";
@@ -47,10 +46,9 @@ function App() {
         <Route path="/OnTheWay/Games" element={<Games />} />
         <Route path="/OnTheWay/MoviesTvShows" element={<MoviesTvShows />} />
         <Route path="/OnTheWay/Books" element={<Books />} />
-        <Route path="/Subscribe" element={<Subscribe />} />
+        <Route path="/SuggestAnActivity" element={<SuggestAnActivity />} />
         <Route path="/ContactUs" element={<ContactUs />} />
         <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
-        <Route path="/TermsOfService" element={<TermsOfService />} />
         <Route path="/SignUp/" element={<SignUp />} />
         <Route path="/Admin/" element={<Admin />} />
         <Route path="/UsersProfile" element={<UsersProfile />} />

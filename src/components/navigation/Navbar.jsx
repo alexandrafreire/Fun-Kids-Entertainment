@@ -159,7 +159,6 @@ function Navbar() {
           <img src={logo} width="338" height="57" className="logo" alt="" />
         </Link>
         <div className="menu-icon" onClick={handleClick}>
-          {/*if click=true place "fas fa-times icon", if false place "fas fa-bars" icon*/}
           <i className={click ? "fas fa-times" : "fas fa-bars"} />
         </div>
         <ul className={click ? "nav-menu active" : "nav-menu"}>
@@ -190,11 +189,11 @@ function Navbar() {
           </li>
           <li className="nav-item">
             <Link
-              to="/Subscribe"
+              to="/SuggestAnActivity"
               className="nav-links"
               onClick={closeMobileMenu}
             >
-              Subscribe
+              Suggest Activities
             </Link>
           </li>
         </ul>

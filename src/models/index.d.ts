@@ -305,3 +305,41 @@ export declare type Books = LazyLoading extends LazyLoadingDisabled ? EagerBooks
 export declare const Books: (new (init: ModelInit<Books>) => Books) & {
   copyOf(source: Books, mutator: (draft: MutableModel<Books>) => MutableModel<Books> | void): Books;
 }
+
+type EagerSuggestedActivities = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<SuggestedActivities, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly activityName: string;
+  readonly activityAddress?: string | null;
+  readonly activityDescription: string;
+  readonly activityAgeRange?: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues | null;
+  readonly activityType?: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues | null;
+  readonly activityImageURLs?: (string | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazySuggestedActivities = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<SuggestedActivities, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly activityName: string;
+  readonly activityAddress?: string | null;
+  readonly activityDescription: string;
+  readonly activityAgeRange?: SiteAgeRangesValues | keyof typeof SiteAgeRangesValues | null;
+  readonly activityType?: AmusementTypeNameValues | keyof typeof AmusementTypeNameValues | null;
+  readonly activityImageURLs?: (string | null)[] | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type SuggestedActivities = LazyLoading extends LazyLoadingDisabled ? EagerSuggestedActivities : LazySuggestedActivities
+
+export declare const SuggestedActivities: (new (init: ModelInit<SuggestedActivities>) => SuggestedActivities) & {
+  copyOf(source: SuggestedActivities, mutator: (draft: MutableModel<SuggestedActivities>) => MutableModel<SuggestedActivities> | void): SuggestedActivities;
+}

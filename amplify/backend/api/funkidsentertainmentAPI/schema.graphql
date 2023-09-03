@@ -185,3 +185,25 @@ type Books
   bookDescription: String!
   bookImage: AWSURL
 }
+
+type SuggestedActivities
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["admin"]
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, update] }
+      { allow: owner }
+    ]
+  ) {
+  id: ID!
+  activityName: String!
+  activityAddress: String
+  activityDescription: String!
+  activityAgeRange: SiteAgeRangesValues
+  activityType: AmusementTypeNameValues
+  activityImageURLs: [String]
+}

@@ -5,10 +5,6 @@
   font-family: 'PT Sans', sans-serif;
 }
 
-
-
-
-
 /* Divider */
 .container-divider{
   margin: 20px 20px 20px 20px;
@@ -20,8 +16,6 @@
   font-size: 10px;
  
 }
-
-
 
 .amplify-divider {
   --amplify-components-divider-border-color: #79C91D;
@@ -41,11 +35,22 @@
 .form-container{
   max-width: 600px;
   margin: 0 auto;
-  
+  align-content: center;
  
 }
 
+.contact-us form {
+  max-width: 600px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
+/* Footer */
 
 footer {
   background-color: #009400;
@@ -54,17 +59,17 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  
+  border-top: 4px solid #79C91D;
 }
 
-footer div {
+.footer-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 1.2rem;
 }
 
-footer ul {
+.footer-links {
   display: flex;
   flex-direction: row;
   list-style-type: none;
@@ -72,22 +77,40 @@ footer ul {
   margin-bottom: 10px;
 }
 
-footer li {
-  margin: 0 10px;
+.footer-links li {
+  margin: 0 15px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
 }
 
-footer a {
+.footer-links a {
   color: white;
   text-decoration: none;
 }
 
-footer a:hover {
-  background-color:#79C91D;
-  border-radius: 0;
-  cursor: pointer;
+.footer-links li:hover {
+  background-color: #79C91D;
 }
 
-footer p {
+.footer-copyright {
   color: white;
   margin: 0;
+  font-size: 0.9rem;
+}
+
+/* privacy-policy */
+
+.privacy-policy-container {
+  
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* This will make it take full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.privacy-policy-text {
+  width: 70vw;
+  text-align:justify;
 }
