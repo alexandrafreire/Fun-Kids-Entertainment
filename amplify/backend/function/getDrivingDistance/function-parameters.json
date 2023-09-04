@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "api": {
+      "funkidsentertainmentAPI": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "auth": {
+      "FunKidsEntertainment": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "City:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Sites:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "googleMapsApiKey",
+      "environmentVariableName": "GOOGLE_MAPS_API_KEY"
+    }
+  ]
+}

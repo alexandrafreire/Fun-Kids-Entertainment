@@ -32,6 +32,11 @@
         "AdminQueriesbc4092b1": {
           "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
           "s3Key": "amplify-builds/AdminQueriesbc4092b1-56784d37723071527166-build.zip"
+        },
+        "getDrivingDistance": {
+          "deploymentBucketName": "amplify-amplifydf1cab9fad9f4-staging-151408-deployment",
+          "s3Key": "amplify-builds/getDrivingDistance-3162325651584d517a53-build.zip",
+          "googleMapsApiKey": "AIzaSyAIUQBCrhf9PPQAe0bb56KFp9TXI1fSc9E"
         }
       }
     }

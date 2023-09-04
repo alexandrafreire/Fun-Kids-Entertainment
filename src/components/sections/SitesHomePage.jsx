@@ -40,13 +40,13 @@ function SitesHomePage({ sitesArray }) {
   });
 
   useEffect(() => {
-    console.log("Current Page:", currentPage);
-    console.log("Items Per Page:", itemsPerPage);
-
     const lastItemIndex = currentPage * itemsPerPage;
     const firstItemIndex = lastItemIndex - itemsPerPage;
 
-    const currentItems = sitesArray.slice(firstItemIndex, lastItemIndex);
+    const currentItems = filteredSitesArray.slice(
+      firstItemIndex,
+      lastItemIndex
+    );
     console.log("Current Items:", currentItems);
 
     const totalPages = Math.ceil(sitesArray.length / itemsPerPage);
@@ -107,7 +107,9 @@ function SitesHomePage({ sitesArray }) {
             <div className="locationContainer flexRowContainer">
               <span className="location flexItem">{`${site.siteVillage}, ${site.siteCounty}`}</span>
               <span className="distance flexItem">
-                {`${site.distanceFromSite} Km Away`}
+                {site.distance
+                  ? `${site.distance} away`
+                  : "Distance Not Available"}
               </span>
               <button
                 className="mapButton"

@@ -138,6 +138,29 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "getDrivingDistance": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "funkidsentertainmentAPI"
+        },
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "FunKidsEntertainment"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "geo": {},
@@ -171,6 +194,30 @@
         {
           "category": "function",
           "resourceName": "InsertUserCognitoToDataStore"
+        }
+      ]
+    },
+    "AMPLIFY_function_getDrivingDistance_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getDrivingDistance"
+        }
+      ]
+    },
+    "AMPLIFY_function_getDrivingDistance_googleMapsApiKey": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getDrivingDistance"
+        }
+      ]
+    },
+    "AMPLIFY_function_getDrivingDistance_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getDrivingDistance"
         }
       ]
     }

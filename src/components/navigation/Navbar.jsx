@@ -17,7 +17,7 @@ function Navbar() {
   const closeMobileMenu = () => setClick(false);
   const [username, setUsername] = useState("");
   const isAdmin = useAdminCheck();
-  console.log(isAdmin);
+  console.log("Is Admin: ", isAdmin);
 
   const onMouseEnter = () => {
     if (window.innerWidth < 960) {
