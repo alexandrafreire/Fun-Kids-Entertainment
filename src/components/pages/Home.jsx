@@ -54,7 +54,7 @@ function Home() {
     [allSites, filteredSites]
   );
 
-  // New useEffect just for logging changes in allSites and filteredSites
+ 
   useEffect(() => {
     console.log(
       "allSites or filteredSites have changed",
